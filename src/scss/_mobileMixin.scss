@@ -1,0 +1,31 @@
+@use 'sass:selector';
+
+@mixin design($designName) {
+  @if & {
+    @at-root #{selector.nest('.'+$designName, &)} {
+      @content
+    }
+  } @else {
+    .#{$designName} {
+      @content
+    }
+  }
+}
+
+@mixin subPrefix($className) {
+  .#{$classPrefix+$className} {
+    @content
+  }
+}
+
+@mixin prefix($className, $concatSelectors: false) {
+  @if $concatSelectors {
+    &.#{$classPrefix+$className} {
+      @content
+    }
+  } @else {
+    @include subPrefix($className) {
+      @content
+    }
+  }
+}

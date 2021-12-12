@@ -1,0 +1,147 @@
+@include prefix("switch") {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+
+  > label {
+    display: flex;
+    cursor: pointer;
+  }
+
+  @include prefix("switch-label") {
+    &:not(:empty) {
+      margin-left: 0.2rem;
+      margin-right: 0.2rem;
+    }
+  }
+
+  input {
+    display: none;
+  }
+
+  @include prefix("switch-toggle") {
+    width: 40px;
+    display: inline-block;
+    position: relative;
+    transition-property: all;
+    transition-duration: 0.35s;
+    transition-timing-function: ease-out;
+    border-radius: 30px;
+
+    @include prefix("switch-handle") {
+      transition-property: all;
+      transition-duration: 0.35s;
+      transition-timing-function: cubic-bezier(.59, .01, .5, .99);
+      border-radius: 100%;
+      background-clip: padding-box;
+      position: absolute;
+      content: '';
+    }
+  }
+
+  %dual-handle-material {
+    background-color: #37474f;
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%), 0 3px 1px -2px rgb(0 0 0 / 20%);
+  }
+
+  %dual-toggle-flat {
+    background-color: #44db5e;
+    box-shadow: inset 0 0 0 2px #44db5e;
+  }
+
+  %dual-handle-flat {
+    background-color: #ffffff;
+    top: 2px;
+    box-shadow: 0 3px 2px rgb(0 0 0 / 25%);
+  }
+
+  @include design($material) {
+
+    input:checked + {
+      @include prefix("switch-toggle") {
+        //box-shadow: none;
+
+        @include prefix("switch-handle") {
+          @extend %dual-handle-material;
+          left: 18px;
+        }
+      }
+    }
+
+    @include prefix("switch-toggle") {
+      background-color: rgba(55, 71, 79, 0.5);
+
+      margin-top: 4px;
+      height: 15px;
+
+      @include prefix("switch-handle") {
+        margin-top: -4px;
+        width: 22px;
+        height: 22px;
+        background-color: #f1f1f1;
+        left: 0;
+        box-shadow: 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%), 0 2px 4px -1px rgb(0 0 0 / 40%);
+
+        &:before {
+          background: transparent;
+          content: '';
+          display: block;
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          z-index: 0;
+          box-shadow: 0 0 0 0 rgb(0 0 0 / 12%);
+          transition: box-shadow 0.1s linear;
+        }
+      }
+    }
+  }
+
+  @include design($flat) {
+    input:checked + {
+      @include prefix("switch-toggle") {
+        @extend %dual-toggle-flat;
+
+        @include prefix("switch-handle") {
+          @extend %dual-handle-flat;
+          left: 19px
+        }
+      }
+    }
+
+    @include prefix("switch-toggle") {
+      height: 23px;
+
+      background-color: white;
+      box-shadow: inset 0 0 0 2px #e5e5e5;
+
+      @include prefix("switch-handle") {
+        height: 19px;
+        width: 19px;
+        background-color: #ffffff;
+        left: 2px;
+        top: 2px;
+        box-shadow: 0 0 1px 0 rgb(0 0 0 / 25%), 0 3px 2px rgb(0 0 0 / 25%);
+      }
+    }
+  }
+
+  @include prefix("dual", true) {
+    @include design($material) {
+      @include prefix("switch-toggle") {
+        @include prefix("switch-handle") {
+          @extend %dual-handle-material;
+        }
+      }
+    }
+    @include design($flat) {
+      @include prefix("switch-toggle") {
+        @extend %dual-toggle-flat;
+
+        @include prefix("switch-handle") {
+          @extend %dual-handle-flat;
+        }
+      }
+    }
+  }
+}

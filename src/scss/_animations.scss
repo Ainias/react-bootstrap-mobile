@@ -1,0 +1,44 @@
+@keyframes material-new-site {
+  0% {
+    transform: translate(0,100%);
+    z-index: 1;
+  }
+  100% {
+    transform: translate(0,0);
+    z-index: 1;
+  }
+}
+
+@keyframes flat-new-site {
+  0% {
+    transform: translate(100%,0);
+    z-index: 1;
+  }
+  100% {
+    transform: translate(0,0);
+    z-index: 1;
+  }
+}
+
+.animation-new-site {
+  @include design($material){
+    animation: material-new-site;
+    animation-duration: $animationDurationMaterial;
+  }
+  @include design($flat){
+    animation: flat-new-site;
+    animation-duration: $animationDurationMaterial;
+  }
+}
+.animation-end-site {
+  @include design($material){
+    animation: material-new-site;
+    animation-duration: $animationDurationMaterial;
+    animation-direction: reverse;
+  }
+  @include design($flat){
+    animation: flat-new-site;
+    animation-duration: $animationDurationMaterial;
+    animation-direction: reverse;
+  }
+}

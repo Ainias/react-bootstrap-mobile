@@ -1,7 +1,8 @@
 import { FunctionComponent } from 'react';
-declare type Props = {
+import { RbmComponentProps } from '../RbmComponentProps';
+declare type Props = RbmComponentProps<{
     disabled?: boolean;
     onClick?: () => void;
-};
+}>;
 export declare const TopBarButton: FunctionComponent<Props>;
 export {};

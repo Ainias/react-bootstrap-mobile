@@ -75,25 +75,50 @@
         "exceptAfterSingleLine": true
       }
     ],
-    "react/sort-comp": ["warn", {
-      "order": [
-        "static-variables",
-        "instance-variables",
-        "static-methods",
-        "lifecycle",
-        "render",
-        "/^render.+$/",
-        "instance-methods",
-        "everything-else"
-      ]
-    }],
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["src/client/**/*.tsx"]}],
-    "react/destructuring-assignment": ["error", "always", { "ignoreClassFields": true }],
-    "react/state-in-constructor": ["error", "never"],
-
-
-
-
+    "react/sort-comp": [
+      "warn",
+      {
+        "order": [
+          "static-variables",
+          "instance-variables",
+          "static-methods",
+          "lifecycle",
+          "render",
+          "/^render.+$/",
+          "instance-methods",
+          "everything-else"
+        ]
+      }
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "src/client/**/*.tsx"
+        ]
+      }
+    ],
+    "react/destructuring-assignment": [
+      "error",
+      "always",
+      {
+        "ignoreClassFields": true
+      }
+    ],
+    "react/state-in-constructor": [
+      "error",
+      "never"
+    ],
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "depth": 3
+      }
+    ],
+    "no-return-assign": [
+      "error",
+      "except-parens"
+    ],
     "@typescript-eslint/no-non-null-assertion": "off",
     "no-console": "off",
     "no-use-before-define": "off",

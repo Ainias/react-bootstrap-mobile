@@ -1,15 +1,24 @@
 import { ComponentType, FunctionComponent } from 'react';
-declare type ButtonType = {
+import { RbmComponentProps } from '../RbmComponentProps';
+export declare type TopBarComponentButtonType = {
     title?: string;
     icon?: string;
-    component?: ComponentType<Record<string, any>>;
+    component: ComponentType<Record<string, any>>;
     action?: () => void;
     disabled?: boolean;
+    key?: string;
 };
-declare type Props = {
+export declare type TopBarActionButtonType = {
+    title: string;
+    icon?: string;
+    action: () => void;
+    disabled?: boolean;
+    key?: string;
+};
+export declare type TopBarButtonType = TopBarComponentButtonType | TopBarActionButtonType;
+export declare type TopBarProps = RbmComponentProps<{
     title?: string;
-    rightButtons?: ButtonType[];
-    leftButtons?: ButtonType[];
-};
-export declare const TopBar: FunctionComponent<Props>;
-export {};
+    rightButtons?: TopBarButtonType[];
+    leftButtons?: TopBarButtonType[];
+}>;
+export declare const TopBar: FunctionComponent<TopBarProps>;

@@ -1,0 +1,48 @@
+@include prefix("input") {
+  display: flex;
+  width: 100%;
+
+  @include prefix("input-text") {
+    flex: 1;
+    background-color: transparent;
+    border: 0;
+    outline: none;
+    padding: 0;
+    
+    @include design($material) {
+      color: #212121;
+      background-image: linear-gradient(to top, transparent 1px, #afafaf 1px);
+      background-size: 100% 2px;
+      background-repeat: no-repeat;
+      background-position: center bottom;
+      padding-bottom: 2px;
+
+      &:focus {
+        background-image: linear-gradient(#3d5afe, #3d5afe),
+        linear-gradient(to top, transparent 1px, #afafaf 1px);
+      }
+    }
+
+    @include design($flat) {
+      color: #1f1f21;
+      &, &:focus {
+        border-bottom: 1px solid #ccc;
+      }
+    }
+  }
+
+  @include prefix("hidden-input", true) {
+    @include prefix("input-text") {
+      background-image: none;
+      border-bottom: 1px solid transparent;
+    }
+    @include prefix("no-focus-hint", true) {
+      @include prefix("input-text") {
+        &:focus {
+          background-image: none;
+          border-bottom: 1px solid transparent;
+        }
+      }
+    }
+  }
+}

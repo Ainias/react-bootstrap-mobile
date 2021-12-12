@@ -1,0 +1,15 @@
+@import "src/scss/variables";
+@import "src/scss/mobileMixin";
+@import "src/scss/default";
+@import "src/scss/animations";
+
+//Components
+@import "src/TopBar/topBar";
+@import "src/Card/card";
+@import "src/FormElements/Button/button";
+@import "src/FormElements/Switch/switch";
+@import "src/FormElements/Input/input";
+@import "src/FormElements/CheckBox/checkbox";
+@import "src/List/list";
+@import "src/Layout/layout";
+@import "src/Text/text";

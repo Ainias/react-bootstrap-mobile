@@ -1,0 +1,34 @@
+@include prefix("button") {
+  cursor: pointer;
+  margin: 0;
+  user-select: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-decoration: none;
+  letter-spacing: 0;
+  color: white;
+  vertical-align: middle;
+  border: 0 solid currentColor;
+  border-radius: 3px;
+  transition: none;
+
+  @include design($material) {
+    box-shadow: $boxShadowMaterial;
+    min-height: 40px;
+    line-height: 40px;
+    padding: 0 16px;
+    text-align: center;
+    font-size: 14px;
+    text-transform: uppercase;
+    background-color: #2979ff;
+    font-weight: 500;
+  }
+
+  @include design($flat) {
+    line-height: 32px;
+    padding: 4px 18px;
+    font-size: 17px;
+    background-color: #0076ff;
+  }
+}
