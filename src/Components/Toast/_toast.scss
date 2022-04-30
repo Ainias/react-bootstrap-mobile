@@ -1,0 +1,49 @@
+@include prefix(toast-container) {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 3rem;
+  max-width: map-get($grid-breakpoints, "sm");
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+}
+
+@include prefix(toast) {
+  background-color: rgba(0, 0, 0, 0.8);
+  min-height: 48px;
+  line-height: 1.5;
+  color: white;
+  font-size: 0.77rem;
+  letter-spacing: normal;
+  transition-duration: 0.25s;
+  margin: 8px;
+
+  @include prefix(hiding, true) {
+    opacity: 0;
+  }
+
+  @include design($material) {
+    padding: 16px 24px;
+  }
+
+  @include design($flat) {
+    border-radius: 0.5rem;
+    padding: 16px;
+  }
+
+  @include prefix(toast-action) {
+    text-transform: uppercase;
+    margin-left: 24px;
+
+    @include design($material) {
+      color: #bbdefb
+    }
+    @include design($flat) {
+      color: #ffffff;
+    }
+  }
+
+}

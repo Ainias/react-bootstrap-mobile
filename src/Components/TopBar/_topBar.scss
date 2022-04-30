@@ -1,0 +1,87 @@
+nav.navbar {
+  @include prefix(topbar, true) {
+    background: white;
+    height: 56px;
+
+    @include prefix(transparent, true) {
+      opacity: 0.65;
+      z-index: 1;
+    }
+    @include prefix(draw-behind, true) {
+      position: absolute;
+      left: 0;
+      right: 0;
+    }
+
+    @include prefix(topbar-title-container) {
+      overflow: hidden;
+      //height: 40px;
+
+      @include prefix(topbar-title) {
+        white-space: nowrap;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    @include prefix(topbar-button-container) {
+      white-space: nowrap;
+      display: flex;
+      flex: 1;
+      min-width: -webkit-min-content;
+
+      &.right {
+        justify-content: flex-end;
+      }
+
+      &.left {
+        justify-content: flex-start;
+      }
+    }
+
+    @include prefix(topbar-hidden-container) {
+      position: relative;
+
+      @include prefix(topbar-hidden-close-curtain) {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 998;
+      }
+
+      @include prefix(topbar-hidden-menu) {
+        position: absolute;
+        right: 0;
+        white-space: nowrap;
+        display: flex;
+        min-width: -webkit-min-content;
+        justify-content: flex-start;
+        flex-direction: column;
+        z-index: 999;
+        background-color: white;
+        border: 1px solid #717171;
+      }
+    }
+
+    @include design($material) {
+      box-shadow: 0 1px 5px rgb(0 0 0 / 30%);
+
+      @include prefix(topbar-hidden-action-menu) {
+        display: none;
+      }
+    }
+    @include design($flat) {
+      background-size: 100% 1px;
+      background-repeat: no-repeat;
+      background-position: bottom;
+      background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 100%);
+
+      @include prefix(topbar-hidden-container) {
+        display: none;
+      }
+    }
+  }
+}

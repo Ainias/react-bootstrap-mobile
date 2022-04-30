@@ -119,6 +119,8 @@
       "error",
       "except-parens"
     ],
+    "jsx-a11y/img-redundant-alt": "off",
+    "import/no-mutable-exports": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
     "no-console": "off",
     "no-use-before-define": "off",

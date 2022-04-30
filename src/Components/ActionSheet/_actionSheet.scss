@@ -1,0 +1,159 @@
+$zIndexActionSheet: 10000;
+
+@include prefix(action-sheet) {
+  position: fixed;
+  top: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: $zIndexActionSheet;
+
+  transition-duration: 0s;
+  //transition-delay: 0s;
+  transition-delay: 0.25s;
+
+  &.open {
+    transition-delay: 0s;
+    top: 0;
+
+    > .full-height {;
+      top: 0
+    }
+  }
+
+  > .full-height {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 100%;
+  }
+
+  @include prefix(action-sheet-content) {
+    bottom: 0;
+    height: 100%;
+
+    //position: absolute;
+    //bottom: 0;
+    //left: 0;
+    //right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+
+    @include prefix(action-sheet-action) {
+      height: 56px;
+      width: 100%;
+      font-size: 20px;
+      color: #0076ff;
+      background-color: #ffffff;
+      border-radius: 0;
+      line-height: 56px;
+      display: block;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    @include prefix(action-sheet-cancel) {
+      height: 56px;
+      width: 100%;
+      font-size: 20px;
+      color: #0076ff;
+      background-color: #ffffff;
+      line-height: 56px;
+      display: block;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      //border-radius: 12px;
+      //margin: 8px 0 0 0;
+    }
+  }
+
+  @include design($material) {
+    > .full-height {
+      padding: 0;
+    }
+
+    @include prefix(action-sheet-content) {
+      text-align: left;
+
+      @include prefix(action-sheet-action) {
+        padding: 0 0 0 16px;
+        color: #686868;
+
+        @include prefix(action-sheet-action-icon) {
+          display: inline-block;
+          float: left;
+          margin-right: 32px;
+          font-size: 26px;
+          text-align: center;
+          width: 0.8em;
+          height: 56px;
+        }
+      }
+
+      @include prefix(action-sheet-cancel) {
+        padding: 0 0 0 16px;
+        color: #686868;
+
+        @include prefix(action-sheet-action-icon) {
+          display: inline-block;
+          float: left;
+          margin-right: 32px;
+          font-size: 1rem;
+          text-align: center;
+          width: 0.8em;
+          height: 56px;
+        }
+      }
+    }
+  }
+
+  @include design($flat) {
+    @include prefix(action-sheet-content) {
+
+      text-align: center;
+
+      padding-right: 10px;
+      padding-left: 10px;
+      padding-bottom: 10px;
+
+      @include prefix(action-sheet-action) {
+        color: #0076ff;
+
+        background-size: 100% 1px;
+        background-repeat: no-repeat;
+        background-position: bottom;
+        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) 100%);
+
+        &:first-child {
+          border-top-right-radius: 12px;
+          border-top-left-radius: 12px;
+        }
+
+        &:nth-last-child(2) {
+          border-bottom-right-radius: 12px;
+          border-bottom-left-radius: 12px;
+        }
+
+        @include prefix(action-sheet-action-icon) {
+          display: none;
+        }
+      }
+
+      @include prefix(action-sheet-cancel) {
+        color: #0076ff;
+
+        border-radius: 12px;
+        margin: 8px 0 0 0;
+
+        @include prefix(action-sheet-action-icon) {
+          display: none;
+        }
+      }
+    }
+  }
+}

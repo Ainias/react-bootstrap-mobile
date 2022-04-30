@@ -1,4 +1,7 @@
-export function prefixClass(className) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.prefixClass = void 0;
+function prefixClass(className) {
     var otherClasses = [];
     for (var _i = 1; _i < arguments.length; _i++) {
         otherClasses[_i - 1] = arguments[_i];
@@ -16,4 +19,5 @@ export function prefixClass(className) {
     });
     return classNames.join(' ');
 }
+exports.prefixClass = prefixClass;
 //# sourceMappingURL=helper.js.map

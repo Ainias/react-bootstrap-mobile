@@ -1,0 +1,97 @@
+@include prefix(tabBar) {
+  height: 60px;
+  width: 100%;
+
+  @include prefix(tabBar-button-container) {
+    padding: 0;
+    display: flex;
+  }
+
+  @include prefix(underlined, true) {
+    @include prefix(tabBar-button-active) {
+      @include design($flat) {
+        border-bottom: 4px solid #0076ff;
+      }
+    }
+  }
+
+  @include prefix(transparent, true) {
+    opacity: 0.65;
+  }
+
+  @include design($material) {
+    background-color: #ffffff;
+    box-shadow: 0 -2px 2px 0px rgb(0 0 0 / 14%), 0 -1px 5px 0px rgb(0 0 0 / 12%), 0 -1px 1px 0px rgb(0 0 0 / 20%);
+  }
+
+  @include design($flat) {
+    background-color: #fafafa;
+    border-top: 1px solid #cccccc;
+  }
+}
+
+@include prefix(tabBar-button) {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  flex-basis: 0;
+  flex-grow: 1;
+  text-align: center;
+
+  > span {
+    width: 100%;
+    display: inline-block;
+  }
+
+  @include prefix(tabBar-button-icon) {
+    display: block;
+    font-size: 24px;
+    line-height: 26px;
+    height: 28px;
+    margin: auto;
+
+    @include prefix(tabBar-button-title, "+") {
+      font-size: 10px;
+      line-height: 1;
+    }
+  }
+  @include prefix(tabBar-button-title) {
+    display: block;
+    margin: auto;
+    font-size: 16px;
+    line-height: 49px;
+  }
+
+  @include design($flat) {
+    color: #999;
+    @include prefix(tabBar-button-active, true) {
+      color: #0076ff;
+    }
+  }
+
+
+  @include design($material) {
+    color: #31313a;
+    position: relative;
+    text-transform: uppercase;
+
+    &::after {
+      content: ' ';
+      display: block;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      position: absolute;
+      margin-top: -2px;
+      background-color: #31313a;
+
+    }
+    @include prefix(tabBar-button-active, true) {
+      &::after {
+        width: 100%;
+        transition: width 0.2s ease-in-out;
+      }
+    }
+  }
+}

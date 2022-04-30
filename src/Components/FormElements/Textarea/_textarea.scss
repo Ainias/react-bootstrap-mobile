@@ -1,0 +1,5 @@
+@use "../../../scss/mobileMixin";
+
+@include mobileMixin.prefix("textarea") {
+  
+}

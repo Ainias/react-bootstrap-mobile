@@ -1,0 +1,19 @@
+@include prefix("loading-area") {
+  height: fit-content;
+  width: fit-content;
+  position: relative;
+  display: contents;
+
+  @include prefix("loading-area-curtain") {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #efeff4;
+  }
+}

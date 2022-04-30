@@ -19,8 +19,12 @@
 }
 
 @mixin prefix($className, $concatSelectors: false) {
-  @if $concatSelectors {
+  @if $concatSelectors == true {
     &.#{$classPrefix+$className} {
+      @content
+    }
+  } @else if ($concatSelectors != false) {
+    #{$concatSelectors}.#{$classPrefix+$className} {
       @content
     }
   } @else {

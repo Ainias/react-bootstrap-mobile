@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./dist",
-    "module": "esnext",
+    "module": "commonjs",
     "target": "es5",
     "lib": [
       "es6",
@@ -21,15 +21,14 @@
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
     "allowSyntheticDefaultImports": true,
-
     "allowJs": true,
     "isolatedModules": false,
     "strict": true,
-    "sourceMap": true,
+    "sourceMap": true
   },
   "include": [
     "src/",
-    "bootstrapReactMobile.ts",
+    "bootstrapReactMobile.ts"
   ],
   "exclude": [
     "dist",
@@ -45,7 +44,7 @@
     "plugins",
     "webpack.config.js"
   ],
-  "types": [
-    "typePatches"
-  ]
+//  "types": [
+//    "typePatches"
+//  ]
 }

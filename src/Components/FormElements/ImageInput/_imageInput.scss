@@ -1,0 +1,24 @@
+@include prefix("image-input") {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  cursor: pointer;
+
+  @include prefix("image-input-preview") {
+    flex: 1;
+    object-fit: contain;
+
+    &.empty {
+      background-color: #d3d3d3;
+    }
+  }
+
+  @include prefix("image-input-value") {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+  }
+}

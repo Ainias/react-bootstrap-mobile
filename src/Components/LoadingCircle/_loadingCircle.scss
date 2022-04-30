@@ -1,0 +1,40 @@
+@keyframes loadingCircle {
+  0% {
+    stroke-dasharray: 10%, 241.32%;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 201%, 50.322%;
+    stroke-dashoffset: -100%;
+  }
+  100% {
+    stroke-dasharray: 10%, 241.32%;
+    stroke-dashoffset: -251.32%;
+  }
+}
+
+@keyframes loadingCircleRotate {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@include prefix("loading-circle") {
+  @include prefix("loading-circle-spinner") {
+    stroke-miterlimit: 10;
+    transform-origin: 50%;
+    animation: loadingCircle 2s ease-in-out infinite, loadingCircleRotate 1.5s linear infinite;
+
+    @include design($material) {
+      stroke-width: 9%;
+      stroke: #37474f;
+    }
+    @include design($ios) {
+      stroke-width: 5%;
+      stroke: #0076ff;
+    }
+  }
+}
