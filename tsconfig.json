@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "./dist",
     "module": "commonjs",
-    "target": "es5",
+    "target": "es6",
     "lib": [
       "es6",
       "es2016",
@@ -23,12 +23,13 @@
     "allowSyntheticDefaultImports": true,
     "allowJs": true,
     "isolatedModules": false,
-    "strict": true,
-    "sourceMap": true
+    "strict": false,
+    "sourceMap": true,
+    "noEmit": true,
   },
   "include": [
-    "src/",
-    "bootstrapReactMobile.ts"
+    "src/**/*",
+    "dist/bootstrapReactMobile.ts"
   ],
   "exclude": [
     "dist",
@@ -43,7 +44,7 @@
     "platforms",
     "plugins",
     "webpack.config.js"
-  ],
+  ]
 //  "types": [
 //    "typePatches"
 //  ]

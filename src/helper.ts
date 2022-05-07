@@ -15,3 +15,7 @@ export function prefixClass(
 
     return classNames.join(' ');
 }
+
+export function classes(...classNames: (string | undefined)[]) {
+    return classNames.filter((c) => c !== undefined).join(' ');
+}

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { InputHTMLAttributes, useCallback } from 'react';
+import { InputHTMLAttributes, KeyboardEvent, useCallback } from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { prefixClass } from '../../../helper';
 import { Override } from '../../../TypeHelpers';
@@ -11,11 +11,19 @@ export type InputProps<OnChangeData> = RbmComponentProps<
         {
             label?: string;
             onChangeText?: (newText: string) => void;
+            onEnter?: (newText: string) => void;
         } & OptionalListener<'onChange', OnChangeData>
     >
 >;
 
-function Input<OnChangeData>({ label, className, onChangeText, ...otherProps }: InputProps<OnChangeData>) {
+function Input<OnChangeData>({
+    label,
+    className,
+    onEnter,
+    onKeyPress,
+    onChangeText,
+    ...otherProps
+}: InputProps<OnChangeData>) {
     // Variables
 
     // States
@@ -34,6 +42,18 @@ function Input<OnChangeData>({ label, className, onChangeText, ...otherProps }: 
         [onChangeWithData, onChangeText]
     );
 
+    const realOnKeyPress = useCallback(
+        (e: KeyboardEvent<HTMLInputElement>) => {
+            if (onKeyPress) {
+                onKeyPress(e);
+            }
+            if (onEnter && e.key === 'Enter' && !e.defaultPrevented) {
+                onEnter((e.target as HTMLInputElement).value);
+            }
+        },
+        [onEnter, onKeyPress]
+    );
+
     // Effects
 
     // Other
@@ -43,7 +63,12 @@ function Input<OnChangeData>({ label, className, onChangeText, ...otherProps }: 
     return (
         <label className={prefixClass('input', className)}>
             {label ? <span className={prefixClass('input-label')}>{label}</span> : null}
-            <input {...otherProps} className={prefixClass('input-text')} onChange={onChange} />
+            <input
+                {...otherProps}
+                className={prefixClass('input-text')}
+                onChange={onChange}
+                onKeyPress={realOnKeyPress}
+            />
         </label>
     );
 }

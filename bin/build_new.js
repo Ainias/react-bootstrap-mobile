@@ -37,19 +37,24 @@ async function buildEntryPoints(fileOption, target) {
     fileOption.input.forEach((dir) => {
         Object.assign(names, findNames(dir + '/', []));
     });
+    console.log('LOG names', names);
 
     let imports = '';
     for (let k in names) {
         imports +=
-            "export * from './" +
+            'import {' +
+            k +
+            "} from './" +
             path.relative(resultDir, path.resolve(process.cwd(), names[k].substring(cutLengthFront))) +
             "';\n";
     }
 
+    let exports = '\nexport {' + Object.keys(names).join(' , ') + '};';
+
     if (!fs.existsSync(resultDir)) {
         fs.mkdirSync(resultDir);
     }
-    fs.writeFileSync(target, imports);
+    fs.writeFileSync(target, imports + exports);
 }
 
 buildEntryPoints(

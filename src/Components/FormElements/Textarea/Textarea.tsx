@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { Override } from '../../../TypeHelpers';
-import { TextareaHTMLAttributes, useCallback } from 'react';
+import { TextareaHTMLAttributes, useCallback, KeyboardEvent, ChangeEvent } from 'react';
 import { OptionalListener, useListener } from '../../Hooks/useListener';
-import { prefixClass } from '../../../helper';
+import { classes } from '../../../helper';
+
+import styles from './textarea.module.scss';
 
 export type TextareaProps<OnChangeData> = RbmComponentProps<
     Override<
@@ -11,11 +13,19 @@ export type TextareaProps<OnChangeData> = RbmComponentProps<
         {
             label?: string;
             onChangeText?: (newText: string) => void;
+            onEnter?: (newText: string) => void;
         } & OptionalListener<'onChange', OnChangeData>
     >
 >;
 
-function Textarea<OnChangeData>({ label, className, onChangeText, ...otherProps }: TextareaProps<OnChangeData>) {
+function Textarea<OnChangeData>({
+    label,
+    className,
+    onKeyPress,
+    onChangeText,
+    onEnter,
+    ...otherProps
+}: TextareaProps<OnChangeData>) {
     // Variables
 
     // States
@@ -25,13 +35,25 @@ function Textarea<OnChangeData>({ label, className, onChangeText, ...otherProps 
     // Callbacks
     const onChangeWithData = useListener<'onChange', OnChangeData>('onChange', otherProps);
     const onChange = useCallback(
-        (e) => {
+        (e: ChangeEvent<HTMLTextAreaElement>) => {
             if (onChangeText) {
                 onChangeText(e.target.value);
             }
             onChangeWithData(e);
         },
         [onChangeWithData, onChangeText]
+    );
+
+    const realOnKeyPress = useCallback(
+        (e: KeyboardEvent<HTMLTextAreaElement>) => {
+            if (onKeyPress) {
+                onKeyPress(e);
+            }
+            if (onEnter && e.key === 'Enter' && !e.defaultPrevented) {
+                onEnter((e.target as HTMLTextAreaElement).value);
+            }
+        },
+        [onEnter, onKeyPress]
     );
 
     // Effects
@@ -41,10 +63,12 @@ function Textarea<OnChangeData>({ label, className, onChangeText, ...otherProps 
     // Render Functions
 
     return (
-        <label className={prefixClass('textarea', className)}>
-            {label ? <span className={prefixClass('textarea-label')}>{label}</span> : null}
-            <textarea {...otherProps} className={prefixClass('textarea-text')} onChange={onChange} />
-        </label>
+        <>
+            <label className={classes(styles.container, className)}>
+                {label ? <span className={styles.label}>{label}</span> : null}
+                <textarea {...otherProps} onKeyPress={realOnKeyPress} className={styles.textarea} onChange={onChange} />
+            </label>
+        </>
     );
 }
 
