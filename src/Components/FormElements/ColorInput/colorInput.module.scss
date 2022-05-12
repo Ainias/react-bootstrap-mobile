@@ -1,20 +1,29 @@
-.preview {
-  width: 1rem;
-  height: 1rem;
-  display: inline-block;
-  border: 1px solid black;
-}
+.colorInput {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 
-.modalContainer {
-  z-index: 9999;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  .preview {
+    width: 1rem;
+    height: 1rem;
+    display: inline-block;
+    border: 1px solid black;
+  }
 
-  .modal {
-    position: absolute;
-    background-color: white;
+  .modalContainer {
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    .modal {
+      position: absolute;
+      background-color: white;
+    }
+  }
+
+  .label {
+    margin-right: 0.2rem;
   }
 }
