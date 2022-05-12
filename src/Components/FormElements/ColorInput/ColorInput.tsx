@@ -1,8 +1,11 @@
 /* eslint-disable no-bitwise */
 import * as React from 'react';
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState, MouseEvent } from 'react';
 import { Color, ColorResult, SketchPicker } from 'react-color';
 import { OptionalListener, useListener } from '../../Hooks/useListener';
+
+import styles from './colorInput.module.scss';
+import { Button } from 'react-bootstrap';
 
 export type ColorInputProps<OnChangeData> = {
     defaultValue?: string;
@@ -55,10 +58,12 @@ function ColorInput<OnChangeData>({
     // Variables
 
     // Refs
+    const containerRef = useRef<HTMLDivElement>(null);
 
     // States
-    const [color, setColor] = useState<Color>(defaultValue ?? '#000000FF');
-    const [isOpen, setIsOpen] = useState(true);
+    const [color, setColor] = useState<string>(defaultValue ?? '#000000FF');
+    const [isOpen, setIsOpen] = useState(false);
+    const [position, setPosition] = useState({ x: 0, y: 0 });
 
     // Selectors
 
@@ -68,7 +73,6 @@ function ColorInput<OnChangeData>({
         (newColor: ColorResult, e) => {
             const hexColor = convertToHex(newColor.rgb);
             setColor(hexColor);
-            console.log('LOG hex-Color converted', hexColor, newColor);
             if (onChangeColor) {
                 onChangeColor(hexColor);
             }
@@ -77,6 +81,17 @@ function ColorInput<OnChangeData>({
         [onChangeColor, onChangeWithData]
     );
 
+    const onContainerClick = useCallback((e: MouseEvent) => {
+        if (e.target === containerRef?.current) {
+            setIsOpen(false);
+        }
+    }, []);
+
+    const openElement = useCallback((e: MouseEvent) => {
+        setIsOpen(true);
+        setPosition({ x: e.clientX, y: e.clientY });
+    }, []);
+
     // Effects
 
     // Other
@@ -84,7 +99,19 @@ function ColorInput<OnChangeData>({
     // Render Functions
     const colVal: Color = value ?? color;
 
-    return <span>{isOpen ? <SketchPicker color={colVal} onChange={onChange} /> : null}</span>;
+    return (
+        <span>
+            {isOpen ? (
+                <div onClick={onContainerClick} className={styles.modalContainer} ref={containerRef}>
+                    <div className={styles.modal} style={{ top: position.y, left: position.x }}>
+                        <SketchPicker color={colVal} onChange={onChange} />
+                    </div>
+                </div>
+            ) : null}
+            <span onClick={openElement}>{label}</span>
+            <span onClick={openElement} style={{ backgroundColor: colVal }} className={styles.preview} />
+        </span>
+    );
 }
 
 // Need ColorInputMemo for autocompletion of phpstorm

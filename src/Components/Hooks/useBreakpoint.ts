@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 
-// TODO size anpassen
 export enum Breakpoints {
     XS = 0,
     SM = 576,
