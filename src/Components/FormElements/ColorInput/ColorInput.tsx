@@ -1,11 +1,12 @@
 /* eslint-disable no-bitwise */
 import * as React from 'react';
 import { useCallback, useRef, useState, MouseEvent } from 'react';
+import withStyles from 'isomorphic-style-loader/withStyles';
+import useStyles from 'isomorphic-style-loader/useStyles';
 import { Color, ColorResult, SketchPicker } from 'react-color';
 import { OptionalListener, useListener } from '../../Hooks/useListener';
 
 import styles from './colorInput.module.scss';
-import { Button } from 'react-bootstrap';
 
 export type ColorInputProps<OnChangeData> = {
     defaultValue?: string;
@@ -56,6 +57,7 @@ function ColorInput<OnChangeData>({
     ...otherProps
 }: ColorInputProps<OnChangeData>) {
     // Variables
+    // useStyles(styles);
 
     // Refs
     const containerRef = useRef<HTMLDivElement>(null);
@@ -100,22 +102,24 @@ function ColorInput<OnChangeData>({
     const colVal: Color = value ?? color;
 
     return (
-        <span className={styles.colorInput}>
-            {isOpen ? (
-                <div onClick={onContainerClick} className={styles.modalContainer} ref={containerRef}>
-                    <div className={styles.modal} style={{ top: position.y, left: position.x }}>
-                        <SketchPicker color={colVal} onChange={onChange} />
+        <span>
+            <span className={styles.colorInput}>
+                {isOpen ? (
+                    <div onClick={onContainerClick} className={styles.modalContainer} ref={containerRef}>
+                        <div className={styles.modal} style={{ top: position.y, left: position.x }}>
+                            <SketchPicker color={colVal} onChange={onChange} />
+                        </div>
                     </div>
-                </div>
-            ) : null}
-            <span onClick={openElement} className={styles.label}>
-                {label}
+                ) : null}
+                <span onClick={openElement} className={styles.label}>
+                    {label}
+                </span>
+                <span onClick={openElement} style={{ backgroundColor: colVal }} className={styles.preview} />
             </span>
-            <span onClick={openElement} style={{ backgroundColor: colVal }} className={styles.preview} />
         </span>
     );
 }
 
 // Need ColorInputMemo for autocompletion of phpstorm
-const ColorInputMemo = React.memo(ColorInput) as typeof ColorInput;
+const ColorInputMemo = React.memo(withStyles(styles)(ColorInput)) as typeof ColorInput;
 export { ColorInputMemo as ColorInput };

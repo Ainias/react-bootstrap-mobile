@@ -118,53 +118,23 @@ module.exports = {
                 //Compiliert SASS zu CSS und speichert es in Datei
                 test: /\.scss$/,
                 use: [
-                    {
-                        loader: 'isomorphic-style-loader',
-                        options: {},
-                    },
+                    { loader: 'isomorphic-style-loader' },
                     {
                         loader: 'css-loader',
-                        // options: {
-                        //     importLoaders: 1,
-                        //     esModule: false,
-                        //     url: {
-                        //         filter: (url, resourcePath) => cssFileResolve(url, resourcePath, false),
-                        //     },
-                        //     import: {
-                        //         filter: (url, _, resourcePath) => cssFileResolve(url, resourcePath, false),
-                        //     },
-                        //     modules: {
-                        //         // Do not transform class names (CJS mode backwards compatibility):
-                        //         exportLocalsConvention: 'asIs', // Server-side (Node.js) rendering support:
-                        //         exportOnlyLocals: true, // Disallow global style exports so we can code-split CSS and
-                        //         // not worry about loading order.
-                        //         mode: 'pure', // Generate a friendly production-ready name so it's
-                        //         // reasonably understandable. The same name is used for
-                        //         // development.
-                        //         // TODO: Consider making production reduce this to a single
-                        //         // character?
-                        //         getLocalIdent: getCssModuleLocalIdent,
-                        //     },
-                        // },
-                    },
-                    {
-                        //Compiliert zu CSS
-                        loader: 'sass-loader',
                         options: {
-                            sourceMap: true,
-                            sassOptions: {},
-                            additionalData: undefined,
+                            esModule: false,
                         },
                     },
+                    { loader: 'sass-loader' },
                 ],
             },
         ],
     },
     plugins: [
         // new PrettierPlugin(),
-        new MiniCssExtractPlugin({
-            filename: 'css/index.css',
-        }),
+        // new MiniCssExtractPlugin({
+        //     filename: 'css/index.css',
+        // }),
         new webpack.BannerPlugin(banner),
     ],
     resolve: {

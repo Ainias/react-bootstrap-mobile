@@ -56,5 +56,5 @@ buildEntryPoints(
     {
         input: [path.resolve(process.cwd(), 'src/')],
     },
-    './dist/bootstrapReactMobile.ts'
+    './bootstrapReactMobile.ts'
 );
