@@ -1,4 +1,7 @@
-@include prefix("checkbox") {
+@import "../../../scss/variables";
+@import "../../../scss/designMixin";
+
+.checkbox {
   position: relative;
   display: inline-block;
   cursor: pointer;
@@ -7,25 +10,21 @@
     display: flex;
     cursor: pointer;
   }
-  @include prefix("checkbox-label") {
+
+  .label {
+    line-height: 22px;
+
     &:not(:empty) {
       margin-left: 0.2rem;
       margin-right: 0.2rem;
     }
   }
 
-  @include prefix("checkbox-input") {
-    //position: absolute;
-    //opacity: 0;
-    //cursor: pointer;
-    //top: 0;
-    //bottom: 0;
-    //left: 0;
-    //right: 0;
+  .input {
     display: none;
   }
 
-  @include prefix("checkbox-checkmark") {
+  .checkmark {
     display: inline-block;
     user-select: none;
     position: relative;
@@ -37,6 +36,7 @@
       height: 100%;
       left: 0;
     }
+
     @include design($material) {
       width: 18px;
       height: 18px;
@@ -62,7 +62,7 @@
   }
 
   input:checked + {
-    @include prefix("checkbox-checkmark") {
+    .checkmark {
       &::after {
         content: " ";
         position: absolute;
@@ -101,9 +101,5 @@
         }
       }
     }
-  }
-
-  @include prefix("checkbox-label") {
-    line-height: 22px;
   }
 }

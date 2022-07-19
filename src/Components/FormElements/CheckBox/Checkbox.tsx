@@ -3,6 +3,10 @@ import { RbmComponentProps } from '../../RbmComponentProps';
 import { prefixClass } from '../../../helper';
 import { InputHTMLAttributes } from 'react';
 
+import styles from './checkbox.scss';
+import { withMemo } from '../../../helper/withMemo';
+import classNames from 'classnames';
+
 export type CheckboxProps = RbmComponentProps<
     {
         label?: string;
@@ -35,16 +39,16 @@ function Checkbox({ children, label = '', isLabelBeforeCheckbox = false, id, cla
     }
 
     return (
-        <span className={prefixClass(['checkbox'], className)}>
+        <span className={classNames(styles.checkbox, className)}>
             <label htmlFor={id} key={id}>
-                <span className={prefixClass('checkbox-label')}>{preLabel}</span>
-                <input {...props} type="checkbox" id={id} className={prefixClass('checkbox-input')} />
-                <span className={prefixClass('checkbox-checkmark')} />
-                <span className={prefixClass('checkbox-label')}>{label}</span>
+                <span className={styles.label}>{preLabel}</span>
+                <input {...props} type="checkbox" id={id} className={styles.input} />
+                <span className={styles.checkmark} />
+                <span className={styles.label}>{label}</span>
             </label>
         </span>
     );
 }
 
-const tmp = React.memo(Checkbox) as typeof Checkbox;
+const tmp = withMemo(Checkbox, styles);
 export { tmp as Checkbox };

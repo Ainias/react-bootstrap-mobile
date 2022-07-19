@@ -1,0 +1,21 @@
+.text {
+  display: inline-block;
+
+  &.block {
+    display: block;
+  }
+
+  &.primary {
+  }
+
+  &.secondary {
+    color: #717171;
+  }
+
+  &.medium {
+  }
+
+  &.small {
+    font-size: 0.8rem;
+  }
+}

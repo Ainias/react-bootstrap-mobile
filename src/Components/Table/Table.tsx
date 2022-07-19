@@ -14,6 +14,7 @@ import { RbmComponentProps } from '../RbmComponentProps';
 import { Table as RBTable, TableProps as RBTableProps } from 'react-bootstrap';
 import { Override } from '../../TypeHelpers';
 import { ReactNode } from 'react';
+import { withMemo } from '../../helper/withMemo';
 
 export type ColumnCellData<DataType extends string | number | Record<string, unknown>> = {
     value: DataType;
@@ -184,5 +185,5 @@ function Table<DataType extends string | number | Record<string, unknown>>({
     );
 }
 
-const tmp = React.memo(Table) as typeof Table;
+const tmp = withMemo(Table);
 export { tmp as Table };

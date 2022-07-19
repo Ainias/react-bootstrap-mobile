@@ -1,12 +1,11 @@
 /* eslint-disable no-bitwise */
 import * as React from 'react';
 import { useCallback, useRef, useState, MouseEvent } from 'react';
-import withStyles from 'isomorphic-style-loader/withStyles';
-import useStyles from 'isomorphic-style-loader/useStyles';
 import { Color, ColorResult, SketchPicker } from 'react-color';
 import { OptionalListener, useListener } from '../../Hooks/useListener';
+import { withMemo } from '../../../helper/withMemo';
 
-import styles from './colorInput.module.scss';
+import styles from './colorInput.scss';
 
 export type ColorInputProps<OnChangeData> = {
     defaultValue?: string;
@@ -14,28 +13,6 @@ export type ColorInputProps<OnChangeData> = {
     label?: string;
     onChangeColor?: (newColor: string) => void;
 } & OptionalListener<'onChange', OnChangeData>;
-
-function convertToRGBA(color: string) {
-    if (/^#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$/.test(color)) {
-        const colorParts = color.substring(1).split('');
-        const c = { r: 0, g: 0, b: 0, a: 1 };
-        if (colorParts.length === 3) {
-            c.r = parseInt(colorParts[0] + colorParts[0], 16);
-            c.g = parseInt(colorParts[1] + colorParts[1], 16);
-            c.b = parseInt(colorParts[2] + colorParts[2], 16);
-        } else {
-            c.r = parseInt(colorParts[0] + colorParts[1], 16);
-            c.g = parseInt(colorParts[2] + colorParts[3], 16);
-            c.b = parseInt(colorParts[4] + colorParts[5], 16);
-
-            if (colorParts.length === 8) {
-                c.a = parseInt(colorParts[6] + colorParts[7], 16) / 255;
-            }
-        }
-        return c;
-    }
-    return color;
-}
 
 function convertToHex(color: { r: number; g: number; b: number; a?: number }) {
     let newColor = `#${color.r.toString(16).padStart(2, '0')}${color.g.toString(16).padStart(2, '0')}${color.b
@@ -121,5 +98,5 @@ function ColorInput<OnChangeData>({
 }
 
 // Need ColorInputMemo for autocompletion of phpstorm
-const ColorInputMemo = React.memo(withStyles(styles)(ColorInput)) as typeof ColorInput;
+const ColorInputMemo = withMemo(ColorInput, styles);
 export { ColorInputMemo as ColorInput };

@@ -6,6 +6,10 @@ import { OptionalListener, useListener } from '../../Hooks/useListener';
 import { prefixClass } from '../../../helper';
 import { Button } from '../Button/Button';
 
+import styles from './imageInput.scss';
+import { withMemo } from '../../../helper/withMemo';
+import classNames from 'classnames';
+
 export type ImageType = { name: string; url: string };
 
 export type ImageInputProps<OnChangeData> = RbmComponentProps<
@@ -74,19 +78,19 @@ function ImageInput<OnChangeData>({
     // Render Functions
 
     return (
-        <label className={prefixClass('image-input', className)}>
-            {label ? <span className={prefixClass('input-label')}>{label}</span> : null}
+        <label className={classNames(styles.imageInput, className)}>
+            {label ? <span>{label}</span> : null}
             <img
                 src={(value ?? image)?.url}
                 alt={(value ?? image)?.name}
-                className={prefixClass('image-input-preview', (value ?? image)?.url ? undefined : 'empty')}
+                className={classNames(styles.preview, (value ?? image)?.url ? undefined : styles.empty)}
             />
             <Button>{(value ?? image)?.name ?? <i>Select Image</i>}</Button>
-            <input {...otherProps} className={prefixClass('image-input-value')} onChange={onChange} type="file" />
+            <input {...otherProps} className={styles.value} onChange={onChange} type="file" />
         </label>
     );
 }
 
 // Need ImageInputMemo for autocompletion of phpstorm
-const ImageInputMemo = React.memo(ImageInput) as typeof ImageInput;
+const ImageInputMemo = withMemo(ImageInput, styles);
 export { ImageInputMemo as ImageInput };

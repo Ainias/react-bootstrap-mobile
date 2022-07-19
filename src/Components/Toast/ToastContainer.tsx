@@ -1,11 +1,14 @@
 import * as React from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
-import { prefixClass } from '../../helper';
 import { Container } from 'react-bootstrap';
+
+import styles from './toast.scss';
+import classNames from 'classnames';
+import { withMemo } from '../../helper/withMemo';
 
 export type ToastContainerProps = RbmComponentProps<{}>;
 
-let ToastContainer = function ToastContainer({ className, children }: ToastContainerProps) {
+function ToastContainer({ className, children }: ToastContainerProps) {
     // Variables
 
     // States
@@ -21,10 +24,10 @@ let ToastContainer = function ToastContainer({ className, children }: ToastConta
     // Render Functions
 
     return (
-        <Container className={prefixClass('toast-container', className)} fluid>
+        <Container className={classNames(styles.toastContainer, className)} fluid>
             {children}
         </Container>
     );
-};
-ToastContainer = React.memo(ToastContainer) as typeof ToastContainer;
-export { ToastContainer };
+}
+const ToastContainerMemo = withMemo(ToastContainer, styles);
+export { ToastContainerMemo as ToastContainer };

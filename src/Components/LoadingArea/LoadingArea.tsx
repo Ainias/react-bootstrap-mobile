@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
-import { prefixClass } from '../../helper';
 import { LoadingCircle } from '../LoadingCircle/LoadingCircle';
+
+import styles from './loadingArea.scss';
+import { withMemo } from '../../helper/withMemo';
+import classNames from 'classnames';
 
 export type LoadingAreaProps = RbmComponentProps<{
     opacity?: number;
@@ -11,7 +14,7 @@ export type LoadingAreaProps = RbmComponentProps<{
     fullSize?: boolean;
 }>;
 
-export const LoadingArea = React.memo<LoadingAreaProps>(function LoadingArea({
+function LoadingArea({
     loading,
     fullWidth = false,
     fullSize = false,
@@ -19,7 +22,7 @@ export const LoadingArea = React.memo<LoadingAreaProps>(function LoadingArea({
     opacity = 0.65,
     className,
     children,
-}) {
+}: LoadingAreaProps) {
     // Variables
     if (fullSize) {
         fullHeight = true;
@@ -35,21 +38,25 @@ export const LoadingArea = React.memo<LoadingAreaProps>(function LoadingArea({
     // Effects
 
     // Other
-    const classes = ['loading-area'];
-    const otherClasses = [className];
-    if (fullHeight) otherClasses.push('full-height');
-    if (fullWidth) otherClasses.push('full-width');
 
     // Render Functions
 
     return (
-        <span className={prefixClass(classes, otherClasses)}>
+        <span
+            className={classNames(styles.loadingArea, className, {
+                'full-height': fullHeight,
+                'full-width': fullWidth,
+            })}
+        >
             {children}
             {loading ? (
-                <span className={prefixClass('loading-area-curtain')} style={{ opacity }}>
+                <span className={styles.curtain} style={{ opacity }}>
                     <LoadingCircle />
                 </span>
             ) : null}
         </span>
     );
-});
+}
+
+const LoadingAreaMemo = withMemo(LoadingArea, styles);
+export { LoadingAreaMemo as LoadingArea };

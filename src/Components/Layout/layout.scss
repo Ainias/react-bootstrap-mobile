@@ -1,17 +1,18 @@
-@include prefix("flex") {
+.flex {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 
-  @include prefix("vertical", true) {
+  &.vertical {
     flex-direction: column;
   }
 }
 
-@include prefix("grow") {
+.grow {
   flex: 1;
-  @include prefix("center", true) {
+
+  &.center {
     text-align: center;
   }
 }

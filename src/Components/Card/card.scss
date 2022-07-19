@@ -1,32 +1,39 @@
+@import "../../scss/variables";
+@import "../../scss/designMixin";
+
 $marginCard: 8px;
 
-@include prefix("card") {
+.card {
   margin: $marginCard;
   padding: 16px;
   word-wrap: break-word;
   background-color: #ffffff;
 
-  @include prefix("full-height", true) {
+  &.fullHeight {
     height: calc(100% - #{2*$marginCard})
   }
-  @include prefix("no-padding-height", true) {
+
+  &.noPaddingHeight {
     padding-top: 0;
     padding-bottom: 0;
   }
-  @include prefix("no-padding-width", true) {
+
+  &.noPaddingWidth {
     padding-left: 0;
     padding-right: 0;
   }
-  @include prefix("no-padding", true) {
+
+  &.noPadding {
     padding: 0
   }
-  @include prefix("no-margin", true) {
+
+  &.noMargin {
     margin: 0;
-    @include prefix("full-height", true) {
+
+    &.fullHeight {
       height: 100%
     }
   }
-
 
   .content {
     font-size: $fontSizeBase;

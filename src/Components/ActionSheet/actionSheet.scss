@@ -1,6 +1,9 @@
+@import "../../scss/variables";
+@import "../../scss/designMixin";
+
 $zIndexActionSheet: 10000;
 
-@include prefix(action-sheet) {
+.actionSheet {
   position: fixed;
   top: 100%;
   left: 0;
@@ -10,19 +13,18 @@ $zIndexActionSheet: 10000;
   z-index: $zIndexActionSheet;
 
   transition-duration: 0s;
-  //transition-delay: 0s;
   transition-delay: 0.25s;
 
   &.open {
     transition-delay: 0s;
     top: 0;
 
-    > .full-height {;
+    > :global(.full-height) {;
       top: 0
     }
   }
 
-  > .full-height {
+  > :global(.full-height) {
     position: absolute;
     left: 0;
     right: 0;
@@ -30,19 +32,15 @@ $zIndexActionSheet: 10000;
     top: 100%;
   }
 
-  @include prefix(action-sheet-content) {
+  .content {
     bottom: 0;
     height: 100%;
 
-    //position: absolute;
-    //bottom: 0;
-    //left: 0;
-    //right: 0;
     display: flex;
     flex-direction: column;
     justify-content: end;
 
-    @include prefix(action-sheet-action) {
+    .action {
       height: 56px;
       width: 100%;
       font-size: 20px;
@@ -56,7 +54,7 @@ $zIndexActionSheet: 10000;
       white-space: nowrap;
     }
 
-    @include prefix(action-sheet-cancel) {
+    .cancel {
       height: 56px;
       width: 100%;
       font-size: 20px;
@@ -67,8 +65,6 @@ $zIndexActionSheet: 10000;
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
-      //border-radius: 12px;
-      //margin: 8px 0 0 0;
     }
   }
 
@@ -77,14 +73,14 @@ $zIndexActionSheet: 10000;
       padding: 0;
     }
 
-    @include prefix(action-sheet-content) {
+    .content {
       text-align: left;
 
-      @include prefix(action-sheet-action) {
+      .action {
         padding: 0 0 0 16px;
         color: #686868;
 
-        @include prefix(action-sheet-action-icon) {
+        .actionIcon {
           display: inline-block;
           float: left;
           margin-right: 32px;
@@ -95,11 +91,11 @@ $zIndexActionSheet: 10000;
         }
       }
 
-      @include prefix(action-sheet-cancel) {
+      .cancel {
         padding: 0 0 0 16px;
         color: #686868;
 
-        @include prefix(action-sheet-action-icon) {
+        .actionIcon {
           display: inline-block;
           float: left;
           margin-right: 32px;
@@ -113,7 +109,7 @@ $zIndexActionSheet: 10000;
   }
 
   @include design($flat) {
-    @include prefix(action-sheet-content) {
+    .content {
 
       text-align: center;
 
@@ -121,7 +117,7 @@ $zIndexActionSheet: 10000;
       padding-left: 10px;
       padding-bottom: 10px;
 
-      @include prefix(action-sheet-action) {
+      .action {
         color: #0076ff;
 
         background-size: 100% 1px;
@@ -139,18 +135,18 @@ $zIndexActionSheet: 10000;
           border-bottom-left-radius: 12px;
         }
 
-        @include prefix(action-sheet-action-icon) {
+        .actionIcon {
           display: none;
         }
       }
 
-      @include prefix(action-sheet-cancel) {
+      .cancel {
         color: #0076ff;
 
         border-radius: 12px;
         margin: 8px 0 0 0;
 
-        @include prefix(action-sheet-action-icon) {
+        .actionIcon {
           display: none;
         }
       }

@@ -4,8 +4,9 @@ import { Override } from '../../../TypeHelpers';
 import { TextareaHTMLAttributes, useCallback, KeyboardEvent, ChangeEvent } from 'react';
 import { OptionalListener, useListener } from '../../Hooks/useListener';
 import { classes } from '../../../helper';
+import { withMemo } from '../../../helper/withMemo';
 
-import styles from './textarea.module.scss';
+import styles from './textarea.scss';
 
 export type TextareaProps<OnChangeData> = RbmComponentProps<
     Override<
@@ -73,5 +74,5 @@ function Textarea<OnChangeData>({
 }
 
 // Need TextareaMemo for autocompletion of phpstorm
-const TextareaMemo = React.memo(Textarea) as typeof Textarea;
+const TextareaMemo = withMemo(Textarea, styles);
 export { TextareaMemo as Textarea };

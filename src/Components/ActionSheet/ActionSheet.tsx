@@ -7,6 +7,10 @@ import { Container } from 'react-bootstrap';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Icon, IconSource } from '../Icon/Icon';
 
+import styles from './actionSheet.scss';
+import { withForwardRef } from '../withForwardRef';
+import classNames from 'classnames';
+
 export type ActionSheetAction<ActionData> = {
     name: string;
     icon?: IconSource;
@@ -27,84 +31,76 @@ export type ActionSheetHandle = {
     hide: () => void;
 };
 
-const ActionSheet = React.memo(
-    React.forwardRef(function ActionSheet(
-        { title, actions, cancelText = 'Cancel', className, onClose }: ActionSheetProps,
-        ref: Ref<ActionSheetHandle>
-    ) {
-        const [isOpen, setIsOpen] = useState(false);
+function ActionSheet(
+    { title, actions, cancelText = 'Cancel', className, onClose }: ActionSheetProps,
+    ref: Ref<ActionSheetHandle>
+) {
+    const [isOpen, setIsOpen] = useState(false);
 
-        // Variables
+    // Variables
 
-        // States
+    // States
 
-        // Refs
+    // Refs
 
-        // Callbacks
-        const close = useCallback(() => {
-            setIsOpen(false);
-            if (onClose) {
-                onClose();
-            }
-        }, [setIsOpen, onClose]);
-        const onActionClick = useCallback(
-            (action?: ActionSheetAction<any>) => {
-                close();
-                action?.action(action.actionData);
-            },
-            [close]
-        );
+    // Callbacks
+    const close = useCallback(() => {
+        setIsOpen(false);
+        if (onClose) {
+            onClose();
+        }
+    }, [setIsOpen, onClose]);
+    const onActionClick = useCallback(
+        (action?: ActionSheetAction<any>) => {
+            close();
+            action?.action(action.actionData);
+        },
+        [close]
+    );
 
-        useImperativeHandle(
-            ref,
-            () => ({
-                show: () => setIsOpen(true),
-                hide: close,
-            }),
-            [setIsOpen, close]
-        );
+    useImperativeHandle(
+        ref,
+        () => ({
+            show: () => setIsOpen(true),
+            hide: close,
+        }),
+        [setIsOpen, close]
+    );
 
-        // Effects
+    // Effects
 
-        // Other
+    // Other
 
-        const renderAction = (action: ActionSheetAction<any>) => (
-            <Clickable
-                key={action.name}
-                className={prefixClass('action-sheet-action')}
-                onClick={onActionClick}
-                onClickData={action}
-            >
-                <span className={prefixClass('action-sheet-action-icon')}>
-                    {action.icon ? <Icon icon={action.icon} /> : null}
-                </span>
-                <span className={prefixClass('action-sheet-name')}>{action.name}</span>
-            </Clickable>
-        );
+    const renderAction = (action: ActionSheetAction<any>) => (
+        <Clickable key={action.name} className={styles.action} onClick={onActionClick} onClickData={action}>
+            <span className={styles.actionIcon}>{action.icon ? <Icon icon={action.icon} /> : null}</span>
+            <span>{action.name}</span>
+        </Clickable>
+    );
 
-        return (
-            <Clickable
-                className={prefixClass('action-sheet', [actions.length > 0 && isOpen ? 'open' : 'closed', className])}
-                onClick={close}
-            >
-                <Container fluid="xxl" className="full-height">
-                    <div className={prefixClass('action-sheet-content')}>
-                        {title ? <div className={prefixClass('action-sheet-title')}>{title}</div> : null}
-                        {actions.map(renderAction)}
-                        <Clickable
-                            className={prefixClass('action-sheet-cancel')}
-                            onClick={() => console.log('Cancel clicked')}
-                        >
-                            <span className={prefixClass('action-sheet-action-icon')}>
-                                <Icon icon={faTimes} />
-                            </span>
-                            {cancelText}
-                        </Clickable>
-                    </div>
-                </Container>
-            </Clickable>
-        );
-    })
-);
+    return (
+        <Clickable
+            className={classNames(styles.actionSheet, { [styles.open]: actions.length > 0 && isOpen }, className)}
+            onClick={close}
+        >
+            <Container fluid="xxl" className="full-height">
+                <div className={prefixClass('action-sheet-content')}>
+                    {title ? <div className={prefixClass('action-sheet-title')}>{title}</div> : null}
+                    {actions.map(renderAction)}
+                    <Clickable
+                        className={prefixClass('action-sheet-cancel')}
+                        onClick={() => console.log('Cancel clicked')}
+                    >
+                        <span className={prefixClass('action-sheet-action-icon')}>
+                            <Icon icon={faTimes} />
+                        </span>
+                        {cancelText}
+                    </Clickable>
+                </div>
+            </Container>
+        </Clickable>
+    );
+}
 
-export { ActionSheet };
+const ActionSheetMemo = withForwardRef<ActionSheetProps, ActionSheetHandle>(ActionSheet, styles);
+export { ActionSheetMemo as ActionSheet };

@@ -1,4 +1,7 @@
-@include prefix("switch") {
+@import "../../../scss/variables";
+@import "../../../scss/designMixin";
+
+.switch {
   cursor: pointer;
   position: relative;
   display: inline-block;
@@ -8,7 +11,7 @@
     cursor: pointer;
   }
 
-  @include prefix("switch-label") {
+  .label {
     &:not(:empty) {
       margin-left: 0.2rem;
       margin-right: 0.2rem;
@@ -19,7 +22,7 @@
     display: none;
   }
 
-  @include prefix("switch-toggle") {
+  .toggle {
     width: 40px;
     display: inline-block;
     position: relative;
@@ -28,7 +31,7 @@
     transition-timing-function: ease-out;
     border-radius: 30px;
 
-    @include prefix("switch-handle") {
+    .handle {
       transition-property: all;
       transition-duration: 0.35s;
       transition-timing-function: cubic-bezier(.59, .01, .5, .99);
@@ -56,25 +59,24 @@
   }
 
   @include design($material) {
-
     input:checked + {
-      @include prefix("switch-toggle") {
+      .toggle {
         //box-shadow: none;
 
-        @include prefix("switch-handle") {
+        .handle {
           @extend %dual-handle-material;
           left: 18px;
         }
       }
     }
 
-    @include prefix("switch-toggle") {
+    .toggle {
       background-color: rgba(55, 71, 79, 0.5);
 
       margin-top: 4px;
       height: 15px;
 
-      @include prefix("switch-handle") {
+      .handle {
         margin-top: -4px;
         width: 22px;
         height: 22px;
@@ -99,23 +101,23 @@
 
   @include design($flat) {
     input:checked + {
-      @include prefix("switch-toggle") {
+      .toggle {
         @extend %dual-toggle-flat;
 
-        @include prefix("switch-handle") {
+        .handle {
           @extend %dual-handle-flat;
           left: 19px
         }
       }
     }
 
-    @include prefix("switch-toggle") {
+    .toggle {
       height: 23px;
 
       background-color: white;
       box-shadow: inset 0 0 0 2px #e5e5e5;
 
-      @include prefix("switch-handle") {
+      .handle {
         height: 19px;
         width: 19px;
         background-color: #ffffff;
@@ -126,19 +128,19 @@
     }
   }
 
-  @include prefix("dual", true) {
+  &.dual {
     @include design($material) {
-      @include prefix("switch-toggle") {
-        @include prefix("switch-handle") {
+      .toggle {
+        .handle {
           @extend %dual-handle-material;
         }
       }
     }
     @include design($flat) {
-      @include prefix("switch-toggle") {
+      .toggle {
         @extend %dual-toggle-flat;
 
-        @include prefix("switch-handle") {
+        .handle {
           @extend %dual-handle-flat;
         }
       }

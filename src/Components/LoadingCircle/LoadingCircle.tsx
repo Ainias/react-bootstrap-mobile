@@ -2,11 +2,15 @@ import * as React from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
 import { prefixClass } from '../../helper';
 
+import styles from './loadingCircle.scss';
+import { withMemo } from '../../helper/withMemo';
+import classNames from 'classnames';
+
 export type LoadingCircleProps = RbmComponentProps<{
     size?: number;
 }>;
 
-export const LoadingCircle = React.memo(function LoadingCircle({ size = 32, className }: LoadingCircleProps) {
+function LoadingCircle({ size = 32, className }: LoadingCircleProps) {
     // Variables
 
     // States
@@ -23,12 +27,15 @@ export const LoadingCircle = React.memo(function LoadingCircle({ size = 32, clas
 
     return (
         <svg
-            className={prefixClass('loading-circle', className)}
+            className={classNames(styles.loadingCircle, className)}
             viewBox={`0 0 ${size} ${size}`}
             width={size}
             height={size}
         >
-            <circle cx="50%" cy="50%" r="40%" fill="none" className={prefixClass('loading-circle-spinner')} />
+            <circle cx="50%" cy="50%" r="40%" fill="none" className={styles.spinner} />
         </svg>
     );
-});
+}
+
+const LoadingCircleMemo = withMemo(LoadingCircle, styles);
+export { LoadingCircleMemo as LoadingCircle };

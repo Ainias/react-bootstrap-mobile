@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { FunctionComponent } from 'react';
-import { prefixClass } from '../../helper';
 import { RbmComponentProps } from '../RbmComponentProps';
 
-type Props = RbmComponentProps<{
+import styles from './card.scss';
+import { withMemo } from '../../helper/withMemo';
+import classNames from 'classnames';
+
+export type CardProps = RbmComponentProps<{
     title?: string;
     fullHeight?: boolean;
     noPaddingHeight?: boolean;
@@ -12,30 +14,34 @@ type Props = RbmComponentProps<{
     noMargin?: boolean;
 }>;
 
-export const Card: FunctionComponent<Props> = React.memo(
-    ({
-        title,
-        children,
-        fullHeight = false,
-        noPaddingHeight = false,
-        noPadding = false,
-        noPaddingWidth = false,
-        noMargin = false,
-        className,
-        ...rbmProps
-    }) => {
-        const classes = ['card'];
-        if (fullHeight) classes.push('full-height');
-        if (noPadding) classes.push('no-padding');
-        if (noMargin) classes.push('no-margin');
-        if (noPaddingHeight) classes.push('no-padding-height');
-        if (noPaddingWidth) classes.push('no-padding-width');
+function Card({
+    title,
+    children,
+    fullHeight = false,
+    noPaddingHeight = false,
+    noPadding = false,
+    noPaddingWidth = false,
+    noMargin = false,
+    className,
+    ...rbmProps
+}: CardProps) {
+    const classes = classNames(styles.card, className, {
+        [styles.fullHeight]: fullHeight,
+        [styles.noPadding]: noPadding,
+        [styles.noMargin]: noMargin,
+        [styles.noPaddingHeight]: noPaddingHeight,
+        [styles.noPaddingWidth]: noPaddingWidth,
+    });
 
-        return (
-            <div {...rbmProps} className={prefixClass(classes, className)}>
-                {title ? <div className="title">{title}</div> : null}
-                <div className="content">{children}</div>
-            </div>
-        );
-    }
-);
+    console.log('LOG-d classes', classes, styles);
+
+    return (
+        <div {...rbmProps} className={classes}>
+            {title ? <div className={styles.title}>{title}</div> : null}
+            <div className={styles.content}>{children}</div>
+        </div>
+    );
+}
+
+const CardMemo = withMemo(Card, styles);
+export { CardMemo as Card };

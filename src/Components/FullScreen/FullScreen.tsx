@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { PropsWithChildren, useCallback, useEffect, useMemo, useRef } from 'react';
 import { Override } from '../../TypeHelpers';
+import { withMemo } from '../../helper/withMemo';
 
 export type FullScreenProps<AsType, AsProps> = PropsWithChildren<
     Override<
@@ -78,5 +79,5 @@ function FullScreen<
 }
 
 // Need FullScreenMemo for autocompletion of phpstorm
-const FullScreenMemo = React.memo(FullScreen) as typeof FullScreen;
+const FullScreenMemo = withMemo(FullScreen);
 export { FullScreenMemo as FullScreen };

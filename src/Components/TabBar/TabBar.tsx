@@ -3,8 +3,11 @@ import { RbmComponentProps } from '../RbmComponentProps';
 import { Icon, IconSource } from '../Icon/Icon';
 import { ComponentType, useCallback, useState } from 'react';
 import { Container, Nav } from 'react-bootstrap';
-import { prefixClass } from '../../helper';
 import { TabBarButton } from './TabBarButton';
+
+import styles from './tabBar.scss';
+import { withMemo } from '../../helper/withMemo';
+import classNames from 'classnames';
 
 export type TabBarComponentButtonType = {
     component: ComponentType<Record<string, any>>;
@@ -35,7 +38,28 @@ export type TabBarProps = RbmComponentProps<{
     underline?: boolean;
 }>;
 
-let TabBar = function TabBar({
+function getButtonComponents(buttons: TabBarButtonType[], activeTab: number) {
+    return buttons.map((button, index) => {
+        const isActive = index === activeTab;
+
+        const key = button.key ?? String(index);
+        if ('component' in button) {
+            const Component = button.component;
+            return <Component key={key} active={isActive} />;
+        }
+
+        return (
+            <TabBarButton key={key} active={isActive} index={index}>
+                <span>
+                    {button.icon ? <Icon icon={button.icon} className={styles.buttonIcon} /> : null}
+                    {button.title ? <span className={styles.buttonTitle}>{button.title}</span> : null}
+                </span>
+            </TabBarButton>
+        );
+    });
+}
+
+function TabBar({
     buttons,
     startActiveTab,
     onTabChange,
@@ -67,38 +91,25 @@ let TabBar = function TabBar({
     // Render Functions
     const buttonComponents = getButtonComponents(buttons, activeTab);
 
-    const classes = ['tabBar'];
-    if (transparent) classes.push('transparent');
-    if (underline) classes.push('underlined');
-
     return (
-        <Nav {...rbmProps} className={prefixClass(classes, className)} onSelect={onSelect}>
-            <Container fluid="xxl" className={prefixClass('tabBar-button-container')}>
+        <Nav
+            {...rbmProps}
+            className={classNames(
+                styles.tabBar,
+                {
+                    [styles.transparent]: transparent,
+                    [styles.underlined]: underline,
+                },
+                className
+            )}
+            onSelect={onSelect}
+        >
+            <Container fluid="xxl" className={styles.buttonContainer}>
                 {buttonComponents}
             </Container>
         </Nav>
     );
-};
-TabBar = React.memo(TabBar) as typeof TabBar;
-export { TabBar };
-
-function getButtonComponents(buttons: TabBarButtonType[], activeTab: number) {
-    return buttons.map((button, index) => {
-        const isActive = index === activeTab;
-
-        const key = button.key ?? String(index);
-        if ('component' in button) {
-            const Component = button.component;
-            return <Component key={key} active={isActive} />;
-        }
-
-        return (
-            <TabBarButton key={key} active={isActive} index={index}>
-                <span>
-                    {button.icon ? <Icon icon={button.icon} className={prefixClass('tabBar-button-icon')} /> : null}
-                    {button.title ? <span className={prefixClass('tabBar-button-title')}>{button.title}</span> : null}
-                </span>
-            </TabBarButton>
-        );
-    });
 }
+
+const TabBarMemo = withMemo(TabBar, styles);
+export { TabBarMemo as TabBar };

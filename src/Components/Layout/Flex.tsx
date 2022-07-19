@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
-import { prefixClass } from '../../helper';
+
+import styles from './layout.scss';
+import { withMemo } from '../../helper/withMemo';
+import classNames from 'classnames';
 
 export type FlexProps = RbmComponentProps<{
     vertical?: boolean;
@@ -18,15 +21,11 @@ function Flex({ className, children, vertical = false }: FlexProps) {
     // Effects
 
     // Other
-    const classes = ['flex'];
-    if (vertical) {
-        classes.push('vertical');
-    }
 
     // Render Functions
 
-    return <div className={prefixClass(classes, className)}>{children}</div>;
+    return <div className={classNames(styles.flex, { [styles.vertical]: vertical }, className)}>{children}</div>;
 }
 
-const tmp = React.memo(Flex) as typeof Flex;
+const tmp = withMemo(Flex, styles);
 export { tmp as Flex };

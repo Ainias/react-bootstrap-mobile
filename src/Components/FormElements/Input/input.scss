@@ -1,13 +1,14 @@
-@include prefix("input") {
-  //display: flex;
+@import "../../../scss/variables";
+@import "../../../scss/designMixin";
+
+.input {
   width: 100%;
 
-  @include prefix("input-label") {
+  .label {
     display: block;
   }
 
-  @include prefix("input-text") {
-    //flex: 1;
+  .text {
     width: 100%;
     background-color: transparent;
     border: 0;
@@ -36,13 +37,14 @@
     }
   }
 
-  @include prefix("hidden-input", true) {
-    @include prefix("input-text") {
+  &.hiddenInput {
+    .text {
       background-image: none;
       border-bottom: 1px solid transparent;
     }
-    @include prefix("no-focus-hint", true) {
-      @include prefix("input-text") {
+
+    &.noFocusHint {
+      .text {
         &:focus {
           background-image: none;
           border-bottom: 1px solid transparent;

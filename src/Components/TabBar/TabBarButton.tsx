@@ -1,17 +1,18 @@
 import * as React from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
 import { NavLink } from 'react-bootstrap';
-import { prefixClass } from '../../helper';
+
+import styles from './tabBar.scss';
+import { withMemo } from '../../helper/withMemo';
+import classNames from 'classnames';
 
 export type TabBarButtonProps = RbmComponentProps<{
     active: boolean;
     index: number;
 }>;
 
-let TabBarButton = function TabBarButton({ active, index, className, children, ...rbmProps }: TabBarButtonProps) {
+function TabBarButton({ active, index, className, children, ...rbmProps }: TabBarButtonProps) {
     // Variables
-    const classes = ['tabBar-button'];
-    if (active) classes.push('tabBar-button-active');
 
     // States
 
@@ -26,10 +27,15 @@ let TabBarButton = function TabBarButton({ active, index, className, children, .
     // Render Functions
 
     return (
-        <NavLink {...rbmProps} className={prefixClass(classes, className)} eventKey={index}>
+        <NavLink
+            {...rbmProps}
+            className={classNames(styles.button, { [styles.buttonActive]: active, className })}
+            eventKey={index}
+        >
             {children}
         </NavLink>
     );
-};
-TabBarButton = React.memo(TabBarButton) as typeof TabBarButton;
-export { TabBarButton };
+}
+
+const TabBarButtonMemo = withMemo(TabBarButton, styles);
+export { TabBarButtonMemo as TabBarButton };

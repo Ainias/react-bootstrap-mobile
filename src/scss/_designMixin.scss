@@ -1,0 +1,13 @@
+@use 'sass:selector';
+
+@mixin design($designName) {
+  @if & {
+    @at-root #{selector.nest(':global(.'+$designName+")", &)} {
+      @content
+    }
+  } @else {
+    :global(.#{$designName}) {
+      @content
+    }
+  }
+}

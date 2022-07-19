@@ -1,10 +1,10 @@
-@include prefix("image-input") {
+.imageInput {
   display: flex;
   flex-direction: column;
   position: relative;
   cursor: pointer;
 
-  @include prefix("image-input-preview") {
+  .preview {
     flex: 1;
     object-fit: contain;
 
@@ -13,7 +13,7 @@
     }
   }
 
-  @include prefix("image-input-value") {
+  .value {
     position: absolute;
     top: 0;
     left: 0;

@@ -1,8 +1,11 @@
-@include prefix("select") {
+@import "../../../scss/variables";
+@import "../../../scss/designMixin";
+
+.select {
   display: flex;
   width: 100%;
 
-  @include prefix("select-input") {
+  .input {
     outline: none;
     background-color: transparent;
     height: 2rem;

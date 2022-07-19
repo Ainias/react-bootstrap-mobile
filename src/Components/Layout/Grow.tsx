@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
-import { prefixClass } from '../../helper';
+
+import styles from './layout.scss';
+import { withMemo } from '../../helper/withMemo';
+import classNames from 'classnames';
 
 export type GrowProps = RbmComponentProps<{
     center?: boolean;
@@ -18,13 +21,10 @@ function Grow({ className, children, center = false }: GrowProps) {
     // Effects
 
     // Other
-    const classes = ['grow'];
-    if (center) classes.push('center');
 
     // Render Functions
-
-    return <div className={prefixClass(classes, className)}>{children}</div>;
+    return <div className={classNames('grow', { [styles.center]: center }, className)}>{children}</div>;
 }
 
-const tmp = React.memo(Grow) as typeof Grow;
+const tmp = withMemo(Grow, styles);
 export { tmp as Grow };

@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { Input, InputProps } from './Input';
-import { prefixClass } from '../../../helper';
+import { withMemo } from '../../../helper/withMemo';
+
+import styles from './input.scss';
+import classNames from 'classnames';
 
 export type HiddenInputProps<OnChangeType> = InputProps<OnChangeType> & { noFocusHint?: boolean };
 
@@ -18,11 +21,13 @@ function HiddenInput<OnChangeData>({ noFocusHint = false, className, ...props }:
     // Other
 
     // Render Functions
-
-    const noFocusHintClass = noFocusHint ? 'no-focus-hint' : undefined;
-
-    return <Input className={prefixClass(['hidden-input', noFocusHintClass], className)} {...props} />;
+    return (
+        <Input
+            className={classNames(styles.hiddenInput, { [styles.noFocusHint]: noFocusHint }, className)}
+            {...props}
+        />
+    );
 }
 
-const tmp = React.memo(HiddenInput) as typeof HiddenInput;
+const tmp = withMemo(HiddenInput);
 export { tmp as HiddenInput };

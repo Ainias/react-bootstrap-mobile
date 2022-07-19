@@ -5,6 +5,10 @@ import { SelectHTMLAttributes, useCallback } from 'react';
 import { OptionalListener, useListener } from '../../Hooks/useListener';
 import { prefixClass } from '../../../helper';
 
+import styles from './select.scss';
+import { withMemo } from '../../../helper/withMemo';
+import classNames from 'classnames';
+
 export type SelectOption = {
     label: string;
     value: string;
@@ -50,9 +54,9 @@ function Select<OnChangeData>({ label, options, className, onChangeValue, ...oth
     // Render Functions
 
     return (
-        <label className={prefixClass('select', className)}>
-            {label ? <span className={prefixClass('input-label')}>{label}</span> : null}
-            <select {...otherProps} className={prefixClass('select-input')} onChange={onChange}>
+        <label className={classNames(styles.select, className)}>
+            {label ? <span>{label}</span> : null}
+            <select {...otherProps} className={styles.input} onChange={onChange}>
                 {options.map((option) => (
                     <option value={option.value} key={option.key ?? option.value}>
                         {option.label}
@@ -64,5 +68,5 @@ function Select<OnChangeData>({ label, options, className, onChangeValue, ...oth
 }
 
 // Need SelectMemo for autocompletion of phpstorm
-const SelectMemo = React.memo(Select) as typeof Select;
+const SelectMemo = withMemo(Select, styles);
 export { SelectMemo as Select };

@@ -1,10 +1,13 @@
 import * as React from 'react';
-import { FunctionComponent, InputHTMLAttributes, useCallback } from 'react';
-import { prefixClass } from '../../../helper';
+import { InputHTMLAttributes, useCallback } from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { Override } from '../../../TypeHelpers';
+import classNames from 'classnames';
 
-type Props = RbmComponentProps<
+import styles from './switch.scss';
+import { withMemo } from '../../../helper/withMemo';
+
+export type SwitchProps = RbmComponentProps<
     Override<
         InputHTMLAttributes<HTMLInputElement>,
         {
@@ -18,66 +21,67 @@ type Props = RbmComponentProps<
     >
 >;
 
-export const Switch: FunctionComponent<Props> = React.memo(
-    ({
-        children,
-        label = '',
-        preLabel = '',
-        isLabelBeforeSwitch = false,
-        isDual = undefined,
-        id,
-        className,
-        onChange,
-        onChangeChecked,
-        ...props
-    }) => {
-        // Variables
+function Switch({
+    children,
+    label = '',
+    preLabel = '',
+    isLabelBeforeSwitch = false,
+    isDual = undefined,
+    id,
+    className,
+    onChange,
+    onChangeChecked,
+    ...props
+}: SwitchProps) {
+    // Variables
 
-        // States
+    // States
 
-        // Refs
+    // Refs
 
-        // Callbacks
-        const realOnChange = useCallback(
-            (e) => {
-                if (onChange) {
-                    onChange(e);
-                }
-                if (onChangeChecked) {
-                    onChangeChecked(e.target.checked);
-                }
-            },
-            [onChange, onChangeChecked]
-        );
+    // Callbacks
+    const realOnChange = useCallback(
+        (e) => {
+            if (onChange) {
+                onChange(e);
+            }
+            if (onChangeChecked) {
+                onChangeChecked(e.target.checked);
+            }
+        },
+        [onChange, onChangeChecked]
+    );
 
-        // Effects
+    // Effects
 
-        // Other
+    // Other
 
-        // Render Functions
+    // Render Functions
 
-        if (React.Children.count(children) === 1 && typeof children === 'string') {
-            label = children;
-        }
-
-        if (isLabelBeforeSwitch) {
-            [label, preLabel] = [preLabel, label];
-        }
-
-        if (label && preLabel && isDual === undefined) {
-            isDual = true;
-        }
-        return (
-            <span className={prefixClass(['switch', isDual ? 'dual' : undefined], className)}>
-                <label htmlFor={id} key={id}>
-                    <span className={prefixClass('switch-label')}>{preLabel}</span>
-                    <input {...props} type="checkbox" id={id} onChange={realOnChange} />
-                    <div className={prefixClass('switch-toggle')}>
-                        <span className={prefixClass('switch-handle')} />
-                    </div>
-                    <span className={prefixClass('switch-label')}>{label}</span>
-                </label>
-            </span>
-        );
+    if (React.Children.count(children) === 1 && typeof children === 'string') {
+        label = children;
     }
-);
+
+    if (isLabelBeforeSwitch) {
+        [label, preLabel] = [preLabel, label];
+    }
+
+    if (label && preLabel && isDual === undefined) {
+        isDual = true;
+    }
+    return (
+        <span className={classNames(styles.switch, { [styles.dual]: isDual }, className)}>
+            <label htmlFor={id} key={id}>
+                <span className={styles.label}>{preLabel}</span>
+                <input {...props} type="checkbox" id={id} onChange={realOnChange} />
+                <div className={styles.toggle}>
+                    <span className={styles.handle} />
+                </div>
+                <span className={styles.label}>{label}</span>
+            </label>
+        </span>
+    );
+}
+
+const SwitchMemo = withMemo(Switch, styles);
+export { SwitchMemo as Switch };

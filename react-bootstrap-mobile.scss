@@ -1,25 +1,5 @@
 @import "src/scss/variables";
-@import "src/scss/mobileMixin";
+@import "src/scss/designMixin";
 @import "src/scss/default";
 @import "src/scss/animations";
 @import "src/scss/baseClasses";
-
-//Components
-@import "src/Components/TopBar/topBar";
-@import "src/Components/Card/card";
-@import "src/Components/FormElements/Button/button";
-@import "src/Components/FormElements/Switch/switch";
-@import "src/Components/FormElements/Input/input";
-@import "src/Components/FormElements/CheckBox/checkbox";
-@import "src/Components/List/list";
-@import "src/Components/Layout/layout";
-@import "src/Components/Text/text";
-@import "src/Components/Clickable/clickable";
-@import "src/Components/ActionSheet/actionSheet";
-@import "src/Components/Toast/toast";
-@import "src/Components/InViewport/inViewport";
-@import "src/Components/TabBar/tabBar";
-@import "src/Components/LoadingCircle/loadingCircle";
-@import "src/Components/LoadingArea/loadingArea";
-@import "src/Components/FormElements/Select/select";
-@import "src/Components/FormElements/ImageInput/imageInput";

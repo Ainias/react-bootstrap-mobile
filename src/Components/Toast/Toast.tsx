@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
-import { prefixClass } from '../../helper';
 import { Clickable } from '../Clickable/Clickable';
 import { ReactNode, useCallback, useEffect, useState } from 'react';
 import { Listener, OptionalListener, useListener } from '../Hooks/useListener';
+
+import styles from './toast.scss';
+import { withMemo } from '../../helper/withMemo';
+import classNames from 'classnames';
 
 type WithoutActionProps<DismissedData> = {
     children: string;
@@ -17,7 +20,7 @@ export type ToastProps<ActionData, DismissedData> = RbmComponentProps<
     WithActionProps<ActionData, DismissedData> | WithoutActionProps<DismissedData>
 >;
 
-let Toast = function Toast<ActionData, DismissedData>({
+function Toast<ActionData, DismissedData>({
     className,
     timeToShow = 0,
     children,
@@ -80,21 +83,22 @@ let Toast = function Toast<ActionData, DismissedData>({
     let actionElement: ReactNode = null;
     if ('onClick' in otherProps) {
         actionElement = (
-            <Clickable className={prefixClass('toast-action')} {...otherProps}>
+            <Clickable className={styles.action} {...otherProps}>
                 {otherProps.actionName}
             </Clickable>
         );
     }
 
-    const classes = ['toast'];
-    if (hidingStart > 0) classes.push('hiding');
-
     return (
-        <Clickable className={prefixClass(classes, className)} onClick={updateHidingStart}>
-            <span className={prefixClass('toast-text')}>{children}</span>
+        <Clickable
+            className={classNames(styles.toast, { [styles.hiding]: hidingStart > 0 }, className)}
+            onClick={updateHidingStart}
+        >
+            <span>{children}</span>
             {actionElement}
         </Clickable>
     );
-};
-Toast = React.memo(Toast) as typeof Toast;
-export { Toast };
+}
+
+const ToastMemo = withMemo(Toast, styles);
+export { ToastMemo as Toast };

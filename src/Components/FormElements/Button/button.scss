@@ -1,4 +1,7 @@
-@include prefix("button") {
+@import "../../../scss/variables";
+@import "../../../scss/designMixin";
+
+.button {
   cursor: pointer;
   margin: 0;
   user-select: none;

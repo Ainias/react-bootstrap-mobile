@@ -3,6 +3,10 @@ import { ReactNode } from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
 import { prefixClass } from '../../helper';
 
+import styles from './list.scss';
+import { withMemo } from '../../helper/withMemo';
+import classNames from 'classnames';
+
 export type ListProps<ItemType> = RbmComponentProps<{
     renderItem: (item: ItemType, index: number) => ReactNode;
     renderBefore?: (item: ItemType, index: number) => ReactNode;
@@ -26,17 +30,17 @@ function List<ItemType>({ items, renderItem, renderBefore, keyExtractor, classNa
     // Render Functions
 
     return (
-        <ul {...props} className={prefixClass('list', className)}>
+        <ul {...props} className={classNames(styles.list, className)}>
             {items.map((item, index) => {
                 let before = null;
                 if (renderBefore) {
-                    before = <span className={prefixClass('list-item-before')}>{renderBefore(item, index)}</span>;
+                    before = <span>{renderBefore(item, index)}</span>;
                 }
 
                 return (
-                    <li className={prefixClass('list-item')} key={keyExtractor(item, index)}>
+                    <li className={styles.item} key={keyExtractor(item, index)}>
                         {before}
-                        <span className={prefixClass('list-item-main')}>{renderItem(item, index)}</span>
+                        <span className={styles.itemMain}>{renderItem(item, index)}</span>
                     </li>
                 );
             })}
@@ -44,5 +48,5 @@ function List<ItemType>({ items, renderItem, renderBefore, keyExtractor, classNa
     );
 }
 
-const tmp = React.memo(List) as typeof List;
+const tmp = withMemo(List, styles);
 export { tmp as List };

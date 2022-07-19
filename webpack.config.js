@@ -72,7 +72,7 @@ function getCssModuleLocalIdent(context, _, exportName, options) {
 
 module.exports = {
     mode: 'production',
-    devtool: 'source-map',
+    // devtool: 'source-map',
     entry: './bootstrapReactMobile.ts',
     output: {
         filename: 'bootstrapReactMobile.js',
@@ -123,6 +123,7 @@ module.exports = {
                         loader: 'css-loader',
                         options: {
                             esModule: false,
+                            modules: true,
                         },
                     },
                     { loader: 'sass-loader' },

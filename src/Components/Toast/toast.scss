@@ -1,4 +1,7 @@
-@include prefix(toast-container) {
+@import "../../scss/variables";
+@import "../../scss/designMixin";
+
+.toastContainer {
   position: fixed;
   left: 0;
   right: 0;
@@ -11,7 +14,7 @@
 
 }
 
-@include prefix(toast) {
+.toast {
   background-color: rgba(0, 0, 0, 0.8);
   min-height: 48px;
   line-height: 1.5;
@@ -21,7 +24,7 @@
   transition-duration: 0.25s;
   margin: 8px;
 
-  @include prefix(hiding, true) {
+  &.hiding {
     opacity: 0;
   }
 
@@ -34,7 +37,7 @@
     padding: 16px;
   }
 
-  @include prefix(toast-action) {
+  .action {
     text-transform: uppercase;
     margin-left: 24px;
 

@@ -1,23 +1,26 @@
-nav.navbar {
-  @include prefix(topbar, true) {
+@import "../../scss/variables";
+@import "../../scss/designMixin";
+
+:global(nav.navbar) {
+  &.topBar {
     background: white;
     height: 56px;
 
-    @include prefix(transparent, true) {
+    &.transparent {
       opacity: 0.65;
       z-index: 1;
     }
-    @include prefix(draw-behind, true) {
+
+    &.drawBehind {
       position: absolute;
       left: 0;
       right: 0;
     }
 
-    @include prefix(topbar-title-container) {
+    .titleContainer {
       overflow: hidden;
-      //height: 40px;
 
-      @include prefix(topbar-title) {
+      .title {
         white-space: nowrap;
         width: 100%;
         overflow: hidden;
@@ -25,7 +28,7 @@ nav.navbar {
       }
     }
 
-    @include prefix(topbar-button-container) {
+    .buttonContainer {
       white-space: nowrap;
       display: flex;
       flex: 1;
@@ -40,10 +43,10 @@ nav.navbar {
       }
     }
 
-    @include prefix(topbar-hidden-container) {
+    .hiddenContainer {
       position: relative;
 
-      @include prefix(topbar-hidden-close-curtain) {
+      .hiddenCloseCurtain {
         position: fixed;
         top: 0;
         left: 0;
@@ -52,7 +55,7 @@ nav.navbar {
         z-index: 998;
       }
 
-      @include prefix(topbar-hidden-menu) {
+      .hiddenMenu {
         position: absolute;
         right: 0;
         white-space: nowrap;
@@ -69,7 +72,7 @@ nav.navbar {
     @include design($material) {
       box-shadow: 0 1px 5px rgb(0 0 0 / 30%);
 
-      @include prefix(topbar-hidden-action-menu) {
+      .hiddenActionMenu {
         display: none;
       }
     }
@@ -79,7 +82,7 @@ nav.navbar {
       background-position: bottom;
       background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 100%);
 
-      @include prefix(topbar-hidden-container) {
+      .hiddenContainer {
         display: none;
       }
     }
