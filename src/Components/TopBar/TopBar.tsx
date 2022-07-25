@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ComponentType, ReactElement, useCallback, useMemo, useRef, useState } from 'react';
-import { Container, Navbar } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { TopBarButton } from './TopBarButton';
 import { RbmComponentProps } from '../RbmComponentProps';
 import { ActionSheet, ActionSheetAction } from '../ActionSheet/ActionSheet';
@@ -8,6 +8,7 @@ import { Icon, IconSource } from '../Icon/Icon';
 import { MoreButton } from './MoreButton';
 
 import styles from './topBar.scss';
+
 import { withMemo } from '../../helper/withMemo';
 import classNames from 'classnames';
 
@@ -124,9 +125,8 @@ function TopBar({
     }));
 
     return (
-        <Navbar
+        <nav
             {...rbmProps}
-            variant="light"
             className={classNames(
                 styles.topBar,
                 {
@@ -137,11 +137,11 @@ function TopBar({
             )}
         >
             <Container fluid="xxl">
-                <div className={classNames(styles.buttonContainer, 'left')}>{leftButtonComponents}</div>
+                <div className={classNames(styles.buttonContainer, styles.left)}>{leftButtonComponents}</div>
                 <div className={styles.titleContainer}>
-                    <Navbar.Text className={styles.title}>{title}</Navbar.Text>
+                    <span className={styles.title}>{title}</span>
                 </div>
-                <div className={classNames(styles.buttonContainer, 'right')}>{rightButtonComponents}</div>
+                <div className={classNames(styles.buttonContainer, styles.right)}>{rightButtonComponents}</div>
                 {hiddenButtons.length > 0 && isHiddenMenuOpen ? (
                     <span className={styles.hiddenContainer}>
                         <span aria-hidden={true} className={styles.hiddenCloseCurtain} onClick={toggleHiddenMenu} />
@@ -155,7 +155,7 @@ function TopBar({
                     onClose={onActionSheetClose}
                 />
             </Container>
-        </Navbar>
+        </nav>
     );
 }
 

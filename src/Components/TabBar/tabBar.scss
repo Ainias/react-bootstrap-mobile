@@ -4,6 +4,11 @@
 .tabBar {
   height: 60px;
   width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
 
   .buttonContainer {
     padding: 0;
@@ -41,6 +46,8 @@
   flex-basis: 0;
   flex-grow: 1;
   text-align: center;
+  text-decoration: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 
   > span {
     width: 100%;

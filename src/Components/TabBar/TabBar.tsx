@@ -2,12 +2,13 @@ import * as React from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
 import { Icon, IconSource } from '../Icon/Icon';
 import { ComponentType, useCallback, useState } from 'react';
-import { Container, Nav } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { TabBarButton } from './TabBarButton';
 
 import styles from './tabBar.scss';
 import { withMemo } from '../../helper/withMemo';
 import classNames from 'classnames';
+import { ListenerWithData } from '../Hooks/useListener';
 
 export type TabBarComponentButtonType = {
     component: ComponentType<Record<string, any>>;
@@ -38,7 +39,7 @@ export type TabBarProps = RbmComponentProps<{
     underline?: boolean;
 }>;
 
-function getButtonComponents(buttons: TabBarButtonType[], activeTab: number) {
+function getButtonComponents(buttons: TabBarButtonType[], activeTab: number, onSelect: ListenerWithData<number>) {
     return buttons.map((button, index) => {
         const isActive = index === activeTab;
 
@@ -49,7 +50,7 @@ function getButtonComponents(buttons: TabBarButtonType[], activeTab: number) {
         }
 
         return (
-            <TabBarButton key={key} active={isActive} index={index}>
+            <TabBarButton key={key} active={isActive} onClickData={index} onClick={onSelect}>
                 <span>
                     {button.icon ? <Icon icon={button.icon} className={styles.buttonIcon} /> : null}
                     {button.title ? <span className={styles.buttonTitle}>{button.title}</span> : null}
@@ -77,9 +78,9 @@ function TabBar({
 
     // Callbacks
     const onSelect = useCallback(
-        (index: string | null) => {
-            setInternalActiveTab(Number(index));
-            onTabChange(Number(index));
+        (_: any, index: number) => {
+            setInternalActiveTab(index);
+            onTabChange(index);
         },
         [onTabChange, setInternalActiveTab]
     );
@@ -89,10 +90,10 @@ function TabBar({
     // Other
 
     // Render Functions
-    const buttonComponents = getButtonComponents(buttons, activeTab);
+    const buttonComponents = getButtonComponents(buttons, activeTab, onSelect);
 
     return (
-        <Nav
+        <div
             {...rbmProps}
             className={classNames(
                 styles.tabBar,
@@ -102,12 +103,11 @@ function TabBar({
                 },
                 className
             )}
-            onSelect={onSelect}
         >
             <Container fluid="xxl" className={styles.buttonContainer}>
                 {buttonComponents}
             </Container>
-        </Nav>
+        </div>
     );
 }
 

@@ -44,9 +44,12 @@
     ],
     "react-hooks/rules-of-hooks": "error",
     // Checks rules of Hooks
-    "react-hooks/exhaustive-deps": ["warn", {
-      "additionalHooks": "(useDelayed|useDebounced)"
-    }],
+    "react-hooks/exhaustive-deps": [
+      "warn",
+      {
+        "additionalHooks": "(useDelayed|useDebounced)"
+      }
+    ],
     // Checks effect dependencies
     "react/jsx-filename-extension": [
       "warn",
@@ -127,8 +130,12 @@
         "varsIgnorePattern": "^_"
       }
     ],
-
-    "import/no-cycle": ["error", {"maxDepth":  1}],
+    "import/no-cycle": [
+      "error",
+      {
+        "maxDepth": 1
+      }
+    ],
     "no-promise-executor-return": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
     "no-console": "off",
@@ -145,6 +152,7 @@
     "no-plusplus": "off",
     "no-param-reassign": "off",
     "default-case": "off",
+    "jsx-a11y/interactive-supports-focus": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "react/require-default-props": "off"
   },

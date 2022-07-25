@@ -11,8 +11,6 @@ import {
     useTable,
 } from 'react-table';
 import { RbmComponentProps } from '../RbmComponentProps';
-import { Table as RBTable, TableProps as RBTableProps } from 'react-bootstrap';
-import { Override } from '../../TypeHelpers';
 import { ReactNode } from 'react';
 import { withMemo } from '../../helper/withMemo';
 
@@ -40,21 +38,14 @@ export type TableSortOptions<DataType extends string | number | Record<string, u
     renderSortIndicator?: (column: HeaderGroup<Record<string, DataType>>) => ReactNode;
 };
 
-export type TableProps<DataType extends string | number | Record<string, unknown>> = RbmComponentProps<
-    Override<
-        RBTableProps,
-        {
-            columns: Column<DataType>[];
-            data: Record<string, DataType>[];
-            cellRenderer?: ({ value }: { value: DataType }) => ReactNode;
-            sortOptions?: TableSortOptions<DataType>;
-            getCellProperties?: (
-                row: Cell<Record<string, DataType>>
-            ) => React.TdHTMLAttributes<HTMLTableDataCellElement>;
-            getRowProperties?: (row: Row<Record<string, DataType>>) => React.HTMLAttributes<HTMLTableRowElement>;
-        }
-    >
->;
+export type TableProps<DataType extends string | number | Record<string, unknown>> = RbmComponentProps<{
+    columns: Column<DataType>[];
+    data: Record<string, DataType>[];
+    cellRenderer?: ({ value }: { value: DataType }) => ReactNode;
+    sortOptions?: TableSortOptions<DataType>;
+    getCellProperties?: (row: Cell<Record<string, DataType>>) => React.TdHTMLAttributes<HTMLTableDataCellElement>;
+    getRowProperties?: (row: Row<Record<string, DataType>>) => React.HTMLAttributes<HTMLTableRowElement>;
+}>;
 
 const defaultPropertiesGetter = () => ({});
 
@@ -122,7 +113,7 @@ function Table<DataType extends string | number | Record<string, unknown>>({
 
     return (
         // apply the table props
-        <RBTable className={className} {...getTableProps()}>
+        <table className={className} {...getTableProps()}>
             <thead>
                 {
                     // Loop over the header rows
@@ -181,7 +172,7 @@ function Table<DataType extends string | number | Record<string, unknown>>({
                     })
                 }
             </tbody>
-        </RBTable>
+        </table>
     );
 }
 

@@ -1,20 +1,29 @@
 import * as React from 'react';
-import { FunctionComponent, useCallback } from 'react';
-import { NavLink } from 'react-bootstrap';
+import { useCallback } from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
 
-type Props = RbmComponentProps<{
+import styles from './topBar.scss';
+import classNames from 'classnames';
+import { withMemo } from '../../helper/withMemo';
+
+export type TopBarButtonProps = RbmComponentProps<{
     disabled?: boolean;
     onClick?: () => void;
 }>;
 
-export const TopBarButton: FunctionComponent<Props> = React.memo(
-    ({ disabled = false, onClick, children, ...rbmProps }) => {
-        const cb = useCallback(() => (onClick ? onClick() : null), [onClick]);
-        return (
-            <NavLink {...rbmProps} onClick={cb} disabled={disabled}>
-                {children}
-            </NavLink>
-        );
-    }
-);
+function TopBarButton({ disabled = false, onClick, className, children, ...rbmProps }: TopBarButtonProps) {
+    const cb = useCallback(() => (onClick ? onClick() : null), [onClick]);
+    return (
+        <a
+            role="button"
+            {...rbmProps}
+            onClick={cb}
+            className={classNames(styles.button, { [styles.disabled]: disabled }, className)}
+        >
+            {children}
+        </a>
+    );
+}
+
+const TopBarButtonMemo = withMemo(TopBarButton, styles);
+export { TopBarButtonMemo as TopBarButton };

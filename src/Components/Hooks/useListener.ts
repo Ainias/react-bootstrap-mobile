@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
 
-type ListenerWithData<DataType, Event = void | any, ReturnType = void> = (
+export type ListenerWithData<DataType, Event = void | any, ReturnType = void> = (
     eventData: Event,
     extraData: DataType
 ) => ReturnType;
-type ListenerWithoutData<Event = void | any, ReturnType = void> = (eventData: Event) => ReturnType;
+export type ListenerWithoutData<Event = void | any, ReturnType = void> = (eventData: Event) => ReturnType;
 
 export type Listener<ListenerProperty extends string, DataType, Event = any | void, ReturnType = void> =
     | ({ [Property in ListenerProperty]: ListenerWithData<DataType, Event, ReturnType> } & {
@@ -49,4 +49,25 @@ export function useListener<ListenerName extends string, DataType, EventType = a
         },
         [callback, extraData]
     );
+}
+
+export function useListenerWithExtractedProps<
+    ListenerName extends string,
+    DataType,
+    EventType = any,
+    ReturnType = void,
+    PropTypes extends OptionalListener<ListenerName, DataType, EventType, ReturnType> = OptionalListener<
+        ListenerName,
+        DataType,
+        EventType,
+        ReturnType
+    >
+>(listener: ListenerName, listenerProps: PropTypes) {
+    const {
+        [`${listener}Data` as keyof typeof listenerProps]: _,
+        [listener as keyof typeof listenerProps]: __,
+        ...otherProps
+    } = listenerProps;
+
+    return [useListener<ListenerName, DataType, EventType, ReturnType>(listener, listenerProps), otherProps] as const;
 }

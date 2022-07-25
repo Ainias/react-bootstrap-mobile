@@ -1,17 +1,18 @@
 import * as React from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
-import { NavLink } from 'react-bootstrap';
 
 import styles from './tabBar.scss';
 import { withMemo } from '../../helper/withMemo';
 import classNames from 'classnames';
+import { Listener, useListenerWithExtractedProps } from '../Hooks/useListener';
 
-export type TabBarButtonProps = RbmComponentProps<{
-    active: boolean;
-    index: number;
-}>;
+export type TabBarButtonProps = RbmComponentProps<
+    {
+        active: boolean;
+    } & Listener<'onClick', number>
+>;
 
-function TabBarButton({ active, index, className, children, ...rbmProps }: TabBarButtonProps) {
+function TabBarButton({ active, className, children, ...rbmProps }: TabBarButtonProps) {
     // Variables
 
     // States
@@ -19,6 +20,7 @@ function TabBarButton({ active, index, className, children, ...rbmProps }: TabBa
     // Refs
 
     // Callbacks
+    const [onClick, otherProps] = useListenerWithExtractedProps<'onClick', number>('onClick', rbmProps);
 
     // Effects
 
@@ -27,13 +29,14 @@ function TabBarButton({ active, index, className, children, ...rbmProps }: TabBa
     // Render Functions
 
     return (
-        <NavLink
-            {...rbmProps}
+        <a
+            {...otherProps}
+            role="button"
+            onClick={onClick}
             className={classNames(styles.button, { [styles.buttonActive]: active, className })}
-            eventKey={index}
         >
             {children}
-        </NavLink>
+        </a>
     );
 }
 

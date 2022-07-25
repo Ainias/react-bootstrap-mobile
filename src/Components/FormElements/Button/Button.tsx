@@ -1,20 +1,23 @@
 import * as React from 'react';
-import { Button as BSButton, ButtonProps as BSButtonProps } from 'react-bootstrap';
 import { Override } from '../../../TypeHelpers';
 import { OptionalListener, useListener } from '../../Hooks/useListener';
 
 import styles from './button.scss';
 import classNames from 'classnames';
 import { withMemo } from '../../../helper/withMemo';
+import { HTMLAttributes } from 'react';
+import { RbmComponentProps } from '../../RbmComponentProps';
 
-export type ButtonProps<ClickData> = Override<BSButtonProps, OptionalListener<'onClick', ClickData>>;
+export type ButtonProps<ClickData> = RbmComponentProps<
+    Override<HTMLAttributes<HTMLButtonElement>, OptionalListener<'onClick', ClickData>>
+>;
 
-function Button<ClickData>({ children, ...props }: ButtonProps<ClickData>) {
+function Button<ClickData>({ children, className, ...props }: ButtonProps<ClickData>) {
     const onClick = useListener<'onClick', ClickData>('onClick', props);
     return (
-        <BSButton {...props} onClick={onClick} bsPrefix={classNames(styles.button)}>
+        <button {...props} type="button" onClick={onClick} className={classNames(styles.button, className)}>
             {children}
-        </BSButton>
+        </button>
     );
 }
 
