@@ -5,36 +5,11 @@ const fs = require('fs');
 const packageName = require('../package.json').name;
 
 let pathsToProjects = [
-    '/home/silas/Projekte/web/project-echo',
-    '/home/silas/Projekte/web/bat',
-    '/home/silas/Projekte/web/christival',
-    // "/home/silas/Projekte/web/wordRotator",
-    // '/home/silas/Projekte/web/dnd',
-    // '/home/silas/Projekte/web/smd-mail',
-    // '/home/silas/Projekte/web/wordRotator',
-    // '/home/silas/Projekte/web/crew',
-    // '/home/silas/Projekte/web/hoffnungsfest',
-    '/home/silas/Projekte/web/bat',
-    '/home/silas/Projekte/web/TaskList',
-    '/home/silas/Projekte/web/nextjsTest/poc-nextjs',
-    '/home/silas/Projekte/chrome/dmscreen',
-    '/home/silas/Projekte/web/worktime',
     '/home/silas/Projekte/web/prayercircle',
     '/home/silas/Projekte/web/cordova-sites',
     '/home/silas/Projekte/web/cordova-sites-legacy-adapter',
     '/home/silas/Projekte/web/cordova-sites-easy-sync',
     '/home/silas/Projekte/web/cordova-sites-user-management',
-    // "/home/silas/Projekte/Web/orgel",
-    // "/home/silas/Projekte/Web/bible-lexicon",
-    // "/home/silas/Projekte/Web/wordRotator",
-    // "/home/silas/Projekte/web/stories",
-    // "/home/silas/Projekte/web/cordova-sites-user-management",
-    // '/home/silas/Projekte/i9/mbb',
-    // "/var/www/pwa/wordRotator",
-
-    // "/var/www/i9/mbb",
-    // "/home/silas/PhpstormProjects/cordova-sites-user-management",
-    // "/home/silas/PhpstormProjects/project-echo",
 ];
 
 const deleteFolderRecursive = function (path) {

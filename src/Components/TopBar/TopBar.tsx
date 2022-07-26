@@ -136,7 +136,7 @@ function TopBar({
                 className
             )}
         >
-            <Container fluid="xxl">
+            <Container fluid="xxl" className={styles.container}>
                 <div className={classNames(styles.buttonContainer, styles.left)}>{leftButtonComponents}</div>
                 <div className={styles.titleContainer}>
                     <span className={styles.title}>{title}</span>
