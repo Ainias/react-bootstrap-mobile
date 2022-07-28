@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ComponentType, ReactElement, useCallback, useMemo, useRef, useState } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container } from '../Layout/Container';
 import { TopBarButton } from './TopBarButton';
 import { RbmComponentProps } from '../RbmComponentProps';
 import { ActionSheet, ActionSheetAction } from '../ActionSheet/ActionSheet';
@@ -118,11 +118,15 @@ function TopBar({
     const leftButtonComponents = getButtonComponents(leftButtons);
     const hiddenButtonComponents = getButtonComponents(hiddenButtons.map(({ icon: _, ...button }) => button));
 
-    const actions: ActionSheetAction<any>[] = hiddenButtons.map((button) => ({
-        action: button.action!,
-        name: button.title!,
-        icon: button.icon,
-    }));
+    const actions: ActionSheetAction<any>[] = useMemo(
+        () =>
+            hiddenButtons.map((button) => ({
+                action: button.action!,
+                name: button.title!,
+                icon: button.icon,
+            })),
+        [hiddenButtons]
+    );
 
     return (
         <nav

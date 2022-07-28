@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';
-import { prefixClass } from '../../../helper';
 import { InputHTMLAttributes } from 'react';
 
 import styles from './checkbox.scss';

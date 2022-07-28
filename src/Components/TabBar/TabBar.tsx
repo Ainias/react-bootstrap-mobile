@@ -2,7 +2,7 @@ import * as React from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
 import { Icon, IconSource } from '../Icon/Icon';
 import { ComponentType, useCallback, useState } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container } from '../Layout/Container';
 import { TabBarButton } from './TabBarButton';
 
 import styles from './tabBar.scss';

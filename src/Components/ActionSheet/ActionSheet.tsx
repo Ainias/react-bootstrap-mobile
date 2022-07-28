@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
 import { Ref, useCallback, useImperativeHandle, useState } from 'react';
-import { prefixClass } from '../../helper';
 import { Clickable } from '../Clickable/Clickable';
-import { Container } from 'react-bootstrap';
+import { Container } from '../Layout/Container';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Icon, IconSource } from '../Icon/Icon';
 
@@ -51,7 +50,7 @@ function ActionSheet(
         }
     }, [setIsOpen, onClose]);
     const onActionClick = useCallback(
-        (action?: ActionSheetAction<any>) => {
+        (_, action?: ActionSheetAction<any>) => {
             close();
             action?.action(action.actionData);
         },
@@ -84,14 +83,11 @@ function ActionSheet(
             onClick={close}
         >
             <Container fluid="xxl" className="full-height">
-                <div className={prefixClass('action-sheet-content')}>
-                    {title ? <div className={prefixClass('action-sheet-title')}>{title}</div> : null}
+                <div className={styles.content}>
+                    {title ? <div>{title}</div> : null}
                     {actions.map(renderAction)}
-                    <Clickable
-                        className={prefixClass('action-sheet-cancel')}
-                        onClick={() => console.log('Cancel clicked')}
-                    >
-                        <span className={prefixClass('action-sheet-action-icon')}>
+                    <Clickable className={styles.cancel} onClick={() => console.log('Cancel clicked')}>
+                        <span className={styles.actionIcon}>
                             <Icon icon={faTimes} />
                         </span>
                         {cancelText}

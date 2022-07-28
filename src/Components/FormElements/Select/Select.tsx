@@ -3,7 +3,6 @@ import { RbmComponentProps } from '../../RbmComponentProps';
 import { Override } from '../../../TypeHelpers';
 import { SelectHTMLAttributes, useCallback } from 'react';
 import { OptionalListener, useListener } from '../../Hooks/useListener';
-import { prefixClass } from '../../../helper';
 
 import styles from './select.scss';
 import { withMemo } from '../../../helper/withMemo';

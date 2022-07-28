@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
-import { prefixClass } from '../../helper';
 import { Listener, useListener } from '../Hooks/useListener';
 
 import styles from './clickable.scss';

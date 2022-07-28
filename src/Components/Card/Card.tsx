@@ -33,8 +33,6 @@ function Card({
         [styles.noPaddingWidth]: noPaddingWidth,
     });
 
-    console.log('LOG-d classes', classes, styles);
-
     return (
         <div {...rbmProps} className={classes}>
             {title ? <div className={styles.title}>{title}</div> : null}

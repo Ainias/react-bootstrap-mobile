@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
-import { Container } from 'react-bootstrap';
+import { Container } from '../Layout/Container';
 
 import styles from './toast.scss';
 import classNames from 'classnames';
@@ -29,5 +29,6 @@ function ToastContainer({ className, children }: ToastContainerProps) {
         </Container>
     );
 }
+
 const ToastContainerMemo = withMemo(ToastContainer, styles);
 export { ToastContainerMemo as ToastContainer };

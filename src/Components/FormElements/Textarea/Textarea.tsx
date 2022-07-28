@@ -3,10 +3,10 @@ import { RbmComponentProps } from '../../RbmComponentProps';
 import { Override } from '../../../TypeHelpers';
 import { TextareaHTMLAttributes, useCallback, KeyboardEvent, ChangeEvent } from 'react';
 import { OptionalListener, useListener } from '../../Hooks/useListener';
-import { classes } from '../../../helper';
 import { withMemo } from '../../../helper/withMemo';
 
 import styles from './textarea.scss';
+import classNames from 'classnames';
 
 export type TextareaProps<OnChangeData> = RbmComponentProps<
     Override<
@@ -65,7 +65,7 @@ function Textarea<OnChangeData>({
 
     return (
         <>
-            <label className={classes(styles.container, className)}>
+            <label className={classNames(styles.container, className)}>
                 {label ? <span className={styles.label}>{label}</span> : null}
                 <textarea {...otherProps} onKeyPress={realOnKeyPress} className={styles.textarea} onChange={onChange} />
             </label>

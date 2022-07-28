@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
-import { prefixClass } from '../../helper';
 import { useEffect, useRef, useState } from 'react';
 
 import styles from './inViewport.scss';

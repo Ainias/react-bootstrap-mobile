@@ -3,7 +3,6 @@ import { RbmComponentProps } from '../../RbmComponentProps';
 import { Override } from '../../../TypeHelpers';
 import { InputHTMLAttributes, useCallback, useState } from 'react';
 import { OptionalListener, useListener } from '../../Hooks/useListener';
-import { prefixClass } from '../../../helper';
 import { Button } from '../Button/Button';
 
 import styles from './imageInput.scss';
