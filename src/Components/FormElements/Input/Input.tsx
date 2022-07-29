@@ -3,7 +3,7 @@ import { ForwardedRef, InputHTMLAttributes, KeyboardEvent, useCallback } from 'r
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { Override } from '../../../TypeHelpers';
 import { OptionalListener, useListener } from '../../Hooks/useListener';
-import { withForwardRef } from '../../withForwardRef';
+import { withForwardRef } from '../../../helper/withForwardRef';
 
 import styles from './input.scss';
 import classNames from 'classnames';

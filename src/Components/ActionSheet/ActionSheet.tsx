@@ -7,7 +7,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Icon, IconSource } from '../Icon/Icon';
 
 import styles from './actionSheet.scss';
-import { withForwardRef } from '../withForwardRef';
+import { withForwardRef } from '../../helper/withForwardRef';
 import classNames from 'classnames';
 
 export type ActionSheetAction<ActionData> = {
