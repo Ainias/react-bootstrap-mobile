@@ -86,7 +86,11 @@ function ActionSheet(
                 <div className={styles.content}>
                     {title ? <div>{title}</div> : null}
                     {actions.map(renderAction)}
-                    <Clickable className={styles.cancel} onClick={() => console.log('Cancel clicked')}>
+                    <Clickable
+                        className={styles.cancel}
+                        onClick={() => console.log('Cancel clicked')}
+                        __allowChildren="all"
+                    >
                         <span className={styles.actionIcon}>
                             <Icon icon={faTimes} />
                         </span>

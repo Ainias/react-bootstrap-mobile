@@ -6,8 +6,10 @@ import styles from './clickable.scss';
 import classNames from 'classnames';
 import { withMemo } from '../../helper/withMemo';
 
+type OnClickListener<Data> = Listener<'onClick', Data>;
+
 export type ClickableProps<OnClickData> = RbmComponentProps<
-    { interactable?: boolean; style?: React.CSSProperties } & Listener<'onClick', OnClickData>
+    { interactable?: boolean; style?: React.CSSProperties } & OnClickListener<OnClickData>
 >;
 
 function Clickable<OnClickData>({

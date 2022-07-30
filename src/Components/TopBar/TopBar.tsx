@@ -47,7 +47,7 @@ function getButtonComponents(buttons: TopBarButtonType[]) {
             child = <Icon icon={button.icon} />;
         }
         return (
-            <TopBarButton key={key} onClick={button.action} disabled={button.disabled}>
+            <TopBarButton key={key} onClick={button.action} disabled={button.disabled} __allowChildren="all">
                 {child}
             </TopBarButton>
         );

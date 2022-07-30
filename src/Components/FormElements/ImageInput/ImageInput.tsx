@@ -84,7 +84,7 @@ function ImageInput<OnChangeData>({
                 alt={(value ?? image)?.name}
                 className={classNames(styles.preview, (value ?? image)?.url ? undefined : styles.empty)}
             />
-            <Button>{(value ?? image)?.name ?? <i>Select Image</i>}</Button>
+            <Button __allowChildren="all">{(value ?? image)?.name ?? <i>Select Image</i>}</Button>
             <input {...otherProps} className={styles.value} onChange={onChange} type="file" />
         </label>
     );

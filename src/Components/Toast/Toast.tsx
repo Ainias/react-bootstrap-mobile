@@ -83,7 +83,7 @@ function Toast<ActionData, DismissedData>({
     let actionElement: ReactNode = null;
     if ('onClick' in otherProps) {
         actionElement = (
-            <Clickable className={styles.action} {...otherProps}>
+            <Clickable className={styles.action} {...otherProps} __allowChildren="all">
                 {otherProps.actionName}
             </Clickable>
         );
@@ -93,6 +93,7 @@ function Toast<ActionData, DismissedData>({
         <Clickable
             className={classNames(styles.toast, { [styles.hiding]: hidingStart > 0 }, className)}
             onClick={updateHidingStart}
+            __allowChildren="all"
         >
             <span>{children}</span>
             {actionElement}

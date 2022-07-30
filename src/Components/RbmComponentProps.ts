@@ -1,6 +1,19 @@
-import { PropsWithChildren } from 'react';
+import { ReactNode } from 'react';
 
-export type RbmComponentProps<SpecialProps> = PropsWithChildren<
+type Child = JSX.Element | undefined | null | Child[];
+type WithNoStringProps<Props> = (
+    | {
+          children?: Child;
+          __allowChildren?: 'html';
+      }
+    | {
+          children?: ReactNode;
+          __allowChildren: 'text' | 'all';
+      }
+) &
+    Props;
+
+export type RbmComponentProps<SpecialProps> = WithNoStringProps<
     {
         className?: string;
     } & SpecialProps

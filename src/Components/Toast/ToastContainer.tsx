@@ -24,7 +24,7 @@ function ToastContainer({ className, children }: ToastContainerProps) {
     // Render Functions
 
     return (
-        <Container className={classNames(styles.toastContainer, className)} fluid>
+        <Container className={classNames(styles.toastContainer, className)} fluid __allowChildren="all">
             {children}
         </Container>
     );

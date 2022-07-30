@@ -34,23 +34,6 @@ function Container({ fluid, className, children }: ContainerProps) {
 
     // Render Functions
 
-    console.log('styles', styles);
-
-    // return (
-    //     <div
-    //         className={classNames(
-    //             {
-    //                 container: fluid === false,
-    //                 'container-fluid': fluid === true,
-    //                 [`container-${fluid}`]: typeof fluid === 'string',
-    //             },
-    //             className
-    //         )}
-    //     >
-    //         {children}
-    //     </div>
-    // );
-
     const containerClass = typeof fluid === 'string' ? CONTAINER_CLASSES[fluid] : '';
     return (
         <div
