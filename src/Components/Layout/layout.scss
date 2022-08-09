@@ -1,11 +1,11 @@
 .flex {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  &.vertical {
-    flex-direction: column;
+  &.horizontal {
+    flex-direction: row;
   }
 }
 
@@ -15,4 +15,16 @@
   &.center {
     text-align: center;
   }
+}
+
+.block {
+  display: block;
+}
+
+.inlineBlock {
+  display: inline-block;
+}
+
+.inline {
+  display: inline;
 }

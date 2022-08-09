@@ -1,31 +1,35 @@
 import * as React from 'react';
-import { PropsWithChildren, useCallback, useEffect, useMemo, useRef } from 'react';
+import {
+    ComponentPropsWithoutRef,
+    ComponentRef,
+    PropsWithChildren,
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+} from 'react';
 import { Override } from '../../TypeHelpers';
 import { withMemo } from '../../helper/withMemo';
 
-export type FullScreenProps<AsType, AsProps> = PropsWithChildren<
+export type FullScreenProps<AsType extends keyof JSX.IntrinsicElements> = PropsWithChildren<
     Override<
-        AsProps,
+        ComponentPropsWithoutRef<AsType>,
         { as?: AsType; fullscreenKey?: string; onEnterFullscreen?: () => void; onLeaveFullscreen?: () => void }
     >
 >;
 
-function FullScreen<
-    AsTag extends keyof JSX.IntrinsicElements = 'span',
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    AsTagProps extends JSX.IntrinsicElements[AsTag] = {}
->({
+function FullScreen<AsTag extends keyof JSX.IntrinsicElements = 'span'>({
     children,
     as,
     fullscreenKey,
     onEnterFullscreen,
     onLeaveFullscreen,
     ...otherProps
-}: FullScreenProps<AsTag, AsTagProps & JSX.IntrinsicAttributes>) {
+}: FullScreenProps<AsTag>) {
     // Variables
 
     // Refs
-    const containerRef = useRef<HTMLElement>(null);
+    const containerRef = useRef<ComponentRef<AsTag>>(null);
 
     // States
 

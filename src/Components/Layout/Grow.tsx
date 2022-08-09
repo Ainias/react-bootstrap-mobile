@@ -23,7 +23,7 @@ function Grow({ className, children, center = false }: GrowProps) {
     // Other
 
     // Render Functions
-    return <div className={classNames('grow', { [styles.center]: center }, className)}>{children}</div>;
+    return <div className={classNames(styles.grow, { [styles.center]: center }, className)}>{children}</div>;
 }
 
 const tmp = withMemo(Grow, styles);

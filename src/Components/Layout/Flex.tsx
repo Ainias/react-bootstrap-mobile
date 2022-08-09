@@ -2,14 +2,22 @@ import * as React from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
 
 import styles from './layout.scss';
-import { withMemo } from '../../helper/withMemo';
 import classNames from 'classnames';
+import { View, ViewProps } from './View';
+import { ComponentRef, ForwardedRef } from 'react';
+import { withForwardRef } from '../../helper/withForwardRef';
 
-export type FlexProps = RbmComponentProps<{
-    vertical?: boolean;
-}>;
+export type FlexProps<AsType extends keyof JSX.IntrinsicElements> = RbmComponentProps<
+    ViewProps<AsType> & {
+        horizontal?: boolean;
+        grow?: boolean;
+    }
+>;
 
-function Flex({ className, children, vertical = false }: FlexProps) {
+function Flex<AsType extends keyof JSX.IntrinsicElements = 'div'>(
+    { children, as = 'div' as AsType, className, horizontal = false, grow = false, ...props }: FlexProps<AsType>,
+    ref?: ForwardedRef<ComponentRef<AsType>>
+) {
     // Variables
 
     // States
@@ -24,8 +32,24 @@ function Flex({ className, children, vertical = false }: FlexProps) {
 
     // Render Functions
 
-    return <div className={classNames(styles.flex, { [styles.vertical]: vertical }, className)}>{children}</div>;
+    return (
+        <View
+            className={classNames(
+                styles.flex,
+                {
+                    [styles.horizontal]: horizontal,
+                    [styles.grow]: grow,
+                },
+                className
+            )}
+            as={as}
+            ref={ref}
+            {...(props as ViewProps<AsType>)}
+        >
+            {children}
+        </View>
+    );
 }
 
-const tmp = withMemo(Flex, styles);
+const tmp = withForwardRef(Flex, styles);
 export { tmp as Flex };

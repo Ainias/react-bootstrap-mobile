@@ -11,6 +11,11 @@ import styles from './topBar.scss';
 
 import { withMemo } from '../../helper/withMemo';
 import classNames from 'classnames';
+import { Block } from '../Layout/Block';
+import { Words } from '../Text/Words';
+import { Flex } from '../Layout/Flex';
+import { Inline } from '../Layout/Inline';
+import { View } from '../Layout/View';
 
 export type TopBarActionButtonType = {
     title: string;
@@ -141,16 +146,20 @@ function TopBar({
             )}
         >
             <Container fluid="xxl" className={styles.container}>
-                <div className={classNames(styles.buttonContainer, styles.left)}>{leftButtonComponents}</div>
-                <div className={styles.titleContainer}>
-                    <span className={styles.title}>{title}</span>
-                </div>
-                <div className={classNames(styles.buttonContainer, styles.right)}>{rightButtonComponents}</div>
+                <Flex grow={true} className={classNames(styles.buttonContainer, styles.left)} horizontal={true}>
+                    {leftButtonComponents}
+                </Flex>
+                <Block className={styles.titleContainer}>
+                    <Words className={styles.title}>{title}</Words>
+                </Block>
+                <Flex grow={true} className={classNames(styles.buttonContainer, styles.right)} horizontal={true}>
+                    {rightButtonComponents}
+                </Flex>
                 {hiddenButtons.length > 0 && isHiddenMenuOpen ? (
-                    <span className={styles.hiddenContainer}>
-                        <span aria-hidden={true} className={styles.hiddenCloseCurtain} onClick={toggleHiddenMenu} />
-                        <span className={styles.hiddenMenu}>{hiddenButtonComponents}</span>
-                    </span>
+                    <Inline className={styles.hiddenContainer}>
+                        <View aria-hidden={true} className={styles.hiddenCloseCurtain} onClick={toggleHiddenMenu} />
+                        <View className={styles.hiddenMenu}>{hiddenButtonComponents}</View>
+                    </Inline>
                 ) : null}
                 <ActionSheet
                     actions={actions}

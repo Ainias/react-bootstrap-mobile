@@ -9,6 +9,10 @@ import { Icon, IconSource } from '../Icon/Icon';
 import styles from './actionSheet.scss';
 import { withForwardRef } from '../../helper/withForwardRef';
 import classNames from 'classnames';
+import { InlineBlock } from '../Layout/InlineBlock';
+import { Words } from '../Text/Words';
+import { Flex } from '../Layout/Flex';
+import { Block } from '../Layout/Block';
 
 export type ActionSheetAction<ActionData> = {
     name: string;
@@ -72,8 +76,8 @@ function ActionSheet(
 
     const renderAction = (action: ActionSheetAction<any>) => (
         <Clickable key={action.name} className={styles.action} onClick={onActionClick} onClickData={action}>
-            <span className={styles.actionIcon}>{action.icon ? <Icon icon={action.icon} /> : null}</span>
-            <span>{action.name}</span>
+            <InlineBlock className={styles.actionIcon}>{action.icon ? <Icon icon={action.icon} /> : null}</InlineBlock>
+            <Words>{action.name}</Words>
         </Clickable>
     );
 
@@ -83,20 +87,24 @@ function ActionSheet(
             onClick={close}
         >
             <Container fluid="xxl" className="full-height">
-                <div className={styles.content}>
-                    {title ? <div>{title}</div> : null}
+                <Flex className={styles.content}>
+                    {title ? (
+                        <Block>
+                            <Words>{title}</Words>
+                        </Block>
+                    ) : null}
                     {actions.map(renderAction)}
                     <Clickable
                         className={styles.cancel}
                         onClick={() => console.log('Cancel clicked')}
                         __allowChildren="all"
                     >
-                        <span className={styles.actionIcon}>
+                        <InlineBlock className={styles.actionIcon}>
                             <Icon icon={faTimes} />
-                        </span>
+                        </InlineBlock>
                         {cancelText}
                     </Clickable>
-                </div>
+                </Flex>
             </Container>
         </Clickable>
     );

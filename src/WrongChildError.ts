@@ -5,7 +5,7 @@ export class WrongChildError extends Error {
         const value =
             typeof child === 'object' && child !== null
                 ? `${child.toString()} - (${
-                      child.displayName ?? child.name ?? child.type?.displayName ?? child.type?.name
+                      child.displayName ?? child.name ?? child.type?.displayName ?? child.type?.name ?? child.type
                   })`
                 : child;
         super(
@@ -13,5 +13,7 @@ export class WrongChildError extends Error {
         );
         this.name = 'WrongChildError';
         this.childValue = child;
+
+        console.log('LOG-d stack', this.stack);
     }
 }

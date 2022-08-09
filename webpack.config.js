@@ -84,6 +84,7 @@ module.exports = {
     externals: {
         react: 'commonjs react',
         'react-dom': 'commonjs react-dom',
+        'isomorphic-style-loader': 'commonjs2 isomorphic-style-loader',
         '@fortawesome/react-fontawesome': 'commonjs2 @fortawesome/react-fontawesome',
         '@fortawesome/fontawesome-svg-core': 'commonjs2 @fortawesome/fontawesome-svg-core',
         '@fortawesome/free-solid-svg-icons': 'commonjs2 @fortawesome/free-solid-svg-icons',

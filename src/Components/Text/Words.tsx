@@ -24,7 +24,7 @@ export type TextProps = {
     children: Recursive<string | undefined | null | number>;
 };
 
-function Text({ className, children, block = false, prio = TEXT_PRIO.primary, size = TEXT_SIZE.medium }: TextProps) {
+function Words({ className, children, block = false, prio = TEXT_PRIO.primary, size = TEXT_SIZE.medium }: TextProps) {
     // Variables
 
     // States
@@ -49,5 +49,5 @@ function Text({ className, children, block = false, prio = TEXT_PRIO.primary, si
     );
 }
 
-const tmp = React.memo(withStyles(styles)(Text)) as typeof Text;
-export { tmp as Text };
+const tmp = React.memo(withStyles(styles)(Words)) as typeof Words;
+export { tmp as Words };

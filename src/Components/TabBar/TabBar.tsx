@@ -9,6 +9,8 @@ import styles from './tabBar.scss';
 import { withMemo } from '../../helper/withMemo';
 import classNames from 'classnames';
 import { ListenerWithData } from '../Hooks/useListener';
+import { Inline } from '../Layout/Inline';
+import { Words } from '../Text/Words';
 
 export type TabBarComponentButtonType = {
     component: ComponentType<Record<string, any>>;
@@ -51,10 +53,10 @@ function getButtonComponents(buttons: TabBarButtonType[], activeTab: number, onS
 
         return (
             <TabBarButton key={key} active={isActive} onClickData={index} onClick={onSelect}>
-                <span>
+                <Inline>
                     {button.icon ? <Icon icon={button.icon} className={styles.buttonIcon} /> : null}
-                    {button.title ? <span className={styles.buttonTitle}>{button.title}</span> : null}
-                </span>
+                    {button.title ? <Words className={styles.buttonTitle}>{button.title}</Words> : null}
+                </Inline>
             </TabBarButton>
         );
     });
