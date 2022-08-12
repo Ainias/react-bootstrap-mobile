@@ -8965,13 +8965,13 @@ var withRestrictedChildren_rest = undefined && undefined.__rest || function (s, 
 const RESTRICT_CHILDREN = {
   allowChildren: undefined
 };
-function withRestrictedChildren(Component) {
+function withRestrictedChildren(Component, defaultAllowChildren) {
   const displayName = `WithRestrictedChildren(${Component.displayName || Component.name})`;
 
   const hocComponent = (_a, ref) => {
     var {
       children,
-      __allowChildren = RESTRICT_CHILDREN.allowChildren
+      __allowChildren = defaultAllowChildren !== null && defaultAllowChildren !== void 0 ? defaultAllowChildren : RESTRICT_CHILDREN.allowChildren
     } = _a,
         otherProps = withRestrictedChildren_rest(_a, ["children", "__allowChildren"]);
 
@@ -9014,8 +9014,8 @@ function withRestrictedChildren(Component) {
 
 
 
-function withMemo(component, styles) {
-  const withNoStrings = withRestrictedChildren(component);
+function withMemo(component, styles, defaultAllowChildren) {
+  const withNoStrings = withRestrictedChildren(component, defaultAllowChildren);
   const c = styles ? withStyles_default()(styles)(withNoStrings) : withNoStrings;
   const memoizedComponent = /*#__PURE__*/external_react_default().memo(c);
   memoizedComponent.displayName = `Memoized(${component.displayName || component.name})`;
@@ -20981,7 +20981,7 @@ function Toast(_a) {
   }, /*#__PURE__*/external_react_.createElement("span", null, children), actionElement);
 }
 
-const ToastMemo = withMemo(Toast, (toast_default()));
+const ToastMemo = withMemo(Toast, (toast_default()), 'text');
 
 ;// CONCATENATED MODULE: ./src/Components/Toast/ToastContainer.tsx
 

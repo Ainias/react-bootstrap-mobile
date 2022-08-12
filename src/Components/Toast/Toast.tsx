@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { RbmComponentProps } from '../RbmComponentProps';
+import { RbmComponentProps, WithNoStringAndChildrenProps } from '../RbmComponentProps';
 import { Clickable } from '../Clickable/Clickable';
 import { ReactNode, useCallback, useEffect, useState } from 'react';
 import { Listener, OptionalListener, useListener } from '../Hooks/useListener';
@@ -9,7 +9,6 @@ import { withMemo } from '../../helper/withMemo';
 import classNames from 'classnames';
 
 type WithoutActionProps<DismissedData> = {
-    children: string;
     timeToShow?: number;
 } & OptionalListener<'onDismissed', DismissedData>;
 type WithActionProps<ActionData, DismissedData> = WithoutActionProps<DismissedData> & {
@@ -17,7 +16,8 @@ type WithActionProps<ActionData, DismissedData> = WithoutActionProps<DismissedDa
 } & Listener<'onClick', ActionData>;
 
 export type ToastProps<ActionData, DismissedData> = RbmComponentProps<
-    WithActionProps<ActionData, DismissedData> | WithoutActionProps<DismissedData>
+    WithActionProps<ActionData, DismissedData> | WithoutActionProps<DismissedData>,
+    WithNoStringAndChildrenProps
 >;
 
 function Toast<ActionData, DismissedData>({
@@ -101,5 +101,5 @@ function Toast<ActionData, DismissedData>({
     );
 }
 
-const ToastMemo = withMemo(Toast, styles);
+const ToastMemo = withMemo(Toast, styles, 'text');
 export { ToastMemo as Toast };

@@ -6,14 +6,17 @@ export const RESTRICT_CHILDREN = {
     allowChildren: undefined as undefined | 'all' | 'html' | 'text',
 };
 
-export function withRestrictedChildren<C extends ComponentType<RbmComponentProps<Record<string, any>>>>(Component: C) {
+export function withRestrictedChildren<C extends ComponentType<RbmComponentProps<Record<string, any>>>>(
+    Component: C,
+    defaultAllowChildren?: typeof RESTRICT_CHILDREN['allowChildren']
+) {
     type RefType = React.ComponentRef<C>;
     type Props = React.ComponentProps<C>;
 
     const displayName = `WithRestrictedChildren(${Component.displayName || Component.name})`;
 
     const hocComponent = (
-        { children, __allowChildren = RESTRICT_CHILDREN.allowChildren, ...otherProps }: Props,
+        { children, __allowChildren = defaultAllowChildren ?? RESTRICT_CHILDREN.allowChildren, ...otherProps }: Props,
         ref?: ForwardedRef<RefType>
     ) => {
         if (__allowChildren !== 'all') {
