@@ -38,7 +38,10 @@ function Words({ className, children, block = false, prio = TEXT_PRIO.primary, s
     // Other
     React.Children.forEach(children, (child) => {
         const type = typeof child;
-        if ((type !== 'string' && type !== 'undefined' && type !== 'object') || (type === 'object' && child !== null)) {
+        if (
+            (type !== 'string' && type !== 'undefined' && type !== 'object' && type !== 'number') ||
+            (type === 'object' && child !== null)
+        ) {
             throw new WrongChildError('string, number, undefined, null', type, child, 'Text');
         }
     });
