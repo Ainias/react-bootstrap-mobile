@@ -1,8 +1,12 @@
 .text {
-  display: inline-block;
+  display: inline;
 
   &.block {
     display: block;
+  }
+
+  &.heading {
+    font-weight: bold;
   }
 
   &.primary {
@@ -12,10 +16,28 @@
     color: #717171;
   }
 
-  &.medium {
+  &.small {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 
-  &.small {
-    font-size: 0.8rem;
+  &.medium {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  &.large {
+    font-size: 1.125rem;
+    line-height: 1.75;
+  }
+
+  &.xlarge {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  &.xxlarge {
+    font-size: 1.5rem;
+    line-height: 2rem;
   }
 }

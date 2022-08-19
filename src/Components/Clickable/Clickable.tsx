@@ -4,21 +4,19 @@ import { Listener, useListener } from '../Hooks/useListener';
 
 import styles from './clickable.scss';
 import classNames from 'classnames';
-import { withMemo } from '../../helper/withMemo';
+import { useCallback, MouseEvent, ForwardedRef } from 'react';
+import { withForwardRef } from '../../helper/withForwardRef';
 
 type OnClickListener<Data> = Listener<'onClick', Data>;
 
-export type ClickableProps<OnClickData> = RbmComponentProps<
-    { interactable?: boolean; style?: React.CSSProperties } & OnClickListener<OnClickData>
+export type ClickableProps<OnClickData, HrefType extends string | undefined> = RbmComponentProps<
+    { interactable?: boolean; style?: React.CSSProperties; href?: HrefType } & OnClickListener<OnClickData>
 >;
 
-function Clickable<OnClickData>({
-    className,
-    children,
-    interactable = true,
-    style,
-    ...clickData
-}: ClickableProps<OnClickData>) {
+function Clickable<OnClickData, HrefType extends string | undefined>(
+    { className, children, interactable = true, style, href, ...clickData }: ClickableProps<OnClickData, HrefType>,
+    ref: ForwardedRef<HrefType extends string ? HTMLAnchorElement : HTMLSpanElement>
+) {
     // Variables
 
     // States
@@ -26,38 +24,42 @@ function Clickable<OnClickData>({
     // Refs
 
     // Callbacks
-    const realOnClick = useListener('onClick', clickData);
+    const onClickInner = useListener('onClick', clickData);
+    const realOnClick = useCallback(
+        (e: MouseEvent) => {
+            e.stopPropagation();
+            e.preventDefault();
+            onClickInner(e);
+        },
+        [onClickInner]
+    );
 
     // Effects
 
     // Other
 
     // Render Functions
-    if (interactable) {
+    const props = {
+        style,
+        role: interactable ? 'button' : undefined,
+        'aria-hidden': interactable ? undefined : true,
+        className: classNames(styles.clickable, className),
+        onClick: realOnClick,
+        tabIndex: interactable ? 0 : undefined,
+    };
+    if (href === 'string') {
         return (
-            <span
-                style={style}
-                role="button"
-                className={classNames(styles.clickable, className)}
-                onClick={realOnClick}
-                tabIndex={0}
-            >
+            <a {...props} href={href} ref={ref as ForwardedRef<HTMLAnchorElement>}>
                 {children}
-            </span>
+            </a>
         );
     }
-
     return (
-        <span
-            style={style}
-            aria-hidden={true}
-            className={classNames(styles.clickable, className)}
-            onClick={realOnClick}
-        >
+        <span {...props} ref={ref as ForwardedRef<HTMLSpanElement>}>
             {children}
         </span>
     );
 }
 
-const ClickableMemo = withMemo(Clickable, styles);
+const ClickableMemo = withForwardRef(Clickable, styles);
 export { ClickableMemo as Clickable };

@@ -3,12 +3,12 @@ import { RbmComponentProps } from '../RbmComponentProps';
 
 import styles from './layout.scss';
 import classNames from 'classnames';
-import { View, ViewProps } from './View';
 import { ComponentRef, ForwardedRef } from 'react';
 import { withForwardRef } from '../../helper/withForwardRef';
+import { ViewWithoutListeners, ViewWithoutListenersProps } from './ViewWithoutListeners';
 
 export type FlexProps<AsType extends keyof JSX.IntrinsicElements> = RbmComponentProps<
-    ViewProps<AsType> & {
+    ViewWithoutListenersProps<AsType> & {
         horizontal?: boolean;
         grow?: boolean;
     }
@@ -33,7 +33,7 @@ function Flex<AsType extends keyof JSX.IntrinsicElements = 'div'>(
     // Render Functions
 
     return (
-        <View
+        <ViewWithoutListeners
             className={classNames(
                 styles.flex,
                 {
@@ -42,12 +42,12 @@ function Flex<AsType extends keyof JSX.IntrinsicElements = 'div'>(
                 },
                 className
             )}
-            as={as}
+            as={as as AsType}
             ref={ref}
-            {...(props as ViewProps<AsType>)}
+            {...(props as ViewWithoutListenersProps<AsType>)}
         >
             {children}
-        </View>
+        </ViewWithoutListeners>
     );
 }
 

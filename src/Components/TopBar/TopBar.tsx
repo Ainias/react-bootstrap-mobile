@@ -12,7 +12,7 @@ import styles from './topBar.scss';
 import { withMemo } from '../../helper/withMemo';
 import classNames from 'classnames';
 import { Block } from '../Layout/Block';
-import { Words } from '../Text/Words';
+import { Text } from '../Text/Text';
 import { Flex } from '../Layout/Flex';
 import { Inline } from '../Layout/Inline';
 import { View } from '../Layout/View';
@@ -150,7 +150,7 @@ function TopBar({
                     {leftButtonComponents}
                 </Flex>
                 <Block className={styles.titleContainer}>
-                    <Words className={styles.title}>{title}</Words>
+                    <Text className={styles.title}>{title}</Text>
                 </Block>
                 <Flex grow={true} className={classNames(styles.buttonContainer, styles.right)} horizontal={true}>
                     {rightButtonComponents}

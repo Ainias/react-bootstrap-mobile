@@ -30,6 +30,10 @@ export type WithStringAndChildrenProps = {
     children: Recursive<string>;
 };
 
+export type WithNoChildren = {
+    children?: never;
+};
+
 export type RbmComponentProps<SpecialProps, ChildrenProps = WithNoStringProps> = ChildrenProps & {
     className?: string;
 } & SpecialProps;

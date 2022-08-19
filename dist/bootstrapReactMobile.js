@@ -565,13 +565,18 @@ var ___CSS_LOADER_API_NO_SOURCEMAP_IMPORT___ = __webpack_require__(8081);
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3645);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(___CSS_LOADER_API_NO_SOURCEMAP_IMPORT___);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".i2YZmieofBjWSbR1kKn1{display:inline-block}.i2YZmieofBjWSbR1kKn1.DZ4JB37dWMiLOW9EybBV{display:block}.i2YZmieofBjWSbR1kKn1.XavRCtORJPtpvDBzbtlC{color:#717171}.i2YZmieofBjWSbR1kKn1.sMSX7yMU3Udh4P2lRFAo{font-size:.8rem}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".i2YZmieofBjWSbR1kKn1{display:inline}.i2YZmieofBjWSbR1kKn1.DZ4JB37dWMiLOW9EybBV{display:block}.i2YZmieofBjWSbR1kKn1.Nz99vYu6dAxda_f6u9iz{font-weight:bold}.i2YZmieofBjWSbR1kKn1.XavRCtORJPtpvDBzbtlC{color:#717171}.i2YZmieofBjWSbR1kKn1.sMSX7yMU3Udh4P2lRFAo{font-size:.875rem;line-height:1.25rem}.i2YZmieofBjWSbR1kKn1.LyGmelwTUuNOUZLSKO5Q{font-size:1rem;line-height:1.5rem}.i2YZmieofBjWSbR1kKn1.AQ1i9ZqNmO8V1GVURW_8{font-size:1.125rem;line-height:1.75}.i2YZmieofBjWSbR1kKn1.CkjbIf6bOY6shQzjjKOb{font-size:1.25rem;line-height:1.75rem}.i2YZmieofBjWSbR1kKn1.VxTgHwoXu9tTT1Q6WToA{font-size:1.5rem;line-height:2rem}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"text": "i2YZmieofBjWSbR1kKn1",
 	"block": "DZ4JB37dWMiLOW9EybBV",
+	"heading": "Nz99vYu6dAxda_f6u9iz",
 	"secondary": "XavRCtORJPtpvDBzbtlC",
-	"small": "sMSX7yMU3Udh4P2lRFAo"
+	"small": "sMSX7yMU3Udh4P2lRFAo",
+	"medium": "LyGmelwTUuNOUZLSKO5Q",
+	"large": "AQ1i9ZqNmO8V1GVURW_8",
+	"xlarge": "CkjbIf6bOY6shQzjjKOb",
+	"xxlarge": "VxTgHwoXu9tTT1Q6WToA"
 };
 module.exports = ___CSS_LOADER_EXPORT___;
 
@@ -8841,8 +8846,10 @@ __webpack_require__.d(__webpack_exports__, {
   "Flex": () => (/* reexport */ Flex_tmp),
   "FullScreen": () => (/* reexport */ FullScreenMemo),
   "Grow": () => (/* reexport */ Grow_tmp),
+  "Heading": () => (/* reexport */ HeadingMemo),
   "HiddenInput": () => (/* reexport */ HiddenInput_tmp),
   "Icon": () => (/* reexport */ IconMemo),
+  "Image": () => (/* reexport */ ImageMemo),
   "ImageInput": () => (/* reexport */ ImageInputMemo),
   "InViewport": () => (/* reexport */ InViewportMemo),
   "Inline": () => (/* reexport */ InlineMemo),
@@ -8861,13 +8868,14 @@ __webpack_require__.d(__webpack_exports__, {
   "TabBar": () => (/* reexport */ TabBarMemo),
   "TabBarButton": () => (/* reexport */ TabBarButtonMemo),
   "Table": () => (/* reexport */ Table_tmp),
+  "Text": () => (/* reexport */ tmp),
   "Textarea": () => (/* reexport */ TextareaMemo),
   "Toast": () => (/* reexport */ ToastMemo),
   "ToastContainer": () => (/* reexport */ ToastContainerMemo),
   "TopBar": () => (/* reexport */ TopBarMemo),
   "TopBarButton": () => (/* reexport */ TopBarButtonMemo),
   "View": () => (/* reexport */ ViewMemo),
-  "Words": () => (/* reexport */ tmp),
+  "ViewWithoutListeners": () => (/* reexport */ ViewWithoutListenersMemo),
   "WrongChildError": () => (/* reexport */ WrongChildError),
   "useBreakpoint": () => (/* reexport */ useBreakpoint),
   "useBreakpointSelect": () => (/* reexport */ useBreakpointSelect),
@@ -9010,18 +9018,22 @@ function withRestrictedChildren(Component, defaultAllowChildren) {
   hocComponent.displayName = displayName;
   return hocComponent;
 }
-;// CONCATENATED MODULE: ./src/helper/withMemo.ts
+;// CONCATENATED MODULE: ./src/helper/withForwardRef.ts
 
 
 
-function withMemo(component, styles, defaultAllowChildren) {
-  const withNoStrings = withRestrictedChildren(component, defaultAllowChildren);
-  const c = styles ? withStyles_default()(styles)(withNoStrings) : withNoStrings;
+function withForwardRef(component, styles) {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  const forwardedComp = /*#__PURE__*/external_react_default().forwardRef(withRestrictedChildren( /*#__PURE__*/external_react_default().forwardRef(component)));
+  const c = styles ? withStyles_default()(styles)(forwardedComp) : forwardedComp;
   const memoizedComponent = /*#__PURE__*/external_react_default().memo(c);
-  memoizedComponent.displayName = `Memoized(${component.displayName || component.name})`;
+  memoizedComponent.displayName = `Memoized-Forwarded(${component.displayName || component.name})`;
   return memoizedComponent;
 }
 ;// CONCATENATED MODULE: ./src/Components/Clickable/Clickable.tsx
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 var Clickable_rest = undefined && undefined.__rest || function (s, e) {
   var t = {};
 
@@ -9039,43 +9051,64 @@ var Clickable_rest = undefined && undefined.__rest || function (s, e) {
 
 
 
-function Clickable(_a) {
+
+function Clickable(_a, ref) {
   // Variables
   var {
     className,
     children,
     interactable = true,
-    style
+    style,
+    href
   } = _a,
-      clickData = Clickable_rest(_a, ["className", "children", "interactable", "style"]); // States
+      clickData = Clickable_rest(_a, ["className", "children", "interactable", "style", "href"]); // States
   // Refs
   // Callbacks
 
 
-  const realOnClick = useListener('onClick', clickData); // Effects
+  const onClickInner = useListener('onClick', clickData);
+  const realOnClick = (0,external_react_.useCallback)(e => {
+    e.stopPropagation();
+    e.preventDefault();
+    onClickInner(e);
+  }, [onClickInner]); // Effects
   // Other
   // Render Functions
 
-  if (interactable) {
-    return /*#__PURE__*/external_react_.createElement("span", {
-      style: style,
-      role: "button",
-      className: classnames_default()((clickable_default()).clickable, className),
-      onClick: realOnClick,
-      tabIndex: 0
-    }, children);
+  const props = {
+    style,
+    role: interactable ? 'button' : undefined,
+    'aria-hidden': interactable ? undefined : true,
+    className: classnames_default()((clickable_default()).clickable, className),
+    onClick: realOnClick,
+    tabIndex: interactable ? 0 : undefined
+  };
+
+  if (href === 'string') {
+    return /*#__PURE__*/external_react_.createElement("a", _extends({}, props, {
+      href: href,
+      ref: ref
+    }), children);
   }
 
-  return /*#__PURE__*/external_react_.createElement("span", {
-    style: style,
-    "aria-hidden": true,
-    className: classnames_default()((clickable_default()).clickable, className),
-    onClick: realOnClick
-  }, children);
+  return /*#__PURE__*/external_react_.createElement("span", _extends({}, props, {
+    ref: ref
+  }), children);
 }
 
-const ClickableMemo = withMemo(Clickable, (clickable_default()));
+const ClickableMemo = withForwardRef(Clickable, (clickable_default()));
 
+;// CONCATENATED MODULE: ./src/helper/withMemo.ts
+
+
+
+function withMemo(component, styles, defaultAllowChildren) {
+  const withNoStrings = withRestrictedChildren(component, defaultAllowChildren);
+  const c = styles ? withStyles_default()(styles)(withNoStrings) : withNoStrings;
+  const memoizedComponent = /*#__PURE__*/external_react_default().memo(c);
+  memoizedComponent.displayName = `Memoized(${component.displayName || component.name})`;
+  return memoizedComponent;
+}
 // EXTERNAL MODULE: ./src/Components/Layout/container.scss
 var container = __webpack_require__(7226);
 var container_default = /*#__PURE__*/__webpack_require__.n(container);
@@ -9122,7 +9155,7 @@ const free_solid_svg_icons_namespaceObject = require("@fortawesome/free-solid-sv
 ;// CONCATENATED MODULE: external "@fortawesome/react-fontawesome"
 const react_fontawesome_namespaceObject = require("@fortawesome/react-fontawesome");
 ;// CONCATENATED MODULE: ./src/Components/Icon/Icon.tsx
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function Icon_extends() { Icon_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return Icon_extends.apply(this, arguments); }
 
 var Icon_rest = undefined && undefined.__rest || function (s, e) {
   var t = {};
@@ -9166,7 +9199,7 @@ function Icon(_a) {
     });
   }
 
-  return /*#__PURE__*/external_react_.createElement(react_fontawesome_namespaceObject.FontAwesomeIcon, _extends({}, props, {
+  return /*#__PURE__*/external_react_.createElement(react_fontawesome_namespaceObject.FontAwesomeIcon, Icon_extends({}, props, {
     icon: icon,
     className: className
   }));
@@ -9177,19 +9210,9 @@ const IconMemo = withMemo(Icon);
 // EXTERNAL MODULE: ./src/Components/ActionSheet/actionSheet.scss
 var actionSheet = __webpack_require__(1679);
 var actionSheet_default = /*#__PURE__*/__webpack_require__.n(actionSheet);
-;// CONCATENATED MODULE: ./src/helper/withForwardRef.ts
-
-
-
-function withForwardRef(component, styles) {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  const forwardedComp = /*#__PURE__*/external_react_default().forwardRef(withRestrictedChildren( /*#__PURE__*/external_react_default().forwardRef(component)));
-  const c = styles ? withStyles_default()(styles)(forwardedComp) : forwardedComp;
-  const memoizedComponent = /*#__PURE__*/external_react_default().memo(c);
-  memoizedComponent.displayName = `Memoized-Forwarded(${component.displayName || component.name})`;
-  return memoizedComponent;
-}
+// EXTERNAL MODULE: ./src/Components/Layout/layout.scss
+var layout = __webpack_require__(2229);
+var layout_default = /*#__PURE__*/__webpack_require__.n(layout);
 ;// CONCATENATED MODULE: ./src/Components/Layout/View.tsx
 var View_rest = undefined && undefined.__rest || function (s, e) {
   var t = {};
@@ -9232,9 +9255,45 @@ function View(_a, ref) {
 
 const ViewMemo = /*#__PURE__*/external_react_.memo( /*#__PURE__*/external_react_.forwardRef(View));
 
-// EXTERNAL MODULE: ./src/Components/Layout/layout.scss
-var layout = __webpack_require__(2229);
-var layout_default = /*#__PURE__*/__webpack_require__.n(layout);
+;// CONCATENATED MODULE: ./src/Components/Layout/ViewWithoutListeners.tsx
+function ViewWithoutListeners_extends() { ViewWithoutListeners_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return ViewWithoutListeners_extends.apply(this, arguments); }
+
+var ViewWithoutListeners_rest = undefined && undefined.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+
+
+
+
+function ViewWithoutListeners(_a, ref) {
+  // Variables
+  var {
+    children
+  } = _a,
+      props = ViewWithoutListeners_rest(_a, ["children"]); // Refs
+  // States
+  // Selectors
+  // Callbacks
+  // Effects
+  // Other
+  // Render Functions
+
+
+  return /*#__PURE__*/external_react_.createElement(ViewMemo, ViewWithoutListeners_extends({}, props, {
+    ref: ref
+  }), children);
+} // Need ViewWithoutListenersMemo for autocompletion of phpstorm
+
+
+const ViewWithoutListenersMemo = /*#__PURE__*/external_react_.memo( /*#__PURE__*/external_react_.forwardRef(ViewWithoutListeners));
+
 ;// CONCATENATED MODULE: ./src/Components/Layout/InlineBlock.tsx
 function InlineBlock_extends() { InlineBlock_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return InlineBlock_extends.apply(this, arguments); }
 
@@ -9255,7 +9314,7 @@ var InlineBlock_rest = undefined && undefined.__rest || function (s, e) {
 
 
 
-function InlineBlock(_a) {
+function InlineBlock(_a, ref) {
   // Variables
   var {
     children,
@@ -9271,19 +9330,81 @@ function InlineBlock(_a) {
   // Render Functions
 
 
-  return /*#__PURE__*/external_react_.createElement(ViewMemo, InlineBlock_extends({
+  return /*#__PURE__*/external_react_.createElement(ViewWithoutListenersMemo, InlineBlock_extends({
     className: classnames_default()((layout_default()).inlineBlock, className),
-    as: as
+    as: as,
+    ref: ref
   }, props), children);
 } // Need InlineMemo for autocompletion of phpstorm
 
 
-const InlineBlockMemo = withMemo(InlineBlock, (layout_default()));
+const InlineBlockMemo = withForwardRef(InlineBlock, (layout_default()));
 
 // EXTERNAL MODULE: ./src/Components/Text/text.scss
 var Text_text = __webpack_require__(5865);
 var text_default = /*#__PURE__*/__webpack_require__.n(Text_text);
-;// CONCATENATED MODULE: ./src/Components/Text/Words.tsx
+;// CONCATENATED MODULE: ./src/Components/Layout/Inline.tsx
+function Inline_extends() { Inline_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return Inline_extends.apply(this, arguments); }
+
+var Inline_rest = undefined && undefined.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+
+
+
+
+
+
+
+function Inline(_a, ref) {
+  // Variables
+  var {
+    children,
+    as = 'span',
+    className
+  } = _a,
+      props = Inline_rest(_a, ["children", "as", "className"]); // Refs
+  // States
+  // Selectors
+  // Callbacks
+  // Effects
+  // Other
+  // Render Functions
+
+
+  return /*#__PURE__*/external_react_.createElement(ViewWithoutListenersMemo, Inline_extends({
+    className: classnames_default()((layout_default()).inline, className),
+    as: as
+  }, props, {
+    ref: ref
+  }), children);
+} // Need InlineMemo for autocompletion of phpstorm
+
+
+const InlineMemo = withForwardRef(Inline, (layout_default()));
+
+;// CONCATENATED MODULE: ./src/Components/Text/Text.tsx
+function Text_extends() { Text_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return Text_extends.apply(this, arguments); }
+
+var Text_rest = undefined && undefined.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+
+
 
 
 
@@ -9291,26 +9412,34 @@ var text_default = /*#__PURE__*/__webpack_require__.n(Text_text);
 
 const TEXT_PRIO = {
   primary: (text_default()).primary,
-  secondary: (text_default()).secondary
+  secondary: (text_default()).secondary,
+  heading: (text_default()).heading
 };
 const TEXT_SIZE = {
+  small: (text_default()).small,
   medium: (text_default()).medium,
-  small: (text_default()).small
+  large: (text_default()).large,
+  xlarge: (text_default()).xlarge,
+  xxlarge: (text_default()).xxlarge
 };
 
-function Words({
-  className,
-  children,
-  block = false,
-  prio = TEXT_PRIO.primary,
-  size = TEXT_SIZE.medium
-}) {
+function Text(_a) {
   // Variables
-  // States
+  var {
+    className,
+    children,
+    block = false,
+    prio = TEXT_PRIO.primary,
+    size = TEXT_SIZE.medium,
+    as = 'span'
+  } = _a,
+      props = Text_rest(_a, ["className", "children", "block", "prio", "size", "as"]); // States
   // Refs
   // Callbacks
   // Effects
   // Other
+
+
   external_react_.Children.forEach(children, child => {
     const type = typeof child;
 
@@ -9319,14 +9448,17 @@ function Words({
     }
   }); // Render Functions
 
-  return /*#__PURE__*/external_react_.createElement("span", {
+  return /*#__PURE__*/external_react_.createElement(InlineMemo, Text_extends({
+    __allowChildren: "text",
+    as: as
+  }, props, {
     className: classnames_default()((text_default()).text, {
       [(text_default()).block]: block
     }, prio, size, className)
-  }, children);
+  }), children);
 }
 
-const tmp = /*#__PURE__*/external_react_.memo(withStyles_default()((text_default()))(Words));
+const tmp = /*#__PURE__*/external_react_.memo(withStyles_default()((text_default()))(Text));
 
 ;// CONCATENATED MODULE: ./src/Components/Layout/Flex.tsx
 function Flex_extends() { Flex_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return Flex_extends.apply(this, arguments); }
@@ -9365,7 +9497,7 @@ function Flex(_a, ref) {
   // Render Functions
 
 
-  return /*#__PURE__*/external_react_.createElement(ViewMemo, Flex_extends({
+  return /*#__PURE__*/external_react_.createElement(ViewWithoutListenersMemo, Flex_extends({
     className: classnames_default()((layout_default()).flex, {
       [(layout_default()).horizontal]: horizontal,
       [(layout_default()).grow]: grow
@@ -9413,7 +9545,7 @@ function Block(_a, ref) {
   // Render Functions
 
 
-  return /*#__PURE__*/external_react_.createElement(ViewMemo, Block_extends({
+  return /*#__PURE__*/external_react_.createElement(ViewWithoutListenersMemo, Block_extends({
     className: classnames_default()((layout_default()).block, className),
     as: as,
     ref: ref
@@ -20367,6 +20499,51 @@ function useKeyListener(key, listener, dependencies = []) {
     return () => window.removeEventListener('keydown', keyListener); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key, ...dependencies]);
 }
+;// CONCATENATED MODULE: ./src/Components/Image/Image.tsx
+function Image_extends() { Image_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return Image_extends.apply(this, arguments); }
+
+var Image_rest = undefined && undefined.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+
+
+
+
+function Image(_a) {
+  // Variables
+  var {
+    src,
+    alt = '',
+    className,
+    style
+  } = _a,
+      otherProps = Image_rest(_a, ["src", "alt", "className", "style"]); // Refs
+  // States
+  // Selectors
+  // Callbacks
+  // Effects
+  // Other
+  // Render Functions
+
+
+  return /*#__PURE__*/external_react_.createElement("img", Image_extends({
+    src: src,
+    alt: alt,
+    className: className,
+    style: style
+  }, otherProps));
+} // Need ImageMemo for autocompletion of phpstorm
+
+
+const ImageMemo = withMemo(Image);
+
 // EXTERNAL MODULE: ./src/Components/InViewport/inViewport.scss
 var inViewport = __webpack_require__(4283);
 var inViewport_default = /*#__PURE__*/__webpack_require__.n(inViewport);
@@ -20445,51 +20622,6 @@ function Grow({
 }
 
 const Grow_tmp = withMemo(Grow, (layout_default()));
-
-;// CONCATENATED MODULE: ./src/Components/Layout/Inline.tsx
-function Inline_extends() { Inline_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return Inline_extends.apply(this, arguments); }
-
-var Inline_rest = undefined && undefined.__rest || function (s, e) {
-  var t = {};
-
-  for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
-
-  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
-  }
-  return t;
-};
-
-
-
-
-
-
-
-function Inline(_a) {
-  // Variables
-  var {
-    children,
-    as = 'span',
-    className
-  } = _a,
-      props = Inline_rest(_a, ["children", "as", "className"]); // Refs
-  // States
-  // Selectors
-  // Callbacks
-  // Effects
-  // Other
-  // Render Functions
-
-
-  return /*#__PURE__*/external_react_.createElement(ViewMemo, Inline_extends({
-    className: classnames_default()((layout_default()).inline, className),
-    as: as
-  }, props), children);
-} // Need InlineMemo for autocompletion of phpstorm
-
-
-const InlineMemo = withMemo(Inline, (layout_default()));
 
 // EXTERNAL MODULE: ./src/Components/List/list.scss
 var list = __webpack_require__(1308);
@@ -20881,6 +21013,32 @@ function Table({
 
 const Table_tmp = withMemo(Table);
 
+;// CONCATENATED MODULE: ./src/Components/Text/Heading.tsx
+
+
+
+
+function Heading({
+  children
+}) {
+  // Variables
+  // Refs
+  // States
+  // Selectors
+  // Callbacks
+  // Effects
+  // Other
+  // Render Functions
+  return /*#__PURE__*/external_react_.createElement(tmp, {
+    as: "h1",
+    size: TEXT_SIZE.xxlarge,
+    prio: TEXT_PRIO.heading
+  }, children);
+} // Need HeadingMemo for autocompletion of phpstorm
+
+
+const HeadingMemo = withMemo(Heading, undefined, 'text');
+
 // EXTERNAL MODULE: ./src/Components/Toast/toast.scss
 var toast = __webpack_require__(8183);
 var toast_default = /*#__PURE__*/__webpack_require__.n(toast);
@@ -21267,6 +21425,9 @@ var StyleContext_default = /*#__PURE__*/__webpack_require__.n(StyleContext);
 const provider = (StyleContext_default()).Provider;
 
 ;// CONCATENATED MODULE: ./bootstrapReactMobile.ts
+
+
+
 
 
 

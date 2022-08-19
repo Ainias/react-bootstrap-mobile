@@ -21,6 +21,9 @@ export declare type WithStringProps = {
 export declare type WithStringAndChildrenProps = {
     children: Recursive<string>;
 };
+export declare type WithNoChildren = {
+    children?: never;
+};
 export declare type RbmComponentProps<SpecialProps, ChildrenProps = WithNoStringProps> = ChildrenProps & {
     className?: string;
 } & SpecialProps;

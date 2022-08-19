@@ -10,7 +10,7 @@ import styles from './actionSheet.scss';
 import { withForwardRef } from '../../helper/withForwardRef';
 import classNames from 'classnames';
 import { InlineBlock } from '../Layout/InlineBlock';
-import { Words } from '../Text/Words';
+import { Text } from '../Text/Text';
 import { Flex } from '../Layout/Flex';
 import { Block } from '../Layout/Block';
 
@@ -77,7 +77,7 @@ function ActionSheet(
     const renderAction = (action: ActionSheetAction<any>) => (
         <Clickable key={action.name} className={styles.action} onClick={onActionClick} onClickData={action}>
             <InlineBlock className={styles.actionIcon}>{action.icon ? <Icon icon={action.icon} /> : null}</InlineBlock>
-            <Words>{action.name}</Words>
+            <Text>{action.name}</Text>
         </Clickable>
     );
 
@@ -90,7 +90,7 @@ function ActionSheet(
                 <Flex className={styles.content}>
                     {title ? (
                         <Block>
-                            <Words>{title}</Words>
+                            <Text>{title}</Text>
                         </Block>
                     ) : null}
                     {actions.map(renderAction)}

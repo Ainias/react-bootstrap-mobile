@@ -10,7 +10,7 @@ import { withMemo } from '../../helper/withMemo';
 import classNames from 'classnames';
 import { ListenerWithData } from '../Hooks/useListener';
 import { Inline } from '../Layout/Inline';
-import { Words } from '../Text/Words';
+import { Text } from '../Text/Text';
 
 export type TabBarComponentButtonType = {
     component: ComponentType<Record<string, any>>;
@@ -55,7 +55,7 @@ function getButtonComponents(buttons: TabBarButtonType[], activeTab: number, onS
             <TabBarButton key={key} active={isActive} onClickData={index} onClick={onSelect}>
                 <Inline>
                     {button.icon ? <Icon icon={button.icon} className={styles.buttonIcon} /> : null}
-                    {button.title ? <Words className={styles.buttonTitle}>{button.title}</Words> : null}
+                    {button.title ? <Text className={styles.buttonTitle}>{button.title}</Text> : null}
                 </Inline>
             </TabBarButton>
         );

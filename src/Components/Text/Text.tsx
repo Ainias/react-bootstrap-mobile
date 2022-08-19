@@ -5,26 +5,40 @@ import styles from './text.scss';
 import { Recursive, ValueOf } from '../../TypeHelpers';
 import { WrongChildError } from '../../WrongChildError';
 import withStyles from 'isomorphic-style-loader/withStyles';
+import { Inline } from '../Layout/Inline';
+import { ViewProps } from '../Layout/View';
 
 export const TEXT_PRIO = {
     primary: styles.primary,
     secondary: styles.secondary,
+    heading: styles.heading,
 };
 
 export const TEXT_SIZE = {
-    medium: styles.medium,
     small: styles.small,
+    medium: styles.medium,
+    large: styles.large,
+    xlarge: styles.xlarge,
+    xxlarge: styles.xxlarge,
 };
 
-export type TextProps = {
+export type TextProps<AsType extends keyof JSX.IntrinsicElements> = {
     block?: boolean;
     prio?: ValueOf<typeof TEXT_PRIO>;
     size?: ValueOf<typeof TEXT_SIZE>;
     className?: string;
     children: Recursive<string | undefined | null | number>;
-};
+} & ViewProps<AsType>;
 
-function Words({ className, children, block = false, prio = TEXT_PRIO.primary, size = TEXT_SIZE.medium }: TextProps) {
+function Text<AsType extends keyof JSX.IntrinsicElements = 'span'>({
+    className,
+    children,
+    block = false,
+    prio = TEXT_PRIO.primary,
+    size = TEXT_SIZE.medium,
+    as = 'span' as AsType,
+    ...props
+}: TextProps<AsType>) {
     // Variables
 
     // States
@@ -48,9 +62,16 @@ function Words({ className, children, block = false, prio = TEXT_PRIO.primary, s
 
     // Render Functions
     return (
-        <span className={classNames(styles.text, { [styles.block]: block }, prio, size, className)}>{children}</span>
+        <Inline
+            __allowChildren="text"
+            as={as}
+            {...props}
+            className={classNames(styles.text, { [styles.block]: block }, prio, size, className)}
+        >
+            {children}
+        </Inline>
     );
 }
 
-const tmp = React.memo(withStyles(styles)(Words)) as typeof Words;
-export { tmp as Words };
+const tmp = React.memo(withStyles(styles)(Text)) as typeof Text;
+export { tmp as Text };

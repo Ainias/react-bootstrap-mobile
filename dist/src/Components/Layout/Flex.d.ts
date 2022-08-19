@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import { RbmComponentProps } from '../RbmComponentProps';
-import { ViewProps } from './View';
-export declare type FlexProps<AsType extends keyof JSX.IntrinsicElements> = RbmComponentProps<ViewProps<AsType> & {
+import { ViewWithoutListenersProps } from './ViewWithoutListeners';
+export declare type FlexProps<AsType extends keyof JSX.IntrinsicElements> = RbmComponentProps<ViewWithoutListenersProps<AsType> & {
     horizontal?: boolean;
     grow?: boolean;
 }>;

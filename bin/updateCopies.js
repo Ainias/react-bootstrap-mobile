@@ -6,6 +6,7 @@ const packageName = require('../package.json').name;
 
 let pathsToProjects = [
     '/home/silas/Projekte/web/prayercircle',
+    '/home/silas/Projekte/chrome/dmscreen',
     '/home/silas/Projekte/web/cordova-sites',
     '/home/silas/Projekte/web/cordova-sites-legacy-adapter',
     '/home/silas/Projekte/web/cordova-sites-easy-sync',
