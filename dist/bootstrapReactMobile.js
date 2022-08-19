@@ -1,6 +1,6 @@
 /*!
  * 
- *   react-bootstrap-mobile v1.0.0
+ *   react-bootstrap-mobile v0.1.4
  *   git+https://github.com/Ainias/Bootstrap-React-Mobile.git
  *   Copyright (c) Silas Günther and project contributors.
  *   This source code is licensed under the MIT license found in the
