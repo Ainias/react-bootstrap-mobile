@@ -532,6 +532,34 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
+/***/ 9057:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// Imports
+var ___CSS_LOADER_API_NO_SOURCEMAP_IMPORT___ = __webpack_require__(8081);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3645);
+var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(___CSS_LOADER_API_NO_SOURCEMAP_IMPORT___);
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "@keyframes KywlXuo2bC7nE31cHaD0{0%{height:0}1%{height:initial}100%{height:initial}}@keyframes AfblfyDKukAPSSMP1th4{0%{height:0;transform:translateY(-100%)}1%{height:initial;transform:translateY(-100%)}100%{height:initial;transform:translateY(0%)}}@keyframes c50mHEmSRYNmN9hQoUvk{0%{height:initial}99%{height:initial}100%{height:0}}@keyframes gNNJPG0iCDA1I1ZBxqO_{0%{height:initial;transform:translateY(0%)}99%{height:initial;transform:translateY(-100%)}100%{height:0;transform:translateY(-100%)}}.pBIFlf0XR07hg8kRfMC5{display:block;border-top:1px solid #b3b3b3;border-bottom:1px solid #b3b3b3}.pBIFlf0XR07hg8kRfMC5.eXqd1__UplgpnVSAmDaD .zAqHYk_sm5cLkEhV6NH9,.pBIFlf0XR07hg8kRfMC5.eXqd1__UplgpnVSAmDaD.f2QCyXWoPFz98VqWgsog .zAqHYk_sm5cLkEhV6NH9{height:initial;animation-name:KywlXuo2bC7nE31cHaD0}.pBIFlf0XR07hg8kRfMC5.eXqd1__UplgpnVSAmDaD .zAqHYk_sm5cLkEhV6NH9 .YDKcWZRadLV75uzQjx_U,.pBIFlf0XR07hg8kRfMC5.eXqd1__UplgpnVSAmDaD.f2QCyXWoPFz98VqWgsog .zAqHYk_sm5cLkEhV6NH9 .YDKcWZRadLV75uzQjx_U{height:initial;transform:translateY(0%);animation-name:AfblfyDKukAPSSMP1th4}.pBIFlf0XR07hg8kRfMC5.OccHBlvoS4gV0FXICM7P .zAqHYk_sm5cLkEhV6NH9,.pBIFlf0XR07hg8kRfMC5.OccHBlvoS4gV0FXICM7P.eXqd1__UplgpnVSAmDaD .zAqHYk_sm5cLkEhV6NH9{animation:none}.pBIFlf0XR07hg8kRfMC5.OccHBlvoS4gV0FXICM7P .zAqHYk_sm5cLkEhV6NH9 .YDKcWZRadLV75uzQjx_U,.pBIFlf0XR07hg8kRfMC5.OccHBlvoS4gV0FXICM7P.eXqd1__UplgpnVSAmDaD .zAqHYk_sm5cLkEhV6NH9 .YDKcWZRadLV75uzQjx_U{animation:none}.pBIFlf0XR07hg8kRfMC5.f2QCyXWoPFz98VqWgsog .zAqHYk_sm5cLkEhV6NH9{animation-name:vsmr4ZsObBOt0tt_xPBi}.pBIFlf0XR07hg8kRfMC5.f2QCyXWoPFz98VqWgsog .zAqHYk_sm5cLkEhV6NH9 .YDKcWZRadLV75uzQjx_U{animation-name:vsmr4ZsObBOt0tt_xPBi}.pBIFlf0XR07hg8kRfMC5 .zAqHYk_sm5cLkEhV6NH9{height:0;overflow:hidden;animation-name:c50mHEmSRYNmN9hQoUvk;animation-duration:.7s;animation-fill-mode:forwards}.pBIFlf0XR07hg8kRfMC5 .zAqHYk_sm5cLkEhV6NH9 .YDKcWZRadLV75uzQjx_U{height:0;overflow:hidden;transform-origin:left top;transform:translateY(-100%);animation-name:gNNJPG0iCDA1I1ZBxqO_;animation-duration:.7s;animation-fill-mode:forwards}", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {
+	"spoiler": "pBIFlf0XR07hg8kRfMC5",
+	"open": "eXqd1__UplgpnVSAmDaD",
+	"bodyContainer": "zAqHYk_sm5cLkEhV6NH9",
+	"noClosingAnimation": "f2QCyXWoPFz98VqWgsog",
+	"spoilerContainerOpen": "KywlXuo2bC7nE31cHaD0",
+	"body": "YDKcWZRadLV75uzQjx_U",
+	"spoilerOpen": "AfblfyDKukAPSSMP1th4",
+	"noAnimation": "OccHBlvoS4gV0FXICM7P",
+	"none": "vsmr4ZsObBOt0tt_xPBi",
+	"spoilerContainerClose": "c50mHEmSRYNmN9hQoUvk",
+	"spoilerClose": "gNNJPG0iCDA1I1ZBxqO_"
+};
+module.exports = ___CSS_LOADER_EXPORT___;
+
+
+/***/ }),
+
 /***/ 9805:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
@@ -551,6 +579,24 @@ ___CSS_LOADER_EXPORT___.locals = {
 	"button": "qzOeg5cfs8mvkhip9yAo",
 	"buttonIcon": "_Gx_g6TMJ_YIdTKr98EN",
 	"buttonTitle": "Uec1lp1q5fr3iDGcG9iv"
+};
+module.exports = ___CSS_LOADER_EXPORT___;
+
+
+/***/ }),
+
+/***/ 9664:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// Imports
+var ___CSS_LOADER_API_NO_SOURCEMAP_IMPORT___ = __webpack_require__(8081);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3645);
+var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(___CSS_LOADER_API_NO_SOURCEMAP_IMPORT___);
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".dkWI7jvpziVwBoXgBapb{display:block}", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {
+	"heading": "dkWI7jvpziVwBoXgBapb"
 };
 module.exports = ___CSS_LOADER_EXPORT___;
 
@@ -1262,12 +1308,56 @@ module.exports = StyleContext;
 
 /***/ }),
 
+/***/ 7629:
+/***/ ((module, exports, __webpack_require__) => {
+
+
+    var refs = 0;
+    var css = __webpack_require__(9057);
+    var insertCss = __webpack_require__(4718);
+    var content = typeof css === 'string' ? [[module.id, css, '']] : css;
+
+    exports = module.exports = css.locals || {};
+    exports._getContent = function() { return content; };
+    exports._getCss = function() { return '' + css; };
+    exports._insertCss = function(options) { return insertCss(content, options) };
+
+    // Hot Module Replacement
+    // https://webpack.github.io/docs/hot-module-replacement
+    // Only activated in browser context
+    if (false) { var removeCss; }
+  
+
+/***/ }),
+
 /***/ 8718:
 /***/ ((module, exports, __webpack_require__) => {
 
 
     var refs = 0;
     var css = __webpack_require__(9805);
+    var insertCss = __webpack_require__(4718);
+    var content = typeof css === 'string' ? [[module.id, css, '']] : css;
+
+    exports = module.exports = css.locals || {};
+    exports._getContent = function() { return content; };
+    exports._getCss = function() { return '' + css; };
+    exports._insertCss = function(options) { return insertCss(content, options) };
+
+    // Hot Module Replacement
+    // https://webpack.github.io/docs/hot-module-replacement
+    // Only activated in browser context
+    if (false) { var removeCss; }
+  
+
+/***/ }),
+
+/***/ 1505:
+/***/ ((module, exports, __webpack_require__) => {
+
+
+    var refs = 0;
+    var css = __webpack_require__(9664);
     var insertCss = __webpack_require__(4718);
     var content = typeof css === 'string' ? [[module.id, css, '']] : css;
 
@@ -8836,6 +8926,7 @@ __webpack_require__.d(__webpack_exports__, {
   "ActionSheet": () => (/* reexport */ ActionSheetMemo),
   "Block": () => (/* reexport */ BlockMemo),
   "Breakpoints": () => (/* reexport */ Breakpoints),
+  "BulletList": () => (/* reexport */ BulletListMemo),
   "Button": () => (/* reexport */ ButtonMemo),
   "CONTAINER_CLASSES": () => (/* reexport */ CONTAINER_CLASSES),
   "Card": () => (/* reexport */ CardMemo),
@@ -8856,11 +8947,14 @@ __webpack_require__.d(__webpack_exports__, {
   "InlineBlock": () => (/* reexport */ InlineBlockMemo),
   "Input": () => (/* reexport */ Input_tmp),
   "List": () => (/* reexport */ List_tmp),
+  "ListItem": () => (/* reexport */ ListItemMemo),
   "LoadingArea": () => (/* reexport */ LoadingAreaMemo),
   "LoadingCircle": () => (/* reexport */ LoadingCircleMemo),
   "MoreButton": () => (/* reexport */ MoreButtonMemo),
   "RESTRICT_CHILDREN": () => (/* reexport */ RESTRICT_CHILDREN),
   "Select": () => (/* reexport */ SelectMemo),
+  "Spoiler": () => (/* reexport */ SpoilerMemo),
+  "SpoilerList": () => (/* reexport */ SpoilerListMemo),
   "StyleProvider": () => (/* reexport */ provider),
   "Switch": () => (/* reexport */ SwitchMemo),
   "TEXT_PRIO": () => (/* reexport */ TEXT_PRIO),
@@ -8885,6 +8979,7 @@ __webpack_require__.d(__webpack_exports__, {
   "useKeyListener": () => (/* reexport */ useKeyListener),
   "useListener": () => (/* reexport */ useListener),
   "useListenerWithExtractedProps": () => (/* reexport */ useListenerWithExtractedProps),
+  "useSpoilerGroup": () => (/* reexport */ useSpoilerGroup),
   "withForwardRef": () => (/* reexport */ withForwardRef),
   "withMemo": () => (/* reexport */ withMemo),
   "withRestrictedChildren": () => (/* reexport */ withRestrictedChildren)
@@ -9053,7 +9148,6 @@ var Clickable_rest = undefined && undefined.__rest || function (s, e) {
 
 
 function Clickable(_a, ref) {
-  // Variables
   var {
     className,
     children,
@@ -9061,17 +9155,21 @@ function Clickable(_a, ref) {
     style,
     href
   } = _a,
-      clickData = Clickable_rest(_a, ["className", "children", "interactable", "style", "href"]); // States
+      clickData = Clickable_rest(_a, ["className", "children", "interactable", "style", "href"]);
+
+  console.log('LOG-d href', href); // Variables
+  // States
   // Refs
   // Callbacks
 
-
   const onClickInner = useListener('onClick', clickData);
   const realOnClick = (0,external_react_.useCallback)(e => {
-    e.stopPropagation();
-    e.preventDefault();
-    onClickInner(e);
-  }, [onClickInner]); // Effects
+    if (clickData.onClick) {
+      e.stopPropagation();
+      e.preventDefault();
+      onClickInner(e);
+    }
+  }, [clickData.onClick, onClickInner]); // Effects
   // Other
   // Render Functions
 
@@ -9084,7 +9182,7 @@ function Clickable(_a, ref) {
     tabIndex: interactable ? 0 : undefined
   };
 
-  if (href === 'string') {
+  if (typeof href === 'string') {
     return /*#__PURE__*/external_react_.createElement("a", _extends({}, props, {
       href: href,
       ref: ref
@@ -20623,6 +20721,60 @@ function Grow({
 
 const Grow_tmp = withMemo(Grow, (layout_default()));
 
+;// CONCATENATED MODULE: ./src/Components/List/BulletList/BulletList.tsx
+
+
+
+function BulletList({
+  numbered = false,
+  className,
+  children
+}) {
+  // Variables
+  // Refs
+  // States
+  // Selectors
+  // Callbacks
+  // Effects
+  // Other
+  const props = {
+    className
+  }; // Render Functions
+
+  if (numbered) {
+    return /*#__PURE__*/external_react_.createElement("ol", props, children);
+  }
+
+  return /*#__PURE__*/external_react_.createElement("ul", props, children);
+} // Need BulletListMemo for autocompletion of phpstorm
+
+
+const BulletListMemo = withMemo(BulletList);
+
+;// CONCATENATED MODULE: ./src/Components/List/BulletList/ListItem.tsx
+
+
+
+function ListItem({
+  className,
+  children
+}) {
+  // Variables
+  // Refs
+  // States
+  // Selectors
+  // Callbacks
+  // Effects
+  // Other
+  // Render Functions
+  return /*#__PURE__*/external_react_.createElement("li", {
+    className: className
+  }, children);
+} // Need ListItemMemo for autocompletion of phpstorm
+
+
+const ListItemMemo = withMemo(ListItem);
+
 // EXTERNAL MODULE: ./src/Components/List/list.scss
 var list = __webpack_require__(1308);
 var list_default = /*#__PURE__*/__webpack_require__.n(list);
@@ -20763,6 +20915,158 @@ function LoadingArea({
 }
 
 const LoadingAreaMemo = withMemo(LoadingArea, (loadingArea_default()));
+
+// EXTERNAL MODULE: ./src/Components/SpoilerList/Spoiler/spoiler.scss
+var spoiler = __webpack_require__(7629);
+var spoiler_default = /*#__PURE__*/__webpack_require__.n(spoiler);
+;// CONCATENATED MODULE: ./src/Components/SpoilerList/Spoiler/Spoiler.tsx
+var Spoiler_rest = undefined && undefined.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+function Spoiler(_a) {
+  // Variables
+  var {
+    title,
+    children,
+    initialOpen = false,
+    noClosingAnimation = false,
+    className,
+    open
+  } = _a,
+      listenerProps = Spoiler_rest(_a, ["title", "children", "initialOpen", "noClosingAnimation", "className", "open"]); // Refs
+  // States
+
+
+  const [isOpen, setIsOpen] = (0,external_react_.useState)(open !== null && open !== void 0 ? open : initialOpen);
+  const [isInitialValue, setIsInitialValue] = (0,external_react_.useState)(true);
+  const savedOpen = (0,external_react_.useRef)(open); // Selectors
+  // Callbacks
+
+  const onClickListener = useListener('onClick', listenerProps);
+  const toggleOpen = (0,external_react_.useCallback)(() => {
+    if (open !== undefined) {
+      onClickListener === null || onClickListener === void 0 ? void 0 : onClickListener(!open);
+    } else {
+      setIsInitialValue(false);
+      setIsOpen(old => {
+        onClickListener === null || onClickListener === void 0 ? void 0 : onClickListener(!old);
+        return !old;
+      });
+    }
+  }, [onClickListener, open]); // Effects
+
+  (0,external_react_.useEffect)(() => {
+    if (savedOpen.current !== open) {
+      setIsInitialValue(false);
+    }
+  }, [open]); // Other
+
+  const titleComponent = typeof title === 'string' || typeof title === 'number' ? /*#__PURE__*/external_react_.createElement(tmp, {
+    size: TEXT_SIZE.large
+  }, title) : title; // Render Functions
+
+  return /*#__PURE__*/external_react_.createElement(ClickableMemo, {
+    onClick: toggleOpen,
+    className: classnames_default()(className, (spoiler_default()).spoiler, {
+      [(spoiler_default()).open]: open !== null && open !== void 0 ? open : isOpen,
+      [(spoiler_default()).noAnimation]: isInitialValue,
+      [(spoiler_default()).noClosingAnimation]: noClosingAnimation
+    })
+  }, /*#__PURE__*/external_react_.createElement(Flex_tmp, {
+    horizontal: true
+  }, /*#__PURE__*/external_react_.createElement(Grow_tmp, null, titleComponent)), /*#__PURE__*/external_react_.createElement(BlockMemo, {
+    className: (spoiler_default()).bodyContainer
+  }, /*#__PURE__*/external_react_.createElement(BlockMemo, {
+    __allowChildren: "all",
+    className: (spoiler_default()).body
+  }, children)));
+} // Need SpoilerMemo for autocompletion of phpstorm
+
+
+const SpoilerMemo = withMemo(Spoiler, (spoiler_default()));
+
+;// CONCATENATED MODULE: ./src/Components/SpoilerList/useSpoilerGroup.ts
+
+function useSpoilerGroup(defaultKey, options = {}) {
+  const [openKey, setOpenKey] = (0,external_react_.useState)(defaultKey);
+  const onClick = (0,external_react_.useCallback)((isOpen, key) => {
+    setOpenKey(oldKey => {
+      if ((options === null || options === void 0 ? void 0 : options.closeWithClick) && oldKey === key && !isOpen) {
+        return undefined;
+      }
+
+      if (isOpen) {
+        return key;
+      }
+
+      return oldKey;
+    });
+  }, [options === null || options === void 0 ? void 0 : options.closeWithClick]);
+  const createProps = (0,external_react_.useCallback)(key => ({
+    onClick,
+    onClickData: key,
+    key,
+    open: key === openKey,
+    noClosingAnimation: (options === null || options === void 0 ? void 0 : options.noClosingAnimation) !== false
+  }), [onClick, openKey, options === null || options === void 0 ? void 0 : options.noClosingAnimation]);
+  return [createProps, openKey];
+}
+;// CONCATENATED MODULE: ./src/Components/SpoilerList/SpoilerList.tsx
+function SpoilerList_extends() { SpoilerList_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return SpoilerList_extends.apply(this, arguments); }
+
+
+
+
+
+
+
+
+const stringIdentity = data => data;
+
+function SpoilerList({
+  data,
+  renderBody,
+  renderTitle = stringIdentity,
+  className
+}) {
+  // Variables
+  const [propsGenerator] = useSpoilerGroup(); // Refs
+  // States
+  // Selectors
+  // Callbacks
+  // Effects
+  // Other
+  // Render Functions
+
+  return /*#__PURE__*/external_react_.createElement(BlockMemo, {
+    className: classnames_default()(className)
+  }, data.map(item => /*#__PURE__*/external_react_.createElement(SpoilerMemo, SpoilerList_extends({
+    title: renderTitle(item)
+  }, propsGenerator(item.key)), renderBody(item))));
+} // Need SpoilerListMemo for autocompletion of phpstorm
+
+
+const SpoilerListMemo = withMemo(SpoilerList);
 
 // EXTERNAL MODULE: ./src/Components/TabBar/tabBar.scss
 var tabBar = __webpack_require__(8718);
@@ -20950,7 +21254,9 @@ function Table({
   const plugins = [];
 
   if (sortOptions) {
-    tableOptions = Object.assign(Object.assign({}, sortOptions), tableOptions);
+    tableOptions = Object.assign(Object.assign({
+      autoResetSortBy: false
+    }, sortOptions), tableOptions);
     plugins.push(react_table.useSortBy);
   }
 
@@ -21013,13 +21319,19 @@ function Table({
 
 const Table_tmp = withMemo(Table);
 
+// EXTERNAL MODULE: ./src/Components/Text/heading.scss
+var heading = __webpack_require__(1505);
+var heading_default = /*#__PURE__*/__webpack_require__.n(heading);
 ;// CONCATENATED MODULE: ./src/Components/Text/Heading.tsx
 
 
 
 
+
+
 function Heading({
-  children
+  children,
+  className
 }) {
   // Variables
   // Refs
@@ -21032,12 +21344,13 @@ function Heading({
   return /*#__PURE__*/external_react_.createElement(tmp, {
     as: "h1",
     size: TEXT_SIZE.xxlarge,
-    prio: TEXT_PRIO.heading
+    prio: TEXT_PRIO.heading,
+    className: classnames_default()((heading_default()).heading, className)
   }, children);
 } // Need HeadingMemo for autocompletion of phpstorm
 
 
-const HeadingMemo = withMemo(Heading, undefined, 'text');
+const HeadingMemo = withMemo(Heading, (heading_default()), 'text');
 
 // EXTERNAL MODULE: ./src/Components/Toast/toast.scss
 var toast = __webpack_require__(8183);
@@ -21425,6 +21738,11 @@ var StyleContext_default = /*#__PURE__*/__webpack_require__.n(StyleContext);
 const provider = (StyleContext_default()).Provider;
 
 ;// CONCATENATED MODULE: ./bootstrapReactMobile.ts
+
+
+
+
+
 
 
 

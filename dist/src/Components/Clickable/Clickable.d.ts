@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
-import { Listener } from '../Hooks/useListener';
-declare type OnClickListener<Data> = Listener<'onClick', Data>;
+import { OptionalListener } from '../Hooks/useListener';
+declare type OnClickListener<Data> = OptionalListener<'onClick', Data>;
 export declare type ClickableProps<OnClickData, HrefType extends string | undefined> = RbmComponentProps<{
     interactable?: boolean;
     style?: React.CSSProperties;

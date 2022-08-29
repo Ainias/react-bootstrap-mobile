@@ -81,6 +81,7 @@ function Table<DataType extends string | number | Record<string, unknown>>({
 
     if (sortOptions) {
         tableOptions = {
+            autoResetSortBy: false,
             ...sortOptions,
             ...tableOptions,
         };

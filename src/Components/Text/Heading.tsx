@@ -3,9 +3,12 @@ import { withMemo } from '../../helper/withMemo';
 import { Text, TEXT_PRIO, TEXT_SIZE } from './Text';
 import { RbmComponentProps, WithStringProps } from '../RbmComponentProps';
 
+import styles from './heading.scss';
+import classNames from 'classnames';
+
 export type HeadingProps = RbmComponentProps<{}, WithStringProps>;
 
-function Heading({ children }: HeadingProps) {
+function Heading({ children, className }: HeadingProps) {
     // Variables
 
     // Refs
@@ -23,12 +26,17 @@ function Heading({ children }: HeadingProps) {
     // Render Functions
 
     return (
-        <Text as="h1" size={TEXT_SIZE.xxlarge} prio={TEXT_PRIO.heading}>
+        <Text
+            as="h1"
+            size={TEXT_SIZE.xxlarge}
+            prio={TEXT_PRIO.heading}
+            className={classNames(styles.heading, className)}
+        >
             {children}
         </Text>
     );
 }
 
 // Need HeadingMemo for autocompletion of phpstorm
-const HeadingMemo = withMemo(Heading, undefined, 'text');
+const HeadingMemo = withMemo(Heading, styles, 'text');
 export { HeadingMemo as Heading };

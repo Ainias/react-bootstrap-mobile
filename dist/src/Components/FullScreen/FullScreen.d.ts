@@ -7,7 +7,7 @@ export declare type FullScreenProps<AsType extends keyof JSX.IntrinsicElements> 
     onEnterFullscreen?: () => void;
     onLeaveFullscreen?: () => void;
 }>>;
-declare function FullScreen<AsTag extends keyof JSX.IntrinsicElements = 'span'>({ children, as, fullscreenKey, onEnterFullscreen, onLeaveFullscreen, ...otherProps }: FullScreenProps<AsTag>): React.ReactElement<Omit<FullScreenProps<AsTag>, "children" | "as" | "fullscreenKey" | "onEnterFullscreen" | "onLeaveFullscreen"> & {
+declare function FullScreen<AsTag extends keyof JSX.IntrinsicElements = 'span'>({ children, as, fullscreenKey, onEnterFullscreen, onLeaveFullscreen, ...otherProps }: FullScreenProps<AsTag>): React.ReactElement<Omit<FullScreenProps<AsTag>, "as" | "children" | "fullscreenKey" | "onEnterFullscreen" | "onLeaveFullscreen"> & {
     ref: React.RefObject<React.ComponentRef<AsTag>>;
 }, string | React.JSXElementConstructor<any>>;
 declare const FullScreenMemo: typeof FullScreen;

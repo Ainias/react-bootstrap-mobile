@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
-import { Listener, useListener } from '../Hooks/useListener';
+import { OptionalListener, useListener } from '../Hooks/useListener';
 
 import styles from './clickable.scss';
 import classNames from 'classnames';
 import { useCallback, MouseEvent, ForwardedRef } from 'react';
 import { withForwardRef } from '../../helper/withForwardRef';
 
-type OnClickListener<Data> = Listener<'onClick', Data>;
+type OnClickListener<Data> = OptionalListener<'onClick', Data>;
 
 export type ClickableProps<OnClickData, HrefType extends string | undefined> = RbmComponentProps<
     { interactable?: boolean; style?: React.CSSProperties; href?: HrefType } & OnClickListener<OnClickData>
@@ -17,6 +17,7 @@ function Clickable<OnClickData, HrefType extends string | undefined>(
     { className, children, interactable = true, style, href, ...clickData }: ClickableProps<OnClickData, HrefType>,
     ref: ForwardedRef<HrefType extends string ? HTMLAnchorElement : HTMLSpanElement>
 ) {
+    console.log('LOG-d href', href);
     // Variables
 
     // States
@@ -27,11 +28,13 @@ function Clickable<OnClickData, HrefType extends string | undefined>(
     const onClickInner = useListener('onClick', clickData);
     const realOnClick = useCallback(
         (e: MouseEvent) => {
-            e.stopPropagation();
-            e.preventDefault();
-            onClickInner(e);
+            if (clickData.onClick) {
+                e.stopPropagation();
+                e.preventDefault();
+                onClickInner(e);
+            }
         },
-        [onClickInner]
+        [clickData.onClick, onClickInner]
     );
 
     // Effects
@@ -47,7 +50,7 @@ function Clickable<OnClickData, HrefType extends string | undefined>(
         onClick: realOnClick,
         tabIndex: interactable ? 0 : undefined,
     };
-    if (href === 'string') {
+    if (typeof href === 'string') {
         return (
             <a {...props} href={href} ref={ref as ForwardedRef<HTMLAnchorElement>}>
                 {children}

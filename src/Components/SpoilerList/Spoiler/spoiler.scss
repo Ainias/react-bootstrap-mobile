@@ -1,0 +1,112 @@
+$borderColor: #b3b3b3;
+
+@keyframes spoilerContainerOpen {
+  0% {
+    height: 0;
+  }
+  1% {
+    height: initial;
+  }
+  100% {
+    height: initial;
+  }
+}
+
+@keyframes spoilerOpen {
+  0% {
+    height: 0;
+    transform: translateY(-100%);
+  }
+  1% {
+    height: initial;
+    transform: translateY(-100%);
+  }
+  100% {
+    height: initial;
+    transform: translateY(0%);
+  }
+}
+
+@keyframes spoilerContainerClose {
+  0% {
+    height: initial;
+  }
+  99% {
+    height: initial;
+  }
+  100% {
+    height: 0;
+  }
+}
+
+@keyframes spoilerClose {
+  0% {
+    height: initial;
+    transform: translateY(0%);
+  }
+  99% {
+    height: initial;
+    transform: translateY(-100%);
+  }
+  100% {
+    height: 0;
+    transform: translateY(-100%);
+  }
+}
+
+.spoiler {
+  display: block;
+  border-top: 1px solid $borderColor;
+  border-bottom: 1px solid $borderColor;
+
+  &.open, &.open.noClosingAnimation {
+    .bodyContainer {
+      height: initial;
+      animation-name: spoilerContainerOpen;
+
+      .body {
+        height: initial;
+        transform: translateY(0%);
+        animation-name: spoilerOpen;
+      }
+    }
+  }
+
+  &.noAnimation, &.noAnimation.open {
+    .bodyContainer {
+      animation: none;
+
+      .body {
+        animation: none;
+      }
+    }
+  }
+
+  &.noClosingAnimation {
+    .bodyContainer {
+      animation-name: none;
+
+      .body {
+        animation-name: none;
+      }
+    }
+  }
+
+  .bodyContainer {
+    height: 0;
+    overflow: hidden;
+    animation-name: spoilerContainerClose;
+    animation-duration: 0.7s;
+    animation-fill-mode: forwards;
+
+    .body {
+      height: 0;
+      overflow: hidden;
+      transform-origin: left top;
+      transform: translateY(-100%);
+      animation-name: spoilerClose;
+      animation-duration: 0.7s;
+      animation-fill-mode: forwards;
+    }
+  }
+}
