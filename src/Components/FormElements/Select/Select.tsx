@@ -25,7 +25,14 @@ export type SelectProps<OnChangeData> = RbmComponentProps<
     >
 >;
 
-function Select<OnChangeData>({ label, options, className, onChangeValue, ...otherProps }: SelectProps<OnChangeData>) {
+function Select<OnChangeData>({
+    label,
+    options,
+    className,
+    style,
+    onChangeValue,
+    ...otherProps
+}: SelectProps<OnChangeData>) {
     // Variables
 
     // Refs
@@ -53,7 +60,7 @@ function Select<OnChangeData>({ label, options, className, onChangeValue, ...oth
     // Render Functions
 
     return (
-        <label className={classNames(styles.select, className)}>
+        <label className={classNames(styles.select, className)} style={style}>
             {label ? <span>{label}</span> : null}
             <select {...otherProps} className={styles.input} onChange={onChange}>
                 {options.map((option) => (

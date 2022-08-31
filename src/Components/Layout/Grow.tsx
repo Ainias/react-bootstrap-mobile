@@ -9,7 +9,7 @@ export type GrowProps = RbmComponentProps<{
     center?: boolean;
 }>;
 
-function Grow({ className, children, center = false }: GrowProps) {
+function Grow({ className, children, center = false, style }: GrowProps) {
     // Variables
 
     // States
@@ -23,7 +23,11 @@ function Grow({ className, children, center = false }: GrowProps) {
     // Other
 
     // Render Functions
-    return <div className={classNames(styles.grow, { [styles.center]: center }, className)}>{children}</div>;
+    return (
+        <div className={classNames(styles.grow, { [styles.center]: center }, className)} style={style}>
+            {children}
+        </div>
+    );
 }
 
 const tmp = withMemo(Grow, styles);

@@ -1,6 +1,7 @@
 import React, { ForwardedRef, ForwardRefRenderFunction, PropsWithoutRef, ReactElement, RefAttributes } from 'react';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import { withRestrictedChildren } from './withRestrictedChildren';
+import { memoComparator } from './memoComparator';
 
 export interface RefComponent<PropTypes, ForwardedRefType> {
     (props: PropsWithoutRef<PropTypes> & RefAttributes<ForwardedRefType>): ReactElement | null;
@@ -19,7 +20,7 @@ export function withForwardRef<PropTypes, ForwardedRefType>(
         ? withStyles(styles)(forwardedComp)
         : forwardedComp;
 
-    const memoizedComponent = React.memo(c) as RefComponent<PropTypes, ForwardedRefType>;
+    const memoizedComponent = React.memo(c, memoComparator) as RefComponent<PropTypes, ForwardedRefType>;
     memoizedComponent.displayName = `Memoized-Forwarded(${component.displayName || component.name})`;
 
     return memoizedComponent;

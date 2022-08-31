@@ -8,4 +8,5 @@ export declare function useSpoilerGroup(defaultKey?: number | string, options?: 
     key: string | number;
     open: boolean;
     noClosingAnimation: boolean;
+    closeIcon: null;
 }, string | number | undefined];

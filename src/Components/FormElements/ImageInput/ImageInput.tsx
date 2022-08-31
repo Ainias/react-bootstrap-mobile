@@ -25,6 +25,7 @@ export type ImageInputProps<OnChangeData> = RbmComponentProps<
 
 function ImageInput<OnChangeData>({
     className,
+    style,
     value,
     defaultValue,
     onChangeImage,
@@ -77,7 +78,7 @@ function ImageInput<OnChangeData>({
     // Render Functions
 
     return (
-        <label className={classNames(styles.imageInput, className)}>
+        <label className={classNames(styles.imageInput, className)} style={style}>
             {label ? <span>{label}</span> : null}
             <img
                 src={(value ?? image)?.url}

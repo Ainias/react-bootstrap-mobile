@@ -29,6 +29,7 @@ function Switch({
     isDual = undefined,
     id,
     className,
+    style,
     onChange,
     onChangeChecked,
     ...props
@@ -70,7 +71,7 @@ function Switch({
         isDual = true;
     }
     return (
-        <span className={classNames(styles.switch, { [styles.dual]: isDual }, className)}>
+        <span className={classNames(styles.switch, { [styles.dual]: isDual }, className)} style={style}>
             <label htmlFor={id} key={id}>
                 <span className={styles.label}>{preLabel}</span>
                 <input {...props} type="checkbox" id={id} onChange={realOnChange} />

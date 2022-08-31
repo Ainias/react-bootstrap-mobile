@@ -55,6 +55,7 @@ function Table<DataType extends string | number | Record<string, unknown>>({
     cellRenderer,
     sortOptions,
     className,
+    style,
     getCellProperties = defaultPropertiesGetter,
     getRowProperties = defaultPropertiesGetter,
 }: TableProps<DataType>) {
@@ -114,7 +115,7 @@ function Table<DataType extends string | number | Record<string, unknown>>({
 
     return (
         // apply the table props
-        <table className={className} {...getTableProps()}>
+        <table className={className} {...getTableProps()} style={style}>
             <thead>
                 {
                     // Loop over the header rows

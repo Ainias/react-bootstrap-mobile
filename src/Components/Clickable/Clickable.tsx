@@ -10,14 +10,13 @@ import { withForwardRef } from '../../helper/withForwardRef';
 type OnClickListener<Data> = OptionalListener<'onClick', Data>;
 
 export type ClickableProps<OnClickData, HrefType extends string | undefined> = RbmComponentProps<
-    { interactable?: boolean; style?: React.CSSProperties; href?: HrefType } & OnClickListener<OnClickData>
+    { interactable?: boolean; href?: HrefType } & OnClickListener<OnClickData>
 >;
 
 function Clickable<OnClickData, HrefType extends string | undefined>(
     { className, children, interactable = true, style, href, ...clickData }: ClickableProps<OnClickData, HrefType>,
     ref: ForwardedRef<HrefType extends string ? HTMLAnchorElement : HTMLSpanElement>
 ) {
-    console.log('LOG-d href', href);
     // Variables
 
     // States

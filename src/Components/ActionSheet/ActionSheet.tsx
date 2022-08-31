@@ -35,7 +35,7 @@ export type ActionSheetHandle = {
 };
 
 function ActionSheet(
-    { title, actions, cancelText = 'Cancel', className, onClose }: ActionSheetProps,
+    { title, actions, cancelText = 'Cancel', className, onClose, style }: ActionSheetProps,
     ref: Ref<ActionSheetHandle>
 ) {
     const [isOpen, setIsOpen] = useState(false);
@@ -85,6 +85,7 @@ function ActionSheet(
         <Clickable
             className={classNames(styles.actionSheet, { [styles.open]: actions.length > 0 && isOpen }, className)}
             onClick={close}
+            style={style}
         >
             <Container fluid="xxl" className="full-height">
                 <Flex className={styles.content}>

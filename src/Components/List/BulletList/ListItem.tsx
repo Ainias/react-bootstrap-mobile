@@ -2,9 +2,9 @@ import * as React from 'react';
 import { withMemo } from '../../../helper/withMemo';
 import { RbmComponentProps } from '../../RbmComponentProps';
 
-export type ListItemProps = RbmComponentProps<{}>;
+export type ListItemProps = RbmComponentProps<Record<string, never>>;
 
-function ListItem({ className, children }: ListItemProps) {
+function ListItem({ className, children, style }: ListItemProps) {
     // Variables
 
     // Refs
@@ -21,7 +21,11 @@ function ListItem({ className, children }: ListItemProps) {
 
     // Render Functions
 
-    return <li className={className}>{children}</li>;
+    return (
+        <li className={className} style={style}>
+            {children}
+        </li>
+    );
 }
 
 // Need ListItemMemo for autocompletion of phpstorm

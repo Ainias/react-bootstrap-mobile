@@ -29,6 +29,7 @@ function SpoilerList<BodyData, TitleData = string>({
     renderBody,
     renderTitle = stringIdentity,
     className,
+    style,
 }: SpoilerListProps<BodyData, TitleData>) {
     // Variables
     const [propsGenerator] = useSpoilerGroup();
@@ -47,7 +48,7 @@ function SpoilerList<BodyData, TitleData = string>({
 
     // Render Functions
     return (
-        <Block className={classNames(className)}>
+        <Block className={classNames(className)} style={style}>
             {data.map((item) => (
                 <Spoiler title={renderTitle(item)} {...propsGenerator(item.key)}>
                     {renderBody(item)}

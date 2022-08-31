@@ -17,7 +17,7 @@ export type ContainerProps = RbmComponentProps<{
     fluid?: boolean | keyof typeof CONTAINER_CLASSES;
 }>;
 
-function Container({ fluid, className, children }: ContainerProps) {
+function Container({ fluid, className, children, style }: ContainerProps) {
     // Variables
 
     // Refs
@@ -45,6 +45,7 @@ function Container({ fluid, className, children }: ContainerProps) {
                 containerClass,
                 className
             )}
+            style={style}
         >
             {children}
         </div>

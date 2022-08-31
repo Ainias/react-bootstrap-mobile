@@ -13,7 +13,15 @@ export type InViewportProps = RbmComponentProps<{
     rootMargin?: string;
 }>;
 
-function InViewport({ threshold = 0, root, rootMargin, onInViewportChange, className, children }: InViewportProps) {
+function InViewport({
+    threshold = 0,
+    root,
+    rootMargin,
+    onInViewportChange,
+    className,
+    style,
+    children,
+}: InViewportProps) {
     // Variables
 
     // States
@@ -53,7 +61,7 @@ function InViewport({ threshold = 0, root, rootMargin, onInViewportChange, class
     // Render Functions
 
     return (
-        <span ref={viewportElement} className={classNames(styles.inViewport, className)}>
+        <span ref={viewportElement} className={classNames(styles.inViewport, className)} style={style}>
             {children}
         </span>
     );

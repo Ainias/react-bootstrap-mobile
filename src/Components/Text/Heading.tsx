@@ -6,9 +6,9 @@ import { RbmComponentProps, WithStringProps } from '../RbmComponentProps';
 import styles from './heading.scss';
 import classNames from 'classnames';
 
-export type HeadingProps = RbmComponentProps<{}, WithStringProps>;
+export type HeadingProps = RbmComponentProps<Record<string, never>, WithStringProps>;
 
-function Heading({ children, className }: HeadingProps) {
+function Heading({ children, className, style }: HeadingProps) {
     // Variables
 
     // Refs
@@ -31,6 +31,7 @@ function Heading({ children, className }: HeadingProps) {
             size={TEXT_SIZE.xxlarge}
             prio={TEXT_PRIO.heading}
             className={classNames(styles.heading, className)}
+            style={style}
         >
             {children}
         </Text>

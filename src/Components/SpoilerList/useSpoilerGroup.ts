@@ -30,6 +30,7 @@ export function useSpoilerGroup(defaultKey?: number | string, options: Partial<S
             key,
             open: key === openKey,
             noClosingAnimation: options?.noClosingAnimation !== false,
+            closeIcon: null,
         }),
         [onClick, openKey, options?.noClosingAnimation]
     );

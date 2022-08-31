@@ -24,6 +24,7 @@ function Toast<ActionData, DismissedData>({
     className,
     timeToShow = 0,
     children,
+    style,
     ...otherProps
 }: ToastProps<ActionData, DismissedData>) {
     // Variables
@@ -91,6 +92,7 @@ function Toast<ActionData, DismissedData>({
 
     return (
         <Clickable
+            style={style}
             className={classNames(styles.toast, { [styles.hiding]: hidingStart > 0 }, className)}
             onClick={updateHidingStart}
             __allowChildren="all"

@@ -79,20 +79,18 @@ function ColorInput<OnChangeData>({
     const colVal: Color = value ?? color;
 
     return (
-        <span>
-            <span className={styles.colorInput}>
-                {isOpen ? (
-                    <div onClick={onContainerClick} className={styles.modalContainer} ref={containerRef}>
-                        <div className={styles.modal} style={{ top: position.y, left: position.x }}>
-                            <SketchPicker color={colVal} onChange={onChange} />
-                        </div>
+        <span className={styles.colorInput}>
+            {isOpen ? (
+                <div onClick={onContainerClick} className={styles.modalContainer} ref={containerRef}>
+                    <div className={styles.modal} style={{ top: position.y, left: position.x }}>
+                        <SketchPicker color={colVal} onChange={onChange} />
                     </div>
-                ) : null}
-                <span onClick={openElement} className={styles.label}>
-                    {label}
-                </span>
-                <span onClick={openElement} style={{ backgroundColor: colVal }} className={styles.preview} />
+                </div>
+            ) : null}
+            <span onClick={openElement} className={styles.label}>
+                {label}
             </span>
+            <span onClick={openElement} style={{ backgroundColor: colVal }} className={styles.preview} />
         </span>
     );
 }

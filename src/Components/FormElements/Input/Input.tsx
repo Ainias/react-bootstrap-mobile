@@ -20,7 +20,7 @@ export type InputProps<OnChangeData> = RbmComponentProps<
 >;
 
 function Input<OnChangeData>(
-    { label, className, onEnter, onKeyPress, onChangeText, ...otherProps }: InputProps<OnChangeData>,
+    { label, className, style, onEnter, onKeyPress, onChangeText, ...otherProps }: InputProps<OnChangeData>,
     ref: ForwardedRef<HTMLInputElement>
 ) {
     // Variables
@@ -60,7 +60,7 @@ function Input<OnChangeData>(
     // Render Functions
 
     return (
-        <label className={classNames(styles.input, className)}>
+        <label className={classNames(styles.input, className)} style={style}>
             {label ? <span className={styles.label}>{label}</span> : null}
             <input {...otherProps} ref={ref} className={styles.text} onChange={onChange} onKeyPress={realOnKeyPress} />
         </label>

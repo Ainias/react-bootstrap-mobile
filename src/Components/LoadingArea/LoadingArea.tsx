@@ -21,6 +21,7 @@ function LoadingArea({
     fullHeight = false,
     opacity = 0.65,
     className,
+    style,
     children,
 }: LoadingAreaProps) {
     // Variables
@@ -47,6 +48,7 @@ function LoadingArea({
                 'full-height': fullHeight,
                 'full-width': fullWidth,
             })}
+            style={style}
         >
             {children}
             {loading ? (

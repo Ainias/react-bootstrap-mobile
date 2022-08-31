@@ -11,6 +11,9 @@ import { Clickable } from '../../Clickable/Clickable';
 import styles from './spoiler.scss';
 import classNames from 'classnames';
 import { OptionalListener, useListener } from '../../Hooks/useListener';
+import { Icon } from '../../Icon/Icon';
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 export type SpoilerProps<OnClickData> = RbmComponentProps<
     {
@@ -18,6 +21,8 @@ export type SpoilerProps<OnClickData> = RbmComponentProps<
         initialOpen?: boolean;
         open?: boolean;
         noClosingAnimation?: boolean;
+        openIcon?: IconProp | null;
+        closeIcon?: IconProp | null;
     } & OptionalListener<'onClick', OnClickData>
 >;
 
@@ -26,7 +31,10 @@ function Spoiler<OnClickData>({
     children,
     initialOpen = false,
     noClosingAnimation = false,
+    openIcon = faChevronDown,
+    closeIcon = faChevronUp,
     className,
+    style,
     open,
     ...listenerProps
 }: SpoilerProps<OnClickData>) {
@@ -68,6 +76,8 @@ function Spoiler<OnClickData>({
         typeof title === 'string' || typeof title === 'number' ? <Text size={TEXT_SIZE.large}>{title}</Text> : title;
 
     // Render Functions
+    const icon = open ?? isOpen ? closeIcon : openIcon;
+
     return (
         <Clickable
             onClick={toggleOpen}
@@ -76,9 +86,11 @@ function Spoiler<OnClickData>({
                 [styles.noAnimation]: isInitialValue,
                 [styles.noClosingAnimation]: noClosingAnimation,
             })}
+            style={style}
         >
             <Flex horizontal={true}>
                 <Grow>{titleComponent}</Grow>
+                {icon ? <Icon icon={icon} className={styles.icon} /> : null}
             </Flex>
             <Block className={styles.bodyContainer}>
                 <Block __allowChildren="all" className={styles.body}>

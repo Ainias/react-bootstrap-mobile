@@ -14,7 +14,15 @@ export type CheckboxProps = RbmComponentProps<
     } & InputHTMLAttributes<HTMLInputElement>
 >;
 
-function Checkbox({ children, label = '', isLabelBeforeCheckbox = false, id, className, ...props }: CheckboxProps) {
+function Checkbox({
+    children,
+    label = '',
+    isLabelBeforeCheckbox = false,
+    id,
+    className,
+    style,
+    ...props
+}: CheckboxProps) {
     // Variables
 
     // States
@@ -38,7 +46,7 @@ function Checkbox({ children, label = '', isLabelBeforeCheckbox = false, id, cla
     }
 
     return (
-        <span className={classNames(styles.checkbox, className)}>
+        <span className={classNames(styles.checkbox, className)} style={style}>
             <label htmlFor={id} key={id}>
                 <span className={styles.label}>{preLabel}</span>
                 <input {...props} type="checkbox" id={id} className={styles.input} />

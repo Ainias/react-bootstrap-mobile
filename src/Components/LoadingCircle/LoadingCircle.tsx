@@ -9,7 +9,7 @@ export type LoadingCircleProps = RbmComponentProps<{
     size?: number;
 }>;
 
-function LoadingCircle({ size = 32, className }: LoadingCircleProps) {
+function LoadingCircle({ size = 32, className, style }: LoadingCircleProps) {
     // Variables
 
     // States
@@ -30,6 +30,7 @@ function LoadingCircle({ size = 32, className }: LoadingCircleProps) {
             viewBox={`0 0 ${size} ${size}`}
             width={size}
             height={size}
+            style={style}
         >
             <circle cx="50%" cy="50%" r="40%" fill="none" className={styles.spinner} />
         </svg>

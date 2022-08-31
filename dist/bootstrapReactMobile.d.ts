@@ -50,6 +50,7 @@ export * from './src/Components/TopBar/TopBarButton';
 export * from './src/StyleProvider';
 export * from './src/TypeHelpers';
 export * from './src/WrongChildError';
+export * from './src/helper/memoComparator';
 export * from './src/helper/withForwardRef';
 export * from './src/helper/withMemo';
 export * from './src/helper/withRestrictedChildren';

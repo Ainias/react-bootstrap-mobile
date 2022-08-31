@@ -11,7 +11,7 @@ export type MoreButtonProps = RbmComponentProps<{
     onClick?: () => void;
 }>;
 
-function MoreButton({ onClick, disabled, className }: MoreButtonProps) {
+function MoreButton({ onClick, disabled, className, style }: MoreButtonProps) {
     // Variables
 
     // States
@@ -27,11 +27,12 @@ function MoreButton({ onClick, disabled, className }: MoreButtonProps) {
     // Render Functions
 
     return (
-        <TopBarButton onClick={onClick} disabled={disabled} className={className}>
+        <TopBarButton onClick={onClick} disabled={disabled} className={className} style={style}>
             <Icon icon={faEllipsisH} className="material-hidden" />
             <Icon icon={faEllipsisV} className="flat-hidden" />
         </TopBarButton>
     );
 }
+
 const MoreButtonMemo = withMemo(MoreButton);
 export { MoreButtonMemo as MoreButton };

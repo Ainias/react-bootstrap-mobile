@@ -4,7 +4,7 @@ import { RbmComponentProps } from '../../RbmComponentProps';
 
 export type BulletListProps = RbmComponentProps<{ numbered?: boolean }>;
 
-function BulletList({ numbered = false, className, children }: BulletListProps) {
+function BulletList({ numbered = false, className, children, style }: BulletListProps) {
     // Variables
 
     // Refs
@@ -18,7 +18,7 @@ function BulletList({ numbered = false, className, children }: BulletListProps) 
     // Effects
 
     // Other
-    const props = { className };
+    const props = { className, style };
 
     // Render Functions
     if (numbered) {

@@ -6,9 +6,9 @@ import styles from './toast.scss';
 import classNames from 'classnames';
 import { withMemo } from '../../helper/withMemo';
 
-export type ToastContainerProps = RbmComponentProps<{}>;
+export type ToastContainerProps = RbmComponentProps<Record<string, never>>;
 
-function ToastContainer({ className, children }: ToastContainerProps) {
+function ToastContainer({ className, children, style }: ToastContainerProps) {
     // Variables
 
     // States
@@ -24,7 +24,7 @@ function ToastContainer({ className, children }: ToastContainerProps) {
     // Render Functions
 
     return (
-        <Container className={classNames(styles.toastContainer, className)} fluid __allowChildren="all">
+        <Container className={classNames(styles.toastContainer, className)} fluid __allowChildren="all" style={style}>
             {children}
         </Container>
     );

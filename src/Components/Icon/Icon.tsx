@@ -17,7 +17,7 @@ export type IconProps = RbmComponentProps<
     >
 >;
 
-function Icon({ icon, alt, className, ...props }: IconProps) {
+function Icon({ icon, alt, className, style, ...props }: IconProps) {
     // Variables
 
     // States
@@ -36,9 +36,9 @@ function Icon({ icon, alt, className, ...props }: IconProps) {
     // Render Functions
 
     if (typeof icon === 'string' && icon.indexOf('.') !== -1) {
-        return <img src={icon} alt={alt} className={className} />;
+        return <img src={icon} alt={alt} className={className} style={style} />;
     }
-    return <FontAwesomeIcon {...props} icon={icon as IconProp} className={className} />;
+    return <FontAwesomeIcon {...props} icon={icon as IconProp} className={className} style={style} />;
 }
 
 const IconMemo = withMemo(Icon);

@@ -22,6 +22,7 @@ export type TextareaProps<OnChangeData> = RbmComponentProps<
 function Textarea<OnChangeData>({
     label,
     className,
+    style,
     onKeyPress,
     onChangeText,
     onEnter,
@@ -64,12 +65,10 @@ function Textarea<OnChangeData>({
     // Render Functions
 
     return (
-        <>
-            <label className={classNames(styles.container, className)}>
-                {label ? <span className={styles.label}>{label}</span> : null}
-                <textarea {...otherProps} onKeyPress={realOnKeyPress} className={styles.textarea} onChange={onChange} />
-            </label>
-        </>
+        <label className={classNames(styles.container, className)} style={style}>
+            {label ? <span className={styles.label}>{label}</span> : null}
+            <textarea {...otherProps} onKeyPress={realOnKeyPress} className={styles.textarea} onChange={onChange} />
+        </label>
     );
 }
 
