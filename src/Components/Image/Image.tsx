@@ -4,6 +4,9 @@ import { RbmComponentProps, WithNoChildren } from '../RbmComponentProps';
 import { CSSProperties, DOMAttributes } from 'react';
 import { Override } from '../../TypeHelpers';
 
+import styles from './image.scss';
+import classNames from 'classnames';
+
 export type ImageProps = RbmComponentProps<
     Override<
         Omit<React.ComponentPropsWithoutRef<'img'>, keyof DOMAttributes<'img'>>,
@@ -33,9 +36,9 @@ function Image({ src, alt = '', className, style, ...otherProps }: ImageProps) {
 
     // Render Functions
 
-    return <img src={src} alt={alt} className={className} style={style} {...otherProps} />;
+    return <img src={src} alt={alt} className={classNames(styles.image, className)} style={style} {...otherProps} />;
 }
 
 // Need ImageMemo for autocompletion of phpstorm
-const ImageMemo = withMemo(Image);
+const ImageMemo = withMemo(Image, styles);
 export { ImageMemo as Image };

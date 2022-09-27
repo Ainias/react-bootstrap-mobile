@@ -10,6 +10,6 @@ export declare type SpoilerListProps<BodyData, TitleData = string> = RbmComponen
     renderBody: (item: SpoilerItem<BodyData, TitleData>) => ReactElement;
     renderTitle?: (item: SpoilerItem<BodyData, TitleData>) => ReactElement | string;
 }, WithNoChildren>;
-declare function SpoilerList<BodyData, TitleData = string>({ data, renderBody, renderTitle, className, }: SpoilerListProps<BodyData, TitleData>): JSX.Element;
+declare function SpoilerList<BodyData, TitleData = string>({ data, renderBody, renderTitle, className, style, }: SpoilerListProps<BodyData, TitleData>): JSX.Element;
 declare const SpoilerListMemo: typeof SpoilerList;
 export { SpoilerListMemo as SpoilerList };

@@ -1,11 +1,12 @@
-import * as React from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
 import { OptionalListener } from '../Hooks/useListener';
 declare type OnClickListener<Data> = OptionalListener<'onClick', Data>;
-export declare type ClickableProps<OnClickData, HrefType extends string | undefined> = RbmComponentProps<{
+declare type OnMouseDownListener<Data> = OptionalListener<'onMouseDown', Data>;
+declare type OnMouseUpListener<Data> = OptionalListener<'onMouseUp', Data>;
+declare type OnMouseMoveListener<Data> = OptionalListener<'onMouseMove', Data>;
+export declare type ClickableProps<OnClickData, OnMouseDownData, OnMouseMoveData, OnMouseUpData, HrefType extends string | undefined> = RbmComponentProps<{
     interactable?: boolean;
-    style?: React.CSSProperties;
     href?: HrefType;
-} & OnClickListener<OnClickData>>;
-declare const ClickableMemo: import("../../helper/withForwardRef").RefComponent<ClickableProps<unknown, string | undefined>, HTMLAnchorElement | HTMLSpanElement>;
+} & OnClickListener<OnClickData> & OnMouseDownListener<OnMouseDownData> & OnMouseMoveListener<OnMouseMoveData> & OnMouseUpListener<OnMouseUpData>>;
+declare const ClickableMemo: import("../../helper/withForwardRef").RefComponent<ClickableProps<unknown, unknown, unknown, unknown, string | undefined>, HTMLAnchorElement | HTMLSpanElement>;
 export { ClickableMemo as Clickable };

@@ -1,7 +1,7 @@
 import { CSSProperties, ReactNode } from 'react';
 import { Recursive } from '../TypeHelpers';
 
-type Child = Recursive<JSX.Element | undefined | null | Child[]>;
+type Child = Recursive<JSX.Element | undefined | null | Child[]> | false;
 export type WithNoStringProps =
     | {
           children?: Child;

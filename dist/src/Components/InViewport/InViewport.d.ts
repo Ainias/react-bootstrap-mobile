@@ -6,6 +6,6 @@ export declare type InViewportProps = RbmComponentProps<{
     root?: HTMLElement;
     rootMargin?: string;
 }>;
-declare function InViewport({ threshold, root, rootMargin, onInViewportChange, className, children }: InViewportProps): JSX.Element;
+declare function InViewport({ threshold, root, rootMargin, onInViewportChange, className, style, children, }: InViewportProps): JSX.Element;
 declare const InViewportMemo: typeof InViewport;
 export { InViewportMemo as InViewport };

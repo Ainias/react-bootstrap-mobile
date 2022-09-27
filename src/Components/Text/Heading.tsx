@@ -5,8 +5,9 @@ import { RbmComponentProps, WithStringProps } from '../RbmComponentProps';
 
 import styles from './heading.scss';
 import classNames from 'classnames';
+import { EmptyProps } from '../../helper/EmptyProps';
 
-export type HeadingProps = RbmComponentProps<Record<string, never>, WithStringProps>;
+export type HeadingProps = RbmComponentProps<EmptyProps, WithStringProps>;
 
 function Heading({ children, className, style }: HeadingProps) {
     // Variables

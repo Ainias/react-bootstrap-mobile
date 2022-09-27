@@ -31,6 +31,6 @@ export declare type TableProps<DataType extends string | number | Record<string,
     getCellProperties?: (row: Cell<Record<string, DataType>>) => React.TdHTMLAttributes<HTMLTableDataCellElement>;
     getRowProperties?: (row: Row<Record<string, DataType>>) => React.HTMLAttributes<HTMLTableRowElement>;
 }>;
-declare function Table<DataType extends string | number | Record<string, unknown>>({ columns, data, cellRenderer, sortOptions, className, getCellProperties, getRowProperties, }: TableProps<DataType>): JSX.Element;
+declare function Table<DataType extends string | number | Record<string, unknown>>({ columns, data, cellRenderer, sortOptions, className, style, getCellProperties, getRowProperties, }: TableProps<DataType>): JSX.Element;
 declare const tmp: typeof Table;
 export { tmp as Table };

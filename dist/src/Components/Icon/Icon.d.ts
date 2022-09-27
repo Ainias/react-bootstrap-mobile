@@ -8,6 +8,6 @@ export declare type IconProps = RbmComponentProps<Override<FontAwesomeIconProps,
     icon: IconSource;
     alt?: string;
 }>>;
-declare function Icon({ icon, alt, className, ...props }: IconProps): JSX.Element;
+declare function Icon({ icon, alt, className, style, ...props }: IconProps): JSX.Element;
 declare const IconMemo: typeof Icon;
 export { IconMemo as Icon };

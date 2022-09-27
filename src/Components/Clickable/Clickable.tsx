@@ -8,13 +8,32 @@ import { useCallback, MouseEvent, ForwardedRef } from 'react';
 import { withForwardRef } from '../../helper/withForwardRef';
 
 type OnClickListener<Data> = OptionalListener<'onClick', Data>;
+type OnMouseDownListener<Data> = OptionalListener<'onMouseDown', Data>;
+type OnMouseUpListener<Data> = OptionalListener<'onMouseUp', Data>;
+type OnMouseMoveListener<Data> = OptionalListener<'onMouseMove', Data>;
 
-export type ClickableProps<OnClickData, HrefType extends string | undefined> = RbmComponentProps<
-    { interactable?: boolean; href?: HrefType } & OnClickListener<OnClickData>
+export type ClickableProps<
+    OnClickData,
+    OnMouseDownData,
+    OnMouseMoveData,
+    OnMouseUpData,
+    HrefType extends string | undefined
+> = RbmComponentProps<
+    { interactable?: boolean; href?: HrefType } & OnClickListener<OnClickData> &
+        OnMouseDownListener<OnMouseDownData> &
+        OnMouseMoveListener<OnMouseMoveData> &
+        OnMouseUpListener<OnMouseUpData>
 >;
 
-function Clickable<OnClickData, HrefType extends string | undefined>(
-    { className, children, interactable = true, style, href, ...clickData }: ClickableProps<OnClickData, HrefType>,
+function Clickable<OnClickData, OnMouseDownData, OnMouseMoveData, OnMouseUpData, HrefType extends string | undefined>(
+    {
+        className,
+        children,
+        interactable = true,
+        style,
+        href,
+        ...clickData
+    }: ClickableProps<OnClickData, OnMouseDownData, OnMouseMoveData, OnMouseUpData, HrefType>,
     ref: ForwardedRef<HrefType extends string ? HTMLAnchorElement : HTMLSpanElement>
 ) {
     // Variables
@@ -24,7 +43,7 @@ function Clickable<OnClickData, HrefType extends string | undefined>(
     // Refs
 
     // Callbacks
-    const onClickInner = useListener('onClick', clickData);
+    const onClickInner = useListener<'onClick', OnClickData>('onClick', clickData);
     const realOnClick = useCallback(
         (e: MouseEvent) => {
             if (clickData.onClick) {
@@ -34,6 +53,42 @@ function Clickable<OnClickData, HrefType extends string | undefined>(
             }
         },
         [clickData.onClick, onClickInner]
+    );
+
+    const onMouseDownInner = useListener<'onMouseDown', OnMouseDownData>('onMouseDown', clickData);
+    const realOnMouseDown = useCallback(
+        (e: MouseEvent) => {
+            if (clickData.onMouseDown) {
+                e.stopPropagation();
+                e.preventDefault();
+                onMouseDownInner(e);
+            }
+        },
+        [clickData.onMouseDown, onMouseDownInner]
+    );
+
+    const onMouseMoveInner = useListener<'onMouseMove', OnMouseMoveData>('onMouseMove', clickData);
+    const realOnMouseMove = useCallback(
+        (e: MouseEvent) => {
+            if (clickData.onMouseMove) {
+                e.stopPropagation();
+                e.preventDefault();
+                onMouseMoveInner(e);
+            }
+        },
+        [clickData.onMouseMove, onMouseMoveInner]
+    );
+
+    const onMouseUpInner = useListener<'onMouseUp', OnMouseUpData>('onMouseUp', clickData);
+    const realOnMouseUp = useCallback(
+        (e: MouseEvent) => {
+            if (clickData.onMouseUp) {
+                e.stopPropagation();
+                e.preventDefault();
+                onMouseUpInner(e);
+            }
+        },
+        [clickData.onMouseUp, onMouseUpInner]
     );
 
     // Effects
@@ -47,6 +102,9 @@ function Clickable<OnClickData, HrefType extends string | undefined>(
         'aria-hidden': interactable ? undefined : true,
         className: classNames(styles.clickable, className),
         onClick: realOnClick,
+        onMouseDown: realOnMouseDown,
+        onMouseMove: realOnMouseMove,
+        onMouseUp: realOnMouseUp,
         tabIndex: interactable ? 0 : undefined,
     };
     if (typeof href === 'string') {

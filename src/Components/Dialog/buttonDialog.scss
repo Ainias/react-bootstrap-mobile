@@ -1,0 +1,115 @@
+@import "../../scss/variables";
+@import "../../scss/designMixin";
+
+.buttonDialog {
+  font-weight: 400;
+  max-width: 95%;
+  overflow: hidden;
+  min-width: 270px;
+
+  .title {
+    font-weight: 500;
+  }
+
+  .message {
+  }
+
+  .buttonContainer {
+    width: 100%;
+
+    .button {
+      padding: 0 8px;
+    }
+  }
+
+  @include design($flat) {
+    border-radius: 8px;
+    background-color: #f4f4f4;
+    padding-top: 16px;
+    color: #1f1f21;
+    font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+    text-align: center;
+
+    .title {
+      font-size: 17px;
+      padding: 0 8px;
+    }
+
+    .message {
+      font-size: 14px;
+      padding: 4px 12px 8px;
+      min-height: 36px;
+    }
+
+    .buttonContainer {
+      display: flex;
+      white-space: nowrap;
+
+      .button {
+        flex: 1;
+        display: block;
+        border-left: 1px solid #dddddd;
+        text-overflow: ellipsis;
+        letter-spacing: 0;
+        vertical-align: middle;
+        border-top: 1px solid #dddddd;
+        font-size: 16px;
+        text-align: center;
+        height: 44px;
+        line-height: 44px;
+        overflow: hidden;
+        color: #0076ff;
+
+        &:first-child {
+          border-left: none;
+        }
+      }
+    }
+  }
+
+  @include design($material) {
+    border-radius: 2px;
+    background-color: #ffffff;
+    padding: 22px 0 0;
+    box-shadow: 0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 40%);
+    color: #31313a;
+    font-family: 'Roboto', 'Noto', sans-serif;
+    text-align: left;
+
+    .title {
+      font-size: 20px;
+      padding: 0 24px;
+    }
+
+    .message {
+      font-size: 16px;
+      line-height: 20px;
+      padding: 0 24px;
+      margin: 24px 0 10px 0;
+      min-height: 0;
+      color: rgba(49, 49, 58, .85);
+    }
+
+    .buttonContainer {
+      display: block;
+      padding: 0;
+      height: 52px;
+      line-height: 1;
+
+      .button {
+        text-transform: uppercase;
+        display: inline-block;
+        width: auto;
+        float: right;
+        border-radius: 2px;
+        font-size: 14px;
+        font-weight: 500;
+        height: 36px;
+        line-height: 36px;
+        margin: 8px 8px 8px 0;
+        min-width: 50px;
+        color: #37474f;
+      }
+    }
+  }
+}

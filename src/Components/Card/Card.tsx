@@ -4,9 +4,10 @@ import { RbmComponentProps } from '../RbmComponentProps';
 import styles from './card.scss';
 import { withMemo } from '../../helper/withMemo';
 import classNames from 'classnames';
+import { ReactElement } from 'react';
 
 export type CardProps = RbmComponentProps<{
-    title?: string;
+    title?: string | ReactElement;
     fullHeight?: boolean;
     noPaddingHeight?: boolean;
     noPaddingWidth?: boolean;

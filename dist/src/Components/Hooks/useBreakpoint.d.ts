@@ -1,3 +1,4 @@
+export declare const BreakpointNames: string[];
 export declare enum Breakpoints {
     XS = 0,
     SM = 576,

@@ -12,6 +12,7 @@ export function memoComparator(prevProps: Readonly<any>, nextProps: Readonly<any
         if (key === 'style') {
             return JsonHelper.deepEqual(prevProps[key], nextProps[key]);
         }
+
         return prevProps[key] === nextProps[key];
     });
 }

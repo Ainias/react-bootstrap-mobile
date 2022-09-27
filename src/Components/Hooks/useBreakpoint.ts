@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+export const BreakpointNames = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
+
 export enum Breakpoints {
     XS = 0,
     SM = 576,

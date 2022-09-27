@@ -5,8 +5,9 @@ import { Container } from '../Layout/Container';
 import styles from './toast.scss';
 import classNames from 'classnames';
 import { withMemo } from '../../helper/withMemo';
+import { EmptyProps } from '../../helper/EmptyProps';
 
-export type ToastContainerProps = RbmComponentProps<Record<string, never>>;
+export type ToastContainerProps = RbmComponentProps<EmptyProps>;
 
 function ToastContainer({ className, children, style }: ToastContainerProps) {
     // Variables

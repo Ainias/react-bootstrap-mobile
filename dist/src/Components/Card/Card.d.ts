@@ -1,7 +1,7 @@
-/// <reference types="react" />
 import { RbmComponentProps } from '../RbmComponentProps';
+import { ReactElement } from 'react';
 export declare type CardProps = RbmComponentProps<{
-    title?: string;
+    title?: string | ReactElement;
     fullHeight?: boolean;
     noPaddingHeight?: boolean;
     noPaddingWidth?: boolean;

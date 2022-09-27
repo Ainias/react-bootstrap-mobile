@@ -12,6 +12,6 @@ export declare type ImageInputProps<OnChangeData> = RbmComponentProps<Override<I
     label?: string;
     onChangeImage?: (image: ImageType, imageData: File) => void;
 } & OptionalListener<'onChange', OnChangeData>>>;
-declare function ImageInput<OnChangeData>({ className, value, defaultValue, onChangeImage, label, ...otherProps }: ImageInputProps<OnChangeData>): JSX.Element;
+declare function ImageInput<OnChangeData>({ className, style, value, defaultValue, onChangeImage, label, ...otherProps }: ImageInputProps<OnChangeData>): JSX.Element;
 declare const ImageInputMemo: typeof ImageInput;
 export { ImageInputMemo as ImageInput };

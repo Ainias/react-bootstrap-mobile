@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { withMemo } from '../../../helper/withMemo';
 import { RbmComponentProps } from '../../RbmComponentProps';
+import { EmptyProps } from '../../../helper/EmptyProps';
 
-export type ListItemProps = RbmComponentProps<Record<string, never>>;
+export type ListItemProps = RbmComponentProps<EmptyProps>;
 
 function ListItem({ className, children, style }: ListItemProps) {
     // Variables
