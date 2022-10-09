@@ -1,4 +1,3 @@
-/* eslint-disable no-bitwise */
 import * as React from 'react';
 import { useCallback, useRef, useState, MouseEvent } from 'react';
 import { Color, ColorResult, SketchPicker } from 'react-color';
@@ -6,6 +5,7 @@ import { OptionalListener, useListener } from '../../Hooks/useListener';
 import { withMemo } from '../../../helper/withMemo';
 
 import styles from './colorInput.scss';
+import { useSharedSelectedColor } from './sharedSelectedColor';
 
 export type ColorInputProps<OnChangeData> = {
     defaultValue?: string;
@@ -13,8 +13,11 @@ export type ColorInputProps<OnChangeData> = {
     label?: string;
     onChangeColor?: (newColor: string) => void;
     onOpen?: (currentColor: string) => void;
+    onChangeColorComplete?: (newColor: string) => void;
     onClose?: (newColor: string) => void;
     disableAlpha?: boolean;
+    presetColors?: string[];
+    sharedColorKey?: string;
 } & OptionalListener<'onChange', OnChangeData>;
 
 function convertToHex(color: { r: number; g: number; b: number; a?: number }, disableAlpha?: boolean) {
@@ -34,9 +37,12 @@ function ColorInput<OnChangeData>({
     value,
     label,
     onChangeColor,
+    onChangeColorComplete,
     onOpen,
     onClose,
     disableAlpha,
+    presetColors,
+    sharedColorKey,
     ...otherProps
 }: ColorInputProps<OnChangeData>) {
     // Variables
@@ -46,10 +52,13 @@ function ColorInput<OnChangeData>({
     const containerRef = useRef<HTMLDivElement>(null);
 
     // States
-    const [color, setColor] = useState<string>(defaultValue ?? '#000000FF');
+    const [color, setColor] = useState<string>(value ?? defaultValue ?? '#000000FF');
     const [isOpen, setIsOpen] = useState(false);
     const [position, setPosition] = useState({ x: 0, y: 0 });
 
+    const { colors, addColor } = useSharedSelectedColor(sharedColorKey);
+
+    const colVal: Color = value ?? color;
     // Selectors
 
     // Callbacks
@@ -65,24 +74,36 @@ function ColorInput<OnChangeData>({
         },
         [disableAlpha, onChangeColor, onChangeWithData]
     );
+    const onChangeComplete = useCallback(
+        (newColor: ColorResult) => {
+            const hexColor = convertToHex(newColor.rgb, disableAlpha);
+            setColor(hexColor);
+            if (onChangeColorComplete) {
+                onChangeColorComplete(hexColor);
+            }
+        },
+        [disableAlpha, onChangeColorComplete]
+    );
 
     const onContainerClick = useCallback(
         (e: MouseEvent) => {
             if (e.target === containerRef?.current) {
                 setIsOpen(false);
-                onClose?.(color);
+                console.log('onContainerClick', colVal);
+                addColor(colVal);
+                onClose?.(colVal);
             }
         },
-        [color, onClose]
+        [addColor, colVal, onClose]
     );
 
     const openElement = useCallback(
         (e: MouseEvent) => {
             setIsOpen(true);
             setPosition({ x: e.clientX, y: e.clientY });
-            onOpen?.(color);
+            onOpen?.(colVal);
         },
-        [color, onOpen]
+        [colVal, onOpen]
     );
 
     // Effects
@@ -90,14 +111,18 @@ function ColorInput<OnChangeData>({
     // Other
 
     // Render Functions
-    const colVal: Color = value ?? color;
-
     return (
         <span className={styles.colorInput}>
             {isOpen ? (
                 <div onClick={onContainerClick} className={styles.modalContainer} ref={containerRef}>
                     <div className={styles.modal} style={{ top: position.y, left: position.x }}>
-                        <SketchPicker color={colVal} onChange={onChange} disableAlpha={disableAlpha} />
+                        <SketchPicker
+                            color={colVal}
+                            onChange={onChange}
+                            onChangeComplete={onChangeComplete}
+                            disableAlpha={disableAlpha}
+                            presetColors={presetColors ?? colors}
+                        />
                     </div>
                 </div>
             ) : null}

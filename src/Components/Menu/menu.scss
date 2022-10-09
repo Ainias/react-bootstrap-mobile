@@ -1,0 +1,22 @@
+$borderColor: #cecece;
+
+.menu {
+  position: fixed;
+  background: #ffffff;
+  border: 1px solid $borderColor;
+
+  .item {
+    display: block;
+    border-top: 1px solid $borderColor;
+    padding: 8px;
+    margin: 0 4px;
+
+    &:hover {
+      background-color: #f5f5f5;
+    }
+
+    &:first-child {
+      border-top: none;
+    }
+  }
+}

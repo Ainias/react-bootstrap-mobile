@@ -42,6 +42,7 @@ function ButtonDialog({ title, message, buttons, style, className }: ButtonDialo
             </Block>
             <Block className={styles.buttonContainer}>
                 {buttons.map((b, i) => (
+                    // eslint-disable-next-line react/no-array-index-key
                     <Clickable onClick={b.callback} className={styles.button} key={i + b.text}>
                         <Text>{b.text}</Text>
                     </Clickable>

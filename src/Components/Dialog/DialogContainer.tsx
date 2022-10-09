@@ -28,7 +28,6 @@ function DialogContainer({ children }: DialogContainerProps) {
 
     // Callbacks
     const showDialog: ShowDialog = useCallback((component, props) => {
-        console.log('LOG-d showDialog', component, props);
         const promise = new PromiseWithHandlers<any>();
         setLastId((oldId) => {
             const id = oldId + 1;

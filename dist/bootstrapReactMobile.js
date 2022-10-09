@@ -285,6 +285,24 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
+/***/ 8721:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// Imports
+var ___CSS_LOADER_API_NO_SOURCEMAP_IMPORT___ = __webpack_require__(8081);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3645);
+var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(___CSS_LOADER_API_NO_SOURCEMAP_IMPORT___);
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".dialogBackground__GkFEH{background-color:#fff;padding:.3rem}", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {
+	"dialogBackground": "dialogBackground__GkFEH"
+};
+module.exports = ___CSS_LOADER_EXPORT___;
+
+
+/***/ }),
+
 /***/ 5172:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
@@ -332,7 +350,7 @@ var ___CSS_LOADER_API_NO_SOURCEMAP_IMPORT___ = __webpack_require__(8081);
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3645);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(___CSS_LOADER_API_NO_SOURCEMAP_IMPORT___);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".colorInput__7LDDj{margin-left:.5rem;margin-right:.5rem}.colorInput__7LDDj .preview__U27kg{width:1rem;height:1rem;display:inline-block;border:1px solid #000}.colorInput__7LDDj .modalContainer__DJAC0{z-index:9999;position:fixed;top:0;left:0;right:0;bottom:0;width:100vw;height:100vh;overflow:auto}.colorInput__7LDDj .modalContainer__DJAC0 .modal__HgPzb{position:absolute;background-color:#fff}.colorInput__7LDDj .label__kakvy{margin-right:.2rem}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".colorInput__7LDDj{margin-left:.5rem;margin-right:.5rem;display:flex}.colorInput__7LDDj .preview__U27kg{margin-left:.4rem;width:1rem;height:1rem;display:inline-block;border:1px solid #000}.colorInput__7LDDj .modalContainer__DJAC0{z-index:9999;position:fixed;top:0;left:0;right:0;bottom:0;width:100vw;height:100vh;overflow:auto}.colorInput__7LDDj .modalContainer__DJAC0 .modal__HgPzb{position:absolute;background-color:#fff}.colorInput__7LDDj .label__kakvy{flex:1;margin-right:.2rem}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"colorInput": "colorInput__7LDDj",
@@ -875,6 +893,25 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
+/***/ 1563:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// Imports
+var ___CSS_LOADER_API_NO_SOURCEMAP_IMPORT___ = __webpack_require__(8081);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3645);
+var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(___CSS_LOADER_API_NO_SOURCEMAP_IMPORT___);
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".menu__fWu0y{position:fixed;background:#fff;border:1px solid #cecece}.menu__fWu0y .item__CB8DA{display:block;border-top:1px solid #cecece;padding:8px;margin:0 4px}.menu__fWu0y .item__CB8DA:hover{background-color:#f5f5f5}.menu__fWu0y .item__CB8DA:first-child{border-top:none}", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {
+	"menu": "menu__fWu0y",
+	"item": "item__CB8DA"
+};
+module.exports = ___CSS_LOADER_EXPORT___;
+
+
+/***/ }),
+
 /***/ 9057:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
@@ -1034,23 +1071,24 @@ var ___CSS_LOADER_API_NO_SOURCEMAP_IMPORT___ = __webpack_require__(8081);
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3645);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(___CSS_LOADER_API_NO_SOURCEMAP_IMPORT___);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".windowContainer__PYrSp{background:#fff;position:fixed;z-index:100;border:1px solid #cecece;border-radius:4px}.windowContainer__PYrSp.active__c7cGB{z-index:101}.windowContainer__PYrSp.moving__qCxMB{transition:none;cursor:grabbing}.windowContainer__PYrSp.moving__qCxMB .title__JPZ7n{cursor:grabbing}.windowContainer__PYrSp .window__kW3Fm{height:100%;cursor:default}.windowContainer__PYrSp .window__kW3Fm>div{margin-top:0 !important}.windowContainer__PYrSp .overflowContainer__zhR4p{overflow:auto}.windowContainer__PYrSp .title__JPZ7n{padding:8px;white-space:nowrap;width:100%;border-bottom:1px solid #cecece;cursor:grab}.windowContainer__PYrSp .title__JPZ7n .titleText__l_tOO{overflow:hidden;text-overflow:ellipsis}.windowContainer__PYrSp .content__EZ1kx{padding:8px}.windowContainer__PYrSp.minimized__evdbX{bottom:initial !important;right:initial !important}.windowContainer__PYrSp.minimized__evdbX .title__JPZ7n{border-bottom:none}.windowContainer__PYrSp.minimized__evdbX .content__EZ1kx{display:none}.windowContainer__PYrSp.minimized__evdbX .resize__FaBEs{pointer-events:none;cursor:pointer}.windowContainer__PYrSp.maximized__V6Nc0{left:0 !important;top:0 !important;bottom:0 !important;right:0 !important}.windowContainer__PYrSp.maximized__V6Nc0 .resize__FaBEs{pointer-events:none;cursor:pointer}.windowContainer__PYrSp.popup__bvkZz{position:relative;width:100%;height:100%;left:0 !important;top:0 !important;bottom:0 !important;right:0 !important;border:none}.windowContainer__PYrSp.popup__bvkZz .titleButtons__yuauh{display:none}.windowContainer__PYrSp.popup__bvkZz .resize__FaBEs{pointer-events:none;cursor:pointer}.windowContainer__PYrSp .titleButton__Tl5WS{padding-left:8px}.windowContainer__PYrSp .stretchItems__zowCs{align-items:stretch}.windowContainer__PYrSp .fullWidth__nNHQM{width:100%}.windowContainer__PYrSp .fullHeight__KL3y7{height:100%}.windowContainer__PYrSp .resize__FaBEs{user-select:none;display:inline-block}.windowContainer__PYrSp .resize__FaBEs.edge__h90jR{width:4px;height:4px}.windowContainer__PYrSp .resize__FaBEs.edge__h90jR.nw__d_1Df{cursor:nw-resize}.windowContainer__PYrSp .resize__FaBEs.edge__h90jR.ne__XxoaU{cursor:ne-resize}.windowContainer__PYrSp .resize__FaBEs.edge__h90jR.sw__c3GWP{cursor:sw-resize}.windowContainer__PYrSp .resize__FaBEs.edge__h90jR.se___JqOK{cursor:se-resize}.windowContainer__PYrSp .resize__FaBEs.y__MNIni{flex:1;cursor:ns-resize;height:4px}.windowContainer__PYrSp .resize__FaBEs.x__N3Z4p{cursor:ew-resize;width:4px}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".windowContainer__PYrSp{background:#fff;position:fixed;z-index:100;border:1px solid #cecece;border-radius:4px}.windowContainer__PYrSp.active__c7cGB{z-index:101}.windowContainer__PYrSp.moving__qCxMB{transition:none;cursor:grabbing}.windowContainer__PYrSp.moving__qCxMB .title__JPZ7n{cursor:grabbing}.windowContainer__PYrSp .overflowHidden__ELfQK{overflow:hidden}.windowContainer__PYrSp .window__kW3Fm{height:100%;cursor:default;display:flex;flex-direction:column}.windowContainer__PYrSp .window__kW3Fm>div{margin-top:0 !important}.windowContainer__PYrSp .title__JPZ7n{padding:8px;white-space:nowrap;width:100%;border-bottom:1px solid #cecece;cursor:grab}.windowContainer__PYrSp .title__JPZ7n .titleText__l_tOO{overflow:hidden;text-overflow:ellipsis}.windowContainer__PYrSp .overflowXAuto__X8HjX{overflow-x:auto}.windowContainer__PYrSp .content__EZ1kx{padding:8px;overflow:auto}.windowContainer__PYrSp .content__EZ1kx.fillHeight__vsloo{flex:1}.windowContainer__PYrSp.minimized__evdbX{bottom:initial !important;right:initial !important}.windowContainer__PYrSp.minimized__evdbX .title__JPZ7n{border-bottom:none}.windowContainer__PYrSp.minimized__evdbX .content__EZ1kx{display:none}.windowContainer__PYrSp.minimized__evdbX .resize__FaBEs{pointer-events:none;cursor:pointer}.windowContainer__PYrSp.maximized__V6Nc0{left:0 !important;top:0 !important;bottom:0 !important;right:0 !important}.windowContainer__PYrSp.maximized__V6Nc0 .resize__FaBEs{pointer-events:none;cursor:pointer}.windowContainer__PYrSp.popup__bvkZz{position:relative;width:100%;height:100%;left:0 !important;top:0 !important;bottom:0 !important;right:0 !important;border:none}.windowContainer__PYrSp.popup__bvkZz .title__JPZ7n{cursor:default}.windowContainer__PYrSp.popup__bvkZz .titleButtons__yuauh{display:none}.windowContainer__PYrSp.popup__bvkZz .resize__FaBEs{pointer-events:none;cursor:pointer}.windowContainer__PYrSp .stretchItems__zowCs{align-items:stretch}.windowContainer__PYrSp .fullWidth__nNHQM{width:100%}.windowContainer__PYrSp .fullHeight__KL3y7{height:100%}.windowContainer__PYrSp .resize__FaBEs{user-select:none;display:inline-block}.windowContainer__PYrSp .resize__FaBEs.edge__h90jR{width:4px;height:4px}.windowContainer__PYrSp .resize__FaBEs.edge__h90jR.nw__d_1Df{cursor:nw-resize}.windowContainer__PYrSp .resize__FaBEs.edge__h90jR.ne__XxoaU{cursor:ne-resize}.windowContainer__PYrSp .resize__FaBEs.edge__h90jR.sw__c3GWP{cursor:sw-resize}.windowContainer__PYrSp .resize__FaBEs.edge__h90jR.se___JqOK{cursor:se-resize}.windowContainer__PYrSp .resize__FaBEs.y__MNIni{flex:1;cursor:ns-resize;height:4px}.windowContainer__PYrSp .resize__FaBEs.x__N3Z4p{cursor:ew-resize;width:4px}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"windowContainer": "windowContainer__PYrSp",
 	"active": "active__c7cGB",
 	"moving": "moving__qCxMB",
 	"title": "title__JPZ7n",
+	"overflowHidden": "overflowHidden__ELfQK",
 	"window": "window__kW3Fm",
-	"overflowContainer": "overflowContainer__zhR4p",
 	"titleText": "titleText__l_tOO",
+	"overflowXAuto": "overflowXAuto__X8HjX",
 	"content": "content__EZ1kx",
+	"fillHeight": "fillHeight__vsloo",
 	"minimized": "minimized__evdbX",
 	"resize": "resize__FaBEs",
 	"maximized": "maximized__V6Nc0",
 	"popup": "popup__bvkZz",
 	"titleButtons": "titleButtons__yuauh",
-	"titleButton": "titleButton__Tl5WS",
 	"stretchItems": "stretchItems__zowCs",
 	"fullWidth": "fullWidth__nNHQM",
 	"fullHeight": "fullHeight__KL3y7",
@@ -1061,6 +1099,24 @@ ___CSS_LOADER_EXPORT___.locals = {
 	"se": "se___JqOK",
 	"y": "y__MNIni",
 	"x": "x__N3Z4p"
+};
+module.exports = ___CSS_LOADER_EXPORT___;
+
+
+/***/ }),
+
+/***/ 8203:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// Imports
+var ___CSS_LOADER_API_NO_SOURCEMAP_IMPORT___ = __webpack_require__(8081);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3645);
+var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(___CSS_LOADER_API_NO_SOURCEMAP_IMPORT___);
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".windowButton__Fu4Fr{padding-left:8px}", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {
+	"windowButton": "windowButton__Fu4Fr"
 };
 module.exports = ___CSS_LOADER_EXPORT___;
 
@@ -1429,6 +1485,28 @@ module.exports = StyleContext;
 
 /***/ }),
 
+/***/ 1393:
+/***/ ((module, exports, __webpack_require__) => {
+
+
+    var refs = 0;
+    var css = __webpack_require__(8721);
+    var insertCss = __webpack_require__(4718);
+    var content = typeof css === 'string' ? [[module.id, css, '']] : css;
+
+    exports = module.exports = css.locals || {};
+    exports._getContent = function() { return content; };
+    exports._getCss = function() { return '' + css; };
+    exports._insertCss = function(options) { return insertCss(content, options) };
+
+    // Hot Module Replacement
+    // https://webpack.github.io/docs/hot-module-replacement
+    // Only activated in browser context
+    if (false) { var removeCss; }
+  
+
+/***/ }),
+
 /***/ 9445:
 /***/ ((module, exports, __webpack_require__) => {
 
@@ -1781,6 +1859,28 @@ module.exports = StyleContext;
 
 /***/ }),
 
+/***/ 1266:
+/***/ ((module, exports, __webpack_require__) => {
+
+
+    var refs = 0;
+    var css = __webpack_require__(1563);
+    var insertCss = __webpack_require__(4718);
+    var content = typeof css === 'string' ? [[module.id, css, '']] : css;
+
+    exports = module.exports = css.locals || {};
+    exports._getContent = function() { return content; };
+    exports._getCss = function() { return '' + css; };
+    exports._insertCss = function(options) { return insertCss(content, options) };
+
+    // Hot Module Replacement
+    // https://webpack.github.io/docs/hot-module-replacement
+    // Only activated in browser context
+    if (false) { var removeCss; }
+  
+
+/***/ }),
+
 /***/ 7629:
 /***/ ((module, exports, __webpack_require__) => {
 
@@ -1919,6 +2019,28 @@ module.exports = StyleContext;
 
     var refs = 0;
     var css = __webpack_require__(871);
+    var insertCss = __webpack_require__(4718);
+    var content = typeof css === 'string' ? [[module.id, css, '']] : css;
+
+    exports = module.exports = css.locals || {};
+    exports._getContent = function() { return content; };
+    exports._getCss = function() { return '' + css; };
+    exports._insertCss = function(options) { return insertCss(content, options) };
+
+    // Hot Module Replacement
+    // https://webpack.github.io/docs/hot-module-replacement
+    // Only activated in browser context
+    if (false) { var removeCss; }
+  
+
+/***/ }),
+
+/***/ 1:
+/***/ ((module, exports, __webpack_require__) => {
+
+
+    var refs = 0;
+    var css = __webpack_require__(8203);
     var insertCss = __webpack_require__(4718);
     var content = typeof css === 'string' ? [[module.id, css, '']] : css;
 
@@ -10486,6 +10608,7 @@ __webpack_require__.r(__webpack_exports__);
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
   "ActionSheet": () => (/* reexport */ ActionSheetMemo),
+  "AlertDialog": () => (/* reexport */ AlertDialogMemo),
   "Block": () => (/* reexport */ BlockMemo),
   "BreakpointNames": () => (/* reexport */ BreakpointNames),
   "Breakpoints": () => (/* reexport */ Breakpoints),
@@ -10500,6 +10623,7 @@ __webpack_require__.d(__webpack_exports__, {
   "ConfirmDialog": () => (/* reexport */ ConfirmDialogMemo),
   "Container": () => (/* reexport */ ContainerMemo),
   "Dialog": () => (/* reexport */ DialogMemo),
+  "DialogBackground": () => (/* reexport */ DialogBackgroundMemo),
   "DialogContainer": () => (/* reexport */ DialogContainerMemo),
   "DialogProvider": () => (/* reexport */ DialogProvider),
   "Flex": () => (/* reexport */ Flex_tmp),
@@ -10520,6 +10644,7 @@ __webpack_require__.d(__webpack_exports__, {
   "ListItem": () => (/* reexport */ ListItemMemo),
   "LoadingArea": () => (/* reexport */ LoadingAreaMemo),
   "LoadingCircle": () => (/* reexport */ LoadingCircleMemo),
+  "Menu": () => (/* reexport */ MenuMemo),
   "MoreButton": () => (/* reexport */ MoreButtonMemo),
   "RESTRICT_CHILDREN": () => (/* reexport */ RESTRICT_CHILDREN),
   "Select": () => (/* reexport */ SelectMemo),
@@ -10540,9 +10665,17 @@ __webpack_require__.d(__webpack_exports__, {
   "TopBarButton": () => (/* reexport */ TopBarButtonMemo),
   "View": () => (/* reexport */ ViewMemo),
   "ViewWithoutListeners": () => (/* reexport */ ViewWithoutListenersMemo),
+  "WINDOW_MIN_HEIGHT": () => (/* reexport */ WINDOW_MIN_HEIGHT),
+  "WINDOW_MIN_WIDTH": () => (/* reexport */ WINDOW_MIN_WIDTH),
   "Window": () => (/* reexport */ WindowMemo),
+  "WindowButton": () => (/* reexport */ WindowButtonMemo),
   "WrongChildError": () => (/* reexport */ WrongChildError),
+  "changeDimension": () => (/* reexport */ changeDimension),
+  "changeDimensionHeight": () => (/* reexport */ changeDimensionHeight),
+  "changeDimensionWidth": () => (/* reexport */ changeDimensionWidth),
+  "checkWindowDimension": () => (/* reexport */ checkWindowDimension),
   "memoComparator": () => (/* reexport */ memoComparator),
+  "useAlertDialog": () => (/* reexport */ useAlertDialog),
   "useBreakpoint": () => (/* reexport */ useBreakpoint),
   "useBreakpointSelect": () => (/* reexport */ useBreakpointSelect),
   "useConfirmDialog": () => (/* reexport */ useConfirmDialog),
@@ -10555,10 +10688,13 @@ __webpack_require__.d(__webpack_exports__, {
   "useKeyUpListener": () => (/* reexport */ useKeyUpListener),
   "useListener": () => (/* reexport */ useListener),
   "useListenerWithExtractedProps": () => (/* reexport */ useListenerWithExtractedProps),
+  "useOnMount": () => (/* reexport */ useOnMount),
+  "useSharedSelectedColor": () => (/* reexport */ useSharedSelectedColor),
   "useSpoilerGroup": () => (/* reexport */ useSpoilerGroup),
   "useWindows": () => (/* reexport */ useWindows),
   "withForwardRef": () => (/* reexport */ withForwardRef),
   "withMemo": () => (/* reexport */ withMemo),
+  "withRenderBrowserOnly": () => (/* reexport */ withRenderBrowserOnly),
   "withRestrictedChildren": () => (/* reexport */ withRestrictedChildren)
 });
 
@@ -10715,10 +10851,10 @@ function memoComparator(prevProps, nextProps) {
 
 
 
-function withForwardRef(component, styles) {
+function withForwardRef(component, styles, defaultAllowChildren) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  const forwardedComp = /*#__PURE__*/external_react_default().forwardRef(withRestrictedChildren( /*#__PURE__*/external_react_default().forwardRef(component)));
+  const forwardedComp = /*#__PURE__*/external_react_default().forwardRef(withRestrictedChildren( /*#__PURE__*/external_react_default().forwardRef(component), defaultAllowChildren));
   const c = styles ? withStyles_default()(styles)(forwardedComp) : forwardedComp;
   const memoizedComponent = /*#__PURE__*/external_react_default().memo(c, memoComparator);
   memoizedComponent.displayName = `Memoized-Forwarded(${component.displayName || component.name})`;
@@ -10903,9 +11039,10 @@ function Icon(_a) {
     icon,
     alt,
     className,
-    style
+    style,
+    title
   } = _a,
-      props = Icon_rest(_a, ["icon", "alt", "className", "style"]); // States
+      props = Icon_rest(_a, ["icon", "alt", "className", "style", "title"]); // States
   // Refs
   // Callbacks
   // Effects
@@ -10922,14 +11059,16 @@ function Icon(_a) {
       src: icon,
       alt: alt,
       className: className,
-      style: style
+      style: style,
+      title: title
     });
   }
 
   return /*#__PURE__*/external_react_.createElement(react_fontawesome_namespaceObject.FontAwesomeIcon, Icon_extends({}, props, {
     icon: icon,
     className: className,
-    style: style
+    style: style,
+    title: title
   }));
 }
 
@@ -11452,7 +11591,10 @@ function ButtonDialog({
     className: (buttonDialog_default()).message
   }, /*#__PURE__*/external_react_.createElement(tmp, null, message)), /*#__PURE__*/external_react_.createElement(BlockMemo, {
     className: (buttonDialog_default()).buttonContainer
-  }, buttons.map((b, i) => /*#__PURE__*/external_react_.createElement(ClickableMemo, {
+  }, buttons.map((b, i) =>
+  /*#__PURE__*/
+  // eslint-disable-next-line react/no-array-index-key
+  external_react_.createElement(ClickableMemo, {
     onClick: b.callback,
     className: (buttonDialog_default()).button,
     key: i + b.text
@@ -11461,6 +11603,40 @@ function ButtonDialog({
 
 
 const ButtonDialogMemo = withMemo(ButtonDialog, (buttonDialog_default()));
+
+;// CONCATENATED MODULE: ./src/Components/Dialog/AlertDialog.tsx
+
+
+
+
+
+function AlertDialog({
+  title,
+  message,
+  close,
+  confirmText = 'OK'
+}) {
+  // Variables
+  const buttons = (0,external_react_.useMemo)(() => [{
+    text: confirmText,
+    callback: () => close()
+  }], [close, confirmText]); // Refs
+  // States
+  // Selectors
+  // Callbacks
+  // Effects
+  // Other
+  // Render Functions
+
+  return /*#__PURE__*/external_react_.createElement(ButtonDialogMemo, {
+    message: message,
+    buttons: buttons,
+    title: title
+  });
+} // Need AlertDialogMemo for autocompletion of phpstorm
+
+
+const AlertDialogMemo = withMemo(AlertDialog);
 
 ;// CONCATENATED MODULE: ./src/Components/Dialog/ConfirmDialog.tsx
 
@@ -11570,6 +11746,39 @@ function Dialog({
 
 const DialogMemo = withMemo(Dialog, (dialog_default()));
 
+// EXTERNAL MODULE: ./src/Components/Dialog/dialogBackground.scss
+var dialogBackground = __webpack_require__(1393);
+var dialogBackground_default = /*#__PURE__*/__webpack_require__.n(dialogBackground);
+;// CONCATENATED MODULE: ./src/Components/Dialog/DialogBackground.tsx
+
+
+
+
+
+
+function DialogBackground({
+  children,
+  className,
+  style
+}) {
+  // Variables
+  // Refs
+  // States
+  // Selectors
+  // Callbacks
+  // Effects
+  // Other
+  // Render Functions
+  return /*#__PURE__*/external_react_.createElement(BlockMemo, {
+    __allowChildren: "all",
+    className: classnames_default()((dialogBackground_default()).dialogBackground, className),
+    style: style
+  }, children);
+} // Need DialogBackgroundMemo for autocompletion of phpstorm
+
+
+const DialogBackgroundMemo = withMemo(DialogBackground, (dialogBackground_default()));
+
 ;// CONCATENATED MODULE: ./src/Components/Dialog/DialogContext.ts
 
 const DialogContext = /*#__PURE__*/external_react_default().createContext(() => Promise.reject());
@@ -11598,7 +11807,6 @@ function DialogContainer({
   // Callbacks
 
   const showDialog = (0,external_react_.useCallback)((component, props) => {
-    console.log('LOG-d showDialog', component, props);
     const promise = new shared.PromiseWithHandlers();
     setLastId(oldId => {
       const id = oldId + 1;
@@ -11642,6 +11850,19 @@ function DialogContainer({
 
 const DialogContainerMemo = withMemo(DialogContainer);
 
+;// CONCATENATED MODULE: ./src/Components/Dialog/useAlertDialog.ts
+
+
+
+function useAlertDialog() {
+  const showDialog = useDialog();
+  return (0,external_react_.useCallback)((message, title) => {
+    return showDialog(AlertDialogMemo, {
+      message,
+      title
+    });
+  }, [showDialog]);
+}
 ;// CONCATENATED MODULE: ./src/Components/Dialog/useConfirmDialog.ts
 
 
@@ -21665,6 +21886,44 @@ Google.defaultProps = {
 // EXTERNAL MODULE: ./src/Components/FormElements/ColorInput/colorInput.scss
 var colorInput = __webpack_require__(5494);
 var colorInput_default = /*#__PURE__*/__webpack_require__.n(colorInput);
+;// CONCATENATED MODULE: ./src/Components/FormElements/ColorInput/sharedSelectedColor.ts
+
+
+const sharedSelectedColor = {};
+function useSharedSelectedColor(key, numberSavedColors = 15) {
+  var _a;
+
+  const [, setVersion] = (0,external_react_.useState)(1);
+  const innerKey = (0,external_react_.useRef)(shared.Random.getStringRandom(12));
+  const realKey = key !== null && key !== void 0 ? key : innerKey.current;
+
+  if (!sharedSelectedColor[realKey]) {
+    sharedSelectedColor[realKey] = {
+      colors: [],
+      updateFunctions: []
+    };
+  }
+
+  const update = (0,external_react_.useCallback)(() => setVersion(old => old + 1), []);
+  (0,external_react_.useMemo)(() => {
+    sharedSelectedColor[realKey].updateFunctions.push(update);
+  }, [realKey, update]);
+  const addColor = (0,external_react_.useCallback)(newColor => {
+    sharedSelectedColor[realKey].colors = sharedSelectedColor[realKey].colors.filter(color => color !== newColor);
+    sharedSelectedColor[realKey].colors.unshift(newColor);
+
+    if (sharedSelectedColor[realKey].colors.length > numberSavedColors) {
+      sharedSelectedColor[realKey].colors.splice(numberSavedColors, 1);
+    } // triggers rerender
+
+
+    sharedSelectedColor[realKey].updateFunctions.forEach(u => u());
+  }, [numberSavedColors, realKey]);
+  return {
+    colors: (_a = sharedSelectedColor[realKey]) === null || _a === void 0 ? void 0 : _a.colors,
+    addColor
+  };
+}
 ;// CONCATENATED MODULE: ./src/Components/FormElements/ColorInput/ColorInput.tsx
 var ColorInput_rest = undefined && undefined.__rest || function (s, e) {
   var t = {};
@@ -21676,7 +21935,6 @@ var ColorInput_rest = undefined && undefined.__rest || function (s, e) {
   }
   return t;
 };
-/* eslint-disable no-bitwise */
 
 
 
@@ -21699,26 +21957,36 @@ function convertToHex(color, disableAlpha) {
 function ColorInput(_a) {
   // Variables
   // useStyles(styles);
+  var _b;
+
   var {
     defaultValue,
     value,
     label,
     onChangeColor,
+    onChangeColorComplete,
     onOpen,
     onClose,
-    disableAlpha
+    disableAlpha,
+    presetColors,
+    sharedColorKey
   } = _a,
-      otherProps = ColorInput_rest(_a, ["defaultValue", "value", "label", "onChangeColor", "onOpen", "onClose", "disableAlpha"]); // Refs
+      otherProps = ColorInput_rest(_a, ["defaultValue", "value", "label", "onChangeColor", "onChangeColorComplete", "onOpen", "onClose", "disableAlpha", "presetColors", "sharedColorKey"]); // Refs
 
 
   const containerRef = (0,external_react_.useRef)(null); // States
 
-  const [color, setColor] = (0,external_react_.useState)(defaultValue !== null && defaultValue !== void 0 ? defaultValue : '#000000FF');
+  const [color, setColor] = (0,external_react_.useState)((_b = value !== null && value !== void 0 ? value : defaultValue) !== null && _b !== void 0 ? _b : '#000000FF');
   const [isOpen, setIsOpen] = (0,external_react_.useState)(false);
   const [position, setPosition] = (0,external_react_.useState)({
     x: 0,
     y: 0
-  }); // Selectors
+  });
+  const {
+    colors,
+    addColor
+  } = useSharedSelectedColor(sharedColorKey);
+  const colVal = value !== null && value !== void 0 ? value : color; // Selectors
   // Callbacks
 
   const onChangeWithData = useListener('onChange', otherProps);
@@ -21732,24 +22000,33 @@ function ColorInput(_a) {
 
     onChangeWithData(e);
   }, [disableAlpha, onChangeColor, onChangeWithData]);
+  const onChangeComplete = (0,external_react_.useCallback)(newColor => {
+    const hexColor = convertToHex(newColor.rgb, disableAlpha);
+    setColor(hexColor);
+
+    if (onChangeColorComplete) {
+      onChangeColorComplete(hexColor);
+    }
+  }, [disableAlpha, onChangeColorComplete]);
   const onContainerClick = (0,external_react_.useCallback)(e => {
     if (e.target === (containerRef === null || containerRef === void 0 ? void 0 : containerRef.current)) {
       setIsOpen(false);
-      onClose === null || onClose === void 0 ? void 0 : onClose(color);
+      console.log('onContainerClick', colVal);
+      addColor(colVal);
+      onClose === null || onClose === void 0 ? void 0 : onClose(colVal);
     }
-  }, [color, onClose]);
+  }, [addColor, colVal, onClose]);
   const openElement = (0,external_react_.useCallback)(e => {
     setIsOpen(true);
     setPosition({
       x: e.clientX,
       y: e.clientY
     });
-    onOpen === null || onOpen === void 0 ? void 0 : onOpen(color);
-  }, [color, onOpen]); // Effects
+    onOpen === null || onOpen === void 0 ? void 0 : onOpen(colVal);
+  }, [colVal, onOpen]); // Effects
   // Other
   // Render Functions
 
-  const colVal = value !== null && value !== void 0 ? value : color;
   return /*#__PURE__*/external_react_.createElement("span", {
     className: (colorInput_default()).colorInput
   }, isOpen ? /*#__PURE__*/external_react_.createElement("div", {
@@ -21765,7 +22042,9 @@ function ColorInput(_a) {
   }, /*#__PURE__*/external_react_.createElement(sketch_Sketch, {
     color: colVal,
     onChange: onChange,
-    disableAlpha: disableAlpha
+    onChangeComplete: onChangeComplete,
+    disableAlpha: disableAlpha,
+    presetColors: presetColors !== null && presetColors !== void 0 ? presetColors : colors
   }))) : null, /*#__PURE__*/external_react_.createElement("span", {
     onClick: openElement,
     className: (colorInput_default()).label
@@ -22526,6 +22805,18 @@ function useKeyPressed(key, ignoreFormElements = true, preventDefault = true) {
   }, [], false);
   return isPressed;
 }
+;// CONCATENATED MODULE: ./src/Components/Hooks/useOnMount.ts
+
+function useOnMount(cb) {
+  const called = (0,external_react_.useRef)(false);
+  (0,external_react_.useEffect)(() => {
+    if (!called.current) {
+      called.current = true;
+      cb();
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
+
+  }, []);
+}
 // EXTERNAL MODULE: ./src/Components/Image/image.scss
 var Image_image = __webpack_require__(9782);
 var image_default = /*#__PURE__*/__webpack_require__.n(Image_image);
@@ -23021,6 +23312,160 @@ function LoadingArea({
 }
 
 const LoadingAreaMemo = withMemo(LoadingArea, (loadingArea_default()));
+
+// EXTERNAL MODULE: ./src/Components/Menu/menu.scss
+var menu = __webpack_require__(1266);
+var menu_default = /*#__PURE__*/__webpack_require__.n(menu);
+;// CONCATENATED MODULE: ./src/helper/withRenderBrowserOnly.tsx
+var withRenderBrowserOnly_rest = undefined && undefined.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+
+
+function withRenderBrowserOnly(Component) {
+  const displayName = `WithRenderBrowserOnly(${Component.displayName || Component.name})`;
+
+  const HocComponent = (_a, ref) => {
+    var {
+      children
+    } = _a,
+        props = withRenderBrowserOnly_rest(_a, ["children"]);
+
+    const [isBrowser, setIsBrowser] = (0,external_react_.useState)(false);
+    (0,external_react_.useEffect)(() => setIsBrowser(true), []);
+
+    if (!isBrowser) {
+      return null;
+    }
+
+    const newProps = props;
+
+    if (ref && Object.keys(ref).length > 0) {
+      newProps.ref = ref;
+    }
+
+    return (
+      /*#__PURE__*/
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      external_react_default().createElement(Component, newProps, children)
+    );
+  };
+
+  HocComponent.displayName = displayName;
+  return HocComponent;
+}
+;// CONCATENATED MODULE: ./src/Components/Menu/Menu.tsx
+
+
+
+
+
+
+
+
+
+
+
+function Menu({
+  className,
+  style,
+  items,
+  y,
+  x,
+  isOpen,
+  onClose
+}) {
+  // Variables
+  // Refs
+  const menuRef = (0,external_react_.useRef)(null); // States
+
+  const [innerX, setInnerX] = (0,external_react_.useState)(x);
+  const [innerY, setInnerY] = (0,external_react_.useState)(y); // Selectors
+  // Callbacks
+
+  const callItemCallback = (0,external_react_.useCallback)((_, cb) => {
+    onClose();
+    cb();
+  }, [onClose]); // Effects
+
+  (0,external_react_.useEffect)(() => {
+    if (isOpen) {
+      const listener = e => {
+        var _a;
+
+        if (!((_a = menuRef.current) === null || _a === void 0 ? void 0 : _a.contains(e.target))) {
+          onClose();
+        }
+      };
+
+      window.addEventListener('mousedown', listener, {
+        capture: true
+      });
+      return () => window.removeEventListener('mousedown', listener, {
+        capture: true
+      });
+    }
+
+    return undefined;
+  }, [isOpen, onClose]);
+  (0,external_react_.useLayoutEffect)(() => {
+    if (!menuRef.current) {
+      return;
+    }
+
+    const {
+      width
+    } = getComputedStyle(menuRef.current);
+    const newX = Math.min(x, window.innerWidth - parseFloat(width));
+    setInnerX(newX);
+  }, [x]);
+  (0,external_react_.useLayoutEffect)(() => {
+    if (!menuRef.current) {
+      return;
+    }
+
+    const height = parseFloat(getComputedStyle(menuRef.current).height);
+    let newY = y;
+
+    if (newY > window.innerHeight - height) {
+      newY -= height;
+    }
+
+    setInnerY(newY);
+  }, [y]); // Other
+  // Render Functions
+
+  if (!isOpen) {
+    return null;
+  }
+
+  return /*#__PURE__*/external_react_.createElement(BlockMemo, {
+    className: classnames_default()(className, (menu_default()).menu),
+    style: Object.assign(Object.assign({}, style), {
+      top: innerY,
+      left: innerX
+    }),
+    ref: menuRef
+  }, items.map(item => /*#__PURE__*/external_react_.createElement(ClickableMemo, {
+    onClick: callItemCallback,
+    onClickData: item.callback,
+    className: (menu_default()).item,
+    key: item.key
+  }, !!item.icon && /*#__PURE__*/external_react_.createElement(IconMemo, {
+    icon: item.icon
+  }), /*#__PURE__*/external_react_.createElement(tmp, null, item.label))));
+} // Need MenuMemo for autocompletion of phpstorm
+
+
+const MenuMemo = withMemo(withRenderBrowserOnly(Menu), (menu_default()));
 
 // EXTERNAL MODULE: ./src/Components/SpoilerList/Spoiler/spoiler.scss
 var spoiler = __webpack_require__(7629);
@@ -24786,7 +25231,120 @@ var _iconsCache = {
 
 
 
+;// CONCATENATED MODULE: ./src/Components/Window/WindowDimension.ts
+const WINDOW_MIN_WIDTH = 150;
+const WINDOW_MIN_HEIGHT = 50;
+;// CONCATENATED MODULE: ./src/Components/Window/checkWindowDimension.ts
+
+function checkWindowDimension(dimension, minWidth = WINDOW_MIN_WIDTH, minHeight = WINDOW_MIN_HEIGHT) {
+  dimension.top = Math.max(dimension.top, 0);
+  dimension.left = Math.max(dimension.left, 0);
+  dimension.right = Math.max(dimension.right, 0);
+  dimension.bottom = Math.max(dimension.bottom, 0);
+
+  if (window.innerWidth < minWidth + dimension.left + dimension.right) {
+    if (dimension.right >= dimension.left) {
+      dimension.right = window.innerWidth - minWidth - dimension.left;
+    } else {
+      dimension.left = window.innerWidth - minWidth - dimension.right;
+    }
+  }
+
+  if (window.innerHeight < minHeight + dimension.top + dimension.bottom) {
+    if (dimension.bottom >= dimension.top) {
+      dimension.bottom = window.innerHeight - minHeight - dimension.top;
+    } else {
+      dimension.top = window.innerHeight - minHeight - dimension.bottom;
+    }
+  }
+
+  return dimension;
+}
+;// CONCATENATED MODULE: ./src/Components/Window/changeDimension.ts
+function changeDimension(dimension, addWidth, addHeight) {
+  if (dimension.right >= dimension.left) {
+    dimension.right -= addWidth;
+  } else {
+    dimension.left -= addWidth;
+  }
+
+  if (dimension.bottom >= dimension.top) {
+    dimension.bottom -= addHeight;
+  } else {
+    dimension.top -= addHeight;
+  }
+
+  return dimension;
+}
+function changeDimensionWidth(dimension, addWidth) {
+  return changeDimension(dimension, addWidth, 0);
+}
+function changeDimensionHeight(dimension, addHeight) {
+  return changeDimension(dimension, 0, addHeight);
+}
+// EXTERNAL MODULE: ./src/Components/Window/windowButton.scss
+var windowButton = __webpack_require__(1);
+var windowButton_default = /*#__PURE__*/__webpack_require__.n(windowButton);
+;// CONCATENATED MODULE: ./src/Components/Window/WindowButton.tsx
+var WindowButton_rest = undefined && undefined.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+
+
+
+
+
+
+
+
+function WindowButton(_a) {
+  // Variables
+  var {
+    icon,
+    title,
+    windowState,
+    hideWhenMaximized,
+    hideWhenMinimized
+  } = _a,
+      listenerProps = WindowButton_rest(_a, ["icon", "title", "windowState", "hideWhenMaximized", "hideWhenMinimized"]); // Refs
+  // States
+  // Selectors
+  // Callbacks
+
+
+  const onClick = useListener('onClick', listenerProps); // Effects
+  // Other
+  // Render Functions
+
+  if (hideWhenMaximized && windowState === 'maximized') {
+    return null;
+  }
+
+  if (hideWhenMinimized && windowState === 'minimized') {
+    return null;
+  }
+
+  return /*#__PURE__*/external_react_.createElement(ClickableMemo, {
+    onClick: onClick,
+    className: (windowButton_default()).windowButton
+  }, /*#__PURE__*/external_react_.createElement(IconMemo, {
+    icon: icon,
+    title: title
+  }));
+} // Need WindowButtonMemo for autocompletion of phpstorm
+
+
+const WindowButtonMemo = withMemo(WindowButton, (windowButton_default()));
+
 ;// CONCATENATED MODULE: ./src/Components/Window/Window.tsx
+function Window_extends() { Window_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return Window_extends.apply(this, arguments); }
 
 
 
@@ -24800,8 +25358,12 @@ var _iconsCache = {
 
 
 
-const MIN_WIDTH = 150;
-const MIN_HEIGHT = 50;
+
+
+
+
+
+
 
 function localStorageKey(id) {
   return `window-data-${id}`;
@@ -24815,74 +25377,125 @@ function Window({
   initialLeft = 200,
   id,
   isActive,
-  onActive
-}) {
+  onActive,
+  fillHeight,
+  defaultWidth,
+  buttons = []
+}, ref) {
   // Variables
   // Refs
-  const windowRef = (0,external_react_.useRef)(null);
+  const windowContainerRef = (0,external_react_.useRef)(null);
   const containerRef = (0,external_react_.useRef)(null);
+  const contentRef = (0,external_react_.useRef)(null);
+  const titleRef = (0,external_react_.useRef)(null);
+  const windowRef = (0,external_react_.useRef)(null);
   const windowSizes = (0,external_react_.useMemo)(() => ({
     x: -1,
     y: -1
   }), []); // States
 
-  const [top, setTop] = (0,external_react_.useState)(initialTop);
-  const [left, setLeft] = (0,external_react_.useState)(initialLeft);
-  const [bottom, setBottom] = (0,external_react_.useState)();
-  const [right, setRight] = (0,external_react_.useState)();
+  const [dimension, setDimension] = (0,external_react_.useState)(undefined);
   const [windowState, setWindowState] = (0,external_react_.useState)('normal');
+  const [isMenuOpen, setIsMenuOpen] = (0,external_react_.useState)(false);
+  const [menuX, setMenuX] = (0,external_react_.useState)(0);
+  const [menuY, setMenuY] = (0,external_react_.useState)(0);
   const [loaded, setLoaded] = (0,external_react_.useState)(false);
+  const [isClient, setIsClient] = (0,external_react_.useState)(false);
   const [mouseDownPos, setMouseDownPos] = (0,external_react_.useState)(undefined);
-  const [moveStartPos, setMoveStartPos] = (0,external_react_.useState)({
-    top,
-    left,
-    bottom,
-    right
-  });
+  const [moveStartPos, setMoveStartPos] = (0,external_react_.useState)(dimension);
   const [resizeStartPos, setResizeStartPos] = (0,external_react_.useState)(undefined);
   const [resizeDirection, setResizeDirection] = (0,external_react_.useState)();
-  const [resizeStartDimension, setResizeStartDimension] = (0,external_react_.useState)({
-    top,
-    left,
-    bottom,
-    right
-  }); // Selectors
+  const [resizeStartDimension, setResizeStartDimension] = (0,external_react_.useState)(dimension); // Selectors
   // Callbacks
 
+  const closeMenu = (0,external_react_.useCallback)(() => setIsMenuOpen(false), []);
+  const openMenu = (0,external_react_.useCallback)(ev => {
+    setIsMenuOpen(true);
+    setMenuX(ev.clientX);
+    setMenuY(ev.clientY);
+  }, []);
   const save = (0,external_react_.useCallback)(() => {
     if (!id || !loaded) {
       return;
     }
 
-    const data = {
-      top,
-      left,
-      bottom,
-      right,
-      windowState
-    };
+    const data = Object.assign(Object.assign({}, dimension), {
+      windowState,
+      windowX: window.innerWidth,
+      windowY: window.innerHeight
+    });
     localStorage.setItem(localStorageKey(id), JSON.stringify(data));
-  }, [bottom, id, left, loaded, right, top, windowState]);
-  const getDimensions = (0,external_react_.useCallback)((useRealDimensions = false) => {
-    let [newBottom, newRight] = [bottom, right];
+  }, [dimension, id, loaded, windowState]);
+  const load = (0,external_react_.useCallback)(() => {
+    var _a;
 
-    if ((!newBottom || !newRight || useRealDimensions) && windowRef.current) {
-      const computedStyles = window.getComputedStyle(windowRef.current);
-      [newBottom, newRight] = [parseFloat(computedStyles.getPropertyValue('bottom')), parseFloat(computedStyles.getPropertyValue('right'))];
+    if (!id) {
+      return;
+    }
 
-      if (!useRealDimensions) {
-        setBottom(newBottom);
-        setRight(newRight);
+    const dataString = localStorage.getItem(localStorageKey(id));
+
+    if (dataString) {
+      const data = JSON.parse(dataString);
+
+      if (data.right !== undefined && data.windowX && data.windowX !== window.innerWidth) {
+        changeDimensionWidth(data, data.windowX - window.innerWidth);
+      }
+
+      if (data.bottom !== undefined && data.windowY && data.windowY !== window.innerHeight) {
+        changeDimensionHeight(data, data.windowY - window.innerHeight);
+      }
+
+      setDimension(checkWindowDimension(data));
+      setWindowState((_a = data.windowState) !== null && _a !== void 0 ? _a : 'normal');
+    }
+
+    setLoaded(true);
+  }, [id]);
+  const getDimensions = (0,external_react_.useCallback)(() => {
+    if (windowContainerRef.current) {
+      const computedStyles = window.getComputedStyle(windowContainerRef.current);
+      return {
+        top: parseFloat(computedStyles.getPropertyValue('top')),
+        bottom: parseFloat(computedStyles.getPropertyValue('bottom')),
+        left: parseFloat(computedStyles.getPropertyValue('left')),
+        right: parseFloat(computedStyles.getPropertyValue('right'))
+      };
+    }
+
+    return undefined;
+  }, []);
+  const resizeToContent = (0,external_react_.useCallback)(() => {
+    if (!windowRef.current || !titleRef.current || !contentRef.current) {
+      return;
+    }
+
+    const realDimension = getDimensions();
+
+    if (!realDimension) {
+      return;
+    }
+
+    if (defaultWidth && windowContainerRef.current) {
+      const currentWidth = window.innerWidth - realDimension.left - realDimension.right;
+
+      if (currentWidth !== defaultWidth) {
+        changeDimensionWidth(realDimension, defaultWidth - currentWidth);
+        windowContainerRef.current.style.right = `${realDimension.right}px`;
+        windowContainerRef.current.style.left = `${realDimension.left}px`;
       }
     }
 
-    return {
-      top,
-      left,
-      right: newRight,
-      bottom: newBottom
-    };
-  }, [bottom, left, right, top]);
+    let diffY = contentRef.current.scrollHeight - contentRef.current.clientHeight;
+    const diffX = contentRef.current.scrollWidth - contentRef.current.clientWidth;
+
+    if (diffY === 0) {
+      diffY = titleRef.current.clientHeight + contentRef.current.clientHeight - windowRef.current.clientHeight;
+    }
+
+    changeDimension(realDimension, diffX, diffY);
+    setDimension(checkWindowDimension(realDimension));
+  }, [defaultWidth, getDimensions]);
   const toggleMinimized = (0,external_react_.useCallback)(() => setWindowState(old => old === 'minimized' ? 'normal' : 'minimized'), []);
   const toggleMaximized = (0,external_react_.useCallback)(() => setWindowState(old => old === 'maximized' ? 'normal' : 'maximized'), []);
   const onResizeStart = (0,external_react_.useCallback)((e, direction) => {
@@ -24891,69 +25504,75 @@ function Window({
       x: e.clientX,
       y: e.clientY
     });
-    setResizeStartDimension(getDimensions());
-  }, [getDimensions]);
+    setResizeStartDimension(dimension);
+  }, [dimension]);
   const onMoveStart = (0,external_react_.useCallback)(e => {
     setMouseDownPos({
       x: e.clientX,
       y: e.clientY
     });
-    setMoveStartPos(getDimensions());
-  }, [getDimensions]);
+    setMoveStartPos(dimension);
+  }, [dimension]);
   const onMove = (0,external_react_.useCallback)(e => {
     var _a, _b, _c, _d, _e, _f;
 
-    if (resizeStartPos) {
+    if (!dimension) {
+      return;
+    }
+
+    const newDimension = Object.assign({}, dimension);
+
+    if (resizeStartPos && resizeStartDimension) {
       const diff = {
         x: e.clientX - resizeStartPos.x,
         y: e.clientY - resizeStartPos.y
       };
 
       if (resizeDirection === 'top' || resizeDirection === 'tl' || resizeDirection === 'tr') {
-        setTop(Math.min(window.innerHeight - ((_a = resizeStartDimension.bottom) !== null && _a !== void 0 ? _a : 0) - MIN_HEIGHT, resizeStartDimension.top + diff.y));
+        newDimension.top = Math.min(window.innerHeight - ((_a = resizeStartDimension.bottom) !== null && _a !== void 0 ? _a : 0) - WINDOW_MIN_HEIGHT, resizeStartDimension.top + diff.y);
       }
 
       if (resizeDirection === 'bottom' || resizeDirection === 'bl' || resizeDirection === 'br') {
-        setBottom(Math.min(window.innerHeight - resizeStartDimension.top - MIN_HEIGHT, ((_b = resizeStartDimension.bottom) !== null && _b !== void 0 ? _b : 0) - diff.y));
+        newDimension.bottom = Math.min(window.innerHeight - resizeStartDimension.top - WINDOW_MIN_HEIGHT, ((_b = resizeStartDimension.bottom) !== null && _b !== void 0 ? _b : 0) - diff.y);
       }
 
       if (resizeDirection === 'left' || resizeDirection === 'bl' || resizeDirection === 'tl') {
-        setLeft(Math.min(window.innerWidth - ((_c = resizeStartDimension.right) !== null && _c !== void 0 ? _c : 0) - MIN_WIDTH, resizeStartDimension.left + diff.x));
+        newDimension.left = Math.min(window.innerWidth - ((_c = resizeStartDimension.right) !== null && _c !== void 0 ? _c : 0) - WINDOW_MIN_WIDTH, resizeStartDimension.left + diff.x);
       }
 
       if (resizeDirection === 'right' || resizeDirection === 'br' || resizeDirection === 'tr') {
-        setRight(Math.min(window.innerWidth - resizeStartDimension.left - MIN_WIDTH, ((_d = resizeStartDimension.right) !== null && _d !== void 0 ? _d : 0) - diff.x));
+        newDimension.right = Math.min(window.innerWidth - resizeStartDimension.left - WINDOW_MIN_WIDTH, ((_d = resizeStartDimension.right) !== null && _d !== void 0 ? _d : 0) - diff.x);
       }
-    } else if (mouseDownPos) {
+    } else if (mouseDownPos && moveStartPos) {
       const diff = {
         x: e.clientX - mouseDownPos.x,
         y: e.clientY - mouseDownPos.y
       };
-      const dimensions = getDimensions(true);
+      const dimensions = getDimensions();
+
+      if (!dimensions) {
+        return;
+      }
+
       diff.y = Math.min(Math.max(diff.y, -moveStartPos.top), dimensions.top + ((_e = dimensions.bottom) !== null && _e !== void 0 ? _e : 0) - moveStartPos.top);
       diff.x = Math.min(Math.max(diff.x, -moveStartPos.left), ((_f = dimensions.right) !== null && _f !== void 0 ? _f : 0) + dimensions.left - moveStartPos.left);
-      setTop(moveStartPos.top + diff.y);
-      setLeft(moveStartPos.left + diff.x);
-
-      if (moveStartPos.bottom !== undefined) {
-        setBottom(moveStartPos.bottom - diff.y);
-      }
-
-      if (moveStartPos.right !== undefined) {
-        setRight(moveStartPos.right - diff.x);
-      }
+      newDimension.top = moveStartPos.top + diff.y;
+      newDimension.left = moveStartPos.left + diff.x;
+      newDimension.bottom = moveStartPos.bottom - diff.y;
+      newDimension.right = moveStartPos.right - diff.x;
     }
 
     if (mouseDownPos || resizeStartPos) {
       onActive === null || onActive === void 0 ? void 0 : onActive(undefined, id);
+      setDimension(newDimension);
     }
-  }, [getDimensions, id, mouseDownPos, moveStartPos, onActive, resizeDirection, resizeStartDimension.bottom, resizeStartDimension.left, resizeStartDimension.right, resizeStartDimension.top, resizeStartPos]);
+  }, [dimension, getDimensions, id, mouseDownPos, moveStartPos, onActive, resizeDirection, resizeStartDimension, resizeStartPos]);
   const onMoveStop = (0,external_react_.useCallback)(() => {
     setMouseDownPos(undefined);
     setResizeStartPos(undefined);
   }, []);
   const openInNewWindow = (0,external_react_.useCallback)(() => {
-    if (windowState === 'popup' || !containerRef.current || !windowRef.current) {
+    if (windowState === 'popup' || !containerRef.current || !windowContainerRef.current) {
       return;
     }
 
@@ -24982,19 +25601,48 @@ function Window({
     }); // TODO Theme-Checker?
 
     windowProxy.document.body.classList.add('flat-design');
-    windowRef.current.remove();
-    windowProxy.document.body.appendChild(windowRef.current);
+    windowContainerRef.current.remove();
+    windowProxy.document.body.appendChild(windowContainerRef.current);
     windowProxy.addEventListener('beforeunload', () => {
       var _a;
 
       setWindowState('normal');
 
-      if (windowRef.current) {
-        windowRef.current.remove();
-        (_a = containerRef.current) === null || _a === void 0 ? void 0 : _a.append(windowRef.current);
+      if (windowContainerRef.current) {
+        windowContainerRef.current.remove();
+        (_a = containerRef.current) === null || _a === void 0 ? void 0 : _a.append(windowContainerRef.current);
       }
     });
-  }, [title, windowState]); // Effects
+  }, [title, windowState]);
+  (0,external_react_.useImperativeHandle)(ref, () => ({
+    toggleMaximize: toggleMaximized,
+    toggleMinimize: toggleMinimized,
+
+    maximize() {
+      if (windowState !== 'popup' && windowState !== 'maximized') {
+        toggleMaximized();
+      }
+    },
+
+    minimize() {
+      if (windowState !== 'popup' && windowState !== 'minimized') {
+        toggleMinimized();
+      }
+    },
+
+    openInNewWindow() {
+      if (windowState !== 'popup') {
+        openInNewWindow();
+      }
+    },
+
+    resizeToContent() {
+      if (windowState !== 'popup') {
+        resizeToContent();
+      }
+    }
+
+  }), [openInNewWindow, resizeToContent, toggleMaximized, toggleMinimized, windowState]); // Effects
 
   (0,external_react_.useEffect)(() => {
     window.addEventListener('mousemove', onMove);
@@ -25009,102 +25657,89 @@ function Window({
     windowSizes.y = window.innerHeight;
 
     const listener = () => {
+      if (!dimension) {
+        return;
+      }
+
       const diff = {
         x: windowSizes.x - window.innerWidth,
         y: windowSizes.y - window.innerHeight
       };
       windowSizes.x = window.innerWidth;
       windowSizes.y = window.innerHeight;
-      let [newLeft, newRight = -1, newTop, newBottom = -1] = [left, right, top, bottom];
+      const newDimension = Object.assign({}, dimension);
 
-      if (right !== undefined && left <= right) {
-        newRight -= diff.x;
+      if (newDimension.left <= newDimension.right) {
+        newDimension.right -= diff.x;
       } else {
-        newLeft -= diff.x;
+        newDimension.left -= diff.x;
       }
 
-      if (bottom !== undefined && top <= bottom) {
-        newBottom -= diff.y;
+      if (newDimension.top <= newDimension.bottom) {
+        newDimension.bottom -= diff.y;
       } else {
-        newTop -= diff.y;
+        newDimension.top -= diff.y;
       }
 
-      if (window.innerWidth < newRight) {
-        newRight = window.innerWidth;
-      }
-
-      if (window.innerWidth < newLeft) {
-        newLeft = window.innerWidth;
-      }
-
-      if (window.innerHeight < newBottom) {
-        newBottom = window.innerHeight;
-      }
-
-      if (window.innerHeight < newTop) {
-        newTop = window.innerHeight;
-      }
-
-      setTop(newTop);
-      setLeft(newLeft);
-
-      if (newBottom >= 0) {
-        setBottom(newBottom);
-      }
-
-      if (newRight >= 0) {
-        setRight(newRight);
-      }
+      setDimension(checkWindowDimension(newDimension));
     };
 
     window.addEventListener('resize', listener);
     return () => window.removeEventListener('resize', listener);
-  }, [top, left, right, bottom, windowSizes]);
+  }, [dimension, windowSizes]);
   (0,external_react_.useEffect)(() => {
-    getDimensions();
-  }, []);
-  (0,external_react_.useEffect)(() => save(), [save]);
-  (0,external_react_.useEffect)(() => {
-    var _a, _b, _c;
-
-    if (id) {
-      const dataString = localStorage.getItem(localStorageKey(id));
-
-      if (dataString) {
-        const data = JSON.parse(dataString);
-
-        if (data.right !== undefined && window.innerWidth - data.right - data.left < MIN_WIDTH) {
-          data.right = window.innerWidth - data.left - MIN_WIDTH;
-
-          if (data.right < 0) {
-            data.left += data.right;
-            data.right = 0;
-          }
-        }
-
-        if (data.bottom !== undefined && window.innerHeight - data.bottom - data.top < MIN_HEIGHT) {
-          data.bottom = window.innerWidth - data.top - MIN_HEIGHT;
-
-          if (data.bottom < 0) {
-            data.top += data.bottom;
-            data.bottom = 0;
-          }
-        }
-
-        setTop((_a = data.top) !== null && _a !== void 0 ? _a : 0);
-        setLeft((_b = data.left) !== null && _b !== void 0 ? _b : 0);
-        setRight(data.right);
-        setBottom(data.bottom);
-        setWindowState((_c = data.windowState) !== null && _c !== void 0 ? _c : 'normal');
+    setDimension(old => {
+      if (old) {
+        return old;
       }
 
-      setLoaded(true);
+      return getDimensions();
+    });
+  }, [getDimensions]);
+  (0,external_react_.useEffect)(() => save(), [save]);
+  (0,external_react_.useEffect)(() => load(), [load]);
+  (0,external_react_.useEffect)(() => setIsClient(true), []); // Other
+
+  const realButtons = (0,external_react_.useMemo)(() => {
+    const defaultButtons = [{
+      key: 'minimize-button',
+      icon: faWindowMinimize,
+      onClick: toggleMinimized
+    }, {
+      key: 'maximize-button',
+      icon: windowState === 'maximized' ? faWindowRestore : faWindowMaximize,
+      onClick: toggleMaximized
+    }];
+
+    if (typeof buttons === 'function') {
+      return buttons(windowState, defaultButtons);
     }
-  }, [id]); // Other
+
+    return [...defaultButtons, ...buttons];
+  }, [buttons, toggleMaximized, toggleMinimized, windowState]);
+  const menuItems = (0,external_react_.useMemo)(() => {
+    const items = [];
+
+    if (windowState === 'normal') {
+      items.push({
+        key: 'resize',
+        label: 'Resize',
+        callback: resizeToContent
+      });
+    }
+
+    items.push({
+      key: 'openInWindow',
+      label: 'Open in new Window',
+      callback: openInNewWindow
+    });
+    return items;
+  }, [openInNewWindow, resizeToContent, windowState]);
 
   const renderTitle = () => /*#__PURE__*/external_react_.createElement(ClickableMemo, {
     onMouseDown: onMoveStart,
-    className: (window_default()).fullWidth
+    className: (window_default()).fullWidth,
+    ref: titleRef
   }, /*#__PURE__*/external_react_.createElement(Flex_tmp, {
     horizontal: true,
     className: (window_default()).title
@@ -25112,22 +25747,19 @@ function Window({
     className: (window_default()).titleText
   }, /*#__PURE__*/external_react_.createElement(tmp, null, title)), /*#__PURE__*/external_react_.createElement(InlineBlockMemo, {
     className: (window_default()).titleButtons
-  }, /*#__PURE__*/external_react_.createElement(ClickableMemo, {
-    onClick: toggleMinimized,
-    className: (window_default()).titleButton
-  }, /*#__PURE__*/external_react_.createElement(IconMemo, {
-    icon: faWindowMinimize
-  })), /*#__PURE__*/external_react_.createElement(ClickableMemo, {
-    onClick: toggleMaximized,
-    className: (window_default()).titleButton
-  }, /*#__PURE__*/external_react_.createElement(IconMemo, {
-    icon: faWindowMaximize
-  })), /*#__PURE__*/external_react_.createElement(ClickableMemo, {
-    onClick: openInNewWindow,
-    className: (window_default()).titleButton
-  }, /*#__PURE__*/external_react_.createElement(IconMemo, {
-    icon: faWindowRestore
-  }))))); // Render Functions
+  }, realButtons === null || realButtons === void 0 ? void 0 : realButtons.map(b => /*#__PURE__*/external_react_.createElement(WindowButtonMemo, Window_extends({}, b, {
+    windowState: windowState
+  }))), /*#__PURE__*/external_react_.createElement(WindowButtonMemo, {
+    icon: free_solid_svg_icons_namespaceObject.faEllipsisV,
+    onClick: openMenu,
+    windowState: windowState
+  }), /*#__PURE__*/external_react_.createElement(MenuMemo, {
+    items: menuItems,
+    x: menuX,
+    y: menuY,
+    isOpen: isMenuOpen,
+    onClose: closeMenu
+  })))); // Render Functions
 
 
   return /*#__PURE__*/external_react_.createElement(ClickableMemo, {
@@ -25135,7 +25767,7 @@ function Window({
     onClickData: id,
     ref: containerRef
   }, /*#__PURE__*/external_react_.createElement(Flex_tmp, {
-    ref: windowRef,
+    ref: windowContainerRef,
     className: classnames_default()((window_default()).windowContainer, className, {
       [(window_default()).minimized]: windowState === 'minimized',
       [(window_default()).maximized]: windowState === 'maximized',
@@ -25143,14 +25775,14 @@ function Window({
       [(window_default()).moving]: mouseDownPos,
       [(window_default()).active]: isActive
     }),
-    style: {
-      top,
-      left,
-      bottom,
-      right,
-      minWidth: MIN_WIDTH,
-      minHeight: MIN_HEIGHT
-    }
+    style: Object.assign(Object.assign({
+      top: initialTop,
+      left: initialLeft,
+      right: defaultWidth && isClient ? window.innerWidth - initialLeft - defaultWidth : undefined
+    }, dimension !== null && dimension !== void 0 ? dimension : {}), {
+      minWidth: WINDOW_MIN_WIDTH,
+      minHeight: WINDOW_MIN_HEIGHT
+    })
   }, /*#__PURE__*/external_react_.createElement(Flex_tmp, {
     horizontal: true,
     className: (window_default()).fullWidth
@@ -25167,7 +25799,7 @@ function Window({
     onMouseDown: onResizeStart,
     onMouseDownData: "tr"
   })), /*#__PURE__*/external_react_.createElement(Grow_tmp, {
-    className: classnames_default()((window_default()).fullWidth, (window_default()).overflowContainer)
+    className: classnames_default()((window_default()).fullWidth, (window_default()).overflowHidden)
   }, /*#__PURE__*/external_react_.createElement(Flex_tmp, {
     horizontal: true,
     className: classnames_default()((window_default()).stretchItems, (window_default()).fullHeight)
@@ -25176,12 +25808,16 @@ function Window({
     onMouseDown: onResizeStart,
     onMouseDownData: "left"
   }), /*#__PURE__*/external_react_.createElement(Grow_tmp, {
-    className: (window_default()).overflowContainer
+    className: (window_default()).overflowXAuto
   }, /*#__PURE__*/external_react_.createElement(BlockMemo, {
-    className: (window_default()).window
+    className: (window_default()).window,
+    ref: windowRef
   }, renderTitle(), /*#__PURE__*/external_react_.createElement(BlockMemo, {
-    className: (window_default()).content,
-    __allowChildren: "all"
+    className: classnames_default()((window_default()).content, {
+      [(window_default()).fillHeight]: fillHeight
+    }),
+    __allowChildren: "all",
+    ref: contentRef
   }, children))), /*#__PURE__*/external_react_.createElement(ClickableMemo, {
     className: classnames_default()((window_default()).resize, (window_default()).x),
     onMouseDown: onResizeStart,
@@ -25205,7 +25841,7 @@ function Window({
 } // Need WindowMemo for autocompletion of phpstorm
 
 
-const WindowMemo = withMemo(Window, (window_default()));
+const WindowMemo = withForwardRef(Window, (window_default()), 'html');
 
 ;// CONCATENATED MODULE: ./src/Components/Window/useWindows.ts
 
@@ -25230,6 +25866,18 @@ var StyleContext_default = /*#__PURE__*/__webpack_require__.n(StyleContext);
 const provider = (StyleContext_default()).Provider;
 
 ;// CONCATENATED MODULE: ./bootstrapReactMobile.ts
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

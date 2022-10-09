@@ -20,17 +20,19 @@ $borderColor: #cecece;
     }
   }
 
+  .overflowHidden {
+    overflow: hidden;
+  }
+
   .window {
     height: 100%;
     cursor: default;
+    display: flex;
+    flex-direction: column;
 
     > div {
       margin-top: 0 !important;
     }
-  }
-
-  .overflowContainer {
-    overflow: auto;
   }
 
   .title {
@@ -47,8 +49,17 @@ $borderColor: #cecece;
     }
   }
 
+  .overflowXAuto {
+    overflow-x: auto;
+  }
+
   .content {
     padding: 8px;
+    overflow: auto;
+
+    &.fillHeight {
+      flex: 1;
+    }
   }
 
   &.minimized {
@@ -91,6 +102,10 @@ $borderColor: #cecece;
     right: 0 !important;
     border: none;
 
+    .title {
+      cursor: default;
+    }
+
     .titleButtons {
       display: none;
     }
@@ -99,10 +114,6 @@ $borderColor: #cecece;
       pointer-events: none;
       cursor: pointer;
     }
-  }
-
-  .titleButton {
-    padding-left: 8px;
   }
 
   .stretchItems {
