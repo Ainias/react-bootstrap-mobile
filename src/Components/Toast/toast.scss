@@ -1,17 +1,17 @@
 @import "../../scss/variables";
 @import "../../scss/designMixin";
 
-.dialogContainer {
+.toastContainer {
   position: fixed;
   left: 0;
   right: 0;
   bottom: 3rem;
+  margin: auto;
   max-width: map-get($grid-breakpoints, "sm");
   z-index: 1;
   display: flex;
   align-items: center;
   flex-direction: column;
-
 }
 
 .toast {

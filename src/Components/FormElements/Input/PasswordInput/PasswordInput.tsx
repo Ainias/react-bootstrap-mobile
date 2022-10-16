@@ -1,0 +1,53 @@
+import React, { ForwardedRef, useCallback, useState } from 'react';
+import { Input, InputProps } from '../Input';
+import { DistributiveOmit } from '../../../../helper/DistributiveOmit';
+import { withForwardRef } from '../../../../helper/withForwardRef';
+import { Flex } from '../../../Layout/Flex';
+import { Grow } from '../../../Layout/Grow';
+import { Icon } from '../../../Icon/Icon';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { Clickable } from '../../../Clickable/Clickable';
+
+import styles from './passwordInput.scss';
+import classNames from 'classnames';
+
+export type PasswordInputProps<OnChangeData> = DistributiveOmit<InputProps<OnChangeData>, 'type'>;
+
+export const PasswordInput = withForwardRef(function PasswordInput<OnChangeData>(
+    { className, style, ...props }: PasswordInputProps<OnChangeData>,
+    ref: ForwardedRef<HTMLInputElement>
+) {
+    // Variables
+    const [isVisible, setIsVisible] = useState(false);
+
+    // Refs
+
+    // States
+
+    // Selectors
+
+    // Callbacks
+    const toggleVisible = useCallback(() => setIsVisible((old) => !old), []);
+
+    // Effects
+
+    // Other
+
+    // Render Functions
+
+    return (
+        <Flex horizontal={true} className={classNames(styles.passwordInput, className)} style={style}>
+            <Grow>
+                <Input {...props} type={isVisible ? 'text' : 'password'} ref={ref} />
+            </Grow>
+            <Clickable onClick={toggleVisible} className={styles.showButton}>
+                <Icon icon={isVisible ? faEye : faEyeSlash} />
+            </Clickable>
+        </Flex>
+    );
+},
+styles);
+
+// // Need PasswordInputMemo for autocompletion of phpstorm
+// const PasswordInputMemo = withMemo(PasswordInput);
+// export { PasswordInputMemo as PasswordInput };

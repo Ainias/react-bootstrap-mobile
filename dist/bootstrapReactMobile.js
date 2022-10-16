@@ -385,6 +385,25 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
+/***/ 1892:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// Imports
+var ___CSS_LOADER_API_NO_SOURCEMAP_IMPORT___ = __webpack_require__(8081);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3645);
+var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(___CSS_LOADER_API_NO_SOURCEMAP_IMPORT___);
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".passwordInput__mBUmX{align-items:end}.showButton__ORcua{padding-left:.4rem}", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {
+	"passwordInput": "passwordInput__mBUmX",
+	"showButton": "showButton__ORcua"
+};
+module.exports = ___CSS_LOADER_EXPORT___;
+
+
+/***/ }),
+
 /***/ 2737:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
@@ -1018,10 +1037,10 @@ var ___CSS_LOADER_API_NO_SOURCEMAP_IMPORT___ = __webpack_require__(8081);
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3645);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(___CSS_LOADER_API_NO_SOURCEMAP_IMPORT___);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".dialogContainer__FP5XZ{position:fixed;left:0;right:0;bottom:3rem;max-width:576px;z-index:1;display:flex;align-items:center;flex-direction:column}.toast__sXrim{background-color:rgba(0,0,0,.8);min-height:48px;line-height:1.5;color:#fff;font-size:.77rem;letter-spacing:normal;transition-duration:.25s;margin:8px}.toast__sXrim.hiding__VMWIu{opacity:0}.material-design .toast__sXrim{padding:16px 24px}.flat-design .toast__sXrim{border-radius:.5rem;padding:16px}.toast__sXrim .action__WbNF_{text-transform:uppercase;margin-left:24px}.material-design .toast__sXrim .action__WbNF_{color:#bbdefb}.flat-design .toast__sXrim .action__WbNF_{color:#fff}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".toastContainer__Cr4Pc{position:fixed;left:0;right:0;bottom:3rem;margin:auto;max-width:576px;z-index:1;display:flex;align-items:center;flex-direction:column}.toast__sXrim{background-color:rgba(0,0,0,.8);min-height:48px;line-height:1.5;color:#fff;font-size:.77rem;letter-spacing:normal;transition-duration:.25s;margin:8px}.toast__sXrim.hiding__VMWIu{opacity:0}.material-design .toast__sXrim{padding:16px 24px}.flat-design .toast__sXrim{border-radius:.5rem;padding:16px}.toast__sXrim .action__WbNF_{text-transform:uppercase;margin-left:24px}.material-design .toast__sXrim .action__WbNF_{color:#bbdefb}.flat-design .toast__sXrim .action__WbNF_{color:#fff}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
-	"dialogContainer": "dialogContainer__FP5XZ",
+	"toastContainer": "toastContainer__Cr4Pc",
 	"toast": "toast__sXrim",
 	"hiding": "hiding__VMWIu",
 	"action": "action__WbNF_"
@@ -1579,6 +1598,28 @@ module.exports = StyleContext;
 
     var refs = 0;
     var css = __webpack_require__(1745);
+    var insertCss = __webpack_require__(4718);
+    var content = typeof css === 'string' ? [[module.id, css, '']] : css;
+
+    exports = module.exports = css.locals || {};
+    exports._getContent = function() { return content; };
+    exports._getCss = function() { return '' + css; };
+    exports._insertCss = function(options) { return insertCss(content, options) };
+
+    // Hot Module Replacement
+    // https://webpack.github.io/docs/hot-module-replacement
+    // Only activated in browser context
+    if (false) { var removeCss; }
+  
+
+/***/ }),
+
+/***/ 3524:
+/***/ ((module, exports, __webpack_require__) => {
+
+
+    var refs = 0;
+    var css = __webpack_require__(1892);
     var insertCss = __webpack_require__(4718);
     var content = typeof css === 'string' ? [[module.id, css, '']] : css;
 
@@ -10646,6 +10687,7 @@ __webpack_require__.d(__webpack_exports__, {
   "LoadingCircle": () => (/* reexport */ LoadingCircleMemo),
   "Menu": () => (/* reexport */ MenuMemo),
   "MoreButton": () => (/* reexport */ MoreButtonMemo),
+  "PasswordInput": () => (/* reexport */ PasswordInput),
   "RESTRICT_CHILDREN": () => (/* reexport */ RESTRICT_CHILDREN),
   "Select": () => (/* reexport */ SelectMemo),
   "Spoiler": () => (/* reexport */ SpoilerMemo),
@@ -10688,6 +10730,7 @@ __webpack_require__.d(__webpack_exports__, {
   "useKeyUpListener": () => (/* reexport */ useKeyUpListener),
   "useListener": () => (/* reexport */ useListener),
   "useListenerWithExtractedProps": () => (/* reexport */ useListenerWithExtractedProps),
+  "useMenu": () => (/* reexport */ useMenu),
   "useOnMount": () => (/* reexport */ useOnMount),
   "useSharedSelectedColor": () => (/* reexport */ useSharedSelectedColor),
   "useSpoilerGroup": () => (/* reexport */ useSpoilerGroup),
@@ -11784,7 +11827,8 @@ const DialogBackgroundMemo = withMemo(DialogBackground, (dialogBackground_defaul
 const DialogContext = /*#__PURE__*/external_react_default().createContext(() => Promise.reject());
 const DialogProvider = DialogContext.Provider;
 function useDialog() {
-  return (0,external_react_.useContext)(DialogContext);
+  const showDialog = (0,external_react_.useContext)(DialogContext);
+  return showDialog;
 }
 ;// CONCATENATED MODULE: ./src/Components/Dialog/DialogContainer.tsx
 function DialogContainer_extends() { DialogContainer_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return DialogContainer_extends.apply(this, arguments); }
@@ -22305,6 +22349,95 @@ function HiddenInput(_a) {
 
 const HiddenInput_tmp = withMemo(HiddenInput);
 
+;// CONCATENATED MODULE: ./src/Components/Layout/Grow.tsx
+
+
+
+
+
+function Grow({
+  className,
+  children,
+  center = false,
+  style
+}) {
+  // Variables
+  // States
+  // Refs
+  // Callbacks
+  // Effects
+  // Other
+  // Render Functions
+  return /*#__PURE__*/external_react_.createElement("div", {
+    className: classnames_default()((layout_default()).grow, {
+      [(layout_default()).center]: center
+    }, className),
+    style: style
+  }, children);
+}
+
+const Grow_tmp = withMemo(Grow, (layout_default()));
+
+// EXTERNAL MODULE: ./src/Components/FormElements/Input/PasswordInput/passwordInput.scss
+var passwordInput = __webpack_require__(3524);
+var passwordInput_default = /*#__PURE__*/__webpack_require__.n(passwordInput);
+;// CONCATENATED MODULE: ./src/Components/FormElements/Input/PasswordInput/PasswordInput.tsx
+function PasswordInput_extends() { PasswordInput_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return PasswordInput_extends.apply(this, arguments); }
+
+var PasswordInput_rest = undefined && undefined.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+
+
+
+
+
+
+
+
+
+
+
+const PasswordInput = withForwardRef(function PasswordInput(_a, ref) {
+  var {
+    className,
+    style
+  } = _a,
+      props = PasswordInput_rest(_a, ["className", "style"]); // Variables
+
+
+  const [isVisible, setIsVisible] = (0,external_react_.useState)(false); // Refs
+  // States
+  // Selectors
+  // Callbacks
+
+  const toggleVisible = (0,external_react_.useCallback)(() => setIsVisible(old => !old), []); // Effects
+  // Other
+  // Render Functions
+
+  return /*#__PURE__*/external_react_default().createElement(Flex_tmp, {
+    horizontal: true,
+    className: classnames_default()((passwordInput_default()).passwordInput, className),
+    style: style
+  }, /*#__PURE__*/external_react_default().createElement(Grow_tmp, null, /*#__PURE__*/external_react_default().createElement(Input_tmp, PasswordInput_extends({}, props, {
+    type: isVisible ? 'text' : 'password',
+    ref: ref
+  }))), /*#__PURE__*/external_react_default().createElement(ClickableMemo, {
+    onClick: toggleVisible,
+    className: (passwordInput_default()).showButton
+  }, /*#__PURE__*/external_react_default().createElement(IconMemo, {
+    icon: isVisible ? free_solid_svg_icons_namespaceObject.faEye : free_solid_svg_icons_namespaceObject.faEyeSlash
+  })));
+}, (passwordInput_default())); // // Need PasswordInputMemo for autocompletion of phpstorm
+// const PasswordInputMemo = withMemo(PasswordInput);
+// export { PasswordInputMemo as PasswordInput };
 // EXTERNAL MODULE: ./src/Components/FormElements/Select/select.scss
 var Select_select = __webpack_require__(9078);
 var select_default = /*#__PURE__*/__webpack_require__.n(Select_select);
@@ -23081,35 +23214,6 @@ function GridItem({
 
 const GridItemMemo = withMemo(GridItem, (grid_default()));
 
-;// CONCATENATED MODULE: ./src/Components/Layout/Grow.tsx
-
-
-
-
-
-function Grow({
-  className,
-  children,
-  center = false,
-  style
-}) {
-  // Variables
-  // States
-  // Refs
-  // Callbacks
-  // Effects
-  // Other
-  // Render Functions
-  return /*#__PURE__*/external_react_.createElement("div", {
-    className: classnames_default()((layout_default()).grow, {
-      [(layout_default()).center]: center
-    }, className),
-    style: style
-  }, children);
-}
-
-const Grow_tmp = withMemo(Grow, (layout_default()));
-
 ;// CONCATENATED MODULE: ./src/Components/List/BulletList/BulletList.tsx
 
 
@@ -23467,6 +23571,29 @@ function Menu({
 
 const MenuMemo = withMemo(withRenderBrowserOnly(Menu), (menu_default()));
 
+;// CONCATENATED MODULE: ./src/Components/Menu/useMenu.ts
+
+function useMenu() {
+  const [isOpen, setIsOpen] = (0,external_react_.useState)(false);
+  const [position, setPosition] = (0,external_react_.useState)({
+    x: 0,
+    y: 0
+  });
+  const open = (0,external_react_.useCallback)(e => {
+    setPosition({
+      x: e.clientX,
+      y: e.clientY
+    });
+    setIsOpen(true);
+  }, []);
+  const props = {
+    isOpen,
+    x: position.x,
+    y: position.y,
+    onClose: (0,external_react_.useCallback)(() => setIsOpen(false), [])
+  };
+  return [open, props];
+}
 // EXTERNAL MODULE: ./src/Components/SpoilerList/Spoiler/spoiler.scss
 var spoiler = __webpack_require__(7629);
 var spoiler_default = /*#__PURE__*/__webpack_require__.n(spoiler);
@@ -25866,6 +25993,8 @@ var StyleContext_default = /*#__PURE__*/__webpack_require__.n(StyleContext);
 const provider = (StyleContext_default()).Provider;
 
 ;// CONCATENATED MODULE: ./bootstrapReactMobile.ts
+
+
 
 
 
