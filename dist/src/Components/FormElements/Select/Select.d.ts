@@ -11,7 +11,8 @@ export declare type SelectProps<OnChangeData> = RbmComponentProps<Override<Selec
     label?: string;
     options: SelectOption[];
     onChangeValue?: (newValue: string) => void;
+    inline?: boolean;
 } & OptionalListener<'onChange', OnChangeData>>>;
-declare function Select<OnChangeData>({ label, options, className, style, onChangeValue, ...otherProps }: SelectProps<OnChangeData>): JSX.Element;
+declare function Select<OnChangeData>({ label, options, className, style, onChangeValue, inline, ...otherProps }: SelectProps<OnChangeData>): JSX.Element;
 declare const SelectMemo: typeof Select;
 export { SelectMemo as Select };

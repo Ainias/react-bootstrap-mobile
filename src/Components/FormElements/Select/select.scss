@@ -2,8 +2,12 @@
 @import "../../../scss/designMixin";
 
 .select {
-  display: flex;
   width: 100%;
+
+  .label {
+    font-weight: bold;
+    display: block;
+  }
 
   .input {
     outline: none;
@@ -32,6 +36,16 @@
     @include design($flat) {
       font-size: 17px;
       background-position: right center;
+    }
+  }
+
+  &.inline {
+    display: flex;
+    align-items: center;
+
+    .label {
+      padding-right: 4px;
+      flex: 1;
     }
   }
 }

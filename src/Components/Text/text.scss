@@ -1,3 +1,10 @@
+$primaryColor: #000000;
+$secondaryColor: #717171;
+
+:root {
+  --text-primary-default-color: $primaryColor;
+}
+
 .text {
   display: inline;
 
@@ -9,11 +16,16 @@
     font-weight: bold;
   }
 
+  &.primaryDefault {
+    color: var(--text-primary-default-color)
+  }
+
   &.primary {
+    color: $primaryColor
   }
 
   &.secondary {
-    color: #717171;
+    color: $secondaryColor;
   }
 
   &.small {

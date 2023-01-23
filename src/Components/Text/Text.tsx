@@ -34,12 +34,13 @@ function Text<AsType extends keyof JSX.IntrinsicElements = 'span'>({
     className,
     children,
     block = false,
-    prio = TEXT_PRIO.primary,
+    prio,
     size = TEXT_SIZE.medium,
     as = 'span' as AsType,
     ...props
 }: TextProps<AsType>) {
     // Variables
+    prio = prio ?? styles.primaryDefault;
 
     // States
 

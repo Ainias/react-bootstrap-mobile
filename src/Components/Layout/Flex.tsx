@@ -34,14 +34,10 @@ function Flex<AsType extends keyof JSX.IntrinsicElements = 'div'>(
 
     return (
         <ViewWithoutListeners
-            className={classNames(
-                styles.flex,
-                {
-                    [styles.horizontal]: horizontal,
-                    [styles.grow]: grow,
-                },
-                className
-            )}
+            className={classNames(className, styles.flex, {
+                [styles.horizontal]: horizontal,
+                [styles.grow]: grow,
+            })}
             as={as as AsType}
             ref={ref}
             {...(props as ViewWithoutListenersProps<AsType>)}

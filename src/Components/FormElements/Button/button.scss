@@ -16,6 +16,8 @@
   border-radius: 3px;
   transition: none;
 
+  --text-primary-default-color: white;
+
   @include design($material) {
     box-shadow: $boxShadowMaterial;
     min-height: 40px;

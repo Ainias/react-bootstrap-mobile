@@ -25,16 +25,6 @@ const banner = `
 
 const regexLikeIndexModule = /(?<!pages[\\/])index\.module\.(scss|sass|css)$/;
 
-function cssFileResolve(url, _resourcePath, urlImports) {
-    if (url.startsWith('/')) {
-        return false;
-    }
-    if (!urlImports && /^[a-z][a-z0-9+.-]*:/i.test(url)) {
-        return false;
-    }
-    return true;
-}
-
 function getCssModuleLocalIdent(context, _, exportName, options) {
     const relativePath = path.relative(context.rootContext, context.resourcePath).replace(/\\+/g, '/');
 
@@ -91,28 +81,10 @@ module.exports = {
     },
     optimization: {
         minimize: false,
-        minimizer: [
-            new TerserPlugin({ extractComments: false }),
-            // new OptimizeCSSAssetsPlugin({
-            //     cssProcessorOptions: {
-            //         map: {
-            //             inline: false
-            //         }
-            //     }
-            // })
-        ],
+        minimizer: [new TerserPlugin({ extractComments: false })],
     },
     module: {
         rules: [
-            // {
-            //     test: /\.(js|json)?$/,
-            //     exclude: /(node_modules)/,
-            //     use: [
-            //         {
-            //             loader: 'babel-loader',
-            //         },
-            //     ],
-            // },
             {
                 test: /\.(ts|tsx)?$/,
                 exclude: /(node_modules)/,

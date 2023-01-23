@@ -34,7 +34,6 @@ export const PasswordInput = withForwardRef(function PasswordInput<OnChangeData>
     // Other
 
     // Render Functions
-
     return (
         <Flex horizontal={true} className={classNames(styles.passwordInput, className)} style={style}>
             <Grow>

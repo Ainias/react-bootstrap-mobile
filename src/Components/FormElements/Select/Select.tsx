@@ -21,6 +21,7 @@ export type SelectProps<OnChangeData> = RbmComponentProps<
             label?: string;
             options: SelectOption[];
             onChangeValue?: (newValue: string) => void;
+            inline?: boolean;
         } & OptionalListener<'onChange', OnChangeData>
     >
 >;
@@ -31,9 +32,11 @@ function Select<OnChangeData>({
     className,
     style,
     onChangeValue,
+    inline = false,
     ...otherProps
 }: SelectProps<OnChangeData>) {
     // Variables
+    console.log('LOG-d inline', inline);
 
     // Refs
 
@@ -60,8 +63,8 @@ function Select<OnChangeData>({
     // Render Functions
 
     return (
-        <label className={classNames(styles.select, className)} style={style}>
-            {label ? <span>{label}</span> : null}
+        <label className={classNames(styles.select, { [styles.inline]: inline }, className)} style={style}>
+            {label ? <span className={styles.label}>{label}</span> : null}
             <select {...otherProps} className={styles.input} onChange={onChange}>
                 {options.map((option) => (
                     <option value={option.value} key={option.key ?? option.value}>
