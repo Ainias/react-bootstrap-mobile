@@ -1,10 +1,9 @@
-$borderColor: #cecece;
 
 .windowContainer {
   background: white;
   position: fixed;
   z-index: 100;
-  border: 1px solid $borderColor;
+  border: 1px solid var(--border-light);
   border-radius: 4px;
 
   &.active {
@@ -39,7 +38,7 @@ $borderColor: #cecece;
     padding: 8px;
     white-space: nowrap;
     width: 100%;
-    border-bottom: 1px solid $borderColor;
+    border-bottom: 1px solid var(--border-light);
 
     cursor: grab;
 

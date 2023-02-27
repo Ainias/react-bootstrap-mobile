@@ -32,8 +32,8 @@ function List<ItemType>({
 
     // Callbacks
     const renderItemInner = useCallback(
-        ({ index, style }) => {
-            return renderItem(items[index], style, index);
+        ({ index, style: itemStyle }) => {
+            return renderItem(items[index], itemStyle, index);
         },
         [items, renderItem]
     );
@@ -49,9 +49,8 @@ function List<ItemType>({
     // Render Functions
 
     return (
-        <AutoSizer onResize={(size) => console.log('LOG-d onResize', size)}>
+        <AutoSizer>
             {({ height, width }) => {
-                console.log('LOG-d sizes', height, width);
                 return (
                     <>
                         {initialItemHeight === 0 && items.length > 0 && (

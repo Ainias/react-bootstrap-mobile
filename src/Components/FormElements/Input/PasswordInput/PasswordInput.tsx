@@ -11,10 +11,13 @@ import { Clickable } from '../../../Clickable/Clickable';
 import styles from './passwordInput.scss';
 import classNames from 'classnames';
 
-export type PasswordInputProps<OnChangeData> = DistributiveOmit<InputProps<OnChangeData>, 'type'>;
+export type PasswordInputProps<OnChangeData, OnBlurData, OnChangeEndData> = DistributiveOmit<
+    InputProps<OnChangeData, OnBlurData, OnChangeEndData>,
+    'type'
+>;
 
-export const PasswordInput = withForwardRef(function PasswordInput<OnChangeData>(
-    { className, style, ...props }: PasswordInputProps<OnChangeData>,
+export const PasswordInput = withForwardRef(function PasswordInput<OnChangeData, OnBlurData, OnChangeEndData>(
+    { className, style, ...props }: PasswordInputProps<OnChangeData, OnBlurData, OnChangeEndData>,
     ref: ForwardedRef<HTMLInputElement>
 ) {
     // Variables

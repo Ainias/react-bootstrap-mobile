@@ -1,13 +1,12 @@
-$borderColor: #cecece;
 
 .menu {
   position: fixed;
   background: #ffffff;
-  border: 1px solid $borderColor;
+  border: 1px solid var(--border-light);
 
   .item {
     display: block;
-    border-top: 1px solid $borderColor;
+    border-top: 1px solid var(--border-light);
     padding: 8px;
     margin: 0 4px;
 

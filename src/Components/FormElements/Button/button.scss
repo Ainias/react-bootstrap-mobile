@@ -26,7 +26,7 @@
     text-align: center;
     font-size: 14px;
     text-transform: uppercase;
-    background-color: #2979ff;
+    background-color: var(--flavor-accent);
     font-weight: 500;
   }
 
@@ -34,6 +34,6 @@
     line-height: 32px;
     padding: 4px 18px;
     font-size: 17px;
-    background-color: #0076ff;
+    background-color: var(--flavor-accent);
   }
 }

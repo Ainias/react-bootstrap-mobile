@@ -1,0 +1,82 @@
+@import "../../../scss/variables";
+@import "../../../scss/designMixin";
+
+.input {
+  display: inline-block;
+  width: 100%;
+  position: relative;
+  padding-bottom: 0.1rem;
+
+  @include design($material) {
+    background-image: linear-gradient(to top, transparent 1px, #afafaf 1px);
+    background-size: 100% 2px;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    padding-bottom: 2px;
+
+    &:focus {
+      background-image: linear-gradient(var(--flavor-focus), var(--flavor-focus)),
+      linear-gradient(to top, transparent 1px, #afafaf 1px);
+    }
+  }
+
+  @include design($flat) {
+    &, &:focus {
+      border-bottom: 1px solid var(--border-light);
+    }
+  }
+
+  .label {
+    display: block;
+    font-weight: bold;
+  }
+
+  .text {
+    width: 100%;
+    background-color: transparent;
+    border: 0;
+    outline: none;
+    padding: 0;
+    background-image: none;
+
+    @include design($material) {
+      color: #212121;
+    }
+
+    @include design($flat) {
+      color: #1f1f21;
+    }
+  }
+}
+
+.inputContainer {
+  display: flex;
+
+}
+
+.tag {
+  color: white;
+  background-color: var(--flavor-accent);
+  padding: 0.1rem 0.2rem;
+  margin-right: 0.1rem;
+  border-radius: 4px;
+}
+
+.selectableOptionContainer {
+  position: fixed;
+  background-color: white;
+  z-index: 1100;
+  border: 1px solid var(--border-light);
+
+
+  .selectableOption {
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+    cursor: pointer;
+
+    &.active {
+      color: white;
+      background-color: var(--flavor-accent);
+    }
+  }
+}

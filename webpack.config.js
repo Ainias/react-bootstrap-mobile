@@ -1,11 +1,8 @@
-const loaderUtils = require('loader-utils');
-
 const path = require('path');
 const webpack = require('webpack');
 // const PrettierPlugin = require('prettier-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const getPackageJson = require('./scripts/getPackageJson');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const { version, name, license, repository, author } = getPackageJson(
     'version',
@@ -22,43 +19,6 @@ const banner = `
   This source code is licensed under the ${license} license found in the
   LICENSE file in the root directory of this source tree.
 `;
-
-const regexLikeIndexModule = /(?<!pages[\\/])index\.module\.(scss|sass|css)$/;
-
-function getCssModuleLocalIdent(context, _, exportName, options) {
-    const relativePath = path.relative(context.rootContext, context.resourcePath).replace(/\\+/g, '/');
-
-    // Generate a more meaningful name (parent folder) when the user names the
-    // file `index.module.css`.
-    const fileNameOrFolder = regexLikeIndexModule.test(relativePath) ? '[folder]' : '[name]';
-
-    // Generate a hash to make the class name unique.
-    const hash = loaderUtils.getHashDigest(
-        Buffer.from(`filePath:${relativePath}#className:${exportName}`),
-        'md5',
-        'base64',
-        5
-    );
-
-    // Have webpack interpolate the `[folder]` or `[name]` to its real value.
-    return (
-        loaderUtils
-            .interpolateName(context, fileNameOrFolder + '_' + exportName + '__' + hash, options)
-            .replace(
-                // Webpack name interpolation returns `about.module_root__2oFM9` for
-                // `.root {}` inside a file named `about.module.css`. Let's simplify
-                // this.
-                /\.module_/,
-                '_'
-            )
-            // Replace invalid symbols with underscores instead of escaping
-            // https://mathiasbynens.be/notes/css-escapes#identifiers-strings
-            .replace(/[^a-zA-Z0-9-_]/g, '_')
-            // "they cannot start with a digit, two hyphens, or a hyphen followed by a digit [sic]"
-            // https://www.w3.org/TR/CSS21/syndata.html#characters
-            .replace(/^(\d|--|-\d)/, '__$1')
-    );
-}
 
 module.exports = {
     mode: 'production',
@@ -78,6 +38,7 @@ module.exports = {
         '@fortawesome/react-fontawesome': 'commonjs2 @fortawesome/react-fontawesome',
         '@fortawesome/fontawesome-svg-core': 'commonjs2 @fortawesome/fontawesome-svg-core',
         '@fortawesome/free-solid-svg-icons': 'commonjs2 @fortawesome/free-solid-svg-icons',
+        'react-beautiful-dnd': 'commonjs2 react-beautiful-dnd',
     },
     optimization: {
         minimize: false,

@@ -1,36 +1,51 @@
 import * as React from 'react';
-import { ForwardedRef, InputHTMLAttributes, KeyboardEvent, useCallback } from 'react';
+import { InputHTMLAttributes, KeyboardEvent, MutableRefObject, useCallback, useEffect } from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { Override } from '../../../TypeHelpers';
-import { OptionalListener, useListener } from '../../Hooks/useListener';
+import { OptionalListener, useListenerWithExtractedProps } from '../../Hooks/useListener';
 import { withForwardRef } from '../../../helper/withForwardRef';
 
 import styles from './input.scss';
 import classNames from 'classnames';
+import { useComposedRef } from '../../Hooks/useComposedRef';
 
-export type InputProps<OnChangeData> = RbmComponentProps<
+export type InputProps<OnChangeData, OnBlurData, OnChangeDoneData> = RbmComponentProps<
     Override<
-        InputHTMLAttributes<HTMLInputElement>,
+        Omit<InputHTMLAttributes<HTMLInputElement>, 'onInput'>,
         {
             label?: string;
             onChangeText?: (newText: string) => void;
             onEnter?: (newText: string) => void;
-        } & OptionalListener<'onChange', OnChangeData>
+        } & OptionalListener<'onChange', OnChangeData> &
+            OptionalListener<'onBlur', OnBlurData> &
+            OptionalListener<'onChangeDone', OnChangeDoneData>
     >
 >;
 
-function Input<OnChangeData>(
-    { label, className, style, onEnter, onKeyPress, onChangeText, ...otherProps }: InputProps<OnChangeData>,
-    ref: ForwardedRef<HTMLInputElement>
+export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnChangeDoneData>(
+    {
+        label,
+        className,
+        style,
+        onEnter,
+        onKeyPress,
+        onChangeText,
+        ...otherProps
+    }: InputProps<OnChangeData, OnBlurData, OnChangeDoneData>,
+    ref: MutableRefObject<HTMLInputElement> | null
 ) {
     // Variables
 
     // States
 
     // Refs
+    const innerRef = useComposedRef(ref);
 
     // Callbacks
-    const onChangeWithData = useListener<'onChange', OnChangeData>('onChange', otherProps);
+    const [onChangeWithData, otherPropsWithoutOnchange] = useListenerWithExtractedProps<'onChange', OnChangeData>(
+        'onChange',
+        otherProps
+    );
     const onChange = useCallback(
         (e) => {
             if (onChangeText) {
@@ -39,6 +54,16 @@ function Input<OnChangeData>(
             onChangeWithData(e);
         },
         [onChangeWithData, onChangeText]
+    );
+
+    const [onBlur, otherPropsWithoutBlur] = useListenerWithExtractedProps<'onBlur', OnBlurData>(
+        'onBlur',
+        otherPropsWithoutOnchange
+    );
+
+    const [onChangeDone, otherPropsWithoutData] = useListenerWithExtractedProps<'onChangeDone', OnChangeDoneData>(
+        'onChangeDone',
+        otherPropsWithoutBlur
     );
 
     const realOnKeyPress = useCallback(
@@ -54,6 +79,13 @@ function Input<OnChangeData>(
     );
 
     // Effects
+    useEffect(() => {
+        const elem = innerRef.current;
+        elem?.addEventListener('change', onChangeDone);
+        return () => {
+            elem?.removeEventListener('change', onChangeDone);
+        };
+    }, [innerRef, onChangeDone, otherProps.type]);
 
     // Other
 
@@ -62,10 +94,15 @@ function Input<OnChangeData>(
     return (
         <label className={classNames(styles.input, className)} style={style}>
             {label ? <span className={styles.label}>{label}</span> : null}
-            <input {...otherProps} ref={ref} className={styles.text} onChange={onChange} onKeyPress={realOnKeyPress} />
+            <input
+                {...otherPropsWithoutData}
+                ref={innerRef}
+                className={styles.text}
+                onBlur={onBlur}
+                onChange={onChange}
+                onKeyPress={realOnKeyPress}
+            />
         </label>
     );
-}
-
-const tmp = withForwardRef(Input, styles);
-export { tmp as Input };
+},
+styles);

@@ -10,7 +10,33 @@
 }
 
 .grow {
-  flex: 1;
+  &.weight0 {
+    flex: 0
+  }
+
+  &.weight1 {
+    flex: 1
+  }
+
+  &.weight2 {
+    flex: 2
+  }
+
+  &.weight3 {
+    flex: 3
+  }
+
+  &.weight4 {
+    flex: 4
+  }
+
+  &.weight5 {
+    flex: 5
+  }
+
+  &.weight6 {
+    flex: 6
+  }
 
   &.center {
     text-align: center;

@@ -5,9 +5,19 @@ import { withMemo } from '../../../helper/withMemo';
 import styles from './input.scss';
 import classNames from 'classnames';
 
-export type HiddenInputProps<OnChangeType> = InputProps<OnChangeType> & { noFocusHint?: boolean };
+export type HiddenInputProps<OnChangeType, OnBlurData, OnChangeEndData> = InputProps<
+    OnChangeType,
+    OnBlurData,
+    OnChangeEndData
+> & {
+    noFocusHint?: boolean;
+};
 
-function HiddenInput<OnChangeData>({ noFocusHint = false, className, ...props }: HiddenInputProps<OnChangeData>) {
+function HiddenInput<OnChangeData, OnBlurData, OnChangeEndData>({
+    noFocusHint = false,
+    className,
+    ...props
+}: HiddenInputProps<OnChangeData, OnBlurData, OnChangeEndData>) {
     // Variables
 
     // States

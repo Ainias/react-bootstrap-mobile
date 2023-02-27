@@ -1,0 +1,13 @@
+@include design($material) {
+  --flavor-accent: #37474f;
+  --flavor-focus: var(--flavor-accent);
+}
+
+:root {
+  --border-light: #cecece;
+  --border-strong: #717171;
+}
+
+@include design($flat) {
+  --flavor-accent: #0076ff;
+}

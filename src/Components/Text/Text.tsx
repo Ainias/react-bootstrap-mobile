@@ -15,11 +15,12 @@ export const TEXT_PRIO = {
 };
 
 export const TEXT_SIZE = {
+    xSmall: styles.xsmall,
     small: styles.small,
     medium: styles.medium,
     large: styles.large,
-    xlarge: styles.xlarge,
-    xxlarge: styles.xxlarge,
+    xLarge: styles.xlarge,
+    xxLarge: styles.xxlarge,
 };
 
 export type TextProps<AsType extends keyof JSX.IntrinsicElements> = {

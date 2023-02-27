@@ -30,14 +30,13 @@
     stroke-miterlimit: 10;
     transform-origin: 50%;
     animation: loadingCircle 2s ease-in-out infinite, loadingCircleRotate 1.5s linear infinite;
+    stroke: var(--flavor-accent);
 
     @include design($material) {
       stroke-width: 9%;
-      stroke: #37474f;
     }
     @include design($flat) {
       stroke-width: 5%;
-      stroke: #0076ff;
     }
   }
 }

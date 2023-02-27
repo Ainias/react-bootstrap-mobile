@@ -28,6 +28,11 @@ $secondaryColor: #717171;
     color: $secondaryColor;
   }
 
+  &.xsmall {
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+
   &.small {
     font-size: 0.875rem;
     line-height: 1.25rem;

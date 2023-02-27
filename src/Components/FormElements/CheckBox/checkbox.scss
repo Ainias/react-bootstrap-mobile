@@ -43,7 +43,7 @@
       margin: 2px;
 
       &::before {
-        border: 2px solid #717171;
+        border: 2px solid var(--border-strong);
         border-radius: 2px;
         transition: background-color 0.1s linear 0.2s, border-color 0.1s linear 0.2s;
         background-color: transparent;
@@ -55,7 +55,7 @@
 
       &::before {
         background: transparent;
-        border: 1px solid #c7c7cd;
+        border: 1px solid var(--border-light);
         border-radius: 22px;
       }
     }
@@ -75,10 +75,13 @@
         border-left-style: solid;
       }
 
+      &::before {
+        background-color: var(--flavor-accent);
+      }
+
       @include design($material) {
         &::before {
-          border: 2px solid #37474f;
-          background-color: #37474f;
+          border: 2px solid var(--flavor-accent);
           transition: background-color 0.1s linear, border-color 0.1s linear;
         }
         &::after {
@@ -92,7 +95,6 @@
       @include design($flat) {
         &::before {
           border: none;
-          background: #0076ff;
         }
         &::after {
           top: 7px;

@@ -29,7 +29,7 @@ function Heading({ children, className, style }: HeadingProps) {
     return (
         <Text
             as="h1"
-            size={TEXT_SIZE.xxlarge}
+            size={TEXT_SIZE.xxLarge}
             prio={TEXT_PRIO.heading}
             className={classNames(styles.heading, className)}
             style={style}
