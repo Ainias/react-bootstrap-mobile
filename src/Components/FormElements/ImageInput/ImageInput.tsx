@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { Override } from '../../../TypeHelpers';
-import { InputHTMLAttributes, useCallback, useState } from 'react';
+import { ChangeEventHandler, InputHTMLAttributes, useCallback, useState } from 'react';
 import { OptionalListener, useListener } from '../../Hooks/useListener';
 import { Button } from '../Button/Button';
 
@@ -43,7 +43,7 @@ function ImageInput<OnChangeData>({
 
     // Callbacks
     const onChangeWithData = useListener<'onChange', OnChangeData>('onChange', otherProps);
-    const getBase64 = useCallback((file) => {
+    const getBase64 = useCallback((file: Blob) => {
         return new Promise<string>((resolve, reject) => {
             const reader = new FileReader();
             reader.onload = () => {
@@ -53,9 +53,9 @@ function ImageInput<OnChangeData>({
             reader.readAsDataURL(file);
         });
     }, []);
-    const onChange = useCallback(
+    const onChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
         async (e) => {
-            if (e.target.files.length === 0) {
+            if (!e.target.files || e.target.files.length === 0) {
                 return;
             }
 
@@ -78,6 +78,7 @@ function ImageInput<OnChangeData>({
     // Render Functions
 
     return (
+        // eslint-disable-next-line jsx-a11y/label-has-associated-control
         <label className={classNames(styles.imageInput, className)} style={style}>
             {label ? <span>{label}</span> : null}
             <img

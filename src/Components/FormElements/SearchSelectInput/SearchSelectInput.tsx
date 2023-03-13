@@ -2,8 +2,8 @@ import * as React from 'react';
 import { OptionalListener } from '../../Hooks/useListener';
 import { SelectOption } from '../Select/Select';
 import classNames from 'classnames';
-import { KeyboardEvent, useCallback, useMemo, useRef, useState } from 'react';
-import { ArrayHelper } from 'js-helper';
+import { ChangeEventHandler, KeyboardEvent, useCallback, useMemo, useRef, useState } from 'react';
+import { ArrayHelper } from '@ainias42/js-helper';
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { withMemo } from '../../../helper/withMemo';
 import { InlineBlock } from '../../Layout/InlineBlock';
@@ -68,16 +68,14 @@ export const SearchSelectInput = withMemo(function SearchSelectInput<OnChangeDat
         setSuggestionsPosition({ top, left, right: (window?.innerWidth ?? 0) - right });
     }, [window?.innerWidth]);
 
-    const onChange = useCallback((ev) => {
+    const onChange = useCallback<ChangeEventHandler<HTMLInputElement>>((ev) => {
         setSearchText(ev.target.value);
         setSelectedIndex(0);
     }, []);
     const onFocus = useCallback(() => updateSuggestionPosition(), [updateSuggestionPosition]);
 
     const toggleOption = useCallback(
-        (_, value: string) => {
-            console.log('LOG-d toggleOption', value, _);
-
+        (_: any, value: string) => {
             const newValues = [...values];
             const index = values.indexOf(value);
             if (index === -1) {

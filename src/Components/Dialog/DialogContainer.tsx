@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { withMemo } from '../../helper/withMemo';
 import { ComponentType, PropsWithChildren, useCallback, useState } from 'react';
-import { PromiseWithHandlers } from 'js-helper';
+import { PromiseWithHandlers } from '@ainias42/js-helper';
 import { DialogProvider, ShowDialog } from './DialogContext';
 import { Dialog } from './Dialog';
 import { EmptyProps } from '../../helper/EmptyProps';
@@ -32,7 +32,7 @@ function DialogContainer({ children }: DialogContainerProps) {
         setLastId((oldId) => {
             const id = oldId + 1;
             setDialogs((oldDialogs) => {
-                return [...oldDialogs, { id, component, props, resultPromise: promise }];
+                return [...oldDialogs, { id, component, props, resultPromise: promise }] as DialogData[];
             });
             return id;
         });

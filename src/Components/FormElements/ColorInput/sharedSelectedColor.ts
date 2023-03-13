@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { Random } from 'js-helper';
+import { Random } from '@ainias42/js-helper';
 
 const sharedSelectedColor: Record<string, { colors: string[]; updateFunctions: (() => void)[] }> = {};
 

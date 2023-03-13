@@ -1,6 +1,6 @@
 $thumbWidth: 16;
 $thumbHeight: 16;
-$trackHeight: $thumbHeight/4;
+$trackHeight: calc($thumbHeight / 4);
 $maxScreenSize: 10000;
 
 .slider {
@@ -60,8 +60,8 @@ $maxScreenSize: 10000;
       @include thumb;
 
       box-shadow: calc(-100vmax - (var(--thumb-width, var(--thumb-height)) / 2)) 0 0 100vmax var(--flavor-accent);
-      $clipTop: ($thumbHeight - $trackHeight)/2;
-      $clipBottom: $thumbHeight -$clipTop;
+      $clipTop: calc(($thumbHeight - $trackHeight) / 2);
+      $clipBottom: $thumbHeight - $clipTop;
       clip-path: path("M 0, #{0.5*$thumbHeight} \
       a #{0.5*$thumbWidth} #{0.5*$thumbHeight}, 0 1 0, #{$thumbWidth} 0 \
       a #{0.5*$thumbWidth} #{0.5*$thumbHeight}, 0 1 0, #{-1*$thumbWidth} 0 \

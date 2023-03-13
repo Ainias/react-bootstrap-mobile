@@ -14,7 +14,7 @@ export declare const TEXT_SIZE: {
     xLarge: string;
     xxLarge: string;
 };
-export declare type TextProps<AsType extends keyof JSX.IntrinsicElements> = {
+export type TextProps<AsType extends keyof JSX.IntrinsicElements> = {
     block?: boolean;
     prio?: ValueOf<typeof TEXT_PRIO>;
     size?: ValueOf<typeof TEXT_SIZE>;

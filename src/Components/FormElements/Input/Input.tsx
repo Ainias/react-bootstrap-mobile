@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { InputHTMLAttributes, KeyboardEvent, MutableRefObject, useCallback } from 'react';
+import { ChangeEventHandler, InputHTMLAttributes, KeyboardEvent, MutableRefObject, useCallback } from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { Override } from '../../../TypeHelpers';
 import { OptionalListener, useListenerWithExtractedProps } from '../../Hooks/useListener';
@@ -29,7 +29,7 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
         className,
         style,
         onEnter,
-        onKeyPress,
+        onKeyDown,
         onChangeText,
         ...otherProps
     }: InputProps<OnChangeData, OnBlurData, OnChangeDoneData>,
@@ -47,7 +47,7 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
         'onChange',
         otherProps
     );
-    const onChange = useCallback(
+    const onChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
         (e) => {
             if (onChangeText) {
                 onChangeText(e.target.value);
@@ -67,16 +67,14 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
         otherPropsWithoutBlur
     );
 
-    const realOnKeyPress = useCallback(
+    const realOnKeyDown = useCallback(
         (e: KeyboardEvent<HTMLInputElement>) => {
-            if (onKeyPress) {
-                onKeyPress(e);
-            }
+            onKeyDown?.(e);
             if (onEnter && e.key === 'Enter' && !e.defaultPrevented) {
                 onEnter((e.target as HTMLInputElement).value);
             }
         },
-        [onEnter, onKeyPress]
+        [onEnter, onKeyDown]
     );
 
     // Effects
@@ -96,7 +94,7 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
                 className={styles.text}
                 onBlur={onBlur}
                 onChange={onChange}
-                onKeyPress={realOnKeyPress}
+                onKeyDown={realOnKeyDown}
             />
         </label>
     );

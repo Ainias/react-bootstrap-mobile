@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useCallback, useRef, useState, MouseEvent } from 'react';
-import { Color, ColorResult, SketchPicker } from 'react-color';
+import { Color, ColorChangeHandler, ColorResult, SketchPicker } from 'react-color';
 import { OptionalListener, useListener } from '../../Hooks/useListener';
 import { withMemo } from '../../../helper/withMemo';
 
@@ -63,7 +63,7 @@ function ColorInput<OnChangeData>({
 
     // Callbacks
     const onChangeWithData = useListener<'onChange', OnChangeData>('onChange', otherProps);
-    const onChange = useCallback(
+    const onChange = useCallback<ColorChangeHandler>(
         (newColor: ColorResult, e) => {
             const hexColor = convertToHex(newColor.rgb, disableAlpha);
             setColor(hexColor);

@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { RbmComponentProps } from '../RbmComponentProps';
-export declare type GrowProps = RbmComponentProps<{
+export type GrowProps = RbmComponentProps<{
     center?: boolean;
     weight?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
 }>;

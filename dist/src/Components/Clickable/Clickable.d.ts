@@ -1,10 +1,10 @@
 import { RbmComponentProps } from '../RbmComponentProps';
 import { OptionalListener } from '../Hooks/useListener';
-declare type OnClickListener<Data> = OptionalListener<'onClick', Data>;
-declare type OnMouseDownListener<Data> = OptionalListener<'onMouseDown', Data>;
-declare type OnMouseUpListener<Data> = OptionalListener<'onMouseUp', Data>;
-declare type OnMouseMoveListener<Data> = OptionalListener<'onMouseMove', Data>;
-export declare type ClickableProps<OnClickData, OnMouseDownData, OnMouseMoveData, OnMouseUpData, OnClickCaptureData, HrefType extends string | undefined> = RbmComponentProps<{
+type OnClickListener<Data> = OptionalListener<'onClick', Data>;
+type OnMouseDownListener<Data> = OptionalListener<'onMouseDown', Data>;
+type OnMouseUpListener<Data> = OptionalListener<'onMouseUp', Data>;
+type OnMouseMoveListener<Data> = OptionalListener<'onMouseMove', Data>;
+export type ClickableProps<OnClickData, OnMouseDownData, OnMouseMoveData, OnMouseUpData, OnClickCaptureData, HrefType extends string | undefined> = RbmComponentProps<{
     interactable?: boolean;
     href?: HrefType;
     preventDefault?: boolean;

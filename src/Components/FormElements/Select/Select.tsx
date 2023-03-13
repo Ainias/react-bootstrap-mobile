@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { Override } from '../../../TypeHelpers';
-import { SelectHTMLAttributes, useCallback } from 'react';
+import { ChangeEventHandler, SelectHTMLAttributes, useCallback } from 'react';
 import { OptionalListener, useListener } from '../../Hooks/useListener';
 
 import styles from './select.scss';
@@ -26,7 +26,7 @@ export type SelectProps<OnChangeData> = RbmComponentProps<
     >
 >;
 
-function Select<OnChangeData>({
+export const Select = withMemo(function Select<OnChangeData>({
     label,
     options,
     className,
@@ -46,11 +46,9 @@ function Select<OnChangeData>({
 
     // Callbacks
     const onChangeWithData = useListener<'onChange', OnChangeData>('onChange', otherProps);
-    const onChange = useCallback(
+    const onChange = useCallback<ChangeEventHandler<HTMLSelectElement>>(
         (e) => {
-            if (onChangeValue) {
-                onChangeValue(e.target.value);
-            }
+            onChangeValue?.(e.target.value);
             onChangeWithData(e);
         },
         [onChangeWithData, onChangeValue]
@@ -63,6 +61,7 @@ function Select<OnChangeData>({
     // Render Functions
 
     return (
+        // eslint-disable-next-line jsx-a11y/label-has-associated-control
         <label className={classNames(styles.select, { [styles.inline]: inline }, className)} style={style}>
             {label ? <span className={styles.label}>{label}</span> : null}
             <select {...otherProps} className={styles.input} onChange={onChange}>
@@ -74,8 +73,5 @@ function Select<OnChangeData>({
             </select>
         </label>
     );
-}
-
-// Need SelectMemo for autocompletion of phpstorm
-const SelectMemo = withMemo(Select, styles);
-export { SelectMemo as Select };
+},
+styles);

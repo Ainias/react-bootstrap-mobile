@@ -21,16 +21,15 @@ fi;
 TMPDIR=$(mktemp -d)
 
 cd "$TMPDIR";
-git clone $REPOSITORY
-pwd
-cd react-bootstrap-mobile
+git clone $REPOSITORY project
+cd project
 
 npm install
-npm run build:production
-
-git add dist/
+npm run build
+git add -u
+git commit -m "pre-version-commit for version $versionName" || echo "no commit needed"
 npm version "$versionName"
-#git push
+npm publish
+git push
 
 echo "$TMPDIR"
-

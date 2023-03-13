@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { InputHTMLAttributes, useCallback } from 'react';
+import { ChangeEventHandler, InputHTMLAttributes, useCallback } from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { Override } from '../../../TypeHelpers';
 import classNames from 'classnames';
@@ -21,7 +21,7 @@ export type SwitchProps = RbmComponentProps<
     >
 >;
 
-function Switch({
+export const Switch = withMemo(function Switch({
     children,
     label = '',
     preLabel = '',
@@ -41,14 +41,10 @@ function Switch({
     // Refs
 
     // Callbacks
-    const realOnChange = useCallback(
+    const realOnChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
         (e) => {
-            if (onChange) {
-                onChange(e);
-            }
-            if (onChangeChecked) {
-                onChangeChecked(e.target.checked);
-            }
+            onChange?.(e);
+            onChangeChecked?.(e.target.checked);
         },
         [onChange, onChangeChecked]
     );
@@ -82,7 +78,5 @@ function Switch({
             </label>
         </span>
     );
-}
-
-const SwitchMemo = withMemo(Switch, styles);
-export { SwitchMemo as Switch };
+},
+styles);

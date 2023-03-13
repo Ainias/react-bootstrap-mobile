@@ -54,7 +54,7 @@ function ActionSheet(
         }
     }, [setIsOpen, onClose]);
     const onActionClick = useCallback(
-        (_, action?: ActionSheetAction<any>) => {
+        (_: any, action?: ActionSheetAction<any>) => {
             close();
             action?.action(action.actionData);
         },

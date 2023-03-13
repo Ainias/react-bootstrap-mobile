@@ -21,6 +21,8 @@ export function withRestrictedChildren<C extends ComponentType<RbmComponentProps
     ) => {
         if (__allowChildren !== 'all') {
             if (__allowChildren !== 'html') {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
                 React.Children.forEach(children, (c) => {
                     if (c && typeof c === 'object' && 'type' in c && typeof c.type === 'string') {
                         throw new WrongChildError('No HTML Elements', 'HTML Elements', c, displayName);
@@ -28,6 +30,8 @@ export function withRestrictedChildren<C extends ComponentType<RbmComponentProps
                 });
             }
             if (__allowChildren !== 'text') {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
                 React.Children.forEach(children, (c) => {
                     if (typeof c === 'string') {
                         throw new WrongChildError('Not String', 'string', c, displayName);

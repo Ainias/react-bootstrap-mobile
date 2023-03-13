@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { withMemo } from '../../../helper/withMemo';
-import { InputHTMLAttributes, useCallback } from 'react';
+import { ChangeEventHandler, InputHTMLAttributes, useCallback } from 'react';
 
 import styles from './slider.scss';
 import classNames from 'classnames';
@@ -49,7 +49,7 @@ export const Slider = withMemo(function Slider<OnChangeData, OnChangeValueData, 
         otherPropsWithoutOnChangeValue
     );
 
-    const innerOnChange = useCallback(
+    const innerOnChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
         (e) => {
             onChangeValue(Number(e.target.value));
             onChange(e);

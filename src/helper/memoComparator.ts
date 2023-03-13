@@ -1,4 +1,4 @@
-import { JsonHelper } from 'js-helper';
+import { JsonHelper } from '@ainias42/js-helper';
 
 export function memoComparator(prevProps: Readonly<any>, nextProps: Readonly<any>) {
     const keysPrev = Object.keys(prevProps);
