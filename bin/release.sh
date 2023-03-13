@@ -25,8 +25,9 @@ git clone $REPOSITORY
 pwd
 cd react-bootstrap-mobile
 
-npm install --legacy-peer-deps
+npm install
 npm run build:production
+
 git add dist/
 npm version "$versionName"
 #git push
