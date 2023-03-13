@@ -17,23 +17,39 @@ export type ClickableProps<
     OnMouseDownData,
     OnMouseMoveData,
     OnMouseUpData,
+    OnClickCaptureData,
     HrefType extends string | undefined
 > = RbmComponentProps<
-    { interactable?: boolean; href?: HrefType } & OnClickListener<OnClickData> &
+    {
+        interactable?: boolean;
+        href?: HrefType;
+        preventDefault?: boolean;
+        stopPropagation?: boolean;
+    } & OnClickListener<OnClickData> &
         OnMouseDownListener<OnMouseDownData> &
         OnMouseMoveListener<OnMouseMoveData> &
-        OnMouseUpListener<OnMouseUpData>
+        OnMouseUpListener<OnMouseUpData> &
+        OptionalListener<'onClickCapture', OnClickCaptureData>
 >;
 
-function Clickable<OnClickData, OnMouseDownData, OnMouseMoveData, OnMouseUpData, HrefType extends string | undefined>(
+function Clickable<
+    OnClickData,
+    OnMouseDownData,
+    OnMouseMoveData,
+    OnMouseUpData,
+    OnClickCaptureData,
+    HrefType extends string | undefined
+>(
     {
         className,
         children,
-        interactable = true,
         style,
         href,
+        interactable = true,
+        preventDefault = true,
+        stopPropagation = true,
         ...clickData
-    }: ClickableProps<OnClickData, OnMouseDownData, OnMouseMoveData, OnMouseUpData, HrefType>,
+    }: ClickableProps<OnClickData, OnMouseDownData, OnMouseMoveData, OnMouseUpData, OnClickCaptureData, HrefType>,
     ref: ForwardedRef<HrefType extends string ? HTMLAnchorElement : HTMLSpanElement>
 ) {
     // Variables
@@ -47,48 +63,80 @@ function Clickable<OnClickData, OnMouseDownData, OnMouseMoveData, OnMouseUpData,
     const realOnClick = useCallback(
         (e: MouseEvent) => {
             if (clickData.onClick) {
-                e.stopPropagation();
-                e.preventDefault();
+                if (stopPropagation) {
+                    e.stopPropagation();
+                }
+                if (preventDefault) {
+                    e.preventDefault();
+                }
                 onClickInner(e);
             }
         },
-        [clickData.onClick, onClickInner]
+        [clickData.onClick, onClickInner, preventDefault, stopPropagation]
     );
 
     const onMouseDownInner = useListener<'onMouseDown', OnMouseDownData>('onMouseDown', clickData);
     const realOnMouseDown = useCallback(
         (e: MouseEvent) => {
             if (clickData.onMouseDown) {
-                e.stopPropagation();
-                e.preventDefault();
+                if (stopPropagation) {
+                    e.stopPropagation();
+                }
+                if (preventDefault) {
+                    e.preventDefault();
+                }
                 onMouseDownInner(e);
             }
         },
-        [clickData.onMouseDown, onMouseDownInner]
+        [clickData.onMouseDown, onMouseDownInner, preventDefault, stopPropagation]
     );
 
     const onMouseMoveInner = useListener<'onMouseMove', OnMouseMoveData>('onMouseMove', clickData);
     const realOnMouseMove = useCallback(
         (e: MouseEvent) => {
             if (clickData.onMouseMove) {
-                e.stopPropagation();
-                e.preventDefault();
+                if (stopPropagation) {
+                    e.stopPropagation();
+                }
+                if (preventDefault) {
+                    e.preventDefault();
+                }
                 onMouseMoveInner(e);
             }
         },
-        [clickData.onMouseMove, onMouseMoveInner]
+        [clickData.onMouseMove, onMouseMoveInner, preventDefault, stopPropagation]
     );
 
     const onMouseUpInner = useListener<'onMouseUp', OnMouseUpData>('onMouseUp', clickData);
     const realOnMouseUp = useCallback(
         (e: MouseEvent) => {
             if (clickData.onMouseUp) {
-                e.stopPropagation();
-                e.preventDefault();
+                if (stopPropagation) {
+                    e.stopPropagation();
+                }
+                if (preventDefault) {
+                    e.preventDefault();
+                }
                 onMouseUpInner(e);
             }
         },
-        [clickData.onMouseUp, onMouseUpInner]
+        [clickData.onMouseUp, onMouseUpInner, preventDefault, stopPropagation]
+    );
+
+    const onClickCaptureInner = useListener<'onClickCapture', OnClickCaptureData>('onClickCapture', clickData);
+    const realOnClickCaptureInner = useCallback(
+        (e: MouseEvent) => {
+            if (clickData.onClickCapture) {
+                if (stopPropagation) {
+                    e.stopPropagation();
+                }
+                if (preventDefault) {
+                    e.preventDefault();
+                }
+                onClickCaptureInner(e);
+            }
+        },
+        [clickData.onClickCapture, onClickCaptureInner, preventDefault, stopPropagation]
     );
 
     // Effects
@@ -105,6 +153,7 @@ function Clickable<OnClickData, OnMouseDownData, OnMouseMoveData, OnMouseUpData,
         onMouseDown: realOnMouseDown,
         onMouseMove: realOnMouseMove,
         onMouseUp: realOnMouseUp,
+        onClickCapture: realOnClickCaptureInner,
         tabIndex: interactable ? 0 : undefined,
     };
     if (typeof href === 'string') {

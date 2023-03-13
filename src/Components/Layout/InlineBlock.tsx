@@ -33,10 +33,10 @@ function InlineBlock<AsType extends keyof JSX.IntrinsicElements = 'span'>(
 
     return (
         <ViewWithoutListeners
+            {...(props as ViewWithoutListenersProps<AsType>)}
             className={classNames(styles.inlineBlock, className)}
             as={as as AsType}
             ref={ref}
-            {...(props as ViewWithoutListenersProps<AsType>)}
         >
             {children}
         </ViewWithoutListeners>

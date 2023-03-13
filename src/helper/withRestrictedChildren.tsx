@@ -1,4 +1,4 @@
-import React, { ComponentType, ForwardedRef } from 'react';
+import React, { ComponentType, ForwardedRef, ReactElement } from 'react';
 import { RbmComponentProps } from '../Components/RbmComponentProps';
 import { WrongChildError } from '../WrongChildError';
 
@@ -38,7 +38,7 @@ export function withRestrictedChildren<C extends ComponentType<RbmComponentProps
 
         const newProps: Record<string, any> = otherProps;
 
-        if (ref && Object.keys(ref).length > 0) {
+        if ((ref && Object.keys(ref).length > 0) || typeof ref === 'function') {
             newProps.ref = ref;
         }
 
@@ -49,5 +49,5 @@ export function withRestrictedChildren<C extends ComponentType<RbmComponentProps
         );
     };
     hocComponent.displayName = displayName;
-    return hocComponent as C;
+    return hocComponent as (props: Props, ref: ForwardedRef<RefType>) => ReactElement;
 }

@@ -14,9 +14,9 @@ export function withForwardRef<PropTypes, ForwardedRefType>(
     styles?: any,
     defaultAllowChildren?: typeof RESTRICT_CHILDREN['allowChildren']
 ) {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    const forwardedComp = React.forwardRef(withRestrictedChildren(React.forwardRef(component), defaultAllowChildren));
+    const forwarded = React.forwardRef(component);
+    forwarded.displayName = component.displayName ?? component.name;
+    const forwardedComp = React.forwardRef(withRestrictedChildren(forwarded, defaultAllowChildren));
     const c: (props: PropTypes, ref: ForwardedRef<ForwardedRefType>) => ReactElement = styles
         ? withStyles(styles)(forwardedComp)
         : forwardedComp;

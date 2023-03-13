@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { InputHTMLAttributes, KeyboardEvent, MutableRefObject, useCallback, useEffect } from 'react';
+import { InputHTMLAttributes, KeyboardEvent, MutableRefObject, useCallback } from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { Override } from '../../../TypeHelpers';
 import { OptionalListener, useListenerWithExtractedProps } from '../../Hooks/useListener';
@@ -8,6 +8,7 @@ import { withForwardRef } from '../../../helper/withForwardRef';
 import styles from './input.scss';
 import classNames from 'classnames';
 import { useComposedRef } from '../../Hooks/useComposedRef';
+import { useOnChangeDone } from '../hooks/useOnChangeDone';
 
 export type InputProps<OnChangeData, OnBlurData, OnChangeDoneData> = RbmComponentProps<
     Override<
@@ -79,19 +80,14 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
     );
 
     // Effects
-    useEffect(() => {
-        const elem = innerRef.current;
-        elem?.addEventListener('change', onChangeDone);
-        return () => {
-            elem?.removeEventListener('change', onChangeDone);
-        };
-    }, [innerRef, onChangeDone, otherProps.type]);
+    useOnChangeDone(onChangeDone, innerRef);
 
     // Other
 
     // Render Functions
 
     return (
+        // eslint-disable-next-line jsx-a11y/label-has-associated-control
         <label className={classNames(styles.input, className)} style={style}>
             {label ? <span className={styles.label}>{label}</span> : null}
             <input

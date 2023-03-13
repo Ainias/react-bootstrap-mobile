@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useWindow } from '../../WindowContext/WindowContext';
 
 export const BreakpointNames = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
 
@@ -32,14 +33,15 @@ const resolveBreakpoint = (width: number) => {
 
 export const useBreakpoint = () => {
     const [size, setSize] = useState(Breakpoints.SM);
+    const window = useWindow();
 
     useEffect(() => {
-        setSize(resolveBreakpoint(window.innerWidth));
-        const calcInnerWidth = () => setTimeout(() => setSize(resolveBreakpoint(window.innerWidth)), 200);
+        setSize(resolveBreakpoint(window?.innerWidth ?? 1024));
+        const calcInnerWidth = () => setTimeout(() => setSize(resolveBreakpoint(window?.innerWidth ?? 1024)), 200);
 
-        window.addEventListener('resize', calcInnerWidth);
-        return () => window.removeEventListener('resize', calcInnerWidth);
-    }, []);
+        window?.addEventListener('resize', calcInnerWidth);
+        return () => window?.removeEventListener('resize', calcInnerWidth);
+    }, [window]);
 
     return size;
 };

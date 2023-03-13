@@ -10,6 +10,7 @@ import { Text } from '../Text/Text';
 import { Clickable } from '../Clickable/Clickable';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { withRenderBrowserOnly } from '../../helper/withRenderBrowserOnly';
+import { useWindow } from '../../WindowContext/WindowContext';
 
 export type MenuItem = {
     label: string;
@@ -28,6 +29,7 @@ function Menu({ className, style, items, y, x, isOpen, onClose }: MenuProps) {
 
     // Refs
     const menuRef = useRef<HTMLDivElement>(null);
+    const window = useWindow();
 
     // States
     const [innerX, setInnerX] = useState(x);
@@ -52,20 +54,20 @@ function Menu({ className, style, items, y, x, isOpen, onClose }: MenuProps) {
                     onClose();
                 }
             };
-            window.addEventListener('mousedown', listener, { capture: true });
-            return () => window.removeEventListener('mousedown', listener, { capture: true });
+            window?.addEventListener('mousedown', listener, { capture: true });
+            return () => window?.removeEventListener('mousedown', listener, { capture: true });
         }
         return undefined;
-    }, [isOpen, onClose]);
+    }, [isOpen, onClose, window]);
 
     useLayoutEffect(() => {
         if (!menuRef.current) {
             return;
         }
         const { width } = getComputedStyle(menuRef.current);
-        const newX = Math.min(x, window.innerWidth - parseFloat(width));
+        const newX = Math.min(x, (window?.innerWidth ?? 0) - parseFloat(width));
         setInnerX(newX);
-    }, [x]);
+    }, [window?.innerWidth, x]);
 
     useLayoutEffect(() => {
         if (!menuRef.current) {
@@ -73,11 +75,11 @@ function Menu({ className, style, items, y, x, isOpen, onClose }: MenuProps) {
         }
         const height = parseFloat(getComputedStyle(menuRef.current).height);
         let newY = y;
-        if (newY > window.innerHeight - height) {
+        if (newY > (window?.innerHeight ?? 0) - height) {
             newY -= height;
         }
         setInnerY(newY);
-    }, [y]);
+    }, [window?.innerHeight, y]);
 
     // Other
 

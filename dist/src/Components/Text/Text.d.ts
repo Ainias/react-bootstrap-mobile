@@ -7,11 +7,12 @@ export declare const TEXT_PRIO: {
     heading: string;
 };
 export declare const TEXT_SIZE: {
+    xSmall: string;
     small: string;
     medium: string;
     large: string;
-    xlarge: string;
-    xxlarge: string;
+    xLarge: string;
+    xxLarge: string;
 };
 export declare type TextProps<AsType extends keyof JSX.IntrinsicElements> = {
     block?: boolean;

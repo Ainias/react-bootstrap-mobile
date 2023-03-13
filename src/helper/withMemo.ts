@@ -9,7 +9,7 @@ export function withMemo<C extends ComponentType<any>>(
     defaultAllowChildren?: typeof RESTRICT_CHILDREN['allowChildren']
 ) {
     const withNoStrings = withRestrictedChildren(component, defaultAllowChildren);
-    const c: any = styles ? withStyles(styles)(withNoStrings) : withNoStrings;
+    const c = styles ? withStyles(styles)(withNoStrings) : withNoStrings;
     const memoizedComponent = React.memo(c, memoComparator) as unknown as C;
     memoizedComponent.displayName = `Memoized(${component.displayName || component.name})`;
     return memoizedComponent;

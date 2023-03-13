@@ -14,6 +14,7 @@ import styles from './seachSelectInput.scss';
 import { Flex } from '../../Layout/Flex';
 import { Grow } from '../../Layout/Grow';
 import { Clickable } from '../../Clickable/Clickable';
+import { useWindow } from '../../../WindowContext/WindowContext';
 
 export type SearchSelectInputProps<OnChangeData> = RbmComponentProps<
     {
@@ -37,6 +38,7 @@ export const SearchSelectInput = withMemo(function SearchSelectInput<OnChangeDat
 
     // Refs
     const containerRef = useRef<HTMLLabelElement>(null);
+    const window = useWindow();
 
     // States
     const [searchText, setSearchText] = useState('');
@@ -63,18 +65,19 @@ export const SearchSelectInput = withMemo(function SearchSelectInput<OnChangeDat
             return;
         }
         const { left, right, bottom: top } = containerRef.current.getBoundingClientRect();
-        setSuggestionsPosition({ top, left, right: window.innerWidth - right });
-    }, []);
+        setSuggestionsPosition({ top, left, right: (window?.innerWidth ?? 0) - right });
+    }, [window?.innerWidth]);
 
     const onChange = useCallback((ev) => {
         setSearchText(ev.target.value);
         setSelectedIndex(0);
     }, []);
-    const onBlur = useCallback(() => setSuggestionsPosition(undefined), []);
     const onFocus = useCallback(() => updateSuggestionPosition(), [updateSuggestionPosition]);
 
     const toggleOption = useCallback(
         (_, value: string) => {
+            console.log('LOG-d toggleOption', value, _);
+
             const newValues = [...values];
             const index = values.indexOf(value);
             if (index === -1) {
@@ -137,6 +140,7 @@ export const SearchSelectInput = withMemo(function SearchSelectInput<OnChangeDat
     );
 
     return (
+        // eslint-disable-next-line jsx-a11y/label-has-associated-control
         <label className={classNames(styles.input, className)} style={style} ref={containerRef}>
             {label ? <span className={styles.label}>{label}</span> : null}
             <Flex className={styles.inputContainer} horizontal={true}>
@@ -146,17 +150,14 @@ export const SearchSelectInput = withMemo(function SearchSelectInput<OnChangeDat
                         className={styles.text}
                         value={searchText}
                         onChange={onChange}
-                        onFocus={onFocus}
-                        onBlur={onBlur}
                         onKeyDown={onKeyPress}
+                        onFocus={onFocus}
                     />
                 </Grow>
             </Flex>
-            {selectableOptions.length > 0 && (
-                <InlineBlock className={styles.selectableOptionContainer} style={suggestionsPosition}>
-                    {selectableOptions.map(renderSelectableOption)}
-                </InlineBlock>
-            )}
+            <InlineBlock className={styles.selectableOptionContainer} style={suggestionsPosition}>
+                {selectableOptions.map(renderSelectableOption)}
+            </InlineBlock>
         </label>
     );
 },

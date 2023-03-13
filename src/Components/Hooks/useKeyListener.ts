@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useWindow } from '../../WindowContext/WindowContext';
 
 function isFormElement(element: EventTarget | null) {
     return (
@@ -14,6 +15,8 @@ export function useKeyListener(
     dependencies: any[] = [],
     ignoreFormElements = true
 ) {
+    const window = useWindow();
+
     useEffect(() => {
         const lowercaseKey = key.toLowerCase();
         const keyListener = (e: KeyboardEvent) => {
@@ -21,10 +24,10 @@ export function useKeyListener(
                 listener(e);
             }
         };
-        window.addEventListener('keydown', keyListener);
-        return () => window.removeEventListener('keydown', keyListener);
+        window?.addEventListener('keydown', keyListener);
+        return () => window?.removeEventListener('keydown', keyListener);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [key, ...dependencies]);
+    }, [window, key, ...dependencies]);
 }
 
 export function useKeyUpListener(

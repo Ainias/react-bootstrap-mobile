@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useRef } from 'react';
 
 export function useDelayed<Args extends any[]>(
     callback: (...args: Args) => void | Promise<void>,
@@ -6,32 +6,41 @@ export function useDelayed<Args extends any[]>(
     delay = 100,
     maxDelay?: number
 ) {
-    const [args, setArgs] = useState<Args | undefined>();
+    const argsRef = useRef<Args | undefined>(undefined);
+    const timeoutRef = useRef<any>(undefined);
+    const mayDelayTimeoutRef = useRef<any>(undefined);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const realCB = useCallback(callback, dependencies);
-    const func = useCallback((...newArgs: Args) => setArgs(newArgs), []);
-    const maxDelayTimeout = useRef<any>();
+    const func = useCallback(
+        (...newArgs: Args) => {
+            argsRef.current = newArgs;
 
-    useEffect(() => {
-        if (Array.isArray(args)) {
             const triggerFunc = () => {
-                clearTimeout(maxDelayTimeout.current);
+                clearTimeout(mayDelayTimeoutRef.current);
+                clearTimeout(timeoutRef.current);
+                timeoutRef.current = undefined;
                 maxDelayTimeout.current = undefined;
-                realCB(...args);
+
+                if (argsRef.current !== undefined) {
+                    realCB(...argsRef.current);
+                }
             };
-            const timeout = setTimeout(triggerFunc, delay);
+
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+            }
+            timeoutRef.current = setTimeout(triggerFunc, delay);
 
             if (maxDelay && maxDelayTimeout.current === undefined) {
                 maxDelayTimeout.current = setTimeout(() => {
                     triggerFunc();
-                    clearTimeout(timeout);
                 }, maxDelay);
             }
-            return () => clearTimeout(timeout);
-        }
-        return undefined;
-    }, [args, realCB, delay, maxDelay]);
+        },
+        [delay, maxDelay, realCB]
+    );
+    const maxDelayTimeout = useRef<any>();
 
     return func;
 }

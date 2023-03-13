@@ -10,6 +10,7 @@ import {
 } from 'react';
 import { Override } from '../../TypeHelpers';
 import { withMemo } from '../../helper/withMemo';
+import { useWindow } from '../../WindowContext/WindowContext';
 
 export type FullScreenProps<AsType extends keyof JSX.IntrinsicElements> = PropsWithChildren<
     Override<
@@ -30,6 +31,7 @@ function FullScreen<AsTag extends keyof JSX.IntrinsicElements = 'span'>({
 
     // Refs
     const containerRef = useRef<ComponentRef<AsTag>>(null);
+    const window = useWindow();
 
     // States
 
@@ -70,9 +72,9 @@ function FullScreen<AsTag extends keyof JSX.IntrinsicElements = 'span'>({
                 toggleFullscreen();
             }
         };
-        window.addEventListener('keyup', listener);
-        return () => window.removeEventListener('keyup', listener);
-    }, [fullscreenKey, toggleFullscreen]);
+        window?.addEventListener('keyup', listener);
+        return () => window?.removeEventListener('keyup', listener);
+    }, [fullscreenKey, toggleFullscreen, window]);
 
     // Other
 

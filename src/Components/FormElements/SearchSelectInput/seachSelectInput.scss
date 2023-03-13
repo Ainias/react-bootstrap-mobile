@@ -7,6 +7,12 @@
   position: relative;
   padding-bottom: 0.1rem;
 
+  &:focus-within {
+    .selectableOptionContainer {
+      display: inherit;
+    }
+  }
+
   @include design($material) {
     background-image: linear-gradient(to top, transparent 1px, #afafaf 1px);
     background-size: 100% 2px;
@@ -59,10 +65,12 @@
   background-color: var(--flavor-accent);
   padding: 0.1rem 0.2rem;
   margin-right: 0.1rem;
+  margin-bottom: 0.1rem;
   border-radius: 4px;
 }
 
 .selectableOptionContainer {
+  display: none;
   position: fixed;
   background-color: white;
   z-index: 1100;

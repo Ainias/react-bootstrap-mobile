@@ -1,0 +1,92 @@
+$thumbWidth: 16;
+$thumbHeight: 16;
+$trackHeight: $thumbHeight/4;
+$maxScreenSize: 10000;
+
+.slider {
+  --thumb-height: #{$thumbHeight}px;
+  --thumb-width: #{$thumbWidth}px;
+  --track-height: #{$trackHeight}px;
+  --clip-edges: 0.125rem;
+
+  width: 100%;
+
+  .input {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    background: transparent;
+
+    transition: all ease 100ms;
+    height: var(--thumb-height);
+
+    &:active {
+      cursor: grabbing;
+    }
+
+    @mixin track {
+      -webkit-appearance: none;
+      appearance: none;
+      transition: all ease 100ms;
+      height: var(--thumb-height);
+      position: relative;
+      width: 100%;
+      border-radius: var(--track-height);
+      background: linear-gradient(var(--border-light) 0 0) scroll no-repeat center /
+		100% calc(var(--track-height) + 1px);
+    }
+
+    @mixin thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: var(--thumb-width);
+      transition: all ease 100ms;
+      height: var(--thumb-height);
+      background: var(--flavor-accent);
+      position: relative;
+      border: 0;
+      border-radius: var(--thumb-width);
+
+    }
+
+    &::-webkit-slider-runnable-track {
+      @include track;
+    }
+
+    &::-webkit-slider-thumb {
+      @include thumb;
+
+      box-shadow: calc(-100vmax - (var(--thumb-width, var(--thumb-height)) / 2)) 0 0 100vmax var(--flavor-accent);
+      $clipTop: ($thumbHeight - $trackHeight)/2;
+      $clipBottom: $thumbHeight -$clipTop;
+      clip-path: path("M 0, #{0.5*$thumbHeight} \
+      a #{0.5*$thumbWidth} #{0.5*$thumbHeight}, 0 1 0, #{$thumbWidth} 0 \
+      a #{0.5*$thumbWidth} #{0.5*$thumbHeight}, 0 1 0, #{-1*$thumbWidth} 0 \
+      L  #{0.5*$thumbWidth} #{$clipTop} \
+      L  #{-1*$maxScreenSize} #{$clipTop} \
+      L  #{-1*$maxScreenSize} #{$clipBottom} \
+      L  #{0.5*$thumbWidth} #{$clipBottom} \
+      z");
+    }
+
+    &::-moz-range-thumb {
+      @include thumb;
+    }
+
+    &::-moz-range-track {
+      @include track;
+    }
+
+    &::-moz-range-progress {
+      background: transparent;
+      appearance: none;
+      background: var(--flavor-accent);
+      transition-delay: 30ms;
+      height: var(--track-height);
+      border-radius: var(--track-height);
+    }
+  }
+}

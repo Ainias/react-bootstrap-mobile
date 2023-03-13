@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ComponentRef, ForwardedRef, PropsWithChildren, ReactElement, RefAttributes, useMemo } from 'react';
+import { ComponentRef, ForwardedRef, PropsWithChildren, ReactElement, RefAttributes } from 'react';
 import { Override } from '../../TypeHelpers';
 
 export type ViewProps<AsType extends keyof JSX.IntrinsicElements> = PropsWithChildren<
@@ -26,7 +26,10 @@ function View<AsType extends keyof JSX.IntrinsicElements>(
 
     // Render Functions
     const element = (as as keyof JSX.IntrinsicElements) ?? 'span';
-    const props = useMemo(() => ({ ...otherProps, ref }), [otherProps, ref]);
+    const props = {
+        ...otherProps,
+        ref,
+    };
     return React.createElement(element, props, children);
 }
 
