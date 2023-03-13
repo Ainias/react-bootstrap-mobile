@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { RbmComponentProps } from '../RbmComponentProps';
-export declare type InViewportProps = RbmComponentProps<{
+export type InViewportProps = RbmComponentProps<{
     threshold?: number;
     onInViewportChange: (isInViewport: boolean) => void;
     root?: HTMLElement;

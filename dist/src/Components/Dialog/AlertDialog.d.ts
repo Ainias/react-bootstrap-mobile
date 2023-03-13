@@ -1,5 +1,5 @@
 /// <reference types="react" />
-export declare type AlertDialogProps = {
+export type AlertDialogProps = {
     title?: string;
     message: string;
     close: () => void;

@@ -2,11 +2,11 @@ import { RbmComponentProps } from '../../RbmComponentProps';
 import { Override } from '../../../TypeHelpers';
 import { InputHTMLAttributes } from 'react';
 import { OptionalListener } from '../../Hooks/useListener';
-export declare type ImageType = {
+export type ImageType = {
     name: string;
     url: string;
 };
-export declare type ImageInputProps<OnChangeData> = RbmComponentProps<Override<InputHTMLAttributes<HTMLInputElement>, {
+export type ImageInputProps<OnChangeData> = RbmComponentProps<Override<InputHTMLAttributes<HTMLInputElement>, {
     defaultValue?: ImageType;
     value?: ImageType;
     label?: string;

@@ -7,7 +7,7 @@ export declare const CONTAINER_CLASSES: {
     xl: string;
     xxl: string;
 };
-export declare type ContainerProps = RbmComponentProps<{
+export type ContainerProps = RbmComponentProps<{
     fluid?: boolean | keyof typeof CONTAINER_CLASSES;
 }>;
 declare function Container({ fluid, className, children, style }: ContainerProps): JSX.Element;

@@ -2,7 +2,7 @@ import { InputHTMLAttributes } from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { Override } from '../../../TypeHelpers';
 import { OptionalListener } from '../../Hooks/useListener';
-export declare type InputProps<OnChangeData, OnBlurData, OnChangeDoneData> = RbmComponentProps<Override<Omit<InputHTMLAttributes<HTMLInputElement>, 'onInput'>, {
+export type InputProps<OnChangeData, OnBlurData, OnChangeDoneData> = RbmComponentProps<Override<Omit<InputHTMLAttributes<HTMLInputElement>, 'onInput'>, {
     label?: string;
     onChangeText?: (newText: string) => void;
     onEnter?: (newText: string) => void;

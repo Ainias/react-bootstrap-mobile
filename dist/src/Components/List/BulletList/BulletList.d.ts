@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { RbmComponentProps } from '../../RbmComponentProps';
-export declare type BulletListProps = RbmComponentProps<{
+export type BulletListProps = RbmComponentProps<{
     numbered?: boolean;
 }>;
 declare function BulletList({ numbered, className, children, style }: BulletListProps): JSX.Element;

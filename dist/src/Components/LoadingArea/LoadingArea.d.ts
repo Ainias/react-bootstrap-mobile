@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { RbmComponentProps } from '../RbmComponentProps';
-export declare type LoadingAreaProps = RbmComponentProps<{
+export type LoadingAreaProps = RbmComponentProps<{
     opacity?: number;
     loading: boolean;
     fullWidth?: boolean;

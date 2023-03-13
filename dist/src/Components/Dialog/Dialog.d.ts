@@ -1,6 +1,6 @@
 import { RbmComponentProps } from '../RbmComponentProps';
 import { ReactElement } from 'react';
-export declare type DialogProps<ReturnData> = RbmComponentProps<{
+export type DialogProps<ReturnData> = RbmComponentProps<{
     closable?: boolean;
     onClose?: (data?: ReturnData, identifier?: number) => void;
     identifier?: number;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ComponentRef, PropsWithChildren, ReactElement, RefAttributes } from 'react';
 import { Override } from '../../TypeHelpers';
-export declare type ViewProps<AsType extends keyof JSX.IntrinsicElements> = PropsWithChildren<Override<React.ComponentPropsWithoutRef<AsType>, {
+export type ViewProps<AsType extends keyof JSX.IntrinsicElements> = PropsWithChildren<Override<React.ComponentPropsWithoutRef<AsType>, {
     as?: AsType;
     children?: React.ReactNode;
 }>>;

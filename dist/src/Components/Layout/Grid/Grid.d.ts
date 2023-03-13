@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { RbmComponentProps } from '../../RbmComponentProps';
-export declare type GridProps = RbmComponentProps<{
+export type GridProps = RbmComponentProps<{
     columns?: number;
     rows?: number;
 }>;

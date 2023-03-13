@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { RbmComponentProps } from '../../RbmComponentProps';
-export declare type GridItemProps = RbmComponentProps<{
+export type GridItemProps = RbmComponentProps<{
     size: number;
     sm?: number;
     md?: number;

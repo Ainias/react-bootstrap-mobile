@@ -3,8 +3,8 @@ import { FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
 import { RbmComponentProps } from '../RbmComponentProps';
 import { Override } from '../../TypeHelpers';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-export declare type IconSource = IconProp | string;
-export declare type IconProps = RbmComponentProps<Override<FontAwesomeIconProps, {
+export type IconSource = IconProp | string;
+export type IconProps = RbmComponentProps<Override<FontAwesomeIconProps, {
     icon: IconSource;
     alt?: string;
 }>>;

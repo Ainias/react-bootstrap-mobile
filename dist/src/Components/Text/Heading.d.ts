@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import { RbmComponentProps, WithStringProps } from '../RbmComponentProps';
 import { EmptyProps } from '../../helper/EmptyProps';
-export declare type HeadingProps = RbmComponentProps<EmptyProps, WithStringProps>;
+export type HeadingProps = RbmComponentProps<EmptyProps, WithStringProps>;
 declare function Heading({ children, className, style }: HeadingProps): JSX.Element;
 declare const HeadingMemo: typeof Heading;
 export { HeadingMemo as Heading };

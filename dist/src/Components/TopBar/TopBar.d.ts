@@ -1,18 +1,18 @@
 import { ComponentType } from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
 import { IconSource } from '../Icon/Icon';
-export declare type TopBarActionButtonType = {
+export type TopBarActionButtonType = {
     title: string;
     icon?: IconSource;
     action: () => void;
     disabled?: boolean;
     key?: string;
 };
-export declare type TopBarComponentButtonType = Partial<TopBarActionButtonType> & {
+export type TopBarComponentButtonType = Partial<TopBarActionButtonType> & {
     component: ComponentType<Record<string, any>>;
 };
-export declare type TopBarButtonType = TopBarComponentButtonType | TopBarActionButtonType;
-export declare type TopBarProps = RbmComponentProps<{
+export type TopBarButtonType = TopBarComponentButtonType | TopBarActionButtonType;
+export type TopBarProps = RbmComponentProps<{
     title?: string;
     leftButtons?: TopBarButtonType[];
     rightButtons?: TopBarButtonType[];

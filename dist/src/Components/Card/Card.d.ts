@@ -1,6 +1,6 @@
 import { RbmComponentProps } from '../RbmComponentProps';
 import { ReactElement } from 'react';
-export declare type CardProps = RbmComponentProps<{
+export type CardProps = RbmComponentProps<{
     title?: string | ReactElement;
     fullHeight?: boolean;
     noPaddingHeight?: boolean;

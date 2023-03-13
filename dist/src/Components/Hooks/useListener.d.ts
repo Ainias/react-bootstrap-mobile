@@ -1,13 +1,13 @@
-export declare type ListenerWithData<DataType, Event = void | any, ReturnType = void> = (eventData: Event, extraData: DataType) => ReturnType;
-export declare type ListenerWithoutData<Event = void | any, ReturnType = void> = (eventData: Event) => ReturnType;
-export declare type Listener<ListenerProperty extends string, DataType, Event = any | void, ReturnType = void> = ({
+export type ListenerWithData<DataType, Event = void | any, ReturnType = void> = (eventData: Event, extraData: DataType) => ReturnType;
+export type ListenerWithoutData<Event = void | any, ReturnType = void> = (eventData: Event) => ReturnType;
+export type Listener<ListenerProperty extends string, DataType, Event = any | void, ReturnType = void> = ({
     [Property in ListenerProperty]: ListenerWithData<DataType, Event, ReturnType>;
 } & {
     [Property in `${ListenerProperty}Data`]: DataType;
 }) | {
     [Property in ListenerProperty]: ListenerWithoutData<Event, ReturnType>;
 };
-export declare type OptionalListener<ListenerProperty extends string, DataType, Event = any | void, ReturnType = void> = ({
+export type OptionalListener<ListenerProperty extends string, DataType, Event = any | void, ReturnType = void> = ({
     [Property in ListenerProperty]: ListenerWithData<DataType, Event, ReturnType>;
 } & {
     [Property in `${ListenerProperty}Data`]: DataType;

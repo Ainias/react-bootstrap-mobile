@@ -1,22 +1,22 @@
 import { RbmComponentProps } from '../RbmComponentProps';
 import { IconSource } from '../Icon/Icon';
 import { ComponentType } from 'react';
-export declare type TabBarComponentButtonType = {
+export type TabBarComponentButtonType = {
     component: ComponentType<Record<string, any>>;
     key?: string;
 };
-export declare type TabBarTitleButtonType = {
+export type TabBarTitleButtonType = {
     title: string;
     icon?: IconSource;
     key?: string;
 };
-export declare type TabBarIconButtonType = {
+export type TabBarIconButtonType = {
     title?: string;
     icon: IconSource;
     key?: string;
 };
-export declare type TabBarButtonType = TabBarComponentButtonType | TabBarTitleButtonType | TabBarIconButtonType;
-export declare type TabBarProps = RbmComponentProps<{
+export type TabBarButtonType = TabBarComponentButtonType | TabBarTitleButtonType | TabBarIconButtonType;
+export type TabBarProps = RbmComponentProps<{
     buttons: TabBarButtonType[];
     startActiveTab?: number;
     onTabChange: (newActiveTab: number) => void;

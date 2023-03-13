@@ -1,6 +1,6 @@
 import React, { ComponentType } from 'react';
 import { EmptyProps } from '../../helper/EmptyProps';
-export declare type ShowDialog = <P = EmptyProps, R = any, C extends ComponentType<(P & {
+export type ShowDialog = <P = EmptyProps, R = any, C extends ComponentType<(P & {
     close: (result?: R) => void;
 }) | P> = ComponentType<(P & {
     close: (result?: R) => void;

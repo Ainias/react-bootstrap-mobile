@@ -1,4 +1,4 @@
-export declare type SpoilerGroupOptions = {
+export type SpoilerGroupOptions = {
     closeWithClick: boolean;
     noClosingAnimation: boolean;
 };

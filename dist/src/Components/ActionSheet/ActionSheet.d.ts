@@ -1,19 +1,19 @@
 import { RbmComponentProps } from '../RbmComponentProps';
 import { IconSource } from '../Icon/Icon';
-export declare type ActionSheetAction<ActionData> = {
+export type ActionSheetAction<ActionData> = {
     name: string;
     icon?: IconSource;
     action: (data?: ActionData) => void;
     actionData?: ActionData;
     isDeleteAction?: boolean;
 };
-export declare type ActionSheetProps = RbmComponentProps<{
+export type ActionSheetProps = RbmComponentProps<{
     title?: string;
     actions: ActionSheetAction<any>[];
     cancelText?: string;
     onClose?: () => void;
 }>;
-export declare type ActionSheetHandle = {
+export type ActionSheetHandle = {
     show: () => void;
     hide: () => void;
 };

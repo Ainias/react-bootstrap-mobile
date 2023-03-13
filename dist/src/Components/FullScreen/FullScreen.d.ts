@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ComponentPropsWithoutRef, PropsWithChildren } from 'react';
 import { Override } from '../../TypeHelpers';
-export declare type FullScreenProps<AsType extends keyof JSX.IntrinsicElements> = PropsWithChildren<Override<ComponentPropsWithoutRef<AsType>, {
+export type FullScreenProps<AsType extends keyof JSX.IntrinsicElements> = PropsWithChildren<Override<ComponentPropsWithoutRef<AsType>, {
     as?: AsType;
     fullscreenKey?: string;
     onEnterFullscreen?: () => void;

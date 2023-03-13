@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { RbmComponentProps } from '../RbmComponentProps';
-export declare type TopBarButtonProps = RbmComponentProps<{
+export type TopBarButtonProps = RbmComponentProps<{
     disabled?: boolean;
     onClick?: () => void;
 }>;

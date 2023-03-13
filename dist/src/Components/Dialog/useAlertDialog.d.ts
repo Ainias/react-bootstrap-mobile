@@ -1,1 +1,1 @@
-export declare function useAlertDialog(): (message: string, title?: string | undefined) => Promise<any>;
+export declare function useAlertDialog(): (message: string, title?: string) => Promise<any>;

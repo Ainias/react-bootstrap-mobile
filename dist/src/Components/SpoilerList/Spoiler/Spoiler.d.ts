@@ -2,7 +2,7 @@ import { RbmComponentProps } from '../../RbmComponentProps';
 import { ReactChild } from 'react';
 import { OptionalListener } from '../../Hooks/useListener';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-export declare type SpoilerProps<OnClickData> = RbmComponentProps<{
+export type SpoilerProps<OnClickData> = RbmComponentProps<{
     title: ReactChild;
     initialOpen?: boolean;
     open?: boolean;

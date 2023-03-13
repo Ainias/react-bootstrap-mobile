@@ -2,7 +2,7 @@ import * as React from 'react';
 import { RbmComponentProps, WithNoChildren } from '../RbmComponentProps';
 import { CSSProperties, DOMAttributes } from 'react';
 import { Override } from '../../TypeHelpers';
-export declare type ImageProps = RbmComponentProps<Override<Omit<React.ComponentPropsWithoutRef<'img'>, keyof DOMAttributes<'img'>>, {
+export type ImageProps = RbmComponentProps<Override<Omit<React.ComponentPropsWithoutRef<'img'>, keyof DOMAttributes<'img'>>, {
     src: string;
     style?: CSSProperties;
     alt?: string;

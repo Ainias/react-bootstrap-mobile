@@ -1,5 +1,5 @@
 /// <reference types="react" />
-export declare type ConfirmDialogProps = {
+export type ConfirmDialogProps = {
     title?: string;
     message: string;
     close: (confirmed: boolean) => void;

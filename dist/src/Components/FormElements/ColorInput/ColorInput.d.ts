@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { OptionalListener } from '../../Hooks/useListener';
-export declare type ColorInputProps<OnChangeData> = {
+export type ColorInputProps<OnChangeData> = {
     defaultValue?: string;
     value?: string;
     label?: string;

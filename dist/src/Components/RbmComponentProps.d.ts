@@ -1,30 +1,30 @@
 import { CSSProperties, ReactNode } from 'react';
 import { Recursive } from '../TypeHelpers';
-declare type Child = Recursive<JSX.Element | undefined | null | Child[]> | false;
-export declare type WithNoStringProps = {
+type Child = Recursive<JSX.Element | undefined | null | Child[]> | false;
+export type WithNoStringProps = {
     children?: Child;
     __allowChildren?: 'html';
 } | {
     children?: ReactNode;
     __allowChildren: 'text' | 'all';
 };
-export declare type WithNoStringAndChildrenProps = {
+export type WithNoStringAndChildrenProps = {
     children: Child;
     __allowChildren?: 'html';
 } | {
     children: ReactNode;
     __allowChildren: 'text' | 'all';
 };
-export declare type WithStringProps = {
+export type WithStringProps = {
     children?: Recursive<string>;
 };
-export declare type WithStringAndChildrenProps = {
+export type WithStringAndChildrenProps = {
     children: Recursive<string>;
 };
-export declare type WithNoChildren = {
+export type WithNoChildren = {
     children?: never;
 };
-export declare type RbmComponentProps<SpecialProps, ChildrenProps = WithNoStringProps> = ChildrenProps & {
+export type RbmComponentProps<SpecialProps, ChildrenProps = WithNoStringProps> = ChildrenProps & {
     className?: string;
     style?: CSSProperties;
 } & SpecialProps;

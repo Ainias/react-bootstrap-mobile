@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { RbmComponentProps, WithNoChildren } from '../RbmComponentProps';
-export declare type ButtonDialogProps = RbmComponentProps<{
+export type ButtonDialogProps = RbmComponentProps<{
     title?: string;
     message: string;
     buttons: {

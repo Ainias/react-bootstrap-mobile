@@ -1,1 +1,1 @@
-export declare type EmptyProps = {};
+export type EmptyProps = {};

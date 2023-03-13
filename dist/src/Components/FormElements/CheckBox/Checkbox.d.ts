@@ -1,6 +1,6 @@
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { InputHTMLAttributes } from 'react';
-export declare type CheckboxProps = RbmComponentProps<{
+export type CheckboxProps = RbmComponentProps<{
     label?: string;
     children?: string;
     isLabelBeforeCheckbox?: boolean;
