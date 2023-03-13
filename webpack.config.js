@@ -20,64 +20,66 @@ const banner = `
   LICENSE file in the root directory of this source tree.
 `;
 
-module.exports = {
-    mode: 'production',
-    // devtool: 'source-map',
-    entry: './bootstrapReactMobile.ts',
-    output: {
-        filename: 'bootstrapReactMobile.js',
-        path: path.resolve(__dirname, 'dist'),
-        library: { type: 'umd' },
-        clean: true,
-        globalObject: 'this',
-    },
-    externals: {
-        react: 'commonjs react',
-        'react-dom': 'commonjs react-dom',
-        'isomorphic-style-loader': 'commonjs2 isomorphic-style-loader',
-        '@fortawesome/react-fontawesome': 'commonjs2 @fortawesome/react-fontawesome',
-        '@fortawesome/fontawesome-svg-core': 'commonjs2 @fortawesome/fontawesome-svg-core',
-        '@fortawesome/free-solid-svg-icons': 'commonjs2 @fortawesome/free-solid-svg-icons',
-        'react-beautiful-dnd': 'commonjs2 react-beautiful-dnd',
-    },
-    optimization: {
-        minimize: false,
-        minimizer: [new TerserPlugin({ extractComments: false })],
-    },
-    module: {
-        rules: [
-            {
-                test: /\.(ts|tsx)?$/,
-                exclude: /(node_modules)/,
-                use: [{ loader: 'babel-loader' }, { loader: 'ts-loader' }],
-            },
-            {
-                //Compiliert SASS zu CSS und speichert es in Datei
-                test: /\.scss$/,
-                use: [
-                    { loader: 'isomorphic-style-loader' },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            esModule: false,
-                            modules: {
-                                localIdentName: '[local]__[hash:base64:5]',
+module.exports = (env) => {
+    return {
+        mode: env.production ? 'production' : 'development',
+        // devtool: 'source-map',
+        entry: './bootstrapReactMobile.ts',
+        output: {
+            filename: 'bootstrapReactMobile.js',
+            path: path.resolve(__dirname, 'dist'),
+            library: { type: 'umd' },
+            clean: true,
+            globalObject: 'this',
+        },
+        externals: {
+            react: 'commonjs react',
+            'react-dom': 'commonjs react-dom',
+            'isomorphic-style-loader': 'commonjs2 isomorphic-style-loader',
+            '@fortawesome/react-fontawesome': 'commonjs2 @fortawesome/react-fontawesome',
+            '@fortawesome/fontawesome-svg-core': 'commonjs2 @fortawesome/fontawesome-svg-core',
+            '@fortawesome/free-solid-svg-icons': 'commonjs2 @fortawesome/free-solid-svg-icons',
+            'react-beautiful-dnd': 'commonjs2 react-beautiful-dnd',
+        },
+        optimization: {
+            minimize: false,
+            minimizer: [new TerserPlugin({ extractComments: false })],
+        },
+        module: {
+            rules: [
+                {
+                    test: /\.(ts|tsx)?$/,
+                    exclude: /(node_modules)/,
+                    use: [{ loader: 'babel-loader' }, { loader: 'ts-loader' }],
+                },
+                {
+                    //Compiliert SASS zu CSS und speichert es in Datei
+                    test: /\.scss$/,
+                    use: [
+                        { loader: 'isomorphic-style-loader' },
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                esModule: false,
+                                modules: {
+                                    localIdentName: '[local]__[hash:base64:5]',
+                                },
                             },
                         },
-                    },
-                    { loader: 'sass-loader' },
-                ],
-            },
+                        { loader: 'sass-loader' },
+                    ],
+                },
+            ],
+        },
+        plugins: [
+            // new PrettierPlugin(),
+            // new MiniCssExtractPlugin({
+            //     filename: 'css/index.css',
+            // }),
+            new webpack.BannerPlugin(banner),
         ],
-    },
-    plugins: [
-        // new PrettierPlugin(),
-        // new MiniCssExtractPlugin({
-        //     filename: 'css/index.css',
-        // }),
-        new webpack.BannerPlugin(banner),
-    ],
-    resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.json'],
-    },
+        resolve: {
+            extensions: ['.ts', '.tsx', '.js', '.json'],
+        },
+    };
 };
