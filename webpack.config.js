@@ -23,7 +23,7 @@ const banner = `
 module.exports = (env) => {
     return {
         mode: env.production ? 'production' : 'development',
-        // devtool: 'source-map',
+        devtool: env.production ? 'source-map' : 'eval-source-map',
         entry: './bootstrapReactMobile.ts',
         output: {
             filename: 'bootstrapReactMobile.js',

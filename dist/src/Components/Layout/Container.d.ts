@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { RbmComponentProps } from '../RbmComponentProps';
 export declare const CONTAINER_CLASSES: {
     sm: string;
@@ -10,6 +9,4 @@ export declare const CONTAINER_CLASSES: {
 export type ContainerProps = RbmComponentProps<{
     fluid?: boolean | keyof typeof CONTAINER_CLASSES;
 }>;
-declare function Container({ fluid, className, children, style }: ContainerProps): JSX.Element;
-declare const ContainerMemo: typeof Container;
-export { ContainerMemo as Container };
+export declare const Container: ({ fluid, className, children, style }: ContainerProps) => JSX.Element;

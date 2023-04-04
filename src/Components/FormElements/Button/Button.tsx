@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Override } from '../../../TypeHelpers';
+import { Override } from '@ainias42/js-helper';
 import { OptionalListener, useListener } from '../../Hooks/useListener';
 
 import styles from './button.scss';

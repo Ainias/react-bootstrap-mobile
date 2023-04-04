@@ -1,4 +1,4 @@
-import { Override } from '../../../TypeHelpers';
+import { Override } from '@ainias42/js-helper';
 import { OptionalListener } from '../../Hooks/useListener';
 import { HTMLAttributes } from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';

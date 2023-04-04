@@ -25,7 +25,7 @@ git clone $REPOSITORY project
 cd project
 
 npm install
-npm run build
+npm run build:production
 git add -u
 git commit -m "pre-version-commit for version $versionName" || echo "no commit needed"
 npm version "$versionName"

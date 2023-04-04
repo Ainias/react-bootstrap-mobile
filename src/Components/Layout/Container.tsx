@@ -17,7 +17,7 @@ export type ContainerProps = RbmComponentProps<{
     fluid?: boolean | keyof typeof CONTAINER_CLASSES;
 }>;
 
-function Container({ fluid, className, children, style }: ContainerProps) {
+export const Container = withMemo(function Container({ fluid, className, children, style }: ContainerProps) {
     // Variables
 
     // Refs
@@ -50,8 +50,4 @@ function Container({ fluid, className, children, style }: ContainerProps) {
             {children}
         </div>
     );
-}
-
-// Need ContainerMemo for autocompletion of phpstorm
-const ContainerMemo = withMemo(Container, styles);
-export { ContainerMemo as Container };
+}, styles);
