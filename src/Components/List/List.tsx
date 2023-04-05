@@ -32,15 +32,11 @@ export const List = withMemo(function List<ItemType>({
 
     // Callbacks
     const renderItemInner = useCallback<ComponentType<ListChildComponentProps>>(
-        ({ index, style: itemStyle }) => {
-            return renderItem(items[index], itemStyle, index);
-        },
+        ({ index, style: itemStyle }) => renderItem(items[index], itemStyle, index),
         [items, renderItem]
     );
 
-    const setHeight = useCallback<SizeCalculatorProps['onSize']>((_, height) => {
-        setItemHeight(height);
-    }, []);
+    const setHeight = useCallback<SizeCalculatorProps['onSize']>((_, height) => setItemHeight(height), []);
 
     // Effects
 
@@ -68,17 +64,19 @@ export const List = withMemo(function List<ItemType>({
                                 )}
                             </SizeCalculator>
                         )}
-                        <FixedSizeList
-                            height={height}
-                            itemCount={items.length}
-                            width={width}
-                            itemSize={itemHeight}
-                            style={style}
-                            className={className}
-                            itemData={items}
-                        >
-                            {renderItemInner}
-                        </FixedSizeList>
+                        {height !== undefined && width !== undefined && (
+                            <FixedSizeList
+                                height={height}
+                                itemCount={items.length}
+                                width={width}
+                                itemSize={itemHeight}
+                                style={style}
+                                className={className}
+                                itemData={items}
+                            >
+                                {renderItemInner}
+                            </FixedSizeList>
+                        )}
                     </>
                 );
             }}
