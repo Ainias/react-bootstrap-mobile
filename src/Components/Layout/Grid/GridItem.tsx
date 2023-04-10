@@ -13,18 +13,21 @@ export type GridItemProps = RbmComponentProps<{
     lg?: number;
     xl?: number;
     xxl?: number;
+    print?: number;
     startXs?: number;
     startSm?: number;
     startMd?: number;
     startLg?: number;
     startXl?: number;
     startXxl?: number;
+    startPrint?: number;
     orderXs?: number;
     orderSm?: number;
     orderMd?: number;
     orderLg?: number;
     orderXl?: number;
     orderXxl?: number;
+    orderPrint?: number;
 }>;
 
 function GridItem({
@@ -38,18 +41,21 @@ function GridItem({
     lg,
     xl,
     xxl,
+    print,
     startXs,
     startMd,
     startSm,
     startLg,
     startXl,
     startXxl,
+    startPrint,
     orderXs,
     orderSm,
     orderMd,
     orderLg,
     orderXxl,
     orderXl,
+    orderPrint,
 }: GridItemProps) {
     // Variables
 
@@ -68,6 +74,9 @@ function GridItem({
     }
     if (xxl) {
         classes.push(`item-xxl-${xxl}`);
+    }
+    if (print) {
+        classes.push(`item-print-${print}`);
     }
 
     if (startXs) {
@@ -88,6 +97,9 @@ function GridItem({
     if (startXxl) {
         classes.push(`start-xxl-${startXxl}`);
     }
+    if (startPrint) {
+        classes.push(`start-print-${startPrint}`);
+    }
 
     if (orderXs) {
         classes.push(`order-xs-${orderXs}`);
@@ -106,6 +118,9 @@ function GridItem({
     }
     if (orderXxl) {
         classes.push(`order-xxl-${orderXxl}`);
+    }
+    if (orderPrint) {
+        classes.push(`order-print-${orderPrint}`);
     }
 
     // Refs

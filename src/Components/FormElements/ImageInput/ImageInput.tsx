@@ -23,6 +23,7 @@ export type ImageInputProps<OnChangeData> = RbmComponentProps<
     >
 >;
 
+// TODO use MultipleFileInput internal
 function ImageInput<OnChangeData>({
     className,
     style,
@@ -79,7 +80,7 @@ function ImageInput<OnChangeData>({
 
     return (
         // eslint-disable-next-line jsx-a11y/label-has-associated-control
-        <label className={classNames(styles.imageInput, className)} style={style}>
+        <label className={classNames(styles.fileInput, className)} style={style}>
             {label ? <span>{label}</span> : null}
             <img
                 src={(value ?? image)?.url}

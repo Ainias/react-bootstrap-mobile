@@ -1,10 +1,12 @@
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { InputHTMLAttributes } from 'react';
-export type CheckboxProps = RbmComponentProps<{
+import { Override } from '@ainias42/js-helper';
+import { OptionalListener } from '../../Hooks/useListener';
+export type CheckboxProps<OnChangeData, OnChangeCheckedData> = RbmComponentProps<Override<InputHTMLAttributes<HTMLInputElement>, {
     label?: string;
     children?: string;
     isLabelBeforeCheckbox?: boolean;
-} & InputHTMLAttributes<HTMLInputElement>>;
-declare function Checkbox({ children, label, isLabelBeforeCheckbox, id, className, style, ...props }: CheckboxProps): JSX.Element;
+} & OptionalListener<'onChange', OnChangeData> & OptionalListener<'onChangeChecked', OnChangeCheckedData, boolean>>>;
+declare function Checkbox<OnChangeData, OnChangeCheckedData>({ children, label, isLabelBeforeCheckbox, id, className, style, ...props }: CheckboxProps<OnChangeData, OnChangeCheckedData>): JSX.Element;
 declare const tmp: typeof Checkbox;
 export { tmp as Checkbox };

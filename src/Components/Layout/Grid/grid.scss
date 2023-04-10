@@ -40,4 +40,27 @@ $breakpoints: $grid-breakpoints;
       }
     }
   }
+
+  @media print {
+    @for $i from 1 through $columns {
+      .item-print-#{$i} {
+        grid-column: auto / span $i;
+      }
+    }
+
+    // Start with `1` because `0` is and invalid value.
+    // Ends with `$columns - 1` because offsetting by the width of an entire row isn't possible.
+    @for $i from 1 through ($columns - 1) {
+      .start-print-#{$i} {
+        grid-column-start: $i;
+      }
+    }
+
+    // Add classes for reordering
+    @for $i from -10 through 10 {
+      .order-print-#{$i} {
+        order: $i;
+      }
+    }
+  }
 }

@@ -1,20 +1,26 @@
 import * as React from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';
-import { InputHTMLAttributes } from 'react';
+import { ChangeEventHandler, InputHTMLAttributes, useCallback } from 'react';
 
 import styles from './checkbox.scss';
 import { withMemo } from '../../../helper/withMemo';
 import classNames from 'classnames';
+import { Override } from '@ainias42/js-helper';
+import { OptionalListener, useListenerWithExtractedProps } from '../../Hooks/useListener';
 
-export type CheckboxProps = RbmComponentProps<
-    {
-        label?: string;
-        children?: string;
-        isLabelBeforeCheckbox?: boolean;
-    } & InputHTMLAttributes<HTMLInputElement>
+export type CheckboxProps<OnChangeData, OnChangeCheckedData> = RbmComponentProps<
+    Override<
+        InputHTMLAttributes<HTMLInputElement>,
+        {
+            label?: string;
+            children?: string;
+            isLabelBeforeCheckbox?: boolean;
+        } & OptionalListener<'onChange', OnChangeData> &
+            OptionalListener<'onChangeChecked', OnChangeCheckedData, boolean>
+    >
 >;
 
-function Checkbox({
+function Checkbox<OnChangeData, OnChangeCheckedData>({
     children,
     label = '',
     isLabelBeforeCheckbox = false,
@@ -22,7 +28,7 @@ function Checkbox({
     className,
     style,
     ...props
-}: CheckboxProps) {
+}: CheckboxProps<OnChangeData, OnChangeCheckedData>) {
     // Variables
 
     // States
@@ -30,6 +36,23 @@ function Checkbox({
     // Refs
 
     // Callbacks
+    const [onChange, otherPropsWithoutChange] = useListenerWithExtractedProps<'onChange', OnChangeData>(
+        'onChange',
+        props
+    );
+
+    const [onChangeChecked, otherPropsWithoutData] = useListenerWithExtractedProps<
+        'onChangeChecked',
+        OnChangeCheckedData
+    >('onChangeChecked', otherPropsWithoutChange);
+
+    const onChangeInner = useCallback<ChangeEventHandler<HTMLInputElement>>(
+        (e) => {
+            onChangeChecked(e.target.checked);
+            onChange(e);
+        },
+        [onChange, onChangeChecked]
+    );
 
     // Effects
 
@@ -49,7 +72,13 @@ function Checkbox({
         <span className={classNames(styles.checkbox, className)} style={style}>
             <label htmlFor={id} key={id}>
                 <span className={styles.label}>{preLabel}</span>
-                <input {...props} type="checkbox" id={id} className={styles.input} />
+                <input
+                    {...otherPropsWithoutData}
+                    type="checkbox"
+                    id={id}
+                    className={styles.input}
+                    onChange={onChangeInner}
+                />
                 <span className={styles.checkmark} />
                 <span className={styles.label}>{label}</span>
             </label>

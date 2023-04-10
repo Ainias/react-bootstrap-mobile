@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useCallback, useRef, useState, MouseEvent } from 'react';
+import { useCallback, useRef, useState, MouseEvent, useEffect, useLayoutEffect } from 'react';
 import { Color, ColorChangeHandler, ColorResult, SketchPicker } from 'react-color';
 import { OptionalListener, useListener } from '../../Hooks/useListener';
 import { withMemo } from '../../../helper/withMemo';
@@ -50,6 +50,7 @@ function ColorInput<OnChangeData>({
 
     // Refs
     const containerRef = useRef<HTMLDivElement>(null);
+    const modalRef = useRef<HTMLDivElement>(null);
 
     // States
     const [color, setColor] = useState<string>(value ?? defaultValue ?? '#000000FF');
@@ -89,7 +90,6 @@ function ColorInput<OnChangeData>({
         (e: MouseEvent) => {
             if (e.target === containerRef?.current) {
                 setIsOpen(false);
-                console.log('onContainerClick', colVal);
                 addColor(colVal);
                 onClose?.(colVal);
             }
@@ -107,6 +107,19 @@ function ColorInput<OnChangeData>({
     );
 
     // Effects
+    useLayoutEffect(() => {
+        if (!modalRef.current) {
+            return;
+        }
+        const dimension = modalRef.current.getBoundingClientRect();
+        if (dimension.right > window.innerWidth || dimension.bottom > window.innerHeight) {
+            const newPosition = {
+                x: Math.max(0, Math.min(window.innerWidth - dimension.width, position.x)),
+                y: Math.max(0, Math.min(window.innerHeight - dimension.height, position.y)),
+            };
+            setPosition(newPosition);
+        }
+    }, [position]);
 
     // Other
 
@@ -115,7 +128,7 @@ function ColorInput<OnChangeData>({
         <span className={styles.colorInput}>
             {isOpen ? (
                 <div onClick={onContainerClick} className={styles.modalContainer} ref={containerRef}>
-                    <div className={styles.modal} style={{ top: position.y, left: position.x }}>
+                    <div className={styles.modal} style={{ top: position.y, left: position.x }} ref={modalRef}>
                         <SketchPicker
                             color={colVal}
                             onChange={onChange}

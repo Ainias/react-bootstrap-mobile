@@ -18,6 +18,7 @@ export * from './src/Components/FormElements/CheckBox/Checkbox';
 export * from './src/Components/FormElements/ColorInput/ColorInput';
 export * from './src/Components/FormElements/ColorInput/sharedSelectedColor';
 export * from './src/Components/FormElements/ImageInput/ImageInput';
+export * from './src/Components/FormElements/ImageInput/MultipleFileInput';
 export * from './src/Components/FormElements/Input/HiddenInput';
 export * from './src/Components/FormElements/Input/Input';
 export * from './src/Components/FormElements/Input/PasswordInput/PasswordInput';
