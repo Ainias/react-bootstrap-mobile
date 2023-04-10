@@ -3,6 +3,8 @@
 # Exit when a command fails
 set -e
 
+ORIGIN_DIR=$(pwd)
+
 REPOSITORY=git@github.com:Ainias/react-bootstrap-mobile.git
 
 if [[ -z "$1" ]]; then
@@ -33,3 +35,6 @@ npm publish
 git push
 
 echo "$TMPDIR"
+
+cd "$ORIGIN_DIR"
+git pull
