@@ -23,7 +23,7 @@ function Textarea<OnChangeData>({
     label,
     className,
     style,
-    onKeyPress,
+    onKeyUp,
     onChangeText,
     onEnter,
     ...otherProps
@@ -48,14 +48,14 @@ function Textarea<OnChangeData>({
 
     const realOnKeyPress = useCallback(
         (e: KeyboardEvent<HTMLTextAreaElement>) => {
-            if (onKeyPress) {
-                onKeyPress(e);
+            if (onKeyUp) {
+                onKeyUp(e);
             }
             if (onEnter && e.key === 'Enter' && !e.defaultPrevented) {
                 onEnter((e.target as HTMLTextAreaElement).value);
             }
         },
-        [onEnter, onKeyPress]
+        [onEnter, onKeyUp]
     );
 
     // Effects
@@ -67,7 +67,7 @@ function Textarea<OnChangeData>({
     return (
         <label className={classNames(styles.container, className)} style={style}>
             {label ? <span className={styles.label}>{label}</span> : null}
-            <textarea {...otherProps} onKeyPress={realOnKeyPress} className={styles.textarea} onChange={onChange} />
+            <textarea {...otherProps} onKeyUp={realOnKeyPress} className={styles.textarea} onChange={onChange} />
         </label>
     );
 }

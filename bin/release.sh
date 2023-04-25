@@ -3,8 +3,6 @@
 # Exit when a command fails
 set -e
 
-ORIGIN_DIR=$(pwd)
-
 REPOSITORY=git@github.com:Ainias/react-bootstrap-mobile.git
 
 if [[ -z "$1" ]]; then
@@ -14,6 +12,8 @@ fi;
 
 versionName=$1
 versionExists="$(git ls-remote $REPOSITORY refs/tags/"$versionName"| tr -d '\n')"
+workingDir=$(pwd);
+
 
 if [ -n "$versionExists" ]; then
 	echo "Version existiert bereits!";
@@ -36,5 +36,5 @@ git push
 
 echo "$TMPDIR"
 
-cd "$ORIGIN_DIR"
+cd "$workingDir"
 git pull

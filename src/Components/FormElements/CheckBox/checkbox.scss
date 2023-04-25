@@ -39,6 +39,7 @@
 
     @include design($material) {
       width: 18px;
+      min-width: 18px;
       height: 18px;
       margin: 2px;
 
@@ -51,6 +52,7 @@
     }
     @include design($flat) {
       width: 22px;
+      min-width: 22px;
       height: 22px;
 
       &::before {
