@@ -122,13 +122,19 @@ export const SearchSelectInput = withMemo(function SearchSelectInput<OnChangeDat
     // Other
 
     // Render Functions
-    const renderOption = (value: string) => (
-        <Clickable onClick={toggleOption} onClickData={value} key={indexedOptions[value].key}>
-            <InlineBlock className={styles.tag}>
-                <Text size={TEXT_SIZE.xSmall}>{indexedOptions[value].label}</Text>
-            </InlineBlock>
-        </Clickable>
-    );
+    const renderOption = (value: string) => {
+        if (!indexedOptions[value]) {
+            return null;
+        }
+
+        return (
+            <Clickable onClick={toggleOption} onClickData={value} key={indexedOptions[value].key}>
+                <InlineBlock className={styles.tag}>
+                    <Text size={TEXT_SIZE.xSmall}>{indexedOptions[value].label}</Text>
+                </InlineBlock>
+            </Clickable>
+        );
+    };
     const renderSelectableOption = (opt: SelectOption, index: number) => (
         <Clickable onClick={toggleOption} onClickData={opt.value} key={opt.key}>
             <Block className={classNames(styles.selectableOption, { [styles.active]: index === selectedIndex })}>
