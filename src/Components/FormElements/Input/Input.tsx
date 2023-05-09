@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { InputHTMLAttributes, KeyboardEvent, useCallback } from 'react';
+import { ForwardedRef, InputHTMLAttributes, KeyboardEvent, useCallback } from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { prefixClass } from '../../../helper';
 import { Override } from '../../../TypeHelpers';
 import { OptionalListener, useListener } from '../../Hooks/useListener';
+import { RefComponent, withForwardRef } from '../../withForwardRef';
 
 export type InputProps<OnChangeData> = RbmComponentProps<
     Override<
@@ -16,14 +17,10 @@ export type InputProps<OnChangeData> = RbmComponentProps<
     >
 >;
 
-function Input<OnChangeData>({
-    label,
-    className,
-    onEnter,
-    onKeyPress,
-    onChangeText,
-    ...otherProps
-}: InputProps<OnChangeData>) {
+function Input<OnChangeData>(
+    { label, className, onEnter, onKeyPress, onChangeText, ...otherProps }: InputProps<OnChangeData>,
+    ref: ForwardedRef<HTMLInputElement>
+) {
     // Variables
 
     // States
@@ -65,6 +62,7 @@ function Input<OnChangeData>({
             {label ? <span className={prefixClass('input-label')}>{label}</span> : null}
             <input
                 {...otherProps}
+                ref={ref}
                 className={prefixClass('input-text')}
                 onChange={onChange}
                 onKeyPress={realOnKeyPress}
@@ -73,5 +71,5 @@ function Input<OnChangeData>({
     );
 }
 
-const tmp = React.memo(Input) as typeof Input;
+const tmp = withForwardRef(Input);
 export { tmp as Input };
