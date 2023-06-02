@@ -46,7 +46,7 @@ export const List = withMemo(function List<ItemType>({
 
     return (
         <AutoSizer>
-            {({ height, width }) => {
+            {({ height, width }: { height?: number; width?: number }) => {
                 return (
                     <>
                         {initialItemHeight === 0 && items.length > 0 && (
