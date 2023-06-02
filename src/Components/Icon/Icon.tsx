@@ -4,8 +4,9 @@ import { RbmComponentProps } from '../RbmComponentProps';
 import { Override } from '../../TypeHelpers';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { withMemo } from '../../helper/withMemo';
+import { IconDefinition } from '@fortawesome/free-regular-svg-icons';
 
-export type IconSource = IconProp | string;
+export type IconSource = IconProp | string | IconDefinition;
 
 export type IconProps = RbmComponentProps<
     Override<

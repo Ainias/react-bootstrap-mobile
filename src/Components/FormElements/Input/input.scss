@@ -25,6 +25,11 @@
       background-position: center bottom;
       padding-bottom: 2px;
 
+      &:read-only, &:read-only:focus {
+        background-image: none;
+        border-bottom: 1px solid transparent;
+      }
+
       &:focus {
         background-image: linear-gradient(var(--flavor-focus), var(--flavor-focus)),
         linear-gradient(to top, transparent 1px, #afafaf 1px);

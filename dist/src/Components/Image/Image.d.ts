@@ -7,6 +7,6 @@ export type ImageProps = RbmComponentProps<Override<Omit<React.ComponentPropsWit
     style?: CSSProperties;
     alt?: string;
 }>, WithNoChildren>;
-declare function Image({ src, alt, className, style, ...otherProps }: ImageProps): JSX.Element;
+declare function Image({ src, alt, className, style, ...otherProps }: ImageProps): React.JSX.Element;
 declare const ImageMemo: typeof Image;
 export { ImageMemo as Image };

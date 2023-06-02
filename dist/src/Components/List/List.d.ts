@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { CSSProperties, ReactElement, ReactNode } from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
 export type ListProps<ItemType> = RbmComponentProps<{
@@ -7,4 +8,4 @@ export type ListProps<ItemType> = RbmComponentProps<{
     renderBefore?: (item: ItemType, index: number) => ReactNode;
     keyExtractor?: (item: ItemType, index: number) => string;
 }>;
-export declare const List: <ItemType>({ items, renderItem, itemHeight: initialItemHeight, className, style, }: ListProps<ItemType>) => JSX.Element;
+export declare const List: <ItemType>({ items, renderItem, itemHeight: initialItemHeight, className, style, }: ListProps<ItemType>) => React.JSX.Element;

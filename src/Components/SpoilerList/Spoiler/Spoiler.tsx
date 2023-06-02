@@ -11,7 +11,7 @@ import { Clickable } from '../../Clickable/Clickable';
 import styles from './spoiler.scss';
 import classNames from 'classnames';
 import { OptionalListener, useListener } from '../../Hooks/useListener';
-import { Icon } from '../../Icon/Icon';
+import { Icon, IconSource } from '../../Icon/Icon';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
@@ -21,8 +21,8 @@ export type SpoilerProps<OnClickData> = RbmComponentProps<
         initialOpen?: boolean;
         open?: boolean;
         noClosingAnimation?: boolean;
-        openIcon?: IconProp | null;
-        closeIcon?: IconProp | null;
+        openIcon?: IconSource | null;
+        closeIcon?: IconSource | null;
     } & OptionalListener<'onClick', OnClickData>
 >;
 

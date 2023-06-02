@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
 import { ReactElement } from 'react';
 export type DialogProps<ReturnData> = RbmComponentProps<{
@@ -9,6 +10,6 @@ export type DialogProps<ReturnData> = RbmComponentProps<{
         close?: (data?: ReturnData) => void;
     }> | string | number;
 }>;
-declare function Dialog<ReturnData>({ style, children, className, closable, onClose, identifier, }: DialogProps<ReturnData>): JSX.Element | null;
+declare function Dialog<ReturnData>({ style, children, className, closable, onClose, identifier, }: DialogProps<ReturnData>): React.JSX.Element | null;
 declare const DialogMemo: typeof Dialog;
 export { DialogMemo as Dialog };

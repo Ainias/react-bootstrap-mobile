@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
 import { IconSource } from '../Icon/Icon';
 import { ComponentType } from 'react';
@@ -25,6 +26,6 @@ export type TabBarProps = RbmComponentProps<{
     drawBehind?: boolean;
     underline?: boolean;
 }>;
-declare function TabBar({ buttons, startActiveTab, onTabChange, activeTab, transparent, underline, className, ...rbmProps }: TabBarProps): JSX.Element;
+declare function TabBar({ buttons, startActiveTab, onTabChange, activeTab, transparent, underline, className, ...rbmProps }: TabBarProps): React.JSX.Element;
 declare const TabBarMemo: typeof TabBar;
 export { TabBarMemo as TabBar };

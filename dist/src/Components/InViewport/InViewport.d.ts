@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import * as React from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
 export type InViewportProps = RbmComponentProps<{
     threshold?: number;
@@ -6,6 +6,6 @@ export type InViewportProps = RbmComponentProps<{
     root?: HTMLElement;
     rootMargin?: string;
 }>;
-declare function InViewport({ threshold, root, rootMargin, onInViewportChange, className, style, children, }: InViewportProps): JSX.Element;
+declare function InViewport({ threshold, root, rootMargin, onInViewportChange, className, style, children, }: InViewportProps): React.JSX.Element;
 declare const InViewportMemo: typeof InViewport;
 export { InViewportMemo as InViewport };

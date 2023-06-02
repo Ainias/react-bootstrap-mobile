@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { ComponentType } from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
 import { IconSource } from '../Icon/Icon';
@@ -20,6 +21,6 @@ export type TopBarProps = RbmComponentProps<{
     transparent?: boolean;
     drawBehind?: boolean;
 }>;
-declare function TopBar({ title, rightButtons, leftButtons, hiddenButtons, className, transparent, drawBehind, ...rbmProps }: TopBarProps): JSX.Element;
+declare function TopBar({ title, rightButtons, leftButtons, hiddenButtons, className, transparent, drawBehind, ...rbmProps }: TopBarProps): React.JSX.Element;
 declare const TopBarMemo: typeof TopBar;
 export { TopBarMemo as TopBar };

@@ -6,7 +6,7 @@ const packageName = require('../package.json').name;
 
 let pathsToProjects = [
     '/home/silas/Projekte/web/dnd',
-    '/home/silas/Projekte/web/bat',
+    '/home/silas/Projekte/web/smd-mail',
     '/home/silas/Projekte/web/games',
     '/home/silas/Projekte/web/react-windows',
     '/home/silas/Projekte/web/cordova-sites',

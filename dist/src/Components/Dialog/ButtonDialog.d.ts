@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import * as React from 'react';
 import { RbmComponentProps, WithNoChildren } from '../RbmComponentProps';
 export type ButtonDialogProps = RbmComponentProps<{
     title?: string;
@@ -8,6 +8,6 @@ export type ButtonDialogProps = RbmComponentProps<{
         callback: () => void;
     }[];
 }, WithNoChildren>;
-declare function ButtonDialog({ title, message, buttons, style, className }: ButtonDialogProps): JSX.Element;
+declare function ButtonDialog({ title, message, buttons, style, className }: ButtonDialogProps): React.JSX.Element;
 declare const ButtonDialogMemo: typeof ButtonDialog;
 export { ButtonDialogMemo as ButtonDialog };

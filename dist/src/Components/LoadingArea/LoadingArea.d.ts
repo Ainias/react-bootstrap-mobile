@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import * as React from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
 export type LoadingAreaProps = RbmComponentProps<{
     opacity?: number;
@@ -7,6 +7,6 @@ export type LoadingAreaProps = RbmComponentProps<{
     fullHeight?: boolean;
     fullSize?: boolean;
 }>;
-declare function LoadingArea({ loading, fullWidth, fullSize, fullHeight, opacity, className, style, children, }: LoadingAreaProps): JSX.Element;
+declare function LoadingArea({ loading, fullWidth, fullSize, fullHeight, opacity, className, style, children, }: LoadingAreaProps): React.JSX.Element;
 declare const LoadingAreaMemo: typeof LoadingArea;
 export { LoadingAreaMemo as LoadingArea };

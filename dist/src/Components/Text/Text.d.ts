@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import * as React from 'react';
 import { Recursive, ValueOf } from '../../TypeHelpers';
 import { ViewProps } from '../Layout/View';
 export declare const TEXT_PRIO: {
@@ -21,6 +21,6 @@ export type TextProps<AsType extends keyof JSX.IntrinsicElements> = {
     className?: string;
     children: Recursive<string | undefined | null | number>;
 } & ViewProps<AsType>;
-declare function Text<AsType extends keyof JSX.IntrinsicElements = 'span'>({ className, children, block, prio, size, as, ...props }: TextProps<AsType>): JSX.Element;
+declare function Text<AsType extends keyof JSX.IntrinsicElements = 'span'>({ className, children, block, prio, size, as, ...props }: TextProps<AsType>): React.JSX.Element;
 declare const tmp: typeof Text;
 export { tmp as Text };

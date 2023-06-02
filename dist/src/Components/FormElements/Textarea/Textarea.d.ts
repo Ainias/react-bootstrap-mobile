@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { Override } from '../../../TypeHelpers';
 import { TextareaHTMLAttributes } from 'react';
@@ -7,6 +8,6 @@ export type TextareaProps<OnChangeData> = RbmComponentProps<Override<TextareaHTM
     onChangeText?: (newText: string) => void;
     onEnter?: (newText: string) => void;
 } & OptionalListener<'onChange', OnChangeData>>>;
-declare function Textarea<OnChangeData>({ label, className, style, onKeyUp, onChangeText, onEnter, ...otherProps }: TextareaProps<OnChangeData>): JSX.Element;
+declare function Textarea<OnChangeData>({ label, className, style, onKeyUp, onChangeText, onEnter, ...otherProps }: TextareaProps<OnChangeData>): React.JSX.Element;
 declare const TextareaMemo: typeof Textarea;
 export { TextareaMemo as Textarea };

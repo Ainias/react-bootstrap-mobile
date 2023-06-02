@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { RbmComponentProps, WithNoChildren } from '../RbmComponentProps';
 import { IconSource } from '../Icon/Icon';
 export type MenuItem = {
@@ -13,4 +14,4 @@ export type MenuProps = RbmComponentProps<{
     isOpen: boolean;
     onClose: () => void;
 }, WithNoChildren>;
-export declare const Menu: ({ className, style, items, y, x, isOpen, onClose }: MenuProps) => JSX.Element | null;
+export declare const Menu: ({ className, style, items, y, x, isOpen, onClose }: MenuProps) => React.JSX.Element | null;
