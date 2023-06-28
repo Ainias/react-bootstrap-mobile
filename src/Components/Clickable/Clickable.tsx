@@ -46,7 +46,7 @@ function Clickable<
         style,
         href,
         interactable = true,
-        preventDefault = true,
+        preventDefault = false,
         stopPropagation = true,
         ...clickData
     }: ClickableProps<OnClickData, OnMouseDownData, OnMouseMoveData, OnMouseUpData, OnClickCaptureData, HrefType>,
