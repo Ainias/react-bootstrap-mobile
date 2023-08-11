@@ -6,8 +6,9 @@ import classNames from 'classnames';
 
 import styles from './switch.scss';
 import { withMemo } from '../../../helper/withMemo';
+import {OptionalListener, useListenerWithExtractedProps} from "../../Hooks/useListener";
 
-export type SwitchProps = RbmComponentProps<
+export type SwitchProps<OnChangeCheckedData> = RbmComponentProps<
     Override<
         InputHTMLAttributes<HTMLInputElement>,
         {
@@ -16,12 +17,11 @@ export type SwitchProps = RbmComponentProps<
             children?: string;
             isLabelBeforeSwitch?: boolean;
             isDual?: boolean;
-            onChangeChecked?(isChecked: boolean): void;
-        }
+        } & OptionalListener<"onChangeChecked", OnChangeCheckedData, boolean>
     >
 >;
 
-export const Switch = withMemo(function Switch({
+export const Switch = withMemo(function Switch<OnChangeCheckedData>({
     children,
     label = '',
     preLabel = '',
@@ -31,9 +31,8 @@ export const Switch = withMemo(function Switch({
     className,
     style,
     onChange,
-    onChangeChecked,
     ...props
-}: SwitchProps) {
+}: SwitchProps<OnChangeCheckedData>) {
     // Variables
 
     // States
@@ -41,10 +40,12 @@ export const Switch = withMemo(function Switch({
     // Refs
 
     // Callbacks
+    const [onChangeChecked, otherProps] = useListenerWithExtractedProps("onChangeChecked", props);
+
     const realOnChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
         (e) => {
             onChange?.(e);
-            onChangeChecked?.(e.target.checked);
+            onChangeChecked(e.target.checked);
         },
         [onChange, onChangeChecked]
     );
@@ -70,7 +71,7 @@ export const Switch = withMemo(function Switch({
         <span className={classNames(styles.switch, { [styles.dual]: isDual }, className)} style={style}>
             <label htmlFor={id} key={id}>
                 <span className={styles.label}>{preLabel}</span>
-                <input {...props} type="checkbox" id={id} onChange={realOnChange} />
+                <input {...otherProps} type="checkbox" id={id} onChange={realOnChange} />
                 <div className={styles.toggle}>
                     <span className={styles.handle} />
                 </div>

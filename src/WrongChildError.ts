@@ -13,7 +13,5 @@ export class WrongChildError extends Error {
         );
         this.name = 'WrongChildError';
         this.childValue = child;
-
-        console.log('LOG-d stack', this.stack);
     }
 }

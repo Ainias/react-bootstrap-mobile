@@ -16,6 +16,5 @@ const DialogContext = React.createContext<ShowDialog>(() => Promise.reject());
 export const DialogProvider = DialogContext.Provider;
 
 export function useDialog() {
-    const showDialog = useContext(DialogContext);
-    return showDialog as ShowDialog;
+    return useContext(DialogContext);
 }

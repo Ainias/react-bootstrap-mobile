@@ -1,17 +1,25 @@
 import * as React from 'react';
-import { RbmComponentProps, WithNoChildren } from '../RbmComponentProps';
+import { RbmComponentProps } from '../RbmComponentProps';
 import { IconSource } from '../Icon/Icon';
-export type MenuItem = {
+export type MenuItemType = {
     label: string;
-    callback: () => void;
-    icon?: IconSource;
+    icon?: IconSource | {
+        icon: IconSource;
+        color: string;
+    };
     key: string;
+    className?: string;
+    callback: () => void;
+    onMouseEnter?: () => void;
+    onMouseLeave?: () => void;
 };
 export type MenuProps = RbmComponentProps<{
-    items: MenuItem[];
+    items?: MenuItemType[];
     x: number;
     y: number;
     isOpen: boolean;
     onClose: () => void;
-}, WithNoChildren>;
-export declare const Menu: ({ className, style, items, y, x, isOpen, onClose }: MenuProps) => React.JSX.Element | null;
+    offsetX?: number;
+    offsetY?: number;
+}>;
+export declare const Menu: ({ className, style, items, y, x, isOpen, onClose, children, offsetY, offsetX, }: MenuProps) => React.JSX.Element | null;

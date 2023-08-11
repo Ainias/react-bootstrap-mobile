@@ -10,9 +10,10 @@ import { useMemo } from 'react';
 export type GridProps = RbmComponentProps<{
     columns?: number;
     rows?: number;
+    useContainerWidth?: boolean;
 }>;
 
-function Grid({ style, children, columns = 12, rows = 1, className, __allowChildren }: GridProps) {
+function Grid({ style, children, columns = 12, rows = 1, useContainerWidth = false, className, __allowChildren }: GridProps) {
     // Variables
     const appliedStyle = useMemo(
         () => ({
@@ -40,7 +41,7 @@ function Grid({ style, children, columns = 12, rows = 1, className, __allowChild
     return (
         <Block
             style={appliedStyle}
-            className={classNames(styles.grid, className)}
+            className={classNames(styles.grid, className, {[styles.useContainerWidth]: useContainerWidth})}
             __allowChildren={__allowChildren as 'all'}
         >
             {children}

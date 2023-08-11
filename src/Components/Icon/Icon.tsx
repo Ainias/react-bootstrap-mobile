@@ -5,6 +5,9 @@ import { Override } from '../../TypeHelpers';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { withMemo } from '../../helper/withMemo';
 import { IconDefinition } from '@fortawesome/free-regular-svg-icons';
+import classNames from "classnames";
+
+import styles from "./icon.scss";
 
 export type IconSource = IconProp | string | IconDefinition;
 
@@ -12,13 +15,14 @@ export type IconProps = RbmComponentProps<
     Override<
         FontAwesomeIconProps,
         {
+            noMargin?: boolean
             icon: IconSource;
             alt?: string;
         }
     >
 >;
 
-function Icon({ icon, alt, className, style, title, ...props }: IconProps) {
+export const Icon = withMemo(function Icon({ icon, alt, className, noMargin=true, style, title, ...props }: IconProps) {
     // Variables
 
     // States
@@ -37,10 +41,7 @@ function Icon({ icon, alt, className, style, title, ...props }: IconProps) {
     // Render Functions
 
     if (typeof icon === 'string' && icon.indexOf('.') !== -1) {
-        return <img src={icon} alt={alt} className={className} style={style} title={title} />;
+        return <img src={icon} alt={alt} className={classNames(className, {[styles.margin]: !noMargin})} style={style} title={title} />;
     }
-    return <FontAwesomeIcon {...props} icon={icon as IconProp} className={className} style={style} title={title} />;
-}
-
-const IconMemo = withMemo(Icon);
-export { IconMemo as Icon };
+    return <FontAwesomeIcon {...props} icon={icon as IconProp} className={classNames(className, {[styles.margin]: !noMargin})} style={style} title={title} />;
+}, styles)

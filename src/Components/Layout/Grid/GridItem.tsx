@@ -8,12 +8,14 @@ import styles from './grid.scss';
 
 export type GridItemProps = RbmComponentProps<{
     size: number;
+    xs?: number;
     sm?: number;
     md?: number;
     lg?: number;
     xl?: number;
     xxl?: number;
     print?: number;
+    startXxs?: number;
     startXs?: number;
     startSm?: number;
     startMd?: number;
@@ -21,6 +23,7 @@ export type GridItemProps = RbmComponentProps<{
     startXl?: number;
     startXxl?: number;
     startPrint?: number;
+    orderXxs?: number;
     orderXs?: number;
     orderSm?: number;
     orderMd?: number;
@@ -36,12 +39,14 @@ function GridItem({
     className,
     __allowChildren,
     size,
+    xs,
     sm,
     md,
     lg,
     xl,
     xxl,
     print,
+    startXxs,
     startXs,
     startMd,
     startSm,
@@ -49,6 +54,7 @@ function GridItem({
     startXl,
     startXxl,
     startPrint,
+    orderXxs,
     orderXs,
     orderSm,
     orderMd,
@@ -59,7 +65,10 @@ function GridItem({
 }: GridItemProps) {
     // Variables
 
-    const classes = [`item-xs-${size}`];
+    const classes = [`item-xxs-${size}`];
+    if (xs) {
+        classes.push(`item-xs-${xs}`);
+    }
     if (sm) {
         classes.push(`item-sm-${sm}`);
     }
@@ -79,6 +88,9 @@ function GridItem({
         classes.push(`item-print-${print}`);
     }
 
+    if (startXxs) {
+        classes.push(`start-xxs-${startXxs}`);
+    }
     if (startXs) {
         classes.push(`start-xs-${startXs}`);
     }
@@ -101,6 +113,9 @@ function GridItem({
         classes.push(`start-print-${startPrint}`);
     }
 
+    if (orderXxs) {
+        classes.push(`order-xxs-${orderXxs}`);
+    }
     if (orderXs) {
         classes.push(`order-xs-${orderXs}`);
     }

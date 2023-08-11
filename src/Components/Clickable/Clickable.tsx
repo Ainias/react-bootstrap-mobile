@@ -1,16 +1,18 @@
 import * as React from 'react';
-import { RbmComponentProps } from '../RbmComponentProps';
-import { OptionalListener, useListener } from '../Hooks/useListener';
+import {RbmComponentProps} from '../RbmComponentProps';
+import {OptionalListener, useListener} from '../Hooks/useListener';
 
 import styles from './clickable.scss';
 import classNames from 'classnames';
-import { useCallback, MouseEvent, ForwardedRef } from 'react';
-import { withForwardRef } from '../../helper/withForwardRef';
+import {useCallback, MouseEvent, ForwardedRef} from 'react';
+import {withForwardRef} from '../../helper/withForwardRef';
 
 type OnClickListener<Data> = OptionalListener<'onClick', Data>;
 type OnMouseDownListener<Data> = OptionalListener<'onMouseDown', Data>;
 type OnMouseUpListener<Data> = OptionalListener<'onMouseUp', Data>;
 type OnMouseMoveListener<Data> = OptionalListener<'onMouseMove', Data>;
+type OnDropListener<Data> = OptionalListener<'onDrop', Data>;
+type OnDragOverListener<Data> = OptionalListener<'onDragOver', Data>;
 
 export type ClickableProps<
     OnClickData,
@@ -18,6 +20,10 @@ export type ClickableProps<
     OnMouseMoveData,
     OnMouseUpData,
     OnClickCaptureData,
+    OnDropData,
+    OnDragOverData,
+    OnMouseEnterData,
+    OnMouseLeaveData,
     HrefType extends string | undefined
 > = RbmComponentProps<
     {
@@ -26,10 +32,14 @@ export type ClickableProps<
         preventDefault?: boolean;
         stopPropagation?: boolean;
     } & OnClickListener<OnClickData> &
-        OnMouseDownListener<OnMouseDownData> &
-        OnMouseMoveListener<OnMouseMoveData> &
-        OnMouseUpListener<OnMouseUpData> &
-        OptionalListener<'onClickCapture', OnClickCaptureData>
+    OnMouseDownListener<OnMouseDownData> &
+    OnMouseMoveListener<OnMouseMoveData> &
+    OnMouseUpListener<OnMouseUpData> &
+    OnDropListener<OnDropData> &
+    OnDragOverListener<OnDragOverData> &
+    OptionalListener<'onClickCapture', OnClickCaptureData> &
+    OptionalListener<'onMouseEnter', OnMouseEnterData> &
+    OptionalListener<'onMouseLeave', OnMouseLeaveData>
 >;
 
 function Clickable<
@@ -38,6 +48,10 @@ function Clickable<
     OnMouseMoveData,
     OnMouseUpData,
     OnClickCaptureData,
+    OnDropData,
+    OnDragOverData,
+    OnMouseEnterData,
+    OnMouseLeaveData,
     HrefType extends string | undefined
 >(
     {
@@ -49,7 +63,7 @@ function Clickable<
         preventDefault = false,
         stopPropagation = true,
         ...clickData
-    }: ClickableProps<OnClickData, OnMouseDownData, OnMouseMoveData, OnMouseUpData, OnClickCaptureData, HrefType>,
+    }: ClickableProps<OnClickData, OnMouseDownData, OnMouseMoveData, OnMouseUpData, OnClickCaptureData, OnDropData, OnDragOverData,OnMouseEnterData, OnMouseLeaveData, HrefType>,
     ref: ForwardedRef<HrefType extends string ? HTMLAnchorElement : HTMLSpanElement>
 ) {
     // Variables
@@ -124,7 +138,7 @@ function Clickable<
     );
 
     const onClickCaptureInner = useListener<'onClickCapture', OnClickCaptureData>('onClickCapture', clickData);
-    const realOnClickCaptureInner = useCallback(
+    const realOnClickCapture = useCallback(
         (e: MouseEvent) => {
             if (clickData.onClickCapture) {
                 if (stopPropagation) {
@@ -137,6 +151,70 @@ function Clickable<
             }
         },
         [clickData.onClickCapture, onClickCaptureInner, preventDefault, stopPropagation]
+    );
+
+    const onDropInner = useListener<'onDrop', OnDropData>('onDrop', clickData);
+    const realOnDrop = useCallback(
+        (e: MouseEvent) => {
+            if (clickData.onDrop) {
+                if (stopPropagation) {
+                    e.stopPropagation();
+                }
+                if (preventDefault) {
+                    e.preventDefault();
+                }
+                onDropInner(e);
+            }
+        },
+        [clickData.onDrop, onDropInner, preventDefault, stopPropagation]
+    );
+
+    const onDragOver = useListener<'onDragOver', OnDragOverData>('onDragOver', clickData);
+    const realOnDragOver = useCallback(
+        (e: MouseEvent) => {
+            if (clickData.onDragOver) {
+                if (stopPropagation) {
+                    e.stopPropagation();
+                }
+                if (preventDefault) {
+                    e.preventDefault();
+                }
+                onDragOver(e);
+            }
+        },
+        [clickData.onDragOver, onDragOver, preventDefault, stopPropagation]
+    );
+
+    const onMouseEnter = useListener<'onMouseEnter', OnMouseEnterData>('onMouseEnter', clickData);
+    const realOnMouseEnter = useCallback(
+        (e: MouseEvent) => {
+            if (clickData.onMouseEnter) {
+                if (stopPropagation) {
+                    e.stopPropagation();
+                }
+                if (preventDefault) {
+                    e.preventDefault();
+                }
+                onMouseEnter(e);
+            }
+        },
+        [clickData.onMouseEnter, onMouseEnter, preventDefault, stopPropagation]
+    );
+
+    const onMouseLeave = useListener<'onMouseLeave', OnMouseLeaveData>('onMouseLeave', clickData);
+    const realOnMouseLeave = useCallback(
+        (e: MouseEvent) => {
+            if (clickData.onMouseLeave) {
+                if (stopPropagation) {
+                    e.stopPropagation();
+                }
+                if (preventDefault) {
+                    e.preventDefault();
+                }
+                onMouseLeave(e);
+            }
+        },
+        [clickData.onMouseLeave, onMouseLeave, preventDefault, stopPropagation]
     );
 
     // Effects
@@ -153,7 +231,11 @@ function Clickable<
         onMouseDown: realOnMouseDown,
         onMouseMove: realOnMouseMove,
         onMouseUp: realOnMouseUp,
-        onClickCapture: realOnClickCaptureInner,
+        onClickCapture: realOnClickCapture,
+        onDrop: realOnDrop,
+        onDragOver: realOnDragOver,
+        onMouseEnter: realOnMouseEnter,
+        onMouseLeave: realOnMouseLeave,
         tabIndex: interactable ? 0 : undefined,
     };
     if (typeof href === 'string') {
@@ -171,4 +253,4 @@ function Clickable<
 }
 
 const ClickableMemo = withForwardRef(Clickable, styles);
-export { ClickableMemo as Clickable };
+export {ClickableMemo as Clickable};

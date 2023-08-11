@@ -29,9 +29,10 @@ function DropArea({ children, style, className, ...dropProps }: DropAreaProps) {
 
     return (
         <Droppable {...dropProps}>
-            {({ innerRef, droppableProps }) => (
+            {({ innerRef, droppableProps, placeholder }) => (
                 <div {...droppableProps} ref={innerRef} style={style} className={className}>
                     {children}
+                    {placeholder}
                 </div>
             )}
         </Droppable>

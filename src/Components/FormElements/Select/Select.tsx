@@ -22,6 +22,7 @@ export type SelectProps<OnChangeData> = RbmComponentProps<
             options: SelectOption[];
             onChangeValue?: (newValue: string) => void;
             inline?: boolean;
+            small?: boolean;
         } & OptionalListener<'onChange', OnChangeData>
     >
 >;
@@ -33,10 +34,10 @@ export const Select = withMemo(function Select<OnChangeData>({
     style,
     onChangeValue,
     inline = false,
+    small = false,
     ...otherProps
 }: SelectProps<OnChangeData>) {
     // Variables
-    console.log('LOG-d inline', inline);
 
     // Refs
 
@@ -62,7 +63,7 @@ export const Select = withMemo(function Select<OnChangeData>({
 
     return (
         // eslint-disable-next-line jsx-a11y/label-has-associated-control
-        <label className={classNames(styles.select, { [styles.inline]: inline }, className)} style={style}>
+        <label className={classNames(styles.select, { [styles.inline]: inline, [styles.small]: small }, className)} style={style}>
             {label ? <span className={styles.label}>{label}</span> : null}
             <select {...otherProps} className={styles.input} onChange={onChange}>
                 {options.map((option) => (

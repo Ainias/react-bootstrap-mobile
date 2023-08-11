@@ -6,10 +6,11 @@ import { EmptyProps } from '../../helper/EmptyProps';
 
 import styles from './dialogBackground.scss';
 import classNames from 'classnames';
+import {Heading} from "../Text/Heading";
 
-export type DialogBackgroundProps = RbmComponentProps<EmptyProps>;
+export type DialogBackgroundProps = RbmComponentProps<{title?: string}>;
 
-function DialogBackground({ children, className, style }: DialogBackgroundProps) {
+export const DialogBackground = withMemo(function DialogBackground({ children, className, style, title }: DialogBackgroundProps) {
     // Variables
 
     // Refs
@@ -28,11 +29,8 @@ function DialogBackground({ children, className, style }: DialogBackgroundProps)
 
     return (
         <Block __allowChildren="all" className={classNames(styles.dialogBackground, className)} style={style}>
+            {!!title && <Heading className={styles.title}>{title}</Heading>}
             {children}
         </Block>
     );
-}
-
-// Need DialogBackgroundMemo for autocompletion of phpstorm
-const DialogBackgroundMemo = withMemo(DialogBackground, styles);
-export { DialogBackgroundMemo as DialogBackground };
+}, styles);

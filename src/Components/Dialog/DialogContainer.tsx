@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { withMemo } from '../../helper/withMemo';
-import { ComponentType, PropsWithChildren, useCallback, useState } from 'react';
+import {ComponentType, ForwardedRef, PropsWithChildren, useCallback, useImperativeHandle, useState} from 'react';
 import { PromiseWithHandlers } from '@ainias42/js-helper';
 import { DialogProvider, ShowDialog } from './DialogContext';
 import { Dialog } from './Dialog';
 import { EmptyProps } from '../../helper/EmptyProps';
+import {withForwardRef} from "../../helper/withForwardRef";
 
 export type DialogContainerProps = PropsWithChildren<EmptyProps>;
 
@@ -15,7 +15,11 @@ type DialogData = {
     resultPromise: PromiseWithHandlers<any>;
 };
 
-function DialogContainer({ children }: DialogContainerProps) {
+export type DialogContainerRef = {
+    showDialog: ShowDialog;
+}
+
+export const DialogContainer = withForwardRef(function DialogContainer({ children }: DialogContainerProps, ref: ForwardedRef<DialogContainerRef>) {
     // Variables
     const [dialogs, setDialogs] = useState<DialogData[]>([]);
     const [, setLastId] = useState(0);
@@ -52,6 +56,10 @@ function DialogContainer({ children }: DialogContainerProps) {
     }, []);
 
     // Effects
+    useImperativeHandle(ref, () => ({
+        showDialog
+    }), [showDialog]);
+
 
     // Other
 
@@ -70,8 +78,4 @@ function DialogContainer({ children }: DialogContainerProps) {
             })}
         </DialogProvider>
     );
-}
-
-// Need DialogContainerMemo for autocompletion of phpstorm
-const DialogContainerMemo = withMemo(DialogContainer);
-export { DialogContainerMemo as DialogContainer };
+})

@@ -9,7 +9,7 @@ export function useMenu() {
         setIsOpen(true);
     }, []);
 
-    const props: Omit<MenuProps, 'items'> = {
+    const props: Omit<MenuProps, 'items'|"children"> = {
         isOpen,
         x: position.x,
         y: position.y,

@@ -1,0 +1,3 @@
+@mixin flavorSelection($varName) {
+  #{$varName}: var(--flavor-accent);
+}

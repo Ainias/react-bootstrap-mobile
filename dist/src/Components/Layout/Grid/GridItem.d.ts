@@ -2,12 +2,14 @@ import * as React from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';
 export type GridItemProps = RbmComponentProps<{
     size: number;
+    xs?: number;
     sm?: number;
     md?: number;
     lg?: number;
     xl?: number;
     xxl?: number;
     print?: number;
+    startXxs?: number;
     startXs?: number;
     startSm?: number;
     startMd?: number;
@@ -15,6 +17,7 @@ export type GridItemProps = RbmComponentProps<{
     startXl?: number;
     startXxl?: number;
     startPrint?: number;
+    orderXxs?: number;
     orderXs?: number;
     orderSm?: number;
     orderMd?: number;
@@ -23,6 +26,6 @@ export type GridItemProps = RbmComponentProps<{
     orderXxl?: number;
     orderPrint?: number;
 }>;
-declare function GridItem({ style, children, className, __allowChildren, size, sm, md, lg, xl, xxl, print, startXs, startMd, startSm, startLg, startXl, startXxl, startPrint, orderXs, orderSm, orderMd, orderLg, orderXxl, orderXl, orderPrint, }: GridItemProps): React.JSX.Element;
+declare function GridItem({ style, children, className, __allowChildren, size, xs, sm, md, lg, xl, xxl, print, startXxs, startXs, startMd, startSm, startLg, startXl, startXxl, startPrint, orderXxs, orderXs, orderSm, orderMd, orderLg, orderXxl, orderXl, orderPrint, }: GridItemProps): React.JSX.Element;
 declare const GridItemMemo: typeof GridItem;
 export { GridItemMemo as GridItem };

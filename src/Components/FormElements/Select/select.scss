@@ -48,4 +48,9 @@
       flex: 1;
     }
   }
+
+  &.small .input {
+    height: initial;
+    line-height: 1.5rem;
+  }
 }

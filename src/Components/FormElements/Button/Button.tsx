@@ -7,19 +7,27 @@ import classNames from 'classnames';
 import { withMemo } from '../../../helper/withMemo';
 import { HTMLAttributes } from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';
+import {ButtonType} from "./ButtonType";
 
 export type ButtonProps<ClickData> = RbmComponentProps<
-    Override<HTMLAttributes<HTMLButtonElement>, OptionalListener<'onClick', ClickData>>
+    Override<HTMLAttributes<HTMLButtonElement>, {
+    type?: ButtonType,
+        disabled?: boolean;
+    } & OptionalListener<'onClick', ClickData>>
 >;
 
-function Button<ClickData>({ children, className, ...props }: ButtonProps<ClickData>) {
+export const Button = withMemo(function Button<ClickData>({ children, className, disabled, type=ButtonType.Primary, ...props }: ButtonProps<ClickData>) {
     const onClick = useListener<'onClick', ClickData>('onClick', props);
+
+    const classes = {
+        [styles.primary]: type === ButtonType.Primary,
+        [styles.secondary]: type === ButtonType.Secondary,
+        [styles.disabled]: disabled,
+    };
+
     return (
-        <button {...props} type="button" onClick={onClick} className={classNames(styles.button, className)}>
+        <button {...props} disabled={disabled} type="button" onClick={onClick} className={classNames(styles.button, classes, className)}>
             {children}
         </button>
     );
-}
-
-const ButtonMemo = withMemo(Button, styles);
-export { ButtonMemo as Button };
+}, styles);

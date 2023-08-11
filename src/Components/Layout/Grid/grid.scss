@@ -1,8 +1,43 @@
 @import "../../../scss/variables";
 @import "bootstrap/scss/mixins/breakpoints";
 
+$grid-breakpoints: (
+        xxs: 0,
+        xs: 320px,
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 1200px,
+        xxl: 1400px
+);
+
 $columns: 12;
 $breakpoints: $grid-breakpoints;
+$containerBreakpoints: $grid-breakpoints;
+
+@mixin contentMin($breakpointName) {
+  @for $i from 1 through $columns {
+    .item-#{$breakpointName}-#{$i} {
+      grid-column: auto / span $i;
+    }
+  }
+
+  // Start with `1` because `0` is and invalid value.
+  // Ends with `$columns - 1` because offsetting by the width of an entire row isn't possible.
+  @for $i from 1 through ($columns - 1) {
+    .start-#{$breakpointName}-#{$i} {
+      grid-column-start: $i;
+    }
+  }
+}
+
+@mixin contentOnly($breakpointName) {
+  @for $i from -10 through 10 {
+    .order-#{$breakpointName}-#{$i} {
+      order: $i;
+    }
+  }
+}
 
 .grid {
   display: grid;
@@ -14,28 +49,64 @@ $breakpoints: $grid-breakpoints;
     padding: 4px;
   }
 
-  @each $breakpoint in map-keys($breakpoints) {
-    @include media-breakpoint-up($breakpoint, $breakpoints) {
-      @for $i from 1 through $columns {
-        .item-#{$breakpoint}-#{$i} {
-          grid-column: auto / span $i;
-        }
+  &.useContainerWidth {
+    container-type: inline-size;
+
+    @each $breakpoint in map-keys($containerBreakpoints) {
+      $min: breakpoint-min($breakpoint, $containerBreakpoints);
+      @if $min {
+      @container (min-width: #{$min}) {
+        @include contentMin($breakpoint);
+      }
+      } @else {
+        @include contentMin($breakpoint);
       }
 
-      // Start with `1` because `0` is and invalid value.
-      // Ends with `$columns - 1` because offsetting by the width of an entire row isn't possible.
-      @for $i from 1 through ($columns - 1) {
-        .start-#{$breakpoint}-#{$i} {
-          grid-column-start: $i;
-        }
+      // Add classes for reordering
+      $min: breakpoint-min($breakpoint, $containerBreakpoints);
+      $next: breakpoint-next($breakpoint, $containerBreakpoints);
+      $max: breakpoint-max($next, $containerBreakpoints);
+
+      @if $min != null and $max != null {
+      @container (min-width: #{$min}) and (max-width: #{$max}) {
+        @include contentOnly($breakpoint);
+      }
+      } @else if $max == null {
+      @container (min-width: #{$min}) {
+        @include contentOnly($breakpoint);
+      }
+      } @else if $min == null {
+      @container (max-width: #{$max}) {
+        @include contentOnly($breakpoint);
+      }
       }
     }
+  }
 
-    // Add classes for reordering
-    @include media-breakpoint-only($breakpoint, $breakpoints) {
-      @for $i from -10 through 10 {
-        .order-#{$breakpoint}-#{$i} {
-          order: $i;
+  &:not(.useContainerWidth) {
+    @each $breakpoint in map-keys($breakpoints) {
+      @include media-breakpoint-up($breakpoint, $breakpoints) {
+        @for $i from 1 through $columns {
+          .item-#{$breakpoint}-#{$i} {
+            grid-column: auto / span $i;
+          }
+        }
+
+        // Start with `1` because `0` is and invalid value.
+        // Ends with `$columns - 1` because offsetting by the width of an entire row isn't possible.
+        @for $i from 1 through ($columns - 1) {
+          .start-#{$breakpoint}-#{$i} {
+            grid-column-start: $i;
+          }
+        }
+      }
+
+      // Add classes for reordering
+      @include media-breakpoint-only($breakpoint, $breakpoints) {
+        @for $i from -10 through 10 {
+          .order-#{$breakpoint}-#{$i} {
+            order: $i;
+          }
         }
       }
     }

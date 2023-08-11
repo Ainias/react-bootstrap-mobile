@@ -18,6 +18,10 @@ export type WithNoStringAndChildrenProps = {
 export type WithStringProps = {
     children?: Recursive<string>;
 };
+export type WithChildren = {
+    children: ReactNode;
+    __allowChildren?: "text" | "all" | "html";
+};
 export type WithStringAndChildrenProps = {
     children: Recursive<string>;
 };

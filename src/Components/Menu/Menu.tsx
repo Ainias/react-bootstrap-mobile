@@ -1,31 +1,51 @@
 import * as React from 'react';
-import { withMemo } from '../../helper/withMemo';
-import { RbmComponentProps, WithNoChildren } from '../RbmComponentProps';
-import { Icon, IconSource } from '../Icon/Icon';
-import { Block } from '../Layout/Block';
+import {withMemo} from '../../helper/withMemo';
+import {RbmComponentProps, WithNoStringProps} from '../RbmComponentProps';
+import {IconSource} from '../Icon/Icon';
+import {Block} from '../Layout/Block';
 import classNames from 'classnames';
-
 import styles from './menu.scss';
-import { Text } from '../Text/Text';
-import { Clickable } from '../Clickable/Clickable';
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { withRenderBrowserOnly } from '../../helper/withRenderBrowserOnly';
-import { useWindow } from '../../WindowContext/WindowContext';
+import {useEffect, useLayoutEffect, useRef, useState} from 'react';
+import {withRenderBrowserOnly} from '../../helper/withRenderBrowserOnly';
+import {useWindow} from '../../WindowContext/WindowContext';
+import {MenuItem} from "./MenuItem";
+import {MenuCloseContextProvider} from "./MenuCloseContext";
 
-export type MenuItem = {
+export type MenuItemType = {
     label: string;
-    callback: () => void;
-    icon?: IconSource;
+    icon?: IconSource | { icon: IconSource, color: string };
     key: string;
+    className?: string;
+    callback: () => void;
+    onMouseEnter?: () => void;
+    onMouseLeave?: () => void;
 };
 
 export type MenuProps = RbmComponentProps<
-    { items: MenuItem[]; x: number; y: number; isOpen: boolean; onClose: () => void },
-    WithNoChildren
+    {
+        items?: MenuItemType[];
+        x: number;
+        y: number;
+        isOpen: boolean;
+        onClose: () => void,
+        offsetX?: number,
+        offsetY?: number
+    }
 >;
 
 export const Menu = withMemo(
-    withRenderBrowserOnly(function Menu({ className, style, items, y, x, isOpen, onClose }: MenuProps) {
+    withRenderBrowserOnly(function Menu({
+                                            className,
+                                            style,
+                                            items,
+                                            y,
+                                            x,
+                                            isOpen,
+                                            onClose,
+                                            children,
+                                            offsetY = 0,
+                                            offsetX = 0,
+                                        }: MenuProps) {
         // Variables
 
         // Refs
@@ -39,13 +59,6 @@ export const Menu = withMemo(
         // Selectors
 
         // Callbacks
-        const callItemCallback = useCallback(
-            (_: any, cb: () => void) => {
-                onClose();
-                cb();
-            },
-            [onClose]
-        );
 
         // Effects
         useEffect(() => {
@@ -55,8 +68,8 @@ export const Menu = withMemo(
                         onClose();
                     }
                 };
-                window?.addEventListener('mousedown', listener, { capture: true });
-                return () => window?.removeEventListener('mousedown', listener, { capture: true });
+                window?.addEventListener('mousedown', listener, {capture: true});
+                return () => window?.removeEventListener('mousedown', listener, {capture: true});
             }
             return undefined;
         }, [isOpen, onClose, window]);
@@ -65,10 +78,18 @@ export const Menu = withMemo(
             if (!menuRef.current) {
                 return;
             }
-            const { width } = getComputedStyle(menuRef.current);
-            const newX = Math.min(x, (window?.innerWidth ?? 0) - parseFloat(width));
+            const width = parseFloat(getComputedStyle(menuRef.current).width);
+            let newX = x;
+            if (newX > (window?.innerWidth ?? 0) - width) {
+                newX -= width+offsetX;
+            }
+
+            if (newX < 0) {
+                newX = 0;
+            }
+
             setInnerX(newX);
-        }, [window?.innerWidth, x]);
+        }, [offsetX, window?.innerWidth, x]);
 
         useLayoutEffect(() => {
             if (!menuRef.current) {
@@ -77,10 +98,15 @@ export const Menu = withMemo(
             const height = parseFloat(getComputedStyle(menuRef.current).height);
             let newY = y;
             if (newY > (window?.innerHeight ?? 0) - height) {
-                newY -= height;
+                newY -= height+offsetY;
             }
+
+            if (newY < 0) {
+                newY = 0;
+            }
+
             setInnerY(newY);
-        }, [window?.innerHeight, y]);
+        }, [offsetY, window?.innerHeight, y]);
 
         // Other
 
@@ -90,23 +116,28 @@ export const Menu = withMemo(
         }
 
         return (
-            <Block
-                className={classNames(className, styles.menu)}
-                style={{ ...style, top: innerY, left: innerX }}
-                ref={menuRef}
-            >
-                {items.map((item) => (
-                    <Clickable
-                        onClick={callItemCallback}
-                        onClickData={item.callback}
-                        className={styles.item}
-                        key={item.key}
-                    >
-                        {!!item.icon && <Icon icon={item.icon} />}
-                        <Text>{item.label}</Text>
-                    </Clickable>
-                ))}
-            </Block>
+            <MenuCloseContextProvider value={onClose}>
+                <Block
+                    className={classNames(className, styles.menu)}
+                    style={{...style, top: innerY, left: innerX}}
+                    ref={menuRef}
+                    __allowChildren="all"
+                >
+                    {items?.map((item) => {
+                        const icon = (!!item.icon && typeof item.icon === "object" && "color" in item.icon) ? item.icon.icon : item.icon;
+                        const iconColor = (!!item.icon && typeof item.icon === "object" && "color" in item.icon) ? item.icon.color : undefined;
+
+                        return <MenuItem key={item.key}
+                                         onClick={item.callback}
+                                         className={classNames(styles.item, item.className)}
+                                         onMouseEnter={item.onMouseEnter}
+                                         icon={icon}
+                                         iconColor={iconColor}
+                                         onMouseLeave={item.onMouseLeave}>{item.label}</MenuItem>;
+                    })}
+                    {children}
+                </Block>
+            </MenuCloseContextProvider>
         );
     }),
     styles
