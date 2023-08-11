@@ -128,9 +128,9 @@ export const SearchSelectInput = withMemo(function SearchSelectInput<OnChangeDat
         }
 
         return (
-            <Clickable onClick={toggleOption} onClickData={value} key={indexedOptions[value].key}>
+            <Clickable onClick={toggleOption} onClickData={value} key={indexedOptions[value]?.key}>
                 <InlineBlock className={styles.tag}>
-                    <Text size={TEXT_SIZE.xSmall}>{indexedOptions[value].label}</Text>
+                    <Text size={TEXT_SIZE.xSmall}>{indexedOptions[value]?.label}</Text>
                 </InlineBlock>
             </Clickable>
         );

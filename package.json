@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node bin/build.js && webpack",
     "build:production": "node bin/build.js && webpack --env production",
-    "update packages": "node bin/updateCopies.js"
+    "update packages": "node bin/updateCopies.js",
+    "typecheck": "tsc --no-emit"
   },
   "repository": {
     "type": "git",
