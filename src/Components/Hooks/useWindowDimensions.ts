@@ -14,4 +14,4 @@ export function useWindowDimensions() {
 	}, [window]);
 
     return {x: window?.innerWidth ?? 0, y: window?.innerHeight ?? 0};
-};
+}

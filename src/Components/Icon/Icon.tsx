@@ -44,4 +44,4 @@ export const Icon = withMemo(function Icon({ icon, alt, className, noMargin=true
         return <img src={icon} alt={alt} className={classNames(className, {[styles.margin]: !noMargin})} style={style} title={title} />;
     }
     return <FontAwesomeIcon {...props} icon={icon as IconProp} className={classNames(className, {[styles.margin]: !noMargin})} style={style} title={title} />;
-}, styles)
+}, styles);

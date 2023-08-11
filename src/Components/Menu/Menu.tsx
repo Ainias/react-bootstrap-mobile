@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {withMemo} from '../../helper/withMemo';
-import {RbmComponentProps, WithNoStringProps} from '../RbmComponentProps';
+import {RbmComponentProps} from '../RbmComponentProps';
 import {IconSource} from '../Icon/Icon';
 import {Block} from '../Layout/Block';
 import classNames from 'classnames';

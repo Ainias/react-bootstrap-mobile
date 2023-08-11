@@ -2,7 +2,6 @@ import * as React from 'react';
 import { withMemo } from '../../helper/withMemo';
 import { RbmComponentProps } from '../RbmComponentProps';
 import { Block } from '../Layout/Block';
-import { EmptyProps } from '../../helper/EmptyProps';
 
 import styles from './dialogBackground.scss';
 import classNames from 'classnames';

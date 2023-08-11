@@ -1,5 +1,5 @@
 import {withMemo} from "../../helper/withMemo";
-import React, {useCallback, useLayoutEffect, useRef, useState} from "react";
+import React, {useCallback, useRef, useState} from "react";
 import {Clickable} from "../Clickable/Clickable";
 import classNames from "classnames";
 import styles from "./menu.scss";

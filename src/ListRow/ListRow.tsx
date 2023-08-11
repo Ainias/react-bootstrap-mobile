@@ -1,10 +1,7 @@
 import {withMemo} from "../helper/withMemo";
 
-export type ListRowProps = {
 
-};
-
-export const ListRow = withMemo(function ListRow({}: ListRowProps) {
+export const ListRow = withMemo(function ListRow() {
     // Refs
 
     // States/Variables/Selectors
