@@ -10,6 +10,7 @@ import {withRenderBrowserOnly} from '../../helper/withRenderBrowserOnly';
 import {useWindow} from '../../WindowContext/WindowContext';
 import {MenuItem} from "./MenuItem";
 import {MenuCloseContextProvider} from "./MenuCloseContext";
+import {createPortal} from "react-dom";
 
 export type MenuItemType = {
     label: string;
@@ -33,6 +34,8 @@ export type MenuProps = RbmComponentProps<
     }
 >;
 
+export const MENU_CONTAINER_CLASS = "rbm-menu-container";
+
 export const Menu = withMemo(
     withRenderBrowserOnly(function Menu({
                                             className,
@@ -53,6 +56,10 @@ export const Menu = withMemo(
         const window = useWindow();
 
         // States
+        const [portalContainer] = useState<HTMLDivElement>(() => {
+            return document.createElement('div');
+        });
+
         const [innerX, setInnerX] = useState(x);
         const [innerY, setInnerY] = useState(y);
 
@@ -75,13 +82,25 @@ export const Menu = withMemo(
         }, [isOpen, onClose, window]);
 
         useLayoutEffect(() => {
+            if (!isOpen) {
+                return;
+            }
+            let elem = window?.document.body.querySelector("." + MENU_CONTAINER_CLASS);
+            if (!elem) {
+                elem = window?.document.body;
+            }
+            elem?.appendChild(portalContainer)
+        }, [isOpen, portalContainer, window?.document.body]);
+
+
+        useLayoutEffect(() => {
             if (!menuRef.current) {
                 return;
             }
             const width = parseFloat(getComputedStyle(menuRef.current).width);
             let newX = x;
             if (newX > (window?.innerWidth ?? 0) - width) {
-                newX -= width+offsetX;
+                newX -= width + offsetX;
             }
 
             if (newX < 0) {
@@ -98,7 +117,7 @@ export const Menu = withMemo(
             const height = parseFloat(getComputedStyle(menuRef.current).height);
             let newY = y;
             if (newY > (window?.innerHeight ?? 0) - height) {
-                newY -= height+offsetY;
+                newY -= height + offsetY;
             }
 
             if (newY < 0) {
@@ -116,28 +135,32 @@ export const Menu = withMemo(
         }
 
         return (
-            <MenuCloseContextProvider value={onClose}>
-                <Block
-                    className={classNames(className, styles.menu)}
-                    style={{...style, top: innerY, left: innerX}}
-                    ref={menuRef}
-                    __allowChildren="all"
-                >
-                    {items?.map((item) => {
-                        const icon = (!!item.icon && typeof item.icon === "object" && "color" in item.icon) ? item.icon.icon : item.icon;
-                        const iconColor = (!!item.icon && typeof item.icon === "object" && "color" in item.icon) ? item.icon.color : undefined;
+            <>
+                {createPortal(
+                    <MenuCloseContextProvider value={onClose}>
+                        <Block
+                            className={classNames(className, styles.menu)}
+                            style={{...style, top: innerY, left: innerX}}
+                            ref={menuRef}
+                            __allowChildren="all"
+                        >
+                            {items?.map((item) => {
+                                const icon = (!!item.icon && typeof item.icon === "object" && "color" in item.icon) ? item.icon.icon : item.icon;
+                                const iconColor = (!!item.icon && typeof item.icon === "object" && "color" in item.icon) ? item.icon.color : undefined;
 
-                        return <MenuItem key={item.key}
-                                         onClick={item.callback}
-                                         className={classNames(styles.item, item.className)}
-                                         onMouseEnter={item.onMouseEnter}
-                                         icon={icon}
-                                         iconColor={iconColor}
-                                         onMouseLeave={item.onMouseLeave}>{item.label}</MenuItem>;
-                    })}
-                    {children}
-                </Block>
-            </MenuCloseContextProvider>
+                                return <MenuItem key={item.key}
+                                                 onClick={item.callback}
+                                                 className={classNames(styles.item, item.className)}
+                                                 onMouseEnter={item.onMouseEnter}
+                                                 icon={icon}
+                                                 iconColor={iconColor}
+                                                 onMouseLeave={item.onMouseLeave}>{item.label}</MenuItem>;
+                            })}
+                            {children}
+                        </Block>
+                    </MenuCloseContextProvider>
+                    , portalContainer)}
+            </>
         );
     }),
     styles

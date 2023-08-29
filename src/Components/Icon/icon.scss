@@ -2,3 +2,8 @@
   margin-left: 0.3rem;
   margin-right: 0.3rem;
 }
+.imgIcon {
+  width: calc(1em + 4px);
+  height: calc(1em + 4px);
+  object-fit: contain;
+}

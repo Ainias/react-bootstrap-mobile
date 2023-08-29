@@ -10,6 +10,7 @@ let pathsToProjects = [
     // '/home/silas/Projekte/web/games',
     // '/home/silas/Projekte/web/react-windows',
     // '/home/silas/Projekte/web/cordova-sites',
+    "/Users/sguenter/Projekte/Privat/games",
     "/Users/sguenter/Projekte/Privat/dnd",
     "/Users/sguenter/Projekte/Privat/react-windows",
     "/Users/sguenter/Projekte/Privat/cordova-sites"

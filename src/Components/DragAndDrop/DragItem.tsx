@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { withMemo } from '../../helper/withMemo';
-import { RbmComponentProps, WithNoStringAndChildrenProps } from '../RbmComponentProps';
-import { Draggable, DraggableProps } from 'react-beautiful-dnd';
+import {withMemo} from '../../helper/withMemo';
+import {RbmComponentProps, WithNoStringAndChildrenProps} from '../RbmComponentProps';
+import {Draggable, DraggableProps} from 'react-beautiful-dnd';
 
 export type DragItemProps = RbmComponentProps<Omit<DraggableProps, 'children'>, WithNoStringAndChildrenProps>;
 
-function DragItem({ children, ...dragProps }: DragItemProps) {
+function DragItem({children, className, ...dragProps}: DragItemProps) {
     // Variables
 
     // Refs
@@ -24,8 +24,8 @@ function DragItem({ children, ...dragProps }: DragItemProps) {
 
     return (
         <Draggable {...dragProps}>
-            {({ innerRef, dragHandleProps, draggableProps }) => (
-                <div {...draggableProps} {...dragHandleProps} ref={innerRef}>
+            {({innerRef, dragHandleProps, draggableProps}) => (
+                <div className={className} {...draggableProps} {...dragHandleProps} ref={innerRef}>
                     {children}
                 </div>
             )}
@@ -35,4 +35,4 @@ function DragItem({ children, ...dragProps }: DragItemProps) {
 
 // Need DragItemMemo for autocompletion of phpstorm
 const DragItemMemo = withMemo(DragItem);
-export { DragItemMemo as DragItem };
+export {DragItemMemo as DragItem};

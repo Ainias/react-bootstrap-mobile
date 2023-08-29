@@ -1,23 +1,32 @@
 import * as React from 'react';
-import { Override } from '@ainias42/js-helper';
-import { OptionalListener, useListener } from '../../Hooks/useListener';
+import {Override} from '@ainias42/js-helper';
+import {OptionalListener, useListener, useListenerWithExtractedProps} from '../../Hooks/useListener';
 
 import styles from './button.scss';
 import classNames from 'classnames';
-import { withMemo } from '../../../helper/withMemo';
-import { HTMLAttributes } from 'react';
-import { RbmComponentProps } from '../../RbmComponentProps';
+import {withMemo} from '../../../helper/withMemo';
+import {HTMLAttributes} from 'react';
+import {RbmComponentProps} from '../../RbmComponentProps';
 import {ButtonType} from "./ButtonType";
+import {Flavor} from "../../Flavor";
 
 export type ButtonProps<ClickData> = RbmComponentProps<
     Override<HTMLAttributes<HTMLButtonElement>, {
-    type?: ButtonType,
+        type?: ButtonType,
         disabled?: boolean;
+        flavor?: Flavor
     } & OptionalListener<'onClick', ClickData>>
 >;
 
-export const Button = withMemo(function Button<ClickData>({ children, className, disabled, type=ButtonType.Primary, ...props }: ButtonProps<ClickData>) {
-    const onClick = useListener<'onClick', ClickData>('onClick', props);
+export const Button = withMemo(function Button<ClickData>({
+                                                              children,
+                                                              className,
+                                                              disabled,
+                                                              flavor = Flavor.Accent,
+                                                              type = ButtonType.Primary,
+                                                              ...props
+                                                          }: ButtonProps<ClickData>) {
+    const [onClick, otherProps] = useListenerWithExtractedProps<'onClick', ClickData>('onClick', props);
 
     const classes = {
         [styles.primary]: type === ButtonType.Primary,
@@ -26,7 +35,8 @@ export const Button = withMemo(function Button<ClickData>({ children, className,
     };
 
     return (
-        <button {...props} disabled={disabled} type="button" onClick={onClick} className={classNames(styles.button, classes, className)}>
+        <button {...otherProps} disabled={disabled} type="button" onClick={onClick}
+                className={classNames(styles.button, classes, flavor, className)}>
             {children}
         </button>
     );

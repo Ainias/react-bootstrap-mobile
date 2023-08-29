@@ -22,4 +22,5 @@ export type MenuProps = RbmComponentProps<{
     offsetX?: number;
     offsetY?: number;
 }>;
+export declare const MENU_CONTAINER_CLASS = "rbm-menu-container";
 export declare const Menu: ({ className, style, items, y, x, isOpen, onClose, children, offsetY, offsetX, }: MenuProps) => React.JSX.Element | null;

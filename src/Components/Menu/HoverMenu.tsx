@@ -8,7 +8,9 @@ import {Menu} from "./Menu";
 
 export type HoverMenuProps = RbmComponentProps<{
     items: RbmChildWithoutString,
+    openToSide?: boolean;
     onClick?: () => void;
+    onClose?: () => void;
 }, WithNoStringAndChildrenProps>;
 
 export const HoverMenu = withMemo(function HoverMenu({
@@ -17,6 +19,8 @@ export const HoverMenu = withMemo(function HoverMenu({
                                                          className,
                                                          style,
                                                          onClick,
+    onClose,
+                                                         openToSide
                                                      }: HoverMenuProps) {
     // Refs
 
@@ -34,14 +38,20 @@ export const HoverMenu = withMemo(function HoverMenu({
         if (!hoverItemRef.current) {
             return;
         }
-        const {left, bottom, width, height} = hoverItemRef.current.getBoundingClientRect();
-        setPosition({x: left, y: bottom});
-        setOffset({x: -width, y: height});
-    }, []);
+        const {top, left, bottom, right, width, height} = hoverItemRef.current.getBoundingClientRect();
+        if (openToSide) {
+            setPosition({x: right, y: top});
+            setOffset({x: width, y: -height});
+        } else {
+            setPosition({x: left, y: bottom});
+            setOffset({x: -width, y: height});
+        }
+    }, [openToSide]);
 
     const close = useCallback(() => {
         setIsOpen(false);
-    }, []);
+        onClose?.();
+    }, [onClose]);
 
     const open = useCallback(() => {
         recalculatePosition();
@@ -57,6 +67,7 @@ export const HoverMenu = withMemo(function HoverMenu({
     return <Clickable
         onMouseEnter={open}
         onMouseLeave={close}
+        useReactOnMouseLeave={true}
         onClick={onClick}
         className={classNames(styles.hoverMenu, {[styles.open]: isOpen}, className)}
         style={style}
@@ -64,7 +75,7 @@ export const HoverMenu = withMemo(function HoverMenu({
         __allowChildren="all"
     >
         {children}
-        <Menu x={position.x} y={position.y} isOpen={true} onClose={close} offsetX={offset.x} offsetY={offset.y}>
+        <Menu x={position.x} y={position.y} isOpen={true} onClose={close} offsetX={offset.x} offsetY={offset.y} className={classNames({[styles.hidden]: !isOpen})}>
             {items}
         </Menu>
     </Clickable>;

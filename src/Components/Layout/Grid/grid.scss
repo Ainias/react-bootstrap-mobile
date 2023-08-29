@@ -15,6 +15,31 @@ $columns: 12;
 $breakpoints: $grid-breakpoints;
 $containerBreakpoints: $grid-breakpoints;
 
+@mixin printClasses {
+  @media print {
+    @for $i from 1 through $columns {
+      .item-print-#{$i} {
+        grid-column: auto / span $i;
+      }
+    }
+
+    // Start with `1` because `0` is and invalid value.
+    // Ends with `$columns - 1` because offsetting by the width of an entire row isn't possible.
+    @for $i from 1 through ($columns - 1) {
+      .start-print-#{$i} {
+        grid-column-start: $i;
+      }
+    }
+
+    // Add classes for reordering
+    @for $i from -10 through 10 {
+      .order-print-#{$i} {
+        order: $i;
+      }
+    }
+  }
+}
+
 @mixin contentMin($breakpointName) {
   @for $i from 1 through $columns {
     .item-#{$breakpointName}-#{$i} {
@@ -81,6 +106,8 @@ $containerBreakpoints: $grid-breakpoints;
       }
       }
     }
+
+    @include printClasses;
   }
 
   &:not(.useContainerWidth) {
@@ -110,28 +137,7 @@ $containerBreakpoints: $grid-breakpoints;
         }
       }
     }
-  }
 
-  @media print {
-    @for $i from 1 through $columns {
-      .item-print-#{$i} {
-        grid-column: auto / span $i;
-      }
-    }
-
-    // Start with `1` because `0` is and invalid value.
-    // Ends with `$columns - 1` because offsetting by the width of an entire row isn't possible.
-    @for $i from 1 through ($columns - 1) {
-      .start-print-#{$i} {
-        grid-column-start: $i;
-      }
-    }
-
-    // Add classes for reordering
-    @for $i from -10 through 10 {
-      .order-print-#{$i} {
-        order: $i;
-      }
-    }
+    @include printClasses;
   }
 }

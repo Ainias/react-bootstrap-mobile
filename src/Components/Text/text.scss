@@ -1,8 +1,12 @@
-$primaryColor: #000000;
-$secondaryColor: #717171;
+$primaryColor: #18181B; // Gray-900
+$secondaryColor: #71717a; // Gray-500
+$tertiaryColor: #A1A1AA; // Gray-400
 
 :root {
-  --text-primary-default-color: $primaryColor;
+  --text-primary-default-color: #{$primaryColor};
+  --text-prmary: #{$primaryColor};
+  --text-secondary: #{$secondaryColor};
+  --text-tertiary: #{$tertiaryColor};
 }
 
 .text {
@@ -21,11 +25,15 @@ $secondaryColor: #717171;
   }
 
   &.primary {
-    color: $primaryColor
+    color: var(--text-primary)
   }
 
   &.secondary {
-    color: $secondaryColor;
+    color: var(--text-secondary);
+  }
+
+  &.tertiary {
+    color: var(--text-tertiary);
   }
 
   &.xsmall {

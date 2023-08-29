@@ -4,6 +4,7 @@ import { ViewProps } from '../Layout/View';
 export declare const TEXT_PRIO: {
     primary: string;
     secondary: string;
+    tertiary: string;
     heading: string;
 };
 export declare const TEXT_SIZE: {

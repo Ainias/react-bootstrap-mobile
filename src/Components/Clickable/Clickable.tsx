@@ -4,8 +4,9 @@ import {OptionalListener, useListener} from '../Hooks/useListener';
 
 import styles from './clickable.scss';
 import classNames from 'classnames';
-import {useCallback, MouseEvent, ForwardedRef} from 'react';
+import {useCallback, MouseEvent as ReactMouseEvent, ForwardedRef, useEffect, MouseEvent} from 'react';
 import {withForwardRef} from '../../helper/withForwardRef';
+import {useComposedRef} from "../Hooks/useComposedRef";
 
 type OnClickListener<Data> = OptionalListener<'onClick', Data>;
 type OnMouseDownListener<Data> = OptionalListener<'onMouseDown', Data>;
@@ -24,6 +25,7 @@ export type ClickableProps<
     OnDragOverData,
     OnMouseEnterData,
     OnMouseLeaveData,
+    OnDoubleClickData,
     HrefType extends string | undefined
 > = RbmComponentProps<
     {
@@ -31,6 +33,7 @@ export type ClickableProps<
         href?: HrefType;
         preventDefault?: boolean;
         stopPropagation?: boolean;
+        useReactOnMouseLeave?: boolean;
     } & OnClickListener<OnClickData> &
     OnMouseDownListener<OnMouseDownData> &
     OnMouseMoveListener<OnMouseMoveData> &
@@ -39,7 +42,8 @@ export type ClickableProps<
     OnDragOverListener<OnDragOverData> &
     OptionalListener<'onClickCapture', OnClickCaptureData> &
     OptionalListener<'onMouseEnter', OnMouseEnterData> &
-    OptionalListener<'onMouseLeave', OnMouseLeaveData>
+    OptionalListener<'onMouseLeave', OnMouseLeaveData, MouseEvent|ReactMouseEvent> &
+    OptionalListener<'onDoubleClick', OnDoubleClickData>
 >;
 
 function Clickable<
@@ -52,6 +56,7 @@ function Clickable<
     OnDragOverData,
     OnMouseEnterData,
     OnMouseLeaveData,
+    OnDoubleClickData,
     HrefType extends string | undefined
 >(
     {
@@ -62,8 +67,9 @@ function Clickable<
         interactable = true,
         preventDefault = false,
         stopPropagation = true,
+        useReactOnMouseLeave = false,
         ...clickData
-    }: ClickableProps<OnClickData, OnMouseDownData, OnMouseMoveData, OnMouseUpData, OnClickCaptureData, OnDropData, OnDragOverData,OnMouseEnterData, OnMouseLeaveData, HrefType>,
+    }: ClickableProps<OnClickData, OnMouseDownData, OnMouseMoveData, OnMouseUpData, OnClickCaptureData, OnDropData, OnDragOverData,OnMouseEnterData, OnMouseLeaveData, OnDoubleClickData, HrefType>,
     ref: ForwardedRef<HrefType extends string ? HTMLAnchorElement : HTMLSpanElement>
 ) {
     // Variables
@@ -71,11 +77,12 @@ function Clickable<
     // States
 
     // Refs
+    const clickableRef = useComposedRef(ref);
 
     // Callbacks
     const onClickInner = useListener<'onClick', OnClickData>('onClick', clickData);
     const realOnClick = useCallback(
-        (e: MouseEvent) => {
+        (e: ReactMouseEvent) => {
             if (clickData.onClick) {
                 if (stopPropagation) {
                     e.stopPropagation();
@@ -91,7 +98,7 @@ function Clickable<
 
     const onMouseDownInner = useListener<'onMouseDown', OnMouseDownData>('onMouseDown', clickData);
     const realOnMouseDown = useCallback(
-        (e: MouseEvent) => {
+        (e: ReactMouseEvent) => {
             if (clickData.onMouseDown) {
                 if (stopPropagation) {
                     e.stopPropagation();
@@ -107,7 +114,7 @@ function Clickable<
 
     const onMouseMoveInner = useListener<'onMouseMove', OnMouseMoveData>('onMouseMove', clickData);
     const realOnMouseMove = useCallback(
-        (e: MouseEvent) => {
+        (e: ReactMouseEvent) => {
             if (clickData.onMouseMove) {
                 if (stopPropagation) {
                     e.stopPropagation();
@@ -123,7 +130,7 @@ function Clickable<
 
     const onMouseUpInner = useListener<'onMouseUp', OnMouseUpData>('onMouseUp', clickData);
     const realOnMouseUp = useCallback(
-        (e: MouseEvent) => {
+        (e: ReactMouseEvent) => {
             if (clickData.onMouseUp) {
                 if (stopPropagation) {
                     e.stopPropagation();
@@ -139,7 +146,7 @@ function Clickable<
 
     const onClickCaptureInner = useListener<'onClickCapture', OnClickCaptureData>('onClickCapture', clickData);
     const realOnClickCapture = useCallback(
-        (e: MouseEvent) => {
+        (e: ReactMouseEvent) => {
             if (clickData.onClickCapture) {
                 if (stopPropagation) {
                     e.stopPropagation();
@@ -155,7 +162,7 @@ function Clickable<
 
     const onDropInner = useListener<'onDrop', OnDropData>('onDrop', clickData);
     const realOnDrop = useCallback(
-        (e: MouseEvent) => {
+        (e: ReactMouseEvent) => {
             if (clickData.onDrop) {
                 if (stopPropagation) {
                     e.stopPropagation();
@@ -171,7 +178,7 @@ function Clickable<
 
     const onDragOver = useListener<'onDragOver', OnDragOverData>('onDragOver', clickData);
     const realOnDragOver = useCallback(
-        (e: MouseEvent) => {
+        (e: ReactMouseEvent) => {
             if (clickData.onDragOver) {
                 if (stopPropagation) {
                     e.stopPropagation();
@@ -187,7 +194,7 @@ function Clickable<
 
     const onMouseEnter = useListener<'onMouseEnter', OnMouseEnterData>('onMouseEnter', clickData);
     const realOnMouseEnter = useCallback(
-        (e: MouseEvent) => {
+        (e: ReactMouseEvent) => {
             if (clickData.onMouseEnter) {
                 if (stopPropagation) {
                     e.stopPropagation();
@@ -203,7 +210,7 @@ function Clickable<
 
     const onMouseLeave = useListener<'onMouseLeave', OnMouseLeaveData>('onMouseLeave', clickData);
     const realOnMouseLeave = useCallback(
-        (e: MouseEvent) => {
+        (e: Event|ReactMouseEvent) => {
             if (clickData.onMouseLeave) {
                 if (stopPropagation) {
                     e.stopPropagation();
@@ -217,7 +224,33 @@ function Clickable<
         [clickData.onMouseLeave, onMouseLeave, preventDefault, stopPropagation]
     );
 
+    const onDoubleClick = useListener<'onDoubleClick', OnDoubleClickData>('onDoubleClick', clickData);
+    const realOnDoubleClick = useCallback(
+        (e: Event|ReactMouseEvent) => {
+            if (clickData.onDoubleClick) {
+                if (stopPropagation) {
+                    e.stopPropagation();
+                }
+                if (preventDefault) {
+                    e.preventDefault();
+                }
+                onDoubleClick(e);
+            }
+        },
+        [clickData.onDoubleClick, onDoubleClick, preventDefault, stopPropagation]
+    );
+
     // Effects
+    useEffect(() => {
+        if (useReactOnMouseLeave) {
+            return undefined;
+        }
+        const elem = clickableRef.current;
+        elem?.addEventListener('mouseleave', realOnMouseLeave);
+        return () => {
+            elem?.removeEventListener('mouseleave', realOnMouseLeave);
+        };
+    }, [useReactOnMouseLeave, clickableRef, realOnMouseLeave]);
 
     // Other
 
@@ -235,18 +268,19 @@ function Clickable<
         onDrop: realOnDrop,
         onDragOver: realOnDragOver,
         onMouseEnter: realOnMouseEnter,
-        onMouseLeave: realOnMouseLeave,
+        onMouseLeave: useReactOnMouseLeave ? realOnMouseLeave : undefined,
+        onDoubleClick: realOnDoubleClick,
         tabIndex: interactable ? 0 : undefined,
     };
     if (typeof href === 'string') {
         return (
-            <a {...props} href={href} ref={ref as ForwardedRef<HTMLAnchorElement>}>
+            <a {...props} href={href} ref={clickableRef as ForwardedRef<HTMLAnchorElement>}>
                 {children}
             </a>
         );
     }
     return (
-        <span {...props} ref={ref as ForwardedRef<HTMLSpanElement>}>
+        <span {...props} ref={clickableRef as ForwardedRef<HTMLSpanElement>}>
             {children}
         </span>
     );

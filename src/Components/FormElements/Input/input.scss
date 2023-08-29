@@ -31,7 +31,7 @@
       }
 
       &:focus {
-        background-image: linear-gradient(var(--flavor-focus), var(--flavor-focus)),
+        background-image: linear-gradient(var(--flavor-accent), var(--flavor-accent)),
         linear-gradient(to top, transparent 1px, #afafaf 1px);
       }
     }

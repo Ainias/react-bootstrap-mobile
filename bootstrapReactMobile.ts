@@ -13,6 +13,7 @@ export * from './src/Components/Dialog/useConfirmDialog';
 export * from './src/Components/DragAndDrop/DragItem';
 export * from './src/Components/DragAndDrop/DropArea';
 export * from './src/Components/DragAndDrop/useStrictEnabled';
+export * from './src/Components/Flavor';
 export * from './src/Components/FormElements/Button/Button';
 export * from './src/Components/FormElements/Button/ButtonType';
 export * from './src/Components/FormElements/CheckBox/Checkbox';

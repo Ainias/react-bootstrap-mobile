@@ -17,6 +17,8 @@ export type SubmenuProps = RbmComponentProps<{
     label: string, icon?: IconSource;
     iconColor?: string;
     disabled?: boolean;
+    onMouseEnter?: () => void;
+    onMouseLeave?: () => void;
 }, WithNoStringAndChildrenProps>;
 
 export const Submenu = withMemo(function Submenu({
@@ -26,7 +28,9 @@ export const Submenu = withMemo(function Submenu({
                                                      iconColor,
                                                      className,
                                                      style,
-                                                     disabled = false
+                                                     disabled = false,
+                                                     onMouseEnter,
+                                                     onMouseLeave,
                                                  }: SubmenuProps) {
     // Refs
 
@@ -52,11 +56,13 @@ export const Submenu = withMemo(function Submenu({
         setOpenLeft(right + parseFloat(width) >= (window?.innerWidth ?? 0));
         setOpenTop(top + parseFloat(height) >= (window?.innerHeight ?? 0));
         setIsOpen(true);
-    }, [window?.innerHeight, window?.innerWidth]);
+        onMouseEnter?.();
+    }, [onMouseEnter, window?.innerHeight, window?.innerWidth]);
 
     const closeSubmenu = useCallback(() => {
         setIsOpen(false);
-    }, []);
+        onMouseLeave?.();
+    }, [onMouseLeave]);
 
     const closeParent = useMenuClose();
     const closeAllMenus = useCallback(() => {

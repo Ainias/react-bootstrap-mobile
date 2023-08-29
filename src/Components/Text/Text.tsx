@@ -11,6 +11,7 @@ import { ViewProps } from '../Layout/View';
 export const TEXT_PRIO = {
     primary: styles.primary,
     secondary: styles.secondary,
+    tertiary: styles.tertiary,
     heading: styles.heading,
 };
 

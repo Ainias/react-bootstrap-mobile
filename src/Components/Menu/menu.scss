@@ -4,6 +4,10 @@
   border: 1px solid var(--border-light);
   border-radius: 2px;
   z-index: 1000;
+
+  &.hidden {
+    visibility: hidden;
+  }
 }
 
 .divider {
@@ -33,7 +37,7 @@
     white-space: nowrap;
 
     .icon {
-      padding-right: 4px;
+      margin-right: 4px;
     }
   }
 
