@@ -7,3 +7,14 @@
   height: calc(1em + 4px);
   object-fit: contain;
 }
+
+.doubleIconContainer {
+  position: relative;
+  padding: 3px;
+  .secondIcon {
+    position: absolute;
+    right: 3px;
+    bottom: 3px;
+    pointer-events: none;
+  }
+}

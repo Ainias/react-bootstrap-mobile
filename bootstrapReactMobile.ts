@@ -43,6 +43,7 @@ export * from './src/Components/Hooks/useMousePosition';
 export * from './src/Components/Hooks/useOnMount';
 export * from './src/Components/Hooks/useOnce';
 export * from './src/Components/Hooks/useWindowDimensions';
+export * from './src/Components/Icon/DoubleIcon';
 export * from './src/Components/Icon/Icon';
 export * from './src/Components/Image/Image';
 export * from './src/Components/InViewport/InViewport';

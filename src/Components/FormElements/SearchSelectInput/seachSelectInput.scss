@@ -61,6 +61,7 @@
 }
 
 .tag {
+  --text-primary-default-color: white;
   color: white;
   background-color: var(--flavor-accent);
   padding: 0.1rem 0.2rem;
@@ -83,6 +84,7 @@
     cursor: pointer;
 
     &.active {
+      --text-primary-default-color: white;
       color: white;
       background-color: var(--flavor-accent);
     }
