@@ -9,7 +9,7 @@ import {Menu} from "./Menu";
 export type HoverMenuProps = RbmComponentProps<{
     items: RbmChildWithoutString,
     openToSide?: boolean;
-    onClick?: () => void;
+    onClick?: () => void | boolean;
     onClose?: () => void;
 }, WithNoStringAndChildrenProps>;
 
@@ -19,7 +19,7 @@ export const HoverMenu = withMemo(function HoverMenu({
                                                          className,
                                                          style,
                                                          onClick,
-    onClose,
+                                                         onClose,
                                                          openToSide
                                                      }: HoverMenuProps) {
     // Refs
@@ -58,6 +58,12 @@ export const HoverMenu = withMemo(function HoverMenu({
         setIsOpen(true);
     }, [recalculatePosition]);
 
+    const onClickInner = useCallback(() => {
+        if (onClick?.() !== false) {
+            open();
+        }
+    }, [onClick, open]);
+
     // Effects
 
     // Other
@@ -68,14 +74,15 @@ export const HoverMenu = withMemo(function HoverMenu({
         onMouseEnter={open}
         onMouseLeave={close}
         useReactOnMouseLeave={true}
-        onClick={onClick}
+        onClick={onClickInner}
         className={classNames(styles.hoverMenu, {[styles.open]: isOpen}, className)}
         style={style}
         ref={hoverItemRef}
         __allowChildren="all"
     >
         {children}
-        <Menu x={position.x} y={position.y} isOpen={true} onClose={close} offsetX={offset.x} offsetY={offset.y} className={classNames({[styles.hidden]: !isOpen})}>
+        <Menu x={position.x} y={position.y} isOpen={true} onClose={close} offsetX={offset.x} offsetY={offset.y}
+              className={classNames({[styles.hidden]: !isOpen})}>
             {items}
         </Menu>
     </Clickable>;

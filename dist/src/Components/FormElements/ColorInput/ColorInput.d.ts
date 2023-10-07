@@ -11,7 +11,8 @@ export type ColorInputProps<OnChangeData> = {
     disableAlpha?: boolean;
     presetColors?: string[];
     sharedColorKey?: string;
+    disabled?: boolean;
 } & OptionalListener<'onChange', OnChangeData>;
-declare function ColorInput<OnChangeData>({ defaultValue, value, label, onChangeColor, onChangeColorComplete, onOpen, onClose, disableAlpha, presetColors, sharedColorKey, ...otherProps }: ColorInputProps<OnChangeData>): React.JSX.Element;
+declare function ColorInput<OnChangeData>({ defaultValue, value, label, onChangeColor, onChangeColorComplete, onOpen, onClose, disableAlpha, presetColors, sharedColorKey, disabled, ...otherProps }: ColorInputProps<OnChangeData>): React.JSX.Element;
 declare const ColorInputMemo: typeof ColorInput;
 export { ColorInputMemo as ColorInput };

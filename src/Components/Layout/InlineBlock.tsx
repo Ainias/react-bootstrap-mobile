@@ -8,7 +8,9 @@ import { ComponentRef, ForwardedRef } from 'react';
 import { withForwardRef } from '../../helper/withForwardRef';
 
 export type InlineBlockProps<AsType extends keyof JSX.IntrinsicElements> = RbmComponentProps<
-    ViewWithoutListenersProps<AsType>
+    ViewWithoutListenersProps<AsType> & {
+    id?: string
+}
 >;
 
 function InlineBlock<AsType extends keyof JSX.IntrinsicElements = 'span'>(

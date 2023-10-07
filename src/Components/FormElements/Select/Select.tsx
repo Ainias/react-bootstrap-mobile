@@ -2,7 +2,7 @@ import * as React from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { Override } from '../../../TypeHelpers';
 import { ChangeEventHandler, SelectHTMLAttributes, useCallback } from 'react';
-import { OptionalListener, useListener } from '../../Hooks/useListener';
+import {OptionalListener, useListener, useListenerWithExtractedProps} from '../../Hooks/useListener';
 
 import styles from './select.scss';
 import { withMemo } from '../../../helper/withMemo';
@@ -46,7 +46,7 @@ export const Select = withMemo(function Select<OnChangeData>({
     // Selectors
 
     // Callbacks
-    const onChangeWithData = useListener<'onChange', OnChangeData>('onChange', otherProps);
+    const [onChangeWithData, propsWithoutData] = useListenerWithExtractedProps<'onChange', OnChangeData>('onChange', otherProps);
     const onChange = useCallback<ChangeEventHandler<HTMLSelectElement>>(
         (e) => {
             onChangeValue?.(e.target.value);
@@ -65,7 +65,7 @@ export const Select = withMemo(function Select<OnChangeData>({
         // eslint-disable-next-line jsx-a11y/label-has-associated-control
         <label className={classNames(styles.select, { [styles.inline]: inline, [styles.small]: small }, className)} style={style}>
             {label ? <span className={styles.label}>{label}</span> : null}
-            <select {...otherProps} className={styles.input} onChange={onChange}>
+            <select {...propsWithoutData} className={styles.input} onChange={onChange}>
                 {options.map((option) => (
                     <option value={option.value} key={option.key ?? option.value}>
                         {option.label}

@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { useCallback, useRef, useState, MouseEvent, useEffect, useLayoutEffect } from 'react';
-import { Color, ColorChangeHandler, ColorResult, SketchPicker } from 'react-color';
-import { OptionalListener, useListener } from '../../Hooks/useListener';
-import { withMemo } from '../../../helper/withMemo';
+import {useCallback, useRef, useState, MouseEvent, useEffect, useLayoutEffect} from 'react';
+import {Color, ColorChangeHandler, ColorResult, SketchPicker} from 'react-color';
+import {OptionalListener, useListener} from '../../Hooks/useListener';
+import {withMemo} from '../../../helper/withMemo';
 
 import styles from './colorInput.scss';
-import { useSharedSelectedColor } from './sharedSelectedColor';
+import {useSharedSelectedColor} from './sharedSelectedColor';
+import {Menu} from "../../Menu/Menu";
 
 export type ColorInputProps<OnChangeData> = {
     defaultValue?: string;
@@ -18,6 +19,7 @@ export type ColorInputProps<OnChangeData> = {
     disableAlpha?: boolean;
     presetColors?: string[];
     sharedColorKey?: string;
+    disabled?: boolean
 } & OptionalListener<'onChange', OnChangeData>;
 
 function convertToHex(color: { r: number; g: number; b: number; a?: number }, disableAlpha?: boolean) {
@@ -33,31 +35,32 @@ function convertToHex(color: { r: number; g: number; b: number; a?: number }, di
 }
 
 function ColorInput<OnChangeData>({
-    defaultValue,
-    value,
-    label,
-    onChangeColor,
-    onChangeColorComplete,
-    onOpen,
-    onClose,
-    disableAlpha,
-    presetColors,
-    sharedColorKey,
-    ...otherProps
-}: ColorInputProps<OnChangeData>) {
+                                      defaultValue,
+                                      value,
+                                      label,
+                                      onChangeColor,
+                                      onChangeColorComplete,
+                                      onOpen,
+                                      onClose,
+                                      disableAlpha,
+                                      presetColors,
+                                      sharedColorKey = "default",
+    disabled,
+                                      ...otherProps
+                                  }: ColorInputProps<OnChangeData>) {
     // Variables
     // useStyles(styles);
 
     // Refs
-    const containerRef = useRef<HTMLDivElement>(null);
     const modalRef = useRef<HTMLDivElement>(null);
 
     // States
     const [color, setColor] = useState<string>(value ?? defaultValue ?? '#000000FF');
     const [isOpen, setIsOpen] = useState(false);
-    const [position, setPosition] = useState({ x: 0, y: 0 });
+    const [position, setPosition] = useState({x: 0, y: 0});
 
-    const { colors, addColor } = useSharedSelectedColor(sharedColorKey);
+    const {colors, addColor} = useSharedSelectedColor(sharedColorKey);
+    const realIsOpen = disabled !== true && isOpen;
 
     const colVal: Color = value ?? color;
     // Selectors
@@ -86,24 +89,26 @@ function ColorInput<OnChangeData>({
         [disableAlpha, onChangeColorComplete]
     );
 
-    const onContainerClick = useCallback(
-        (e: MouseEvent) => {
-            if (e.target === containerRef?.current) {
-                setIsOpen(false);
-                addColor(colVal);
-                onClose?.(colVal);
-            }
+    const onMenuClose = useCallback(
+        () => {
+            setIsOpen(false);
+            addColor(colVal);
+            onClose?.(colVal);
         },
         [addColor, colVal, onClose]
     );
 
     const openElement = useCallback(
         (e: MouseEvent) => {
+            if (disabled){
+                return;
+            }
+
             setIsOpen(true);
-            setPosition({ x: e.clientX, y: e.clientY });
+            setPosition({x: e.clientX, y: e.clientY});
             onOpen?.(colVal);
         },
-        [colVal, onOpen]
+        [colVal, disabled, onOpen]
     );
 
     // Effects
@@ -114,10 +119,12 @@ function ColorInput<OnChangeData>({
         const dimension = modalRef.current.getBoundingClientRect();
         if (dimension.right > window.innerWidth || dimension.bottom > window.innerHeight) {
             const newPosition = {
-                x: Math.max(0, Math.min(window.innerWidth - dimension.width, position.x)),
-                y: Math.max(0, Math.min(window.innerHeight - dimension.height, position.y)),
+                x: Math.max(0, Math.min(window.innerWidth - dimension.width - 3, position.x)),
+                y: Math.max(0, Math.min(window.innerHeight - dimension.height - 3, position.y)),
             };
-            setPosition(newPosition);
+            if (newPosition.x !== position.x || newPosition.y !== position.y) {
+                setPosition(newPosition);
+            }
         }
     }, [position]);
 
@@ -126,9 +133,7 @@ function ColorInput<OnChangeData>({
     // Render Functions
     return (
         <span className={styles.colorInput}>
-            {isOpen ? (
-                <div onClick={onContainerClick} className={styles.modalContainer} ref={containerRef}>
-                    <div className={styles.modal} style={{ top: position.y, left: position.x }} ref={modalRef}>
+            <Menu x={position.x} y={position.y} isOpen={realIsOpen} onClose={onMenuClose}>
                         <SketchPicker
                             color={colVal}
                             onChange={onChange}
@@ -136,17 +141,15 @@ function ColorInput<OnChangeData>({
                             disableAlpha={disableAlpha}
                             presetColors={presetColors ?? colors}
                         />
-                    </div>
-                </div>
-            ) : null}
+            </Menu>
             <span onClick={openElement} className={styles.label}>
                 {label}
             </span>
-            <span onClick={openElement} style={{ backgroundColor: colVal }} className={styles.preview} />
+            <span onClick={openElement} style={{backgroundColor: colVal}} className={styles.preview}/>
         </span>
     );
 }
 
 // Need ColorInputMemo for autocompletion of phpstorm
 const ColorInputMemo = withMemo(ColorInput, styles);
-export { ColorInputMemo as ColorInput };
+export {ColorInputMemo as ColorInput};

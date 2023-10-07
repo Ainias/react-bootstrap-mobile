@@ -39,7 +39,7 @@ export function useKeyUpListener(
     useEffect(() => {
         const lowercaseKey = key.toLowerCase();
         const keyListener = (e: KeyboardEvent) => {
-            if (e.key.toLowerCase() === lowercaseKey && (!ignoreFormElements || !isFormElement(e.target))) {
+            if ((e.key === "Meta" || e.key.toLowerCase() === lowercaseKey) && (!ignoreFormElements || !isFormElement(e.target))) {
                 listener(e);
             }
         };
