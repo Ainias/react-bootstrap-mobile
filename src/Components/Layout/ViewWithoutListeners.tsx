@@ -5,7 +5,11 @@ import { View, ViewProps } from './View';
 export type ViewWithoutListenersProps<AsType extends keyof JSX.IntrinsicElements> = Omit<
     ViewProps<AsType>,
     keyof DOMAttributes<AsType>
-> & { children?: React.ReactNode };
+> & { children?: React.ReactNode, dangerouslySetInnerHTML?: {
+        // Should be InnerHTML['innerHTML'].
+        // But unfortunately we're mixing renderer-specific type declarations.
+        __html: string | TrustedHTML;
+    } | undefined;   };
 
 function ViewWithoutListeners<AsType extends keyof JSX.IntrinsicElements>(
     { children, ...props }: ViewWithoutListenersProps<AsType>,
