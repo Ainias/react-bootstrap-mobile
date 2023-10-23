@@ -1,6 +1,6 @@
 import { MutableRefObject, useEffect, useRef } from 'react';
 
-export function useOnChangeDone(onChangeDone: (ev: any) => void, ref?: MutableRefObject<HTMLInputElement | null>) {
+export function useOnChangeDone(onChangeDone: (ev: any) => void, ref?: MutableRefObject<HTMLInputElement| HTMLTextAreaElement | null>) {
     const innerRef = useRef<HTMLInputElement>(null);
     const usedRef = ref ?? innerRef;
 

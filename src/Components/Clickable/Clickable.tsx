@@ -31,6 +31,7 @@ export type ClickableProps<
     {
         interactable?: boolean;
         href?: HrefType;
+        target?: string
         preventDefault?: boolean;
         stopPropagation?: boolean;
         useReactOnMouseLeave?: boolean;
@@ -64,6 +65,7 @@ function Clickable<
         children,
         style,
         href,
+        target,
         interactable = true,
         preventDefault = false,
         stopPropagation = true,
@@ -257,6 +259,7 @@ function Clickable<
     // Render Functions
     const props = {
         style,
+        target,
         role: interactable ? 'button' : undefined,
         'aria-hidden': interactable ? undefined : true,
         className: classNames(styles.clickable, className),

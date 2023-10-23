@@ -17,6 +17,7 @@ export type InputProps<OnChangeData, OnBlurData, OnChangeDoneData> = RbmComponen
             label?: string;
             onChangeText?: (newText: string) => void;
             onEnter?: (newText: string) => void;
+            inline?: boolean
         } & OptionalListener<'onChange', OnChangeData> &
             OptionalListener<'onBlur', OnBlurData> &
             OptionalListener<'onChangeDone', OnChangeDoneData>
@@ -30,6 +31,7 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
         style,
         onEnter,
         onKeyDown,
+        inline = false,
         onChangeText,
         ...otherProps
     }: InputProps<OnChangeData, OnBlurData, OnChangeDoneData>,
@@ -86,7 +88,7 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
 
     return (
         // eslint-disable-next-line jsx-a11y/label-has-associated-control
-        <label className={classNames(styles.input, className)} style={style}>
+        <label className={classNames(styles.input, {[styles.inline]: inline}, className)} style={style}>
             {label ? <span className={styles.label}>{label}</span> : null}
             <input
                 {...otherPropsWithoutData}

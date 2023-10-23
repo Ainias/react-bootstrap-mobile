@@ -5,7 +5,7 @@ import styles from './text.scss';
 import { Recursive, ValueOf } from '../../TypeHelpers';
 import { WrongChildError } from '../../WrongChildError';
 import withStyles from 'isomorphic-style-loader/withStyles';
-import { Inline } from '../Layout/Inline';
+import { Inline, InlineProps } from '../Layout/Inline';
 import { ViewProps } from '../Layout/View';
 
 export const TEXT_PRIO = {
@@ -68,7 +68,7 @@ function Text<AsType extends keyof JSX.IntrinsicElements = 'span'>({
         <Inline
             __allowChildren="text"
             as={as}
-            {...props}
+            {...props as InlineProps<AsType>}
             className={classNames(styles.text, { [styles.block]: block }, prio, size, className)}
         >
             {children}

@@ -182,11 +182,12 @@ export const MultipleFileInput = withMemo(function MultipleImageInput<OnChangeDa
         const onDragOver = useCallback((e: DragEvent) => e.preventDefault(), []);
 
         const clickOnFile = useCallback((_: any, index?: number) => {
-            if (!allowOverride || !inputRef.current) {
+            if ((index !== undefined && !allowOverride) || !inputRef.current) {
                 return;
             }
 
             indexRef.current = index;
+            console.log("LOG-d inputRef dispatch", inputRef.current);
             inputRef.current.dispatchEvent(new MouseEvent("click"));
         }, [allowOverride]);
 

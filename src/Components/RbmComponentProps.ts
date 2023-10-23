@@ -1,5 +1,6 @@
 import { CSSProperties, ReactNode } from 'react';
 import { Recursive } from '../TypeHelpers';
+import { URecord } from "@ainias42/js-helper";
 
 export type RbmChildWithoutString = Recursive<JSX.Element | undefined | null | RbmChildWithoutString[]> | false;
 export type WithNoStringProps =
@@ -42,5 +43,5 @@ export type WithNoChildren = {
 
 export type RbmComponentProps<SpecialProps, ChildrenProps = WithNoStringProps> = ChildrenProps & {
     className?: string;
-    style?: CSSProperties;
+    style?: CSSProperties & URecord<`--${string}`, string|number|undefined>;
 } & SpecialProps;

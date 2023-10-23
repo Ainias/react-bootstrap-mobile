@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { withMemo } from '../../../helper/withMemo';
-import { ChangeEventHandler, InputHTMLAttributes, useCallback } from 'react';
+import { ChangeEventHandler, InputHTMLAttributes, MutableRefObject, useCallback } from 'react';
 
 import styles from './slider.scss';
 import classNames from 'classnames';
@@ -58,7 +58,7 @@ export const Slider = withMemo(function Slider<OnChangeData, OnChangeValueData, 
     );
 
     // Effects
-    const innerRef = useOnChangeDone(onChangeDone);
+    const innerRef = useOnChangeDone(onChangeDone) as MutableRefObject<HTMLInputElement|null>;
 
     // Other
 
