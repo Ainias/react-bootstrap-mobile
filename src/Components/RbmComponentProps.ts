@@ -43,5 +43,5 @@ export type WithNoChildren = {
 
 export type RbmComponentProps<SpecialProps, ChildrenProps = WithNoStringProps> = ChildrenProps & {
     className?: string;
-    style?: CSSProperties & URecord<`--${string}`, string|number|undefined>;
+    style?: CSSProperties;
 } & SpecialProps;
