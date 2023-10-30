@@ -70,13 +70,17 @@ export const Menu = withMemo(
         // Effects
         useEffect(() => {
             if (isOpen) {
-                const listener = (e: MouseEvent) => {
+                const listener = (e: MouseEvent|TouchEvent) => {
                     if (!menuRef.current?.contains(e.target as Node)) {
                         onClose();
                     }
                 };
                 window?.addEventListener('mousedown', listener, {capture: true});
-                return () => window?.removeEventListener('mousedown', listener, {capture: true});
+                window?.addEventListener('touchstart', listener, {capture: true});
+                return () => {
+                    window?.removeEventListener('mousedown', listener, {capture: true})
+                    window?.removeEventListener('touchstart', listener, {capture: true})
+                };
             }
             return undefined;
         }, [isOpen, onClose, window]);
