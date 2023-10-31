@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ComponentRef, ForwardedRef, PropsWithChildren, ReactElement, RefAttributes } from 'react';
+import { ComponentRef, ForwardedRef, PropsWithChildren, ReactElement, ReactNode, RefAttributes } from 'react';
 import { Override } from '../../TypeHelpers';
 
 export type ViewProps<AsType extends keyof JSX.IntrinsicElements> = PropsWithChildren<
@@ -36,5 +36,5 @@ function View<AsType extends keyof JSX.IntrinsicElements>(
 // Need ViewMemo for autocompletion of phpstorm
 const ViewMemo: <AsType extends keyof JSX.IntrinsicElements>(
     props: ViewProps<AsType> & RefAttributes<ComponentRef<AsType>>
-) => ReactElement | null = React.memo(React.forwardRef(View));
+) => ReactNode | null = React.memo(React.forwardRef(View));
 export { ViewMemo as View };

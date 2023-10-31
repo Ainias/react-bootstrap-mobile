@@ -4,14 +4,14 @@ import {OptionalListener, useListener} from '../Hooks/useListener';
 
 import styles from './clickable.scss';
 import classNames from 'classnames';
-import {useCallback, MouseEvent as ReactMouseEvent, ForwardedRef, useEffect, MouseEvent} from 'react';
+import { useCallback, MouseEvent as ReactMouseEvent, ForwardedRef, useEffect, MouseEvent, PointerEvent } from 'react';
 import {withForwardRef} from '../../helper/withForwardRef';
 import {useComposedRef} from "../Hooks/useComposedRef";
 
 type OnClickListener<Data> = OptionalListener<'onClick', Data>;
-type OnMouseDownListener<Data> = OptionalListener<'onMouseDown', Data>;
-type OnMouseUpListener<Data> = OptionalListener<'onMouseUp', Data>;
-type OnMouseMoveListener<Data> = OptionalListener<'onMouseMove', Data>;
+type OnPointerDownListener<Data> = OptionalListener<'onPointerDown', Data, PointerEvent>;
+type OnPointerUpListener<Data> = OptionalListener<'onPointerUp', Data, PointerEvent>;
+type OnPointerMoveListener<Data> = OptionalListener<'onPointerMove', Data, PointerEvent>;
 type OnDropListener<Data> = OptionalListener<'onDrop', Data>;
 type OnDragOverListener<Data> = OptionalListener<'onDragOver', Data>;
 
@@ -36,9 +36,9 @@ export type ClickableProps<
         stopPropagation?: boolean;
         useReactOnMouseLeave?: boolean;
     } & OnClickListener<OnClickData> &
-    OnMouseDownListener<OnMouseDownData> &
-    OnMouseMoveListener<OnMouseMoveData> &
-    OnMouseUpListener<OnMouseUpData> &
+    OnPointerDownListener<OnMouseDownData> &
+    OnPointerMoveListener<OnMouseMoveData> &
+    OnPointerUpListener<OnMouseUpData> &
     OnDropListener<OnDropData> &
     OnDragOverListener<OnDragOverData> &
     OptionalListener<'onClickCapture', OnClickCaptureData> &
@@ -49,9 +49,9 @@ export type ClickableProps<
 
 function Clickable<
     OnClickData,
-    OnMouseDownData,
-    OnMouseMoveData,
-    OnMouseUpData,
+    OnPointerDownData,
+    OnPointerMoveData,
+    OnPointerUpData,
     OnClickCaptureData,
     OnDropData,
     OnDragOverData,
@@ -71,7 +71,7 @@ function Clickable<
         stopPropagation = true,
         useReactOnMouseLeave = false,
         ...clickData
-    }: ClickableProps<OnClickData, OnMouseDownData, OnMouseMoveData, OnMouseUpData, OnClickCaptureData, OnDropData, OnDragOverData,OnMouseEnterData, OnMouseLeaveData, OnDoubleClickData, HrefType>,
+    }: ClickableProps<OnClickData, OnPointerDownData, OnPointerMoveData, OnPointerUpData, OnClickCaptureData, OnDropData, OnDragOverData,OnMouseEnterData, OnMouseLeaveData, OnDoubleClickData, HrefType>,
     ref: ForwardedRef<HrefType extends string ? HTMLAnchorElement : HTMLSpanElement>
 ) {
     // Variables
@@ -98,52 +98,52 @@ function Clickable<
         [clickData.onClick, onClickInner, preventDefault, stopPropagation]
     );
 
-    const onMouseDownInner = useListener<'onMouseDown', OnMouseDownData>('onMouseDown', clickData);
-    const realOnMouseDown = useCallback(
+    const onPointerDownInner = useListener<'onPointerDown', OnPointerDownData>('onPointerDown', clickData);
+    const realOnPointerDown = useCallback(
         (e: ReactMouseEvent) => {
-            if (clickData.onMouseDown) {
+            if (clickData.onPointerDown) {
                 if (stopPropagation) {
                     e.stopPropagation();
                 }
                 if (preventDefault) {
                     e.preventDefault();
                 }
-                onMouseDownInner(e);
+                onPointerDownInner(e);
             }
         },
-        [clickData.onMouseDown, onMouseDownInner, preventDefault, stopPropagation]
+        [clickData.onPointerDown, onPointerDownInner, preventDefault, stopPropagation]
     );
 
-    const onMouseMoveInner = useListener<'onMouseMove', OnMouseMoveData>('onMouseMove', clickData);
-    const realOnMouseMove = useCallback(
+    const onPointerMoveInner = useListener<'onPointerMove', OnPointerMoveData>('onPointerMove', clickData);
+    const realOnPointerMove = useCallback(
         (e: ReactMouseEvent) => {
-            if (clickData.onMouseMove) {
+            if (clickData.onPointerMove) {
                 if (stopPropagation) {
                     e.stopPropagation();
                 }
                 if (preventDefault) {
                     e.preventDefault();
                 }
-                onMouseMoveInner(e);
+                onPointerMoveInner(e);
             }
         },
-        [clickData.onMouseMove, onMouseMoveInner, preventDefault, stopPropagation]
+        [clickData.onPointerMove, onPointerMoveInner, preventDefault, stopPropagation]
     );
 
-    const onMouseUpInner = useListener<'onMouseUp', OnMouseUpData>('onMouseUp', clickData);
-    const realOnMouseUp = useCallback(
+    const onPointerUpInner = useListener<'onPointerUp', OnPointerUpData>('onPointerUp', clickData);
+    const realOnPointerUp = useCallback(
         (e: ReactMouseEvent) => {
-            if (clickData.onMouseUp) {
+            if (clickData.onPointerUp) {
                 if (stopPropagation) {
                     e.stopPropagation();
                 }
                 if (preventDefault) {
                     e.preventDefault();
                 }
-                onMouseUpInner(e);
+                onPointerUpInner(e);
             }
         },
-        [clickData.onMouseUp, onMouseUpInner, preventDefault, stopPropagation]
+        [clickData.onPointerUp, onPointerUpInner, preventDefault, stopPropagation]
     );
 
     const onClickCaptureInner = useListener<'onClickCapture', OnClickCaptureData>('onClickCapture', clickData);
@@ -264,9 +264,9 @@ function Clickable<
         'aria-hidden': interactable ? undefined : true,
         className: classNames(styles.clickable, className),
         onClick: realOnClick,
-        onMouseDown: realOnMouseDown,
-        onMouseMove: realOnMouseMove,
-        onMouseUp: realOnMouseUp,
+        onPointerDown: realOnPointerDown,
+        onPointerMove: realOnPointerMove,
+        onPointerUp: realOnPointerUp,
         onClickCapture: realOnClickCapture,
         onDrop: realOnDrop,
         onDragOver: realOnDragOver,

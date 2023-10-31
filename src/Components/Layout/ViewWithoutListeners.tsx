@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ComponentRef, DOMAttributes, ForwardedRef, ReactElement, RefAttributes } from 'react';
+import { ComponentRef, DOMAttributes, ForwardedRef, ReactElement, ReactNode, RefAttributes } from 'react';
 import { View, ViewProps } from './View';
 
 export type ViewWithoutListenersProps<AsType extends keyof JSX.IntrinsicElements> = Omit<
@@ -40,5 +40,5 @@ function ViewWithoutListeners<AsType extends keyof JSX.IntrinsicElements>(
 // Need ViewWithoutListenersMemo for autocompletion of phpstorm
 const ViewWithoutListenersMemo: <AsType extends keyof JSX.IntrinsicElements>(
     props: ViewWithoutListenersProps<AsType> & RefAttributes<ComponentRef<AsType>>
-) => ReactElement | null = React.memo(React.forwardRef(ViewWithoutListeners));
+) => ReactNode = React.memo(React.forwardRef(ViewWithoutListeners));
 export { ViewWithoutListenersMemo as ViewWithoutListeners };
