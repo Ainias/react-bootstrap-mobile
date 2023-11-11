@@ -35,6 +35,7 @@ export type ClickableProps<
         preventDefault?: boolean;
         stopPropagation?: boolean;
         useReactOnMouseLeave?: boolean;
+        id?: string;
     } & OnClickListener<OnClickData> &
     OnPointerDownListener<OnMouseDownData> &
     OnPointerMoveListener<OnMouseMoveData> &
@@ -66,6 +67,7 @@ function Clickable<
         style,
         href,
         target,
+        id,
         interactable = true,
         preventDefault = false,
         stopPropagation = true,
@@ -260,6 +262,7 @@ function Clickable<
     const props = {
         style,
         target,
+        id,
         role: interactable ? 'button' : undefined,
         'aria-hidden': interactable ? undefined : true,
         className: classNames(styles.clickable, className),
