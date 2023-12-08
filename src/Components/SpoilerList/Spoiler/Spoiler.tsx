@@ -89,7 +89,7 @@ function Spoiler<OnClickData>({
             style={style}
         >
             <Flex horizontal={true}>
-                <Grow>{titleComponent}</Grow>
+                <Grow __allowChildren={"all"}>{titleComponent}</Grow>
                 {icon ? <Icon icon={icon} className={styles.icon} /> : null}
             </Flex>
             <Block className={styles.bodyContainer}>
@@ -102,5 +102,5 @@ function Spoiler<OnClickData>({
 }
 
 // Need SpoilerMemo for autocompletion of phpstorm
-const SpoilerMemo = withMemo(Spoiler, styles);
+const SpoilerMemo = withMemo(Spoiler, styles, "all");
 export { SpoilerMemo as Spoiler };

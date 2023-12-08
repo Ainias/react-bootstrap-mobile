@@ -1,13 +1,20 @@
 @include design($material) {
   --flavor-accent: #37474f;
+  --background-accent: #62727b;
 }
 
 :root {
+  --flavor-basic: #000000;
+  --flavor-constructive: #15803D;
+  --flavor-destructive: #B91C1C;
+
+  --background-light: #dedede;
   --border-light: #cecece;
   --border-strong: #717171;
-  --flavor-basic: #000000
+  --background-destructive: #FECACA; // Red-200
 }
 
 @include design($flat) {
   --flavor-accent: #0076ff;
+  --background-accent: #adcdfd;
 }

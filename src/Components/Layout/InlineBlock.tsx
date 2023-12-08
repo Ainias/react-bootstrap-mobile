@@ -10,6 +10,7 @@ import { withForwardRef } from '../../helper/withForwardRef';
 export type InlineBlockProps<AsType extends keyof JSX.IntrinsicElements> = RbmComponentProps<
     ViewWithoutListenersProps<AsType> & {
     id?: string
+    title?: string
 }
 >;
 

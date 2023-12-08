@@ -4,13 +4,15 @@ import { RbmComponentProps } from '../RbmComponentProps';
 import styles from './layout.scss';
 import { withMemo } from '../../helper/withMemo';
 import classNames from 'classnames';
+import { withForwardRef } from "../../helper/withForwardRef";
+import { ComponentRef, ForwardedRef } from "react";
 
 export type GrowProps = RbmComponentProps<{
     center?: boolean;
     weight?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
 }>;
 
-function Grow({ className, children, center = false, style, weight = 1 }: GrowProps) {
+export const Grow = withForwardRef(function Grow({ className, children, center = false, style, weight = 1 }: GrowProps, ref?: ForwardedRef<HTMLDivElement>) {
     // Variables
 
     // States
@@ -26,6 +28,7 @@ function Grow({ className, children, center = false, style, weight = 1 }: GrowPr
     // Render Functions
     return (
         <div
+            ref={ref}
             className={classNames(
                 styles.grow,
                 {
@@ -45,7 +48,4 @@ function Grow({ className, children, center = false, style, weight = 1 }: GrowPr
             {children}
         </div>
     );
-}
-
-const tmp = withMemo(Grow, styles);
-export { tmp as Grow };
+}, styles)
