@@ -1,6 +1,6 @@
 {
   "name": "@ainias42/react-bootstrap-mobile",
-  "version": "0.1.26",
+  "version": "0.1.27",
   "description": "Mobile React Components using Bootstrap",
   "main": "dist/bootstrapReactMobile",
   "scripts": {
