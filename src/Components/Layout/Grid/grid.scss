@@ -68,11 +68,7 @@ $containerBreakpoints: $grid-breakpoints;
   display: grid;
   grid-template-rows: repeat(var(--grid-rows, 1), 1fr);
   grid-template-columns: repeat(var(--grid-columns, $columns), 1fr);
-  gap: var(--grid-gap, 0);
-
-  .item {
-    padding: 4px;
-  }
+  gap: var(--grid-gap, 8px);
 
   &.useContainerWidth {
     container-type: inline-size;
