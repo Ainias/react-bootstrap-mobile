@@ -5,8 +5,11 @@ import { DialogProvider, ShowDialog } from './DialogContext';
 import { Dialog } from './Dialog';
 import { EmptyProps } from '../../helper/EmptyProps';
 import {withForwardRef} from "../../helper/withForwardRef";
+import { Block } from "../Layout/Block";
 
-export type DialogContainerProps = PropsWithChildren<EmptyProps>;
+export type DialogContainerProps = PropsWithChildren<{
+    dialogClassName?: string
+}>;
 
 type DialogData = {
     id: number;
@@ -19,7 +22,7 @@ export type DialogContainerRef = {
     showDialog: ShowDialog;
 }
 
-export const DialogContainer = withForwardRef(function DialogContainer({ children }: DialogContainerProps, ref: ForwardedRef<DialogContainerRef>) {
+export const DialogContainer = withForwardRef(function DialogContainer({ children, dialogClassName }: DialogContainerProps, ref: ForwardedRef<DialogContainerRef>) {
     // Variables
     const [dialogs, setDialogs] = useState<DialogData[]>([]);
     const [, setLastId] = useState(0);
@@ -68,6 +71,7 @@ export const DialogContainer = withForwardRef(function DialogContainer({ childre
     return (
         <DialogProvider value={showDialog}>
             {children}
+            <Block className={dialogClassName}>
             {dialogs.map((d) => {
                 const DialogComponent = d.component;
                 return (
@@ -76,6 +80,7 @@ export const DialogContainer = withForwardRef(function DialogContainer({ childre
                     </Dialog>
                 );
             })}
+            </Block>
         </DialogProvider>
     );
 });
