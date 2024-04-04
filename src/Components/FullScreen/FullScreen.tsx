@@ -12,7 +12,7 @@ export type FullScreenProps<AsType extends keyof JSX.IntrinsicElements> = RbmCom
     >
 >;
 
-function FullScreen<AsTag extends keyof JSX.IntrinsicElements = 'span'>({
+export const FullScreen = withMemo(function FullScreen<AsTag extends keyof JSX.IntrinsicElements = 'span'>({
     children,
     as,
     fullscreenKey,
@@ -77,8 +77,5 @@ function FullScreen<AsTag extends keyof JSX.IntrinsicElements = 'span'>({
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     return React.createElement(element, props, children);
-}
+})
 
-// Need FullScreenMemo for autocompletion of phpstorm
-const FullScreenMemo = withMemo(FullScreen);
-export { FullScreenMemo as FullScreen };

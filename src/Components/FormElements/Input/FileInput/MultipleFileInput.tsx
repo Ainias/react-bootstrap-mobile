@@ -235,8 +235,9 @@ export const MultipleFileInput = withMemo(function MultipleImageInput<OnChangeDa
                     )}
                 </Flex>
                 <Flex horizontal={true} className={styles.previewContainer}>
-                    {value?.map((file, index) => (
-                        <Grow className={styles.preview} center={true} key={file.data}>
+                    {value?.map((file, index) => {
+                        console.log("LOG-d file", file);
+                        return <Grow className={styles.preview} center={true} key={file.data}>
                             <Clickable
                                 onDrop={onDrop}
                                 onDragOver={onDragOver}
@@ -252,7 +253,7 @@ export const MultipleFileInput = withMemo(function MultipleImageInput<OnChangeDa
                                     </Clickable>}
                             </Clickable>
                         </Grow>
-                    ))}
+                    })}
                     <Grow className={classNames(styles.addFile, {[styles.hidden]: value.length >= maxFiles})} center={true}>
                         <Clickable
                             className={styles.addFileButton}

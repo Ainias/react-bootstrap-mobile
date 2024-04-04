@@ -65,4 +65,8 @@ $tertiaryColor: #A1A1AA; // Gray-400
     font-size: 1.5rem;
     line-height: 2rem;
   }
+
+  &.emphasized {
+    font-weight: bold;
+  }
 }

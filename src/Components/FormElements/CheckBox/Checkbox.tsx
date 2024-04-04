@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { ChangeEventHandler, InputHTMLAttributes, useCallback } from 'react';
-
 import styles from './checkbox.scss';
 import { withMemo } from '../../../helper/withMemo';
 import classNames from 'classnames';

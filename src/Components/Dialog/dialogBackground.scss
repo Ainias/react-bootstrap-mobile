@@ -1,6 +1,8 @@
 .dialogBackground {
   background-color: white;
   padding: 0.5rem;
+  max-height: 80vh;
+  overflow: auto;
 
   .title {
     margin: 0 0 0.8rem;

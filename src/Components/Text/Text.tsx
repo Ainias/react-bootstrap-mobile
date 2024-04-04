@@ -1,6 +1,5 @@
 import * as React from 'react';
 import classNames from 'classnames';
-
 import styles from './text.scss';
 import { Recursive, ValueOf } from '../../TypeHelpers';
 import { WrongChildError } from '../../WrongChildError';
@@ -28,6 +27,7 @@ export type TextProps<AsType extends keyof JSX.IntrinsicElements> = {
     block?: boolean;
     prio?: ValueOf<typeof TEXT_PRIO>;
     size?: ValueOf<typeof TEXT_SIZE>;
+    emphasized?: boolean;
     className?: string;
     children: Recursive<string | undefined | null | number>;
 } & ViewProps<AsType>;
@@ -37,6 +37,7 @@ function Text<AsType extends keyof JSX.IntrinsicElements = 'span'>({
     children,
     block = false,
     prio,
+    emphasized = false,
     size = TEXT_SIZE.medium,
     as = 'span' as AsType,
     ...props
@@ -69,7 +70,7 @@ function Text<AsType extends keyof JSX.IntrinsicElements = 'span'>({
             __allowChildren="text"
             as={as}
             {...props as InlineProps<AsType>}
-            className={classNames(styles.text, { [styles.block]: block }, prio, size, className)}
+            className={classNames(styles.text, { [styles.block]: block, [styles.emphasized]: emphasized }, prio, size, className)}
         >
             {children}
         </Inline>

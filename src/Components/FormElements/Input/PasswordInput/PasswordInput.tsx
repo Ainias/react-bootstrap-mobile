@@ -13,8 +13,11 @@ import classNames from 'classnames';
 
 export type PasswordInputProps<OnChangeData, OnBlurData, OnChangeEndData> = DistributiveOmit<
     InputProps<OnChangeData, OnBlurData, OnChangeEndData>,
-    'type'
->;
+    'type'|"onChangeText"|"onEnter"
+> & {
+    onChangeText?: (newText: string) => void;
+    onEnter?: (newText: string) => void;
+};
 
 export const PasswordInput = withForwardRef(function PasswordInput<OnChangeData, OnBlurData, OnChangeEndData>(
     { className, style, ...props }: PasswordInputProps<OnChangeData, OnBlurData, OnChangeEndData>,
@@ -49,7 +52,3 @@ export const PasswordInput = withForwardRef(function PasswordInput<OnChangeData,
     );
 },
 styles);
-
-// // Need PasswordInputMemo for autocompletion of phpstorm
-// const PasswordInputMemo = withMemo(PasswordInput);
-// export { PasswordInputMemo as PasswordInput };

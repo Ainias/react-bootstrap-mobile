@@ -3,7 +3,6 @@ import { withMemo } from '../../../helper/withMemo';
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { Block } from '../Block';
 import classNames from 'classnames';
-
 import styles from './grid.scss';
 import { useMemo } from 'react';
 
