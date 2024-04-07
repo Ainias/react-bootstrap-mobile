@@ -1,5 +1,13 @@
 import * as React from 'react';
-import { ChangeEventHandler, InputHTMLAttributes, KeyboardEvent, MutableRefObject, useCallback, useRef } from 'react';
+import {
+    ChangeEventHandler,
+    InputHTMLAttributes,
+    KeyboardEvent,
+    MutableRefObject,
+    useCallback, useMemo,
+    useRef,
+    useState
+} from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { Override } from '../../../TypeHelpers';
 import { OptionalListener, useListenerWithExtractedProps } from '../../Hooks/useListener';
@@ -10,47 +18,17 @@ import classNames from 'classnames';
 import { useComposedRef } from '../../Hooks/useComposedRef';
 import { useOnChangeDone } from '../hooks/useOnChangeDone';
 
-type InputTypes =
-    | 'button'
-    | 'checkbox'
-    | 'color'
-    | 'date'
-    | 'datetime-local'
-    | 'email'
-    | 'file'
-    | 'hidden'
-    | 'image'
-    | 'month'
-    | 'password'
-    | 'radio'
-    | 'range'
-    | 'reset'
-    | 'search'
-    | 'submit'
-    | 'tel'
-    | 'text'
-    | 'time'
-    | 'url'
-    | 'week';
-
 export type InputProps<OnChangeData, OnBlurData, OnChangeDoneData> = RbmComponentProps<
     Override<
-        Omit<InputHTMLAttributes<HTMLInputElement>, 'onInput' | "type">,
+        Omit<InputHTMLAttributes<HTMLInputElement>, 'onInput'>,
         {
             label?: string;
-            inline?: boolean
+            inline?: boolean;
+            onChangeText?: (newText: string) => void;
+            onEnter?: (newText: string) => void;
         } & OptionalListener<'onChange', OnChangeData> &
         OptionalListener<'onBlur', OnBlurData> &
         OptionalListener<'onChangeDone', OnChangeDoneData>
-        & ({
-        type?: InputTypes
-        onChangeText?: (newText: string) => void;
-        onEnter?: (newText: string) => void;
-    } | {
-        type: "number"
-        onChangeText?: (newNumber: number) => void;
-        onEnter?: (newNumber: number) => void;
-    })
     >
 >;
 
@@ -61,6 +39,7 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
             style,
             onKeyDown,
             inline = false,
+            value,
             ...otherProps
         }: InputProps<OnChangeData, OnBlurData, OnChangeDoneData>,
         ref: MutableRefObject<HTMLInputElement> | null
@@ -68,10 +47,23 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
         // Variables
 
         // States
-
+        const usedValue = useMemo(() => {
+            if (otherProps.type !== "number" || typeof value === "number"){
+                return value;
+            }
+            if (typeof value === "string"){
+                if (!Number.isNaN(Number(value))){
+                    // Do not parse to allow ., and so on
+                    return value;
+                }
+                if (!Number.isNaN(parseFloat(value))){
+                    return parseFloat(value);
+                }
+            }
+            return "";
+        }, [value])
         // Refs
         const innerRef = useComposedRef(ref);
-        const lastValueRef = useRef(NaN);
 
         // Callbacks
         const [onChangeWithData, otherPropsWithoutOnchange] = useListenerWithExtractedProps<'onChange', OnChangeData>(
@@ -82,12 +74,8 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
             (e) => {
                 if (otherProps.onChangeText) {
                     if (otherProps.type === "number") {
-                        if (Number.isNaN(e.target.valueAsNumber)){
-                            otherProps.onChangeText(lastValueRef.current);
-                        } else {
-                            otherProps.onChangeText(e.target.valueAsNumber);
-                            lastValueRef.current = e.target.valueAsNumber;
-                        }
+                        const val = !Number.isNaN(Number(e.target.value)) ? e.target.value : !Number.isNaN(parseFloat(e.target.value)) ? String(parseFloat(e.target.value)) : "";
+                        otherProps.onChangeText(val);
                     } else {
                         otherProps.onChangeText(e.target.value);
                     }
@@ -112,12 +100,9 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
                 onKeyDown?.(e);
                 if (otherProps.onEnter && e.key === 'Enter' && !e.defaultPrevented) {
                     if (otherProps.type === "number") {
-                        if (Number.isNaN((e.target as HTMLInputElement).valueAsNumber)){
-                            otherProps.onEnter(lastValueRef.current);
-                        } else {
-                            otherProps.onEnter((e.target as HTMLInputElement).valueAsNumber);
-                            lastValueRef.current = (e.target as HTMLInputElement).valueAsNumber;
-                        }
+                        const stringValue = (e.target as HTMLInputElement).value;
+                        const val = !Number.isNaN(Number(stringValue)) ? stringValue : !Number.isNaN(parseFloat(stringValue)) ? String(parseFloat(stringValue)) : "";
+                        otherProps.onEnter(val)
                     } else {
                         otherProps.onEnter((e.target as HTMLInputElement).value);
                     }
@@ -139,7 +124,10 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
             <label className={classNames(styles.input, {[styles.inline]: inline}, className)} style={style}>
                 {label ? <span className={styles.label}>{label}</span> : null}
                 <input
+                    inputMode={otherProps.type === "number" ? "numeric" : undefined}
                     {...otherPropsWithoutData}
+                    value={usedValue}
+                    type={otherProps.type === "number" ? "text" : otherProps.type}
                     ref={innerRef}
                     className={styles.text}
                     onBlur={onBlur}
