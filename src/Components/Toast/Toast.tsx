@@ -34,13 +34,14 @@ function Toast<ActionData, DismissedData>({
     // States
     const [hidingStart, setHidingStart] = useState<number>(0);
     const [startShow] = useState(new Date().getTime());
-    const isHidden = hidingStart > 0 && ANIMATION_DURATION + hidingStart < new Date().getTime();
+    const [isHidden, setIsHidden] = useState<boolean>(false);
 
     // Refs
 
     // Callbacks
     const updateHidingStart = useCallback(() => {
         setHidingStart((oldHidingStart) => (oldHidingStart > 0 ? oldHidingStart : new Date().getTime()));
+        setTimeout(() => setIsHidden(true), ANIMATION_DURATION);
     }, [setHidingStart]);
 
     const onDismissed = useListener('onDismissed', otherProps);
@@ -78,6 +79,7 @@ function Toast<ActionData, DismissedData>({
 
     // Render Functions
     if (isHidden) {
+        console.log("LOG-d isHidden");
         return null;
     }
 

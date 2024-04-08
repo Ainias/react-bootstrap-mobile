@@ -2,6 +2,7 @@
 @import "../../scss/designMixin";
 
 .toastContainer {
+  pointer-events: none;
   position: fixed;
   left: 0;
   right: 0;
@@ -15,6 +16,7 @@
 }
 
 .toast {
+  pointer-events: auto;
   background-color: rgba(0, 0, 0, 0.8);
   min-height: 48px;
   line-height: 1.5;

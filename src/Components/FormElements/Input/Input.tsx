@@ -1,8 +1,9 @@
 import * as React from 'react';
 import {
+    ChangeEvent,
     ChangeEventHandler,
     InputHTMLAttributes,
-    KeyboardEvent,
+    KeyboardEvent, KeyboardEventHandler,
     MutableRefObject,
     useCallback, useMemo,
     useRef,
@@ -48,15 +49,29 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
 
         // States
         const usedValue = useMemo(() => {
-            if (otherProps.type !== "number" || typeof value === "number"){
+            if (otherProps.type !== "number" || typeof value === "number") {
                 return value;
             }
-            if (typeof value === "string"){
-                if (!Number.isNaN(Number(value))){
+            if (typeof value === "string") {
+                if (value === "-"){
+                    return value;
+                }
+
+                const numberValue = parseFloat(value);
+                if (!Number.isNaN(numberValue) && Number.isFinite(numberValue)) {
+                    if (otherProps.max !== undefined && numberValue > Number(otherProps.max)) {
+                        return otherProps.max;
+                    }
+                    if (otherProps.min !== undefined && numberValue < Number(otherProps.min)) {
+                        return otherProps.min;
+                    }
+                }
+
+                if (!Number.isNaN(Number(value))) {
                     // Do not parse to allow ., and so on
                     return value;
                 }
-                if (!Number.isNaN(parseFloat(value))){
+                if (!Number.isNaN(numberValue)) {
                     return parseFloat(value);
                 }
             }
@@ -70,14 +85,19 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
             'onChange',
             otherProps
         );
-        const onChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
-            (e) => {
+        const onChange = useCallback(
+            (e: ChangeEvent<HTMLInputElement>|KeyboardEvent<HTMLInputElement>) => {
                 if (otherProps.onChangeText) {
                     if (otherProps.type === "number") {
-                        const val = !Number.isNaN(Number(e.target.value)) ? e.target.value : !Number.isNaN(parseFloat(e.target.value)) ? String(parseFloat(e.target.value)) : "";
+                        if (e.currentTarget.value === "-") {
+                            otherProps.onChangeText(e.currentTarget.value);
+                            return;
+                        }
+
+                        const val = !Number.isNaN(Number(e.currentTarget.value)) ? e.currentTarget.value : !Number.isNaN(parseFloat(e.currentTarget.value)) ? String(parseFloat(e.currentTarget.value)) : "";
                         otherProps.onChangeText(val);
                     } else {
-                        otherProps.onChangeText(e.target.value);
+                        otherProps.onChangeText(e.currentTarget.value);
                     }
                 }
                 onChangeWithData(e);
@@ -106,7 +126,26 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
                     } else {
                         otherProps.onEnter((e.target as HTMLInputElement).value);
                     }
+                }
 
+                if (otherProps.type === "number") {
+                    const step = otherProps.step ? Number(otherProps.step) : 1;
+                    if (e.key === "ArrowUp"){
+                        let newValue = (parseFloat(e.currentTarget.value) || 0) + step;
+                        if (otherProps.max !== undefined && newValue > Number(otherProps.max)) {
+                           newValue = Number(otherProps.max);
+                        }
+                        e.currentTarget.value = newValue.toString();
+                        onChange(e);
+                    }
+                    else if (e.key === "ArrowDown"){
+                        let newValue = (parseFloat(e.currentTarget.value) || 0) - step;
+                        if (otherProps.min !== undefined && newValue < Number(otherProps.min)) {
+                            newValue = Number(otherProps.min);
+                        }
+                        e.currentTarget.value = newValue.toString();
+                        onChange(e);
+                    }
                 }
             },
             [otherProps.onEnter, onKeyDown, otherProps.type]
