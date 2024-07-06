@@ -1,13 +1,11 @@
 import * as React from 'react';
 import {
     ChangeEvent,
-    ChangeEventHandler,
     InputHTMLAttributes,
-    KeyboardEvent, KeyboardEventHandler,
+    KeyboardEvent,
     MutableRefObject,
-    useCallback, useMemo,
-    useRef,
-    useState
+    useCallback, useEffect,
+    useMemo, useRef,
 } from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { Override } from '../../../TypeHelpers';
@@ -41,6 +39,7 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
             onKeyDown,
             inline = false,
             value,
+            onChangeText,
             ...otherProps
         }: InputProps<OnChangeData, OnBlurData, OnChangeDoneData>,
         ref: MutableRefObject<HTMLInputElement> | null
@@ -53,7 +52,7 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
                 return value;
             }
             if (typeof value === "string") {
-                if (value === "-"){
+                if (value === "-") {
                     return value;
                 }
 
@@ -76,7 +75,7 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
                 }
             }
             return "";
-        }, [value])
+        }, [value, otherProps.max, otherProps.min, otherProps.type]);
         // Refs
         const innerRef = useComposedRef(ref);
 
@@ -86,23 +85,23 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
             otherProps
         );
         const onChange = useCallback(
-            (e: ChangeEvent<HTMLInputElement>|KeyboardEvent<HTMLInputElement>) => {
-                if (otherProps.onChangeText) {
+            (e: ChangeEvent<HTMLInputElement> | KeyboardEvent<HTMLInputElement>) => {
+                if (onChangeText) {
                     if (otherProps.type === "number") {
                         if (e.currentTarget.value === "-") {
-                            otherProps.onChangeText(e.currentTarget.value);
+                            onChangeText(e.currentTarget.value);
                             return;
                         }
 
                         const val = !Number.isNaN(Number(e.currentTarget.value)) ? e.currentTarget.value : !Number.isNaN(parseFloat(e.currentTarget.value)) ? String(parseFloat(e.currentTarget.value)) : "";
-                        otherProps.onChangeText(val);
+                        onChangeText(val);
                     } else {
-                        otherProps.onChangeText(e.currentTarget.value);
+                        onChangeText(e.currentTarget.value);
                     }
                 }
                 onChangeWithData(e);
             },
-            [onChangeWithData, otherProps.onChangeText, otherProps.type]
+            [onChangeWithData, onChangeText, otherProps.type]
         );
 
         const [onBlur, otherPropsWithoutBlur] = useListenerWithExtractedProps<'onBlur', OnBlurData>(
@@ -122,7 +121,7 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
                     if (otherProps.type === "number") {
                         const stringValue = (e.target as HTMLInputElement).value;
                         const val = !Number.isNaN(Number(stringValue)) ? stringValue : !Number.isNaN(parseFloat(stringValue)) ? String(parseFloat(stringValue)) : "";
-                        otherProps.onEnter(val)
+                        otherProps.onEnter(val);
                     } else {
                         otherProps.onEnter((e.target as HTMLInputElement).value);
                     }
@@ -130,15 +129,14 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
 
                 if (otherProps.type === "number") {
                     const step = otherProps.step ? Number(otherProps.step) : 1;
-                    if (e.key === "ArrowUp"){
+                    if (e.key === "ArrowUp") {
                         let newValue = (parseFloat(e.currentTarget.value) || 0) + step;
                         if (otherProps.max !== undefined && newValue > Number(otherProps.max)) {
-                           newValue = Number(otherProps.max);
+                            newValue = Number(otherProps.max);
                         }
                         e.currentTarget.value = newValue.toString();
                         onChange(e);
-                    }
-                    else if (e.key === "ArrowDown"){
+                    } else if (e.key === "ArrowDown") {
                         let newValue = (parseFloat(e.currentTarget.value) || 0) - step;
                         if (otherProps.min !== undefined && newValue < Number(otherProps.min)) {
                             newValue = Number(otherProps.min);
@@ -148,18 +146,30 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
                     }
                 }
             },
-            [otherProps.onEnter, onKeyDown, otherProps.type]
+            [onKeyDown, onChange, otherProps]
         );
 
         // Effects
         useOnChangeDone(onChangeDone, innerRef);
+
+        useEffect(() => {
+            // Add the onChangeDone for numbers
+            if (otherProps.type === "number") {
+                const elem = innerRef.current;
+                elem?.addEventListener('blur', onChangeDone);
+                return () => {
+                    elem?.removeEventListener('blur', onChangeDone);
+                };
+            }
+            return undefined;
+        }, [ref, onChangeDone, innerRef, otherProps.type]);
+
 
         // Other
 
         // Render Functions
 
         return (
-            // eslint-disable-next-line jsx-a11y/label-has-associated-control
             <label className={classNames(styles.input, {[styles.inline]: inline}, className)} style={style}>
                 {label ? <span className={styles.label}>{label}</span> : null}
                 <input

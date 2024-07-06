@@ -1,11 +1,9 @@
 import * as React from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
-
 import styles from './layout.scss';
-import { withMemo } from '../../helper/withMemo';
 import classNames from 'classnames';
 import { withForwardRef } from "../../helper/withForwardRef";
-import { ComponentRef, ForwardedRef } from "react";
+import { ForwardedRef } from "react";
 
 export type GrowProps = RbmComponentProps<{
     center?: boolean;
@@ -48,4 +46,4 @@ export const Grow = withForwardRef(function Grow({ className, children, center =
             {children}
         </div>
     );
-}, styles)
+}, styles);

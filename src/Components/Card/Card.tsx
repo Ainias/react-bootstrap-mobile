@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
-
 import styles from './card.scss';
 import { withMemo } from '../../helper/withMemo';
 import classNames from 'classnames';

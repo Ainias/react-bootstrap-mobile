@@ -1,8 +1,9 @@
-import {useLayoutEffect, useRef} from "react";
+import {useRef} from "react";
+import { useClientLayoutEffect } from "./useClientLayoutEffect";
 
 export function useMousePosition() {
     const position = useRef({ x: 0, y: 0 });
-    useLayoutEffect(() => {
+    useClientLayoutEffect(() => {
         const setFromEvent = (e: MouseEvent) => {
             position.current = { x: e.clientX, y: e.clientY };
         };

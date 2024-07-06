@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Input, InputProps } from './Input';
 import { withMemo } from '../../../helper/withMemo';
-
 import styles from './input.scss';
 import classNames from 'classnames';
 

@@ -48,7 +48,7 @@ export const FileInput = withMemo(function FileInput<OnChangeData>({
 
     // Other
 
-    // Render Functions
+    //  Render Functions
     return <MultipleFileInput maxFiles={1} value={innerValue} onChangeFiles={onChangeFiles}
                               mimeTypes={mimeTypes} showDeleteButton={!required} {...multipleFileInputProps}/>;
 

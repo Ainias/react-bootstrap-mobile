@@ -7,13 +7,11 @@ import { Grow } from '../../Layout/Grow';
 import { Text, TEXT_SIZE } from '../../Text/Text';
 import { Block } from '../../Layout/Block';
 import { Clickable } from '../../Clickable/Clickable';
-
 import styles from './spoiler.scss';
 import classNames from 'classnames';
 import { OptionalListener, useListener } from '../../Hooks/useListener';
 import { Icon, IconSource } from '../../Icon/Icon';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 export type SpoilerProps<OnClickData> = RbmComponentProps<
     {
@@ -89,7 +87,7 @@ function Spoiler<OnClickData>({
             style={style}
         >
             <Flex horizontal={true}>
-                <Grow __allowChildren={"all"}>{titleComponent}</Grow>
+                <Grow __allowChildren="all">{titleComponent}</Grow>
                 {icon ? <Icon icon={icon} className={styles.icon} /> : null}
             </Flex>
             <Block className={styles.bodyContainer}>

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { Override } from '../../../TypeHelpers';
 import { ChangeEventHandler, SelectHTMLAttributes, useCallback } from 'react';
-import {OptionalListener, useListener, useListenerWithExtractedProps} from '../../Hooks/useListener';
+import {OptionalListener, useListenerWithExtractedProps} from '../../Hooks/useListener';
 
 import styles from './select.scss';
 import { withMemo } from '../../../helper/withMemo';

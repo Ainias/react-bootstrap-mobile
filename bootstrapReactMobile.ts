@@ -33,6 +33,7 @@ export * from './src/Components/FormElements/Textarea/Textarea';
 export * from './src/Components/FormElements/hooks/useOnChangeDone';
 export * from './src/Components/FullScreen/FullScreen';
 export * from './src/Components/Hooks/useBreakpoint';
+export * from './src/Components/Hooks/useClientLayoutEffect';
 export * from './src/Components/Hooks/useComposedRef';
 export * from './src/Components/Hooks/useDebounced';
 export * from './src/Components/Hooks/useDelayed';

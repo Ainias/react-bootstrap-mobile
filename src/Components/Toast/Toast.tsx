@@ -79,7 +79,6 @@ function Toast<ActionData, DismissedData>({
 
     // Render Functions
     if (isHidden) {
-        console.log("LOG-d isHidden");
         return null;
     }
 

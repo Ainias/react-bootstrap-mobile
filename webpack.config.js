@@ -63,6 +63,7 @@ module.exports = (env) => {
                                 esModule: false,
                                 modules: {
                                     localIdentName: '[local]__[hash:base64:5]',
+                                    exportLocalsConvention: 'camel-case'
                                 },
                             },
                         },

@@ -6,7 +6,7 @@ import { useStrictEnabled } from './useStrictEnabled';
 
 export type DropAreaProps = RbmComponentProps<Omit<DroppableProps, 'children'>, WithNoStringAndChildrenProps>;
 
-function DropArea({ children, style, className, ...dropProps }: DropAreaProps) {
+export const DropArea = withMemo(function DropArea({ children, style, className, ...dropProps }: DropAreaProps) {
     // Variables
 
     // Refs
@@ -37,8 +37,4 @@ function DropArea({ children, style, className, ...dropProps }: DropAreaProps) {
             )}
         </Droppable>
     );
-}
-
-// Need DropAreaMemo for autocompletion of phpstorm
-const DropAreaMemo = withMemo(DropArea);
-export { DropAreaMemo as DropArea };
+});

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useCallback, useRef, useState, MouseEvent, useEffect, useLayoutEffect} from 'react';
+import {useCallback, useRef, useState, MouseEvent} from 'react';
 import {Color, ColorChangeHandler, ColorResult, SketchPicker} from 'react-color';
 import {OptionalListener, useListener} from '../../Hooks/useListener';
 import {withMemo} from '../../../helper/withMemo';
@@ -7,6 +7,7 @@ import {withMemo} from '../../../helper/withMemo';
 import styles from './colorInput.scss';
 import {useSharedSelectedColor} from './sharedSelectedColor';
 import {Menu} from "../../Menu/Menu";
+import { useClientLayoutEffect } from "../../Hooks/useClientLayoutEffect";
 
 export type ColorInputProps<OnChangeData> = {
     defaultValue?: string;
@@ -112,7 +113,7 @@ function ColorInput<OnChangeData>({
     );
 
     // Effects
-    useLayoutEffect(() => {
+    useClientLayoutEffect(() => {
         if (!modalRef.current) {
             return;
         }

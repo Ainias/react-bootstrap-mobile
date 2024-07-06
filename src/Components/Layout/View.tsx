@@ -1,13 +1,15 @@
 import * as React from 'react';
-import { ComponentRef, ForwardedRef, PropsWithChildren, ReactElement, ReactNode, RefAttributes } from 'react';
+import { ComponentRef, ForwardedRef, PropsWithChildren } from 'react';
 import { Override } from '../../TypeHelpers';
+import { withMemo } from "../../helper/withMemo";
+import { withForwardRef } from "../../helper/withForwardRef";
 
 export type ViewProps<AsType extends keyof JSX.IntrinsicElements> = PropsWithChildren<
     Override<React.ComponentPropsWithoutRef<AsType>, { as?: AsType; children?: React.ReactNode }>
 >;
 
-function View<AsType extends keyof JSX.IntrinsicElements>(
-    { children, as, ...otherProps }: ViewProps<AsType>,
+export const View = withForwardRef(function View<AsType extends keyof JSX.IntrinsicElements>(
+    {children, as, ...otherProps}: ViewProps<AsType>,
     ref?: ForwardedRef<ComponentRef<AsType>>
 ) {
     // Variables
@@ -31,10 +33,4 @@ function View<AsType extends keyof JSX.IntrinsicElements>(
         ref,
     };
     return React.createElement(element, props, children);
-}
-
-// Need ViewMemo for autocompletion of phpstorm
-const ViewMemo: <AsType extends keyof JSX.IntrinsicElements>(
-    props: ViewProps<AsType> & RefAttributes<ComponentRef<AsType>>
-) => ReactNode | null = React.memo(React.forwardRef(View));
-export { ViewMemo as View };
+}, undefined, "all");

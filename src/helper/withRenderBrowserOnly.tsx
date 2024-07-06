@@ -6,7 +6,7 @@ export function withRenderBrowserOnly<C extends ComponentType<any>>(Component: C
 
     const displayName = `WithRenderBrowserOnly(${Component.displayName || Component.name})`;
 
-    const HocComponent = ({ children, ...props }: Props, ref?: ForwardedRef<RefType>) => {
+    function HocComponent({ children, ...props }: Props, ref?: ForwardedRef<RefType>) {
         const [isBrowser, setIsBrowser] = useState(false);
 
         useEffect(() => setIsBrowser(true), []);
@@ -24,7 +24,7 @@ export function withRenderBrowserOnly<C extends ComponentType<any>>(Component: C
             // @ts-ignore
             <Component {...(newProps as Props)}>{children}</Component>
         );
-    };
+    }
     HocComponent.displayName = displayName;
     return HocComponent as C;
 }

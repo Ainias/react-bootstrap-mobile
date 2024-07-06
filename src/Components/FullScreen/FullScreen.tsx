@@ -77,5 +77,5 @@ export const FullScreen = withMemo(function FullScreen<AsTag extends keyof JSX.I
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     return React.createElement(element, props, children);
-})
+});
 

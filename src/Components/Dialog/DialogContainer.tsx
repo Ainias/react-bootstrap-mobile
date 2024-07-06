@@ -3,7 +3,6 @@ import {ComponentType, ForwardedRef, PropsWithChildren, useCallback, useImperati
 import { PromiseWithHandlers } from '@ainias42/js-helper';
 import { DialogProvider, ShowDialog } from './DialogContext';
 import { Dialog } from './Dialog';
-import { EmptyProps } from '../../helper/EmptyProps';
 import {withForwardRef} from "../../helper/withForwardRef";
 import { Block } from "../Layout/Block";
 

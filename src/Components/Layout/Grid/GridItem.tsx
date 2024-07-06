@@ -151,7 +151,6 @@ function GridItem({
     // Other
 
     // Render Functions
-
     return (
         <InlineBlock
             style={style}

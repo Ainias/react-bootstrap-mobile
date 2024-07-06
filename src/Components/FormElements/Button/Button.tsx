@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Override} from '@ainias42/js-helper';
-import {OptionalListener, useListener, useListenerWithExtractedProps} from '../../Hooks/useListener';
+import {OptionalListener, useListenerWithExtractedProps} from '../../Hooks/useListener';
 
 import styles from './button.scss';
 import classNames from 'classnames';

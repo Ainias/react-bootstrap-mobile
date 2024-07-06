@@ -5,12 +5,13 @@ import {IconSource} from '../Icon/Icon';
 import {Block} from '../Layout/Block';
 import classNames from 'classnames';
 import styles from './menu.scss';
-import {useEffect, useLayoutEffect, useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {withRenderBrowserOnly} from '../../helper/withRenderBrowserOnly';
 import {useWindow} from '../../WindowContext/WindowContext';
 import {MenuItem} from "./MenuItem";
 import {MenuCloseContextProvider} from "./MenuCloseContext";
 import {createPortal} from "react-dom";
+import { useClientLayoutEffect } from "../Hooks/useClientLayoutEffect";
 
 export type MenuItemType = {
     label: string;
@@ -78,26 +79,25 @@ export const Menu = withMemo(
                 window?.addEventListener('mousedown', listener, {capture: true});
                 window?.addEventListener('touchstart', listener, {capture: true});
                 return () => {
-                    window?.removeEventListener('mousedown', listener, {capture: true})
-                    window?.removeEventListener('touchstart', listener, {capture: true})
+                    window?.removeEventListener('mousedown', listener, {capture: true});
+                    window?.removeEventListener('touchstart', listener, {capture: true});
                 };
             }
             return undefined;
         }, [isOpen, onClose, window]);
 
-        useLayoutEffect(() => {
+        useClientLayoutEffect(() => {
             if (!isOpen) {
                 return;
             }
-            let elem = window?.document.body.querySelector("." + MENU_CONTAINER_CLASS);
+            let elem = window?.document.body.querySelector(`.${  MENU_CONTAINER_CLASS}`);
             if (!elem) {
                 elem = window?.document.body;
             }
-            elem?.appendChild(portalContainer)
+            elem?.appendChild(portalContainer);
         }, [isOpen, portalContainer, window?.document.body]);
 
-
-        useLayoutEffect(() => {
+        useClientLayoutEffect(() => {
             if (!menuRef.current) {
                 return;
             }
@@ -114,7 +114,7 @@ export const Menu = withMemo(
             setInnerX(newX);
         }, [offsetX, window?.innerWidth, x]);
 
-        useLayoutEffect(() => {
+        useClientLayoutEffect(() => {
             if (!menuRef.current) {
                 return;
             }

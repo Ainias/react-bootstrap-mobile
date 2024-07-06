@@ -1,6 +1,8 @@
 import * as React from 'react';
-import { ComponentRef, DOMAttributes, ForwardedRef, ReactElement, ReactNode, RefAttributes } from 'react';
+import { ComponentRef, DOMAttributes, ForwardedRef } from 'react';
 import { View, ViewProps } from './View';
+import { withMemo } from "../../helper/withMemo";
+import { withForwardRef } from "../../helper/withForwardRef";
 
 export type ViewWithoutListenersProps<AsType extends keyof JSX.IntrinsicElements> = Omit<
     ViewProps<AsType>,
@@ -11,7 +13,7 @@ export type ViewWithoutListenersProps<AsType extends keyof JSX.IntrinsicElements
         __html: string | TrustedHTML;
     } | undefined;   };
 
-function ViewWithoutListeners<AsType extends keyof JSX.IntrinsicElements>(
+export const ViewWithoutListeners = withForwardRef(function ViewWithoutListeners<AsType extends keyof JSX.IntrinsicElements>(
     { children, ...props }: ViewWithoutListenersProps<AsType>,
     ref?: ForwardedRef<ComponentRef<AsType>>
 ) {
@@ -35,10 +37,4 @@ function ViewWithoutListeners<AsType extends keyof JSX.IntrinsicElements>(
             {children}
         </View>
     );
-}
-
-// Need ViewWithoutListenersMemo for autocompletion of phpstorm
-const ViewWithoutListenersMemo: <AsType extends keyof JSX.IntrinsicElements>(
-    props: ViewWithoutListenersProps<AsType> & RefAttributes<ComponentRef<AsType>>
-) => ReactNode = React.memo(React.forwardRef(ViewWithoutListeners));
-export { ViewWithoutListenersMemo as ViewWithoutListeners };
+}, undefined, "all");

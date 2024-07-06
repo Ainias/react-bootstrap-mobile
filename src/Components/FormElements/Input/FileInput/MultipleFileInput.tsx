@@ -187,7 +187,6 @@ export const MultipleFileInput = withMemo(function MultipleImageInput<OnChangeDa
             }
 
             indexRef.current = index;
-            console.log("LOG-d inputRef dispatch", inputRef.current);
             inputRef.current.dispatchEvent(new MouseEvent("click"));
         }, [allowOverride]);
 
@@ -236,7 +235,6 @@ export const MultipleFileInput = withMemo(function MultipleImageInput<OnChangeDa
                 </Flex>
                 <Flex horizontal={true} className={styles.previewContainer}>
                     {value?.map((file, index) => {
-                        console.log("LOG-d file", file);
                         return <Grow className={styles.preview} center={true} key={file.data}>
                             <Clickable
                                 onDrop={onDrop}
@@ -252,7 +250,7 @@ export const MultipleFileInput = withMemo(function MultipleImageInput<OnChangeDa
                                         <Icon icon={faTimesCircle}/>
                                     </Clickable>}
                             </Clickable>
-                        </Grow>
+                        </Grow>;
                     })}
                     <Grow className={classNames(styles.addFile, {[styles.hidden]: value.length >= maxFiles})} center={true}>
                         <Clickable

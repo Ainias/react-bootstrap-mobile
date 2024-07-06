@@ -4,7 +4,7 @@ export function useDelayed<Args extends any[]>(
     callback: (...args: Args) => void | Promise<void>,
     dependencies: any[],
     delay = 100,
-    maxDelay?: number
+    maxDelay: number|undefined = undefined
 ) {
     const argsRef = useRef<Args | undefined>(undefined);
     const timeoutRef = useRef<any>(undefined);

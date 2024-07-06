@@ -47,7 +47,7 @@
     "react-hooks/exhaustive-deps": [
       "warn",
       {
-        "additionalHooks": "(useDelayed|useDebounced)"
+        "additionalHooks": "(useDelayed|useDebounced|useClientLayoutEffect)"
       }
     ],
     // Checks effect dependencies
