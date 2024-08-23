@@ -5,7 +5,7 @@ import {
     KeyboardEvent,
     MutableRefObject,
     useCallback, useEffect,
-    useMemo, useRef,
+    useMemo,
 } from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { Override } from '../../../TypeHelpers';

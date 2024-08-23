@@ -1,9 +1,9 @@
 import * as React from 'react';
-import {ComponentType, ForwardedRef, PropsWithChildren, useCallback, useImperativeHandle, useState} from 'react';
+import { ComponentType, ForwardedRef, PropsWithChildren, useCallback, useImperativeHandle, useState } from 'react';
 import { PromiseWithHandlers } from '@ainias42/js-helper';
 import { DialogProvider, ShowDialog } from './DialogContext';
 import { Dialog } from './Dialog';
-import {withForwardRef} from "../../helper/withForwardRef";
+import { withForwardRef } from "../../helper/withForwardRef";
 import { Block } from "../Layout/Block";
 
 export type DialogContainerProps = PropsWithChildren<{
@@ -21,7 +21,10 @@ export type DialogContainerRef = {
     showDialog: ShowDialog;
 }
 
-export const DialogContainer = withForwardRef(function DialogContainer({ children, dialogClassName }: DialogContainerProps, ref: ForwardedRef<DialogContainerRef>) {
+export const DialogContainer = withForwardRef(function DialogContainer({
+                                                                           children,
+                                                                           dialogClassName
+                                                                       }: DialogContainerProps, ref: ForwardedRef<DialogContainerRef>) {
     // Variables
     const [dialogs, setDialogs] = useState<DialogData[]>([]);
     const [, setLastId] = useState(0);
@@ -38,7 +41,7 @@ export const DialogContainer = withForwardRef(function DialogContainer({ childre
         setLastId((oldId) => {
             const id = oldId + 1;
             setDialogs((oldDialogs) => {
-                return [...oldDialogs, { id, component, props, resultPromise: promise }] as DialogData[];
+                return [...oldDialogs, {id, component, props, resultPromise: promise}] as DialogData[];
             });
             return id;
         });
@@ -71,14 +74,14 @@ export const DialogContainer = withForwardRef(function DialogContainer({ childre
         <DialogProvider value={showDialog}>
             {children}
             <Block className={dialogClassName}>
-            {dialogs.map((d) => {
-                const DialogComponent = d.component;
-                return (
-                    <Dialog {...d.props} key={d.id} onClose={onClose} identifier={d.id}>
-                        <DialogComponent {...d.props} />
-                    </Dialog>
-                );
-            })}
+                {dialogs.map((d) => {
+                    const DialogComponent = d.component;
+                    return (
+                        <Dialog {...d.props} key={d.id} onClose={onClose} identifier={d.id}>
+                            <DialogComponent {...d.props} />
+                        </Dialog>
+                    );
+                })}
             </Block>
         </DialogProvider>
     );

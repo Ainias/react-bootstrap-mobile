@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { ComponentRef, ForwardedRef, PropsWithChildren } from 'react';
 import { Override } from '../../TypeHelpers';
-import { withMemo } from "../../helper/withMemo";
 import { withForwardRef } from "../../helper/withForwardRef";
 
 export type ViewProps<AsType extends keyof JSX.IntrinsicElements> = PropsWithChildren<

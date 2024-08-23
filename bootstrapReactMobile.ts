@@ -82,6 +82,7 @@ export * from './src/Components/Text/Heading';
 export * from './src/Components/Text/Text';
 export * from './src/Components/Toast/Toast';
 export * from './src/Components/Toast/ToastContainer';
+export * from './src/Components/Toast/ToastContext';
 export * from './src/Components/TopBar/MoreButton';
 export * from './src/Components/TopBar/TopBar';
 export * from './src/Components/TopBar/TopBarButton';

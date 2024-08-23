@@ -28,7 +28,7 @@ module.exports = (env) => {
         output: {
             filename: 'bootstrapReactMobile.js',
             path: path.resolve(__dirname, 'dist'),
-            library: { type: 'umd' },
+            library: { type: 'commonjs-static' },
             clean: true,
             globalObject: 'this',
         },

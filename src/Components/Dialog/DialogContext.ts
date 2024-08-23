@@ -12,7 +12,10 @@ export type ShowDialog = <
     props?: Omit<P, 'close'>
 ) => Promise<R | void>;
 
-const DialogContext = React.createContext<ShowDialog>(() => Promise.reject());
+const DialogContext = React.createContext<ShowDialog>(() => {
+    console.error("DialogContext not initialized");
+    return Promise.reject("DialogContext not initialized")
+});
 export const DialogProvider = DialogContext.Provider;
 
 export function useDialog() {

@@ -15,7 +15,11 @@ let pathsToProjects = [
     "/Users/sguenter/Projekte/Privat/dndSave",
     "/Users/sguenter/Projekte/Privat/bat",
     "/Users/sguenter/Projekte/Privat/react-windows",
-    "/Users/sguenter/Projekte/Privat/cordova-sites"
+    "/Users/sguenter/Projekte/Privat/cordova-sites",
+    "/Users/sguenter/Projekte/Privat/libraries",
+    "/Users/sguenter/Projekte/Privat/express-app",
+    "/Users/sguenter/Projekte/Privat/test/example-app/express-app-example"
+
 ];
 
 const deleteFolderRecursive = function (path) {

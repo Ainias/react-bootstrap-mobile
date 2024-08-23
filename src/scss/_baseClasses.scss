@@ -1,26 +1,26 @@
-.full-height {
+:global(.full-height) {
   height: 100%;
 }
 
-.full-min-height {
+:global(.full-min-height) {
   min-height: 100%;
 }
 
-.scrollable {
+:global(.scrollable) {
   overflow-y: auto;
 }
 
-.full-width {
+:global(.full-width) {
   width: 100%;
 }
 
-.flat-hidden {
+:global(.flat-hidden) {
   @include design($flat) {
     display: none;
   }
 }
 
-.material-hidden {
+:global(.material-hidden) {
   @include design($material) {
     display: none;
   }

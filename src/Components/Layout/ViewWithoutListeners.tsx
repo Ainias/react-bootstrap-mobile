@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { ComponentRef, DOMAttributes, ForwardedRef } from 'react';
 import { View, ViewProps } from './View';
-import { withMemo } from "../../helper/withMemo";
 import { withForwardRef } from "../../helper/withForwardRef";
 
 export type ViewWithoutListenersProps<AsType extends keyof JSX.IntrinsicElements> = Omit<

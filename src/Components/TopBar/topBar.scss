@@ -24,6 +24,10 @@
   }
 
   .button {
+    &.active {
+      cursor: pointer;
+    }
+
     display: block;
     padding: 0.5rem 1rem;
     color: #0d3efd; // TODO change color

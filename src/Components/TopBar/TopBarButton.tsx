@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useCallback } from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
 
 import styles from './topBar.scss';
@@ -12,13 +11,12 @@ export type TopBarButtonProps = RbmComponentProps<{
 }>;
 
 function TopBarButton({ disabled = false, onClick, className, children, ...rbmProps }: TopBarButtonProps) {
-    const cb = useCallback(() => (onClick ? onClick() : null), [onClick]);
     return (
         <a
             role="button"
             {...rbmProps}
-            onClick={cb}
-            className={classNames(styles.button, { [styles.disabled]: disabled }, className)}
+            onClick={onClick}
+            className={classNames(styles.button, { [styles.disabled]: disabled, [styles.active]: !disabled && onClick }, className)}
         >
             {children}
         </a>
