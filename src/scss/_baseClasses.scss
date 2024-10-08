@@ -1,12 +1,12 @@
-:global(.full-height) {
+.full-height {
   height: 100%;
 }
 
-:global(.full-min-height) {
+.full-min-height {
   min-height: 100%;
 }
 
-:global(.scrollable) {
+.scrollable {
   overflow-y: auto;
 }
 
@@ -14,14 +14,10 @@
   width: 100%;
 }
 
-:global(.flat-hidden) {
-  @include design($flat) {
-    display: none;
-  }
+.#{$flat} .#{$flat}-hidden {
+  display: none;
 }
 
-:global(.material-hidden) {
-  @include design($material) {
-    display: none;
-  }
+.#{$material} .#{$material}-hidden {
+  display: none;
 }

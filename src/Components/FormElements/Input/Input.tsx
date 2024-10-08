@@ -5,7 +5,7 @@ import {
     KeyboardEvent,
     MutableRefObject,
     useCallback, useEffect,
-    useMemo,
+    useMemo, useRef,
 } from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { Override } from '../../../TypeHelpers';
@@ -16,6 +16,9 @@ import styles from './input.scss';
 import classNames from 'classnames';
 import { useComposedRef } from '../../Hooks/useComposedRef';
 import { useOnChangeDone } from '../hooks/useOnChangeDone';
+import { InlineBlock } from "../../Layout/InlineBlock";
+import { Text } from "../../Text/Text";
+import { useSendFormContext } from "../Controller/SendFormContext";
 
 export type InputProps<OnChangeData, OnBlurData, OnChangeDoneData> = RbmComponentProps<
     Override<
@@ -25,6 +28,7 @@ export type InputProps<OnChangeData, OnBlurData, OnChangeDoneData> = RbmComponen
             inline?: boolean;
             onChangeText?: (newText: string) => void;
             onEnter?: (newText: string) => void;
+            error?: string,
         } & OptionalListener<'onChange', OnChangeData> &
         OptionalListener<'onBlur', OnBlurData> &
         OptionalListener<'onChangeDone', OnChangeDoneData>
@@ -39,7 +43,9 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
             onKeyDown,
             inline = false,
             value,
+            error,
             onChangeText,
+            onEnter,
             ...otherProps
         }: InputProps<OnChangeData, OnBlurData, OnChangeDoneData>,
         ref: MutableRefObject<HTMLInputElement> | null
@@ -77,9 +83,13 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
             return "";
         }, [value, otherProps.max, otherProps.min, otherProps.type]);
         // Refs
-        const innerRef = useComposedRef(ref);
+        const innerRef = useRef<HTMLInputElement>(null);
+        const refFunction = useComposedRef(ref, innerRef);
 
         // Callbacks
+        const sendForm = useSendFormContext();
+        onEnter ??= sendForm;
+
         const [onChangeWithData, otherPropsWithoutOnchange] = useListenerWithExtractedProps<'onChange', OnChangeData>(
             'onChange',
             otherProps
@@ -117,13 +127,13 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
         const realOnKeyDown = useCallback(
             (e: KeyboardEvent<HTMLInputElement>) => {
                 onKeyDown?.(e);
-                if (otherProps.onEnter && e.key === 'Enter' && !e.defaultPrevented) {
+                if (onEnter && e.key === 'Enter' && !e.defaultPrevented) {
                     if (otherProps.type === "number") {
                         const stringValue = (e.target as HTMLInputElement).value;
                         const val = !Number.isNaN(Number(stringValue)) ? stringValue : !Number.isNaN(parseFloat(stringValue)) ? String(parseFloat(stringValue)) : "";
-                        otherProps.onEnter(val);
+                        onEnter(val);
                     } else {
-                        otherProps.onEnter((e.target as HTMLInputElement).value);
+                        onEnter((e.target as HTMLInputElement).value);
                     }
                 }
 
@@ -177,12 +187,13 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
                     {...otherPropsWithoutData}
                     value={usedValue}
                     type={otherProps.type === "number" ? "text" : otherProps.type}
-                    ref={innerRef}
+                    ref={refFunction}
                     className={styles.text}
                     onBlur={onBlur}
                     onChange={onChange}
                     onKeyDown={realOnKeyDown}
                 />
+                {error && <InlineBlock className={styles.error}><Text>{error}</Text></InlineBlock>}
             </label>
         );
     },

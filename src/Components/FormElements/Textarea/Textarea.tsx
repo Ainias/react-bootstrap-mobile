@@ -7,15 +7,16 @@ import {
     KeyboardEvent,
     ChangeEvent,
     MutableRefObject,
-    CSSProperties
+    CSSProperties, useRef
 } from 'react';
 import { OptionalListener, useListenerWithExtractedProps } from '../../Hooks/useListener';
-
 import styles from './textarea.scss';
 import classNames from 'classnames';
 import { withForwardRef } from "../../../helper/withForwardRef";
 import { useOnChangeDone } from "../hooks/useOnChangeDone";
 import { useComposedRef } from "../../Hooks/useComposedRef";
+import { InlineBlock } from "../../Layout/InlineBlock";
+import { Text } from "../../Text/Text";
 
 export type TextareaProps<OnChangeData, OnChangeDoneData> = RbmComponentProps<
     Override<
@@ -27,6 +28,7 @@ export type TextareaProps<OnChangeData, OnChangeDoneData> = RbmComponentProps<
             onEscape?: (newText: string) => void;
             textareaStyles?: CSSProperties & Record<`--${string}`, string | number | undefined>,
             containerRef?: MutableRefObject<HTMLLabelElement|null>
+            error?: string,
         } & OptionalListener<'onChange', OnChangeData>
         & OptionalListener<'onChangeDone', OnChangeDoneData>
     >
@@ -42,10 +44,12 @@ export const Textarea = withForwardRef(function Textarea<OnChangeData, OnChangeD
                                                                                              onEscape,
                                                                                              textareaStyles,
                                                                                              containerRef,
+    error,
                                                                                              ...otherProps
                                                                                          }: TextareaProps<OnChangeData, OnChangeDoneData>, ref: MutableRefObject<HTMLTextAreaElement> | null) {
     // Refs
-    const innerRef = useComposedRef(ref);
+    const innerRef = useRef<HTMLTextAreaElement>(null);
+    const refSetter = useComposedRef(ref, innerRef);
 
     // Variables
 
@@ -98,7 +102,8 @@ export const Textarea = withForwardRef(function Textarea<OnChangeData, OnChangeD
         <label className={classNames(styles.container, className)} style={style} ref={containerRef}>
             {label ? <span className={styles.label}>{label}</span> : null}
             <textarea {...otherPropsWithoutData} style={textareaStyles} onKeyUp={realOnKeyPress}
-                      className={styles.textarea} onChange={onChange} ref={innerRef}/>
+                      className={styles.textarea} onChange={onChange} ref={refSetter}/>
+            {error && <InlineBlock className={styles.error}><Text>{error}</Text></InlineBlock>}
         </label>
     );
 }, styles);

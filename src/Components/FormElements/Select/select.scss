@@ -53,4 +53,9 @@
     height: initial;
     line-height: 1.5rem;
   }
+
+  .error {
+    font-size: 0.7rem;
+    --text-primary-default-color: var(--text-error)
+  }
 }

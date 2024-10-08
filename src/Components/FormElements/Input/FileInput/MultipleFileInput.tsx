@@ -3,7 +3,6 @@ import {RbmComponentProps} from '../../../RbmComponentProps';
 import {Override} from '../../../../TypeHelpers';
 import {ChangeEventHandler, DragEvent, InputHTMLAttributes, useCallback, useRef} from 'react';
 import {Listener, useListenerWithExtractedProps} from '../../../Hooks/useListener';
-
 import styles from './fileInput.scss';
 import {withMemo} from '../../../../helper/withMemo';
 import classNames from 'classnames';
@@ -17,6 +16,7 @@ import {Image} from '../../../Image/Image';
 import {Clickable} from '../../../Clickable/Clickable';
 import {Inline} from '../../../Layout/Inline';
 import {FileType} from "./FileType";
+import { InlineBlock } from "../../../Layout/InlineBlock";
 
 
 export type MultipleFileInputProps<OnChangeFilesData> = RbmComponentProps<
@@ -31,6 +31,7 @@ export type MultipleFileInputProps<OnChangeFilesData> = RbmComponentProps<
             onError?: (error: string) => void;
             allowOverride?: boolean
             showDeleteButton?: boolean
+            error?: string,
         } & Listener<'onChangeFiles', OnChangeFilesData, FileType[]>
     >
 >;
@@ -46,6 +47,7 @@ export const MultipleFileInput = withMemo(function MultipleImageInput<OnChangeDa
                                                                                         allowOverride = maxFiles === 1,
                                                                                         onError,
                                                                                         showDeleteButton = true,
+    error,
                                                                                         ...otherProps
                                                                                     }: MultipleFileInputProps<OnChangeData>) {
         // Variables
@@ -275,6 +277,7 @@ export const MultipleFileInput = withMemo(function MultipleImageInput<OnChangeDa
                         </Clickable>
                     </Grow>
                 </Flex>
+                {error && <InlineBlock className={styles.error}><Text>{error}</Text></InlineBlock>}
             </span>
         );
     },

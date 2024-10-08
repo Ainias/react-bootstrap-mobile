@@ -7,6 +7,8 @@ import {OptionalListener, useListenerWithExtractedProps} from '../../Hooks/useLi
 import styles from './select.scss';
 import { withMemo } from '../../../helper/withMemo';
 import classNames from 'classnames';
+import { InlineBlock } from "../../Layout/InlineBlock";
+import { Text } from "../../Text/Text";
 
 export type SelectOption = {
     label: string;
@@ -23,6 +25,7 @@ export type SelectProps<OnChangeData> = RbmComponentProps<
             onChangeValue?: (newValue: string) => void;
             inline?: boolean;
             small?: boolean;
+            error?: string;
         } & OptionalListener<'onChange', OnChangeData>
     >
 >;
@@ -35,6 +38,7 @@ export const Select = withMemo(function Select<OnChangeData>({
     onChangeValue,
     inline = false,
     small = false,
+    error,
     ...otherProps
 }: SelectProps<OnChangeData>) {
     // Variables
@@ -72,6 +76,7 @@ export const Select = withMemo(function Select<OnChangeData>({
                     </option>
                 ))}
             </select>
+            {error && <InlineBlock className={styles.error}><Text>{error}</Text></InlineBlock>}
         </label>
     );
 },

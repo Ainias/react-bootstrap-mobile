@@ -1,17 +1,14 @@
-import { ForwardedRef, useEffect, useRef } from 'react';
+import { ForwardedRef, useCallback, useEffect, useRef } from 'react';
 
-export const useComposedRef = <T>(ref: ForwardedRef<T>, initialValue: T | null = null) => {
-    const targetRef = useRef<T>(initialValue);
-
-    useEffect(() => {
-        if (!ref) return;
-
-        if (typeof ref === 'function') {
-            ref(targetRef.current);
-        } else {
-            ref.current = targetRef.current;
+export function useComposedRef<RefVal>(...refs: (ForwardedRef<RefVal> | undefined)[]) {
+    return useCallback((val: RefVal | null) => {
+        for (const ref of refs) {
+            if (typeof ref === 'function') {
+                ref(val);
+            } else if (ref) {
+                ref.current = val;
+            }
         }
-    }, [ref]);
-
-    return targetRef;
-};
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, refs);
+}

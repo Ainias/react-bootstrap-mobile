@@ -10,7 +10,7 @@ export function useOnChangeDone(onChangeDone: (ev: any) => void, ref?: MutableRe
         return () => {
             elem?.removeEventListener('change', onChangeDone);
         };
-    }, [ref, onChangeDone, usedRef]);
+    }, [onChangeDone, usedRef]);
 
     return usedRef;
 }

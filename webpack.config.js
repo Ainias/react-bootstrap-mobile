@@ -40,6 +40,7 @@ module.exports = (env) => {
             '@fortawesome/fontawesome-svg-core': 'commonjs2 @fortawesome/fontawesome-svg-core',
             '@fortawesome/free-solid-svg-icons': 'commonjs2 @fortawesome/free-solid-svg-icons',
             'react-beautiful-dnd': 'commonjs2 react-beautiful-dnd',
+            'react-hook-form': 'commonjs2 react-hook-form',
         },
         optimization: {
             minimize: false,

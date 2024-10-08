@@ -4,7 +4,15 @@ import {OptionalListener, useListener} from '../Hooks/useListener';
 
 import styles from './clickable.scss';
 import classNames from 'classnames';
-import { useCallback, MouseEvent as ReactMouseEvent, ForwardedRef, useEffect, MouseEvent, PointerEvent } from 'react';
+import {
+    useCallback,
+    MouseEvent as ReactMouseEvent,
+    ForwardedRef,
+    useEffect,
+    MouseEvent,
+    PointerEvent,
+    useRef, DragEventHandler
+} from 'react';
 import {withForwardRef} from '../../helper/withForwardRef';
 import {useComposedRef} from "../Hooks/useComposedRef";
 
@@ -13,6 +21,7 @@ type OnPointerDownListener<Data> = OptionalListener<'onPointerDown', Data, Point
 type OnPointerUpListener<Data> = OptionalListener<'onPointerUp', Data, PointerEvent>;
 type OnPointerMoveListener<Data> = OptionalListener<'onPointerMove', Data, PointerEvent>;
 type OnDropListener<Data> = OptionalListener<'onDrop', Data>;
+type OnDragStartListener<Data> = OptionalListener<'onDragStart', Data>;
 type OnDragOverListener<Data> = OptionalListener<'onDragOver', Data>;
 
 export type ClickableProps<
@@ -22,6 +31,7 @@ export type ClickableProps<
     OnMouseUpData,
     OnClickCaptureData,
     OnDropData,
+    OnDragStartData,
     OnDragOverData,
     OnMouseEnterData,
     OnMouseLeaveData,
@@ -36,11 +46,14 @@ export type ClickableProps<
         stopPropagation?: boolean;
         useReactOnMouseLeave?: boolean;
         id?: string;
+        tabIndex?: number;
+        draggable?: boolean
     } & OnClickListener<OnClickData> &
     OnPointerDownListener<OnMouseDownData> &
     OnPointerMoveListener<OnMouseMoveData> &
     OnPointerUpListener<OnMouseUpData> &
     OnDropListener<OnDropData> &
+    OnDragStartListener<OnDragStartData> &
     OnDragOverListener<OnDragOverData> &
     OptionalListener<'onClickCapture', OnClickCaptureData> &
     OptionalListener<'onMouseEnter', OnMouseEnterData> &
@@ -55,6 +68,7 @@ function Clickable<
     OnPointerUpData,
     OnClickCaptureData,
     OnDropData,
+    OnDragStartData,
     OnDragOverData,
     OnMouseEnterData,
     OnMouseLeaveData,
@@ -72,8 +86,10 @@ function Clickable<
         preventDefault = false,
         stopPropagation = true,
         useReactOnMouseLeave = false,
+        tabIndex,
+        draggable,
         ...clickData
-    }: ClickableProps<OnClickData, OnPointerDownData, OnPointerMoveData, OnPointerUpData, OnClickCaptureData, OnDropData, OnDragOverData,OnMouseEnterData, OnMouseLeaveData, OnDoubleClickData, HrefType>,
+    }: ClickableProps<OnClickData, OnPointerDownData, OnPointerMoveData, OnPointerUpData, OnClickCaptureData, OnDropData,OnDragStartData, OnDragOverData,OnMouseEnterData, OnMouseLeaveData, OnDoubleClickData, HrefType>,
     ref: ForwardedRef<HrefType extends string ? HTMLAnchorElement : HTMLSpanElement>
 ) {
     // Variables
@@ -81,7 +97,8 @@ function Clickable<
     // States
 
     // Refs
-    const clickableRef = useComposedRef(ref);
+    const clickableRef = useRef<HrefType extends string ? HTMLAnchorElement : HTMLSpanElement>(null);
+    const refSetter = useComposedRef(ref, clickableRef);
 
     // Callbacks
     const onClickInner = useListener<'onClick', OnClickData>('onClick', clickData);
@@ -196,6 +213,22 @@ function Clickable<
         [clickData.onDragOver, onDragOver, preventDefault, stopPropagation]
     );
 
+    const onDragStartListener = useListener<'onDragStart', OnDragStartData>('onDragStart', clickData);
+    const realOnDragStartListener = useCallback(
+        (e: ReactMouseEvent) => {
+            if (clickData.onDragStart) {
+                if (stopPropagation) {
+                    e.stopPropagation();
+                }
+                if (preventDefault) {
+                    e.preventDefault();
+                }
+                onDragStartListener(e);
+            }
+        },
+        [clickData.onDragStart, onDragStartListener, preventDefault, stopPropagation]
+    );
+
     const onMouseEnter = useListener<'onMouseEnter', OnMouseEnterData>('onMouseEnter', clickData);
     const realOnMouseEnter = useCallback(
         (e: ReactMouseEvent) => {
@@ -276,17 +309,19 @@ function Clickable<
         onMouseEnter: realOnMouseEnter,
         onMouseLeave: useReactOnMouseLeave ? realOnMouseLeave : undefined,
         onDoubleClick: realOnDoubleClick,
-        tabIndex: interactable ? 0 : undefined,
+        tabIndex: interactable ? 0 : tabIndex,
+        draggable,
+        onDragStart: realOnDragStartListener
     };
     if (typeof href === 'string') {
         return (
-            <a {...props} href={href} ref={clickableRef as ForwardedRef<HTMLAnchorElement>}>
+            <a {...props} href={href} ref={refSetter as ForwardedRef<HTMLAnchorElement>}>
                 {children}
             </a>
         );
     }
     return (
-        <span {...props} ref={clickableRef as ForwardedRef<HTMLSpanElement>}>
+        <span {...props} ref={refSetter as ForwardedRef<HTMLSpanElement>}>
             {children}
         </span>
     );

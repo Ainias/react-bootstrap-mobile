@@ -6,13 +6,13 @@
   font-weight: 400;
 }
 
-@include design($material) {
+.#{$material} {
   * {
     font-family: "Roboto", "Noto", sans-serif;
   }
 }
 
-@include design($flat) {
+.#{$flat} {
   * {
     font-family: -apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif;
   }

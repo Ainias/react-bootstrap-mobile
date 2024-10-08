@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { withMemo } from '../../helper/withMemo';
 import { RbmComponentProps, WithNoChildren } from '../RbmComponentProps';
-import { CSSProperties, DOMAttributes } from 'react';
+import { CSSProperties } from 'react';
 import { Override } from '../../TypeHelpers';
 
 import styles from './image.scss';
@@ -9,7 +9,7 @@ import classNames from 'classnames';
 
 export type ImageProps = RbmComponentProps<
     Override<
-        Omit<React.ComponentPropsWithoutRef<'img'>, keyof DOMAttributes<'img'>>,
+        React.ComponentPropsWithoutRef<'img'>,
         {
             src: string;
             style?: CSSProperties;

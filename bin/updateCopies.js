@@ -12,13 +12,14 @@ let pathsToProjects = [
     // '/home/silas/Projekte/web/cordova-sites',
     "/Users/sguenter/Projekte/Privat/games",
     "/Users/sguenter/Projekte/Privat/dnd",
+    "/Users/sguenter/Projekte/Privat/TestCapacitorElectron",
+    "/Users/sguenter/Projekte/Privat/users-next",
     "/Users/sguenter/Projekte/Privat/dndSave",
     "/Users/sguenter/Projekte/Privat/bat",
     "/Users/sguenter/Projekte/Privat/react-windows",
     "/Users/sguenter/Projekte/Privat/cordova-sites",
     "/Users/sguenter/Projekte/Privat/libraries",
-    "/Users/sguenter/Projekte/Privat/express-app",
-    "/Users/sguenter/Projekte/Privat/test/example-app/express-app-example"
+    "/Users/sguenter/Projekte/Privat/express-app"
 
 ];
 

@@ -79,11 +79,10 @@
 
   .value {
     display: none;
-    //position: absolute;
-    //top: 0;
-    //left: 0;
-    //right: 0;
-    //bottom: 0;
-    //opacity: 0;
+  }
+
+  .error {
+    font-size: 0.7rem;
+    --text-primary-default-color: var(--text-error)
   }
 }

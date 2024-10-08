@@ -45,7 +45,7 @@ export const PasswordInput = withForwardRef(function PasswordInput<OnChangeData,
             <Grow>
                 <Input {...props} type={isVisible ? 'text' : 'password'} ref={ref} />
             </Grow>
-            <Clickable onClick={toggleVisible} className={styles.showButton}>
+            <Clickable onClick={toggleVisible} className={styles.showButton} interactable={false}>
                 <Icon icon={isVisible ? faEye : faEyeSlash} />
             </Clickable>
         </Flex>
