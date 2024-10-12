@@ -11,6 +11,7 @@ export type ConfirmDialogProps = {
     confirmText?: string;
 };
 
+// TODO Translation
 function ConfirmDialog({ title, message, close, cancelText = 'Cancel', confirmText = 'OK' }: ConfirmDialogProps) {
     // Variables
     const buttons = useMemo(

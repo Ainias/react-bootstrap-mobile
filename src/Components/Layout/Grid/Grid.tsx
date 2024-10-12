@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { withMemo } from '../../../helper/withMemo';
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { Block } from '../Block';
 import classNames from 'classnames';
 import styles from './grid.scss';
-import { useMemo } from 'react';
+import { ForwardedRef, useMemo } from 'react';
+import { withForwardRef } from "../../../helper/withForwardRef";
 
 export type GridProps = RbmComponentProps<{
     columns?: number;
@@ -12,7 +12,7 @@ export type GridProps = RbmComponentProps<{
     useContainerWidth?: boolean;
 }>;
 
-function Grid({ style, children, columns = 12, rows = 1, useContainerWidth = false, className, __allowChildren }: GridProps) {
+function Grid({ style, children, columns = 12, rows = 1, useContainerWidth = false, className, __allowChildren }: GridProps, ref?:ForwardedRef<HTMLDivElement>) {
     // Variables
     const appliedStyle = useMemo(
         () => ({
@@ -39,6 +39,7 @@ function Grid({ style, children, columns = 12, rows = 1, useContainerWidth = fal
 
     return (
         <Block
+            ref={ref}
             style={appliedStyle}
             className={classNames(styles.grid, className, {[styles.useContainerWidth]: useContainerWidth})}
             __allowChildren={__allowChildren as 'all'}
@@ -49,5 +50,5 @@ function Grid({ style, children, columns = 12, rows = 1, useContainerWidth = fal
 }
 
 // Need RowMemo for autocompletion of phpstorm
-const GridMemo = withMemo(Grid, styles);
+const GridMemo = withForwardRef(Grid, styles);
 export { GridMemo as Grid };

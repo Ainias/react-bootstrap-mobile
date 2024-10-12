@@ -1,5 +1,6 @@
 @import "../../scss/variables";
 @import "../../scss/designMixin";
+@import "../../scss/flavorMixin";
 
 .buttonDialog {
   font-weight: 400;
@@ -18,8 +19,13 @@
     width: 100%;
 
     .button {
-      color: var(--flavor-accent);
       padding: 0 8px;
+
+      .buttonText {
+        @include flavorSelection(--text-primary-default-color);
+
+      }
+
     }
   }
 
@@ -51,14 +57,17 @@
         display: block;
         border-left: 1px solid var(--border-light);
         border-top: 1px solid var(--border-light);
-        text-overflow: ellipsis;
-        letter-spacing: 0;
         vertical-align: middle;
-        font-size: 16px;
         text-align: center;
         height: 44px;
-        line-height: 44px;
         overflow: hidden;
+
+        .buttonText {
+          line-height: 44px;
+          text-overflow: ellipsis;
+          letter-spacing: 0;
+          font-size: 16px;
+        }
 
         &:first-child {
           border-left: none;
@@ -102,12 +111,15 @@
         width: auto;
         float: right;
         border-radius: 2px;
-        font-size: 14px;
-        font-weight: 500;
         height: 36px;
-        line-height: 36px;
         margin: 8px 8px 8px 0;
         min-width: 50px;
+
+        .buttonText {
+          line-height: 36px;
+          font-size: 14px;
+          font-weight: 500;
+        }
       }
     }
   }

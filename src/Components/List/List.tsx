@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { ComponentType, CSSProperties, ReactElement, ReactNode, useCallback, useState } from 'react';
+import { ComponentType, CSSProperties, ForwardedRef, ReactElement, ReactNode, useCallback, useState } from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
 
 import styles from './list.scss';
 import { withMemo } from '../../helper/withMemo';
-import { FixedSizeList, ListChildComponentProps } from 'react-window';
+import { FixedSizeList, FixedSizeListProps, ListChildComponentProps } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { SizeCalculator, SizeCalculatorProps } from '../SizeCalculator/SizeCalculator';
+import { withForwardRef } from "../../helper/withForwardRef";
 
 export type ListProps<ItemType> = RbmComponentProps<{
     renderItem: (item: ItemType, style: CSSProperties, index: number) => ReactElement;
@@ -14,15 +15,19 @@ export type ListProps<ItemType> = RbmComponentProps<{
     items: ItemType[];
     renderBefore?: (item: ItemType, index: number) => ReactNode;
     keyExtractor?: (item: ItemType, index: number) => string;
+    onItemsRendered?: FixedSizeListProps<ItemType>['onItemsRendered'];
+    autoSizeClassName?: string;
 }>;
 
-export const List = withMemo(function List<ItemType>({
+export const List = withForwardRef(function List<ItemType>({
     items,
     renderItem,
     itemHeight: initialItemHeight = 0,
     className,
     style,
-}: ListProps<ItemType>) {
+    onItemsRendered,
+    autoSizeClassName,
+}: ListProps<ItemType>, ref: ForwardedRef<FixedSizeList<ItemType>>) {
     // Variables
 
     // States
@@ -45,7 +50,7 @@ export const List = withMemo(function List<ItemType>({
     // Render Functions
 
     return (
-        <AutoSizer>
+        <AutoSizer className={autoSizeClassName}>
             {({ height, width }: { height?: number; width?: number }) => {
                 return (
                     <>
@@ -54,6 +59,8 @@ export const List = withMemo(function List<ItemType>({
                                 {renderItem(
                                     items[0],
                                     {
+                                        visibility: 'hidden',
+                                        pointerEvents: 'none',
                                         position: 'relative',
                                         top: '0px',
                                         left: '0px',
@@ -66,6 +73,8 @@ export const List = withMemo(function List<ItemType>({
                         )}
                         {height !== undefined && width !== undefined && (
                             <FixedSizeList
+                                onItemsRendered={onItemsRendered}
+                                ref={ref}
                                 height={height}
                                 itemCount={items.length}
                                 width={width}

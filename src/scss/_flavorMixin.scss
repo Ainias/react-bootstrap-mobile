@@ -7,4 +7,10 @@
   &:global(.flavor-basic) {
     #{$varName}: var(--flavor-basic);
   }
+  &:global(.flavor-destructive) {
+    #{$varName}: var(--flavor-destructive);
+  }
+  &:global(.flavor-constructive) {
+    #{$varName}: var(--flavor-constructive);
+  }
 }

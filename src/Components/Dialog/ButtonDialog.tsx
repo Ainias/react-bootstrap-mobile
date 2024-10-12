@@ -1,19 +1,27 @@
 import * as React from 'react';
+import { ReactElement } from 'react';
 import { withMemo } from '../../helper/withMemo';
 import { Block } from '../Layout/Block';
-import { Text } from '../Text/Text';
+import { Text, TEXT_SIZE } from '../Text/Text';
 import { Clickable } from '../Clickable/Clickable';
 
 import styles from './buttonDialog.scss';
 import { RbmComponentProps, WithNoChildren } from '../RbmComponentProps';
 import classNames from 'classnames';
+import { Flavor } from "../Flavor";
+import { Size } from "../../Size";
 
 export type ButtonDialogProps = RbmComponentProps<
-    { title?: string; message: string; buttons: { text: string; callback: () => void }[] },
+    {
+        title?: string;
+        message: string;
+        buttons: { text: string; callback: () => void, flavor?: Flavor }[]
+        extraContent?: ReactElement|null
+    },
     WithNoChildren
 >;
 
-function ButtonDialog({ title, message, buttons, style, className }: ButtonDialogProps) {
+function ButtonDialog({ title, message, buttons, style, className, extraContent }: ButtonDialogProps) {
     // Variables
 
     // Refs
@@ -31,20 +39,21 @@ function ButtonDialog({ title, message, buttons, style, className }: ButtonDialo
     // Render Functions
 
     return (
-        <Block className={classNames(styles.buttonDialog, className)} style={style}>
+        <Block className={classNames(styles.buttonDialog, className)} style={style} >
             {!!title && (
-                <Block className={styles.title}>
-                    <Text>{title}</Text>
+                <Block>
+                    <Text size={TEXT_SIZE.large} className={styles.title}>{title}</Text>
                 </Block>
             )}
-            <Block className={styles.message}>
-                <Text>{message}</Text>
+            <Block>
+                <Text className={styles.message}>{message}</Text>
             </Block>
+            {extraContent}
             <Block className={styles.buttonContainer}>
                 {buttons.map((b, i) => (
                     // eslint-disable-next-line react/no-array-index-key
-                    <Clickable onClick={b.callback} className={styles.button} key={i + b.text}>
-                        <Text>{b.text}</Text>
+                    <Clickable onClick={b.callback} className={classNames(styles.button)} key={i + b.text}>
+                        <Text className={classNames(styles.buttonText, b.flavor ?? Flavor.Accent)}>{b.text}</Text>
                     </Clickable>
                 ))}
             </Block>

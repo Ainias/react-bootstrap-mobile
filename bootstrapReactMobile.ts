@@ -68,6 +68,7 @@ export * from './src/Components/Layout/View';
 export * from './src/Components/Layout/ViewWithoutListeners';
 export * from './src/Components/List/BulletList/BulletList';
 export * from './src/Components/List/BulletList/ListItem';
+export * from './src/Components/List/InfiniteList';
 export * from './src/Components/List/List';
 export * from './src/Components/LoadingArea/LoadingArea';
 export * from './src/Components/LoadingCircle/LoadingCircle';
