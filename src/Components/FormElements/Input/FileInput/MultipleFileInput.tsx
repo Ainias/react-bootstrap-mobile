@@ -1,21 +1,21 @@
 import * as React from 'react';
-import {RbmComponentProps} from '../../../RbmComponentProps';
-import {Override} from '../../../../TypeHelpers';
-import {ChangeEventHandler, DragEvent, InputHTMLAttributes, useCallback, useRef} from 'react';
-import {Listener, useListenerWithExtractedProps} from '../../../Hooks/useListener';
+import { RbmComponentProps } from '../../../RbmComponentProps';
+import { Override } from '../../../../TypeHelpers';
+import { ChangeEventHandler, DragEvent, InputHTMLAttributes, useCallback, useRef } from 'react';
+import { Listener, useListenerWithExtractedProps } from '../../../Hooks/useListener';
 import styles from './fileInput.scss';
-import {withMemo} from '../../../../helper/withMemo';
+import { withMemo } from '../../../../helper/withMemo';
 import classNames from 'classnames';
-import {Block} from '../../../Layout/Block';
-import {Text} from '../../../Text/Text';
-import {Flex} from '../../../Layout/Flex';
-import {Grow} from '../../../Layout/Grow';
-import {Icon} from '../../../Icon/Icon';
-import {faFile, faPlus, faTimesCircle} from '@fortawesome/free-solid-svg-icons';
-import {Image} from '../../../Image/Image';
-import {Clickable} from '../../../Clickable/Clickable';
-import {Inline} from '../../../Layout/Inline';
-import {FileType} from "./FileType";
+import { Block } from '../../../Layout/Block';
+import { Text } from '../../../Text/Text';
+import { Flex } from '../../../Layout/Flex';
+import { Grow } from '../../../Layout/Grow';
+import { Icon } from '../../../Icon/Icon';
+import { faFile, faPlus, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { Image } from '../../../Image/Image';
+import { Clickable } from '../../../Clickable/Clickable';
+import { Inline } from '../../../Layout/Inline';
+import { FileType } from "./FileType";
 import { InlineBlock } from "../../../Layout/InlineBlock";
 
 
@@ -32,6 +32,7 @@ export type MultipleFileInputProps<OnChangeFilesData> = RbmComponentProps<
             allowOverride?: boolean
             showDeleteButton?: boolean
             error?: string,
+            "data-test-id"?: string;
         } & Listener<'onChangeFiles', OnChangeFilesData, FileType[]>
     >
 >;
@@ -47,7 +48,8 @@ export const MultipleFileInput = withMemo(function MultipleImageInput<OnChangeDa
                                                                                         allowOverride = maxFiles === 1,
                                                                                         onError,
                                                                                         showDeleteButton = true,
-    error,
+                                                                                        error,
+                                                                                        "data-test-id": testId,
                                                                                         ...otherProps
                                                                                     }: MultipleFileInputProps<OnChangeData>) {
         // Variables
@@ -78,7 +80,7 @@ export const MultipleFileInput = withMemo(function MultipleImageInput<OnChangeDa
             [mimeTypes]
         );
 
-        const [onChangeFiles, ...props] = useListenerWithExtractedProps('onChangeFiles', otherProps);
+        const [onChangeFiles, props] = useListenerWithExtractedProps('onChangeFiles', otherProps);
         const getBase64 = useCallback((inputFiles: Blob[]) => {
             const promises = inputFiles.map(
                 (file) =>
@@ -220,6 +222,7 @@ export const MultipleFileInput = withMemo(function MultipleImageInput<OnChangeDa
             <span
                 className={classNames(styles.fileInput, className)}
                 style={style}
+                data-test-id={testId}
             >
                 <Flex horizontal={true}>
                     {!!label && (
@@ -248,13 +251,15 @@ export const MultipleFileInput = withMemo(function MultipleImageInput<OnChangeDa
                             >
                                 {renderFile(file)}
                                 {showDeleteButton &&
-                                    <Clickable className={styles.previewRemove} onClick={removeFile} onClickData={index}>
+                                    <Clickable className={styles.previewRemove} onClick={removeFile}
+                                               onClickData={index}>
                                         <Icon icon={faTimesCircle}/>
                                     </Clickable>}
                             </Clickable>
                         </Grow>;
                     })}
-                    <Grow className={classNames(styles.addFile, {[styles.hidden]: value.length >= maxFiles})} center={true}>
+                    <Grow className={classNames(styles.addFile, {[styles.hidden]: value.length >= maxFiles})}
+                          center={true}>
                         <Clickable
                             className={styles.addFileButton}
                             onDrop={onDrop}

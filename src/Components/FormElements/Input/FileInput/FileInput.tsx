@@ -1,25 +1,24 @@
 import * as React from 'react';
-import {RbmComponentProps} from '../../../RbmComponentProps';
-import {Override} from '../../../../TypeHelpers';
-import {useCallback, useMemo} from 'react';
-import {Listener, useListenerWithExtractedProps} from '../../../Hooks/useListener';
-
+import { RbmComponentProps } from '../../../RbmComponentProps';
+import { Override } from '../../../../TypeHelpers';
+import { useCallback, useMemo } from 'react';
+import { Listener, useListenerWithExtractedProps } from '../../../Hooks/useListener';
 import styles from './fileInput.scss';
-import {withMemo} from '../../../../helper/withMemo';
-import {FileType} from "./FileType";
-import {MultipleFileInput, MultipleFileInputProps} from "./MultipleFileInput";
+import { withMemo } from '../../../../helper/withMemo';
+import { FileType } from "./FileType";
+import { MultipleFileInput, MultipleFileInputProps } from "./MultipleFileInput";
 
 
 export type FileInputProps<OnChangeFileData> = RbmComponentProps<
     Override<
-        Omit<MultipleFileInputProps<unknown>, "onChangeFiles" | "maxFiles" | "onChangeFilesData" | "mimeTypes"|"showDeleteButton">, {
+        Omit<MultipleFileInputProps<unknown>, "onChangeFiles" | "maxFiles" | "onChangeFilesData" | "mimeTypes" | "showDeleteButton">, {
         value?: FileType,
         mimeType?: string,
         required?: boolean,
+        "data-test-id"?: string;
     } & Listener<'onChangeFile', OnChangeFileData, FileType | undefined>>
 >;
 
-// TODO use MultipleFileInput internal
 export const FileInput = withMemo(function FileInput<OnChangeData>({
                                                                        value,
                                                                        mimeType,

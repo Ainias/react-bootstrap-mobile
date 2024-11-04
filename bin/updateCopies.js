@@ -19,7 +19,7 @@ let pathsToProjects = [
     "/Users/sguenter/Projekte/Privat/react-windows",
     "/Users/sguenter/Projekte/Privat/cordova-sites",
     "/Users/sguenter/Projekte/Privat/libraries",
-    "/Users/sguenter/Projekte/Privat/express-app"
+    "/Users/sguenter/Projekte/Privat/wordRotator"
 
 ];
 

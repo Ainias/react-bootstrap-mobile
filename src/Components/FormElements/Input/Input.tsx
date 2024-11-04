@@ -19,6 +19,7 @@ import { useOnChangeDone } from '../hooks/useOnChangeDone';
 import { InlineBlock } from "../../Layout/InlineBlock";
 import { Text } from "../../Text/Text";
 import { useSendFormContext } from "../Controller/SendFormContext";
+import { useDebounced } from "../../Hooks/useDebounced";
 
 export type InputProps<OnChangeData, OnBlurData, OnChangeDoneData> = RbmComponentProps<
     Override<
@@ -119,10 +120,12 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
             otherPropsWithoutOnchange
         );
 
-        const [onChangeDone, otherPropsWithoutData] = useListenerWithExtractedProps<'onChangeDone', OnChangeDoneData>(
+        const [onChangeDoneWithoutDeboune, otherPropsWithoutData] = useListenerWithExtractedProps<'onChangeDone', OnChangeDoneData>(
             'onChangeDone',
             otherPropsWithoutBlur
         );
+        const onChangeDone = useDebounced(onChangeDoneWithoutDeboune, [onChangeDoneWithoutDeboune]);
+
 
         const realOnKeyDown = useCallback(
             (e: KeyboardEvent<HTMLInputElement>) => {
@@ -156,7 +159,7 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
                     }
                 }
             },
-            [onKeyDown, onChange, otherProps]
+            [onKeyDown, onEnter, otherProps.type, otherProps.step, otherProps.max, otherProps.min, onChange]
         );
 
         // Effects
