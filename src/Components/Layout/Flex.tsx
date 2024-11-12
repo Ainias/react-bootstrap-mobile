@@ -37,6 +37,7 @@ function Flex<AsType extends keyof JSX.IntrinsicElements = 'div'>(
             className={classNames(className, styles.flex, {
                 [styles.horizontal]: horizontal,
                 [styles.grow]: grow,
+                [styles.weight1]: grow,
             })}
             as={as as AsType}
             ref={ref}

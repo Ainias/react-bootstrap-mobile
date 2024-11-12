@@ -1,5 +1,4 @@
 
-
 :root {
   --flavor-basic: #000000;
   --flavor-constructive: #15803D;
@@ -12,6 +11,10 @@
 
   --text-error: var(--flavor-destructive);
 
+  --top-bar-button: #0d3efd;
+  --top-bar-button-disabled: #6c757d;
+
+  --link-color: #0d6efd;
 }
 
 .#{$material} {

@@ -315,7 +315,7 @@ function Clickable<
     };
     if (typeof href === 'string') {
         return (
-            <a {...props} href={href} ref={refSetter as ForwardedRef<HTMLAnchorElement>}>
+            <a {...props} className={classNames(styles.link, props.className)} href={href} ref={refSetter as ForwardedRef<HTMLAnchorElement>}>
                 {children}
             </a>
         );

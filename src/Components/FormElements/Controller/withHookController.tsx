@@ -41,6 +41,7 @@ export function withHookController<C extends ComponentType<any>, OnChangeProp ex
                 {...field}
                 {...onChangeProps}
                 value={field.value ?? emptyValue}
+                checked={field.value ?? emptyValue}
                 ref={composedRef}
                 error={errorMessage}
             >

@@ -18,6 +18,7 @@ import { Inline } from '../Layout/Inline';
 import { View } from '../Layout/View';
 
 export type TopBarActionButtonType = {
+    order?: number;
     title: string;
     icon?: IconSource;
     action: () => void;
@@ -45,11 +46,11 @@ function getButtonComponents(buttons: TopBarButtonType[]) {
         const key = button.key ?? String(index);
         if ('component' in button) {
             const Component = button.component;
-            return <Component {...button} key={key} onClick={button.action} />;
+            return <Component {...button} key={key} onClick={button.action}/>;
         }
         let child: string | ReactElement | undefined = button.title;
         if (button.icon) {
-            child = <Icon icon={button.icon} />;
+            child = <Icon icon={button.icon}/>;
         }
         return (
             <TopBarButton key={key} onClick={button.action} disabled={button.disabled} __allowChildren="all">
@@ -60,15 +61,15 @@ function getButtonComponents(buttons: TopBarButtonType[]) {
 }
 
 function TopBar({
-    title = '',
-    rightButtons = [],
-    leftButtons = [],
-    hiddenButtons = [],
-    className,
-    transparent = false,
-    drawBehind = false,
-    ...rbmProps
-}: TopBarProps) {
+                    title = '',
+                    rightButtons: unsortedRightButtons = [],
+                    leftButtons: unsortedLeftButtons = [],
+                    hiddenButtons: unsortedHiddenButtons = [],
+                    className,
+                    transparent = false,
+                    drawBehind = false,
+                    ...rbmProps
+                }: TopBarProps) {
     const [isHiddenMenuOpen, setIsHiddenMenuOpen] = useState(false);
 
     if (isHiddenMenuOpen) {
@@ -76,6 +77,9 @@ function TopBar({
     }
 
     const actionSheetRef = useRef<React.ElementRef<typeof ActionSheet>>(null);
+    let rightButtons = useMemo(() => unsortedRightButtons.sort((a, b) => (a.order ?? 0) - (b.order ?? 0)), [unsortedRightButtons]);
+    const leftButtons = useMemo(() => unsortedLeftButtons.sort((a, b) => (a.order ?? 0) - (b.order ?? 0)), [unsortedLeftButtons]);
+    let hiddenButtons = useMemo(() => unsortedHiddenButtons.sort((a, b) => (a.order ?? 0) - (b.order ?? 0)), [unsortedHiddenButtons]);
 
     const toggleHiddenMenu = useCallback(() => {
         setIsHiddenMenuOpen((isOpen) => {
@@ -121,7 +125,7 @@ function TopBar({
 
     const rightButtonComponents = getButtonComponents(rightButtons);
     const leftButtonComponents = getButtonComponents(leftButtons);
-    const hiddenButtonComponents = getButtonComponents(hiddenButtons.map(({ icon: _, ...button }) => button));
+    const hiddenButtonComponents = getButtonComponents(hiddenButtons.map(({icon: _, ...button}) => button));
 
     const actions: ActionSheetAction<any>[] = useMemo(
         () =>
@@ -157,7 +161,7 @@ function TopBar({
                 </Flex>
                 {hiddenButtons.length > 0 && isHiddenMenuOpen ? (
                     <Inline className={styles.hiddenContainer}>
-                        <View aria-hidden={true} className={styles.hiddenCloseCurtain} onClick={toggleHiddenMenu} />
+                        <View aria-hidden={true} className={styles.hiddenCloseCurtain} onClick={toggleHiddenMenu}/>
                         <View className={styles.hiddenMenu}>{hiddenButtonComponents}</View>
                     </Inline>
                 ) : null}

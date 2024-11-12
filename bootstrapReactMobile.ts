@@ -25,6 +25,7 @@ export * from './src/Components/FormElements/Controller/MultipleFileInputControl
 export * from './src/Components/FormElements/Controller/PasswordInputController';
 export * from './src/Components/FormElements/Controller/SelectController';
 export * from './src/Components/FormElements/Controller/SendFormContext';
+export * from './src/Components/FormElements/Controller/SwitchController';
 export * from './src/Components/FormElements/Controller/TextareaController';
 export * from './src/Components/FormElements/Controller/withHookController';
 export * from './src/Components/FormElements/Input/FileInput/FileInput';
@@ -45,6 +46,7 @@ export * from './src/Components/Hooks/useClientLayoutEffect';
 export * from './src/Components/Hooks/useComposedRef';
 export * from './src/Components/Hooks/useDebounced';
 export * from './src/Components/Hooks/useDelayed';
+export * from './src/Components/Hooks/useDelayedState';
 export * from './src/Components/Hooks/useInViewport';
 export * from './src/Components/Hooks/useKeyListener';
 export * from './src/Components/Hooks/useListener';

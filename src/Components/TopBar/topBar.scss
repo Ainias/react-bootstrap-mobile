@@ -30,12 +30,12 @@
 
     display: block;
     padding: 0.5rem 1rem;
-    color: #0d3efd; // TODO change color
+    color: var(--top-bar-button, #0d3efd);
     text-decoration: none;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 
     &.disabled {
-      color: #6c757d; // TODO change color
+      color: var(--top-bar-button-disabled, #6c757d);
       pointer-events: none;
       cursor: default;
     }

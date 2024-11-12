@@ -18,7 +18,7 @@ $containerBreakpoints: $grid-breakpoints;
 @mixin printClasses {
   @media print {
     @for $i from 1 through $columns {
-      .item-print-#{$i} {
+      > .item-print-#{$i} {
         grid-column: auto / span $i;
       }
     }
@@ -26,14 +26,14 @@ $containerBreakpoints: $grid-breakpoints;
     // Start with `1` because `0` is and invalid value.
     // Ends with `$columns - 1` because offsetting by the width of an entire row isn't possible.
     @for $i from 1 through ($columns - 1) {
-      .start-print-#{$i} {
+      > .start-print-#{$i} {
         grid-column-start: $i;
       }
     }
 
     // Add classes for reordering
     @for $i from -10 through 10 {
-      .order-print-#{$i} {
+      > .order-print-#{$i} {
         order: $i;
       }
     }
@@ -42,7 +42,7 @@ $containerBreakpoints: $grid-breakpoints;
 
 @mixin contentMin($breakpointName) {
   @for $i from 1 through $columns {
-    .item-#{$breakpointName}-#{$i} {
+    > .item-#{$breakpointName}-#{$i} {
       grid-column: auto / span $i;
     }
   }
@@ -50,7 +50,7 @@ $containerBreakpoints: $grid-breakpoints;
   // Start with `1` because `0` is and invalid value.
   // Ends with `$columns - 1` because offsetting by the width of an entire row isn't possible.
   @for $i from 1 through ($columns - 1) {
-    .start-#{$breakpointName}-#{$i} {
+    > .start-#{$breakpointName}-#{$i} {
       grid-column-start: $i;
     }
   }
@@ -58,7 +58,7 @@ $containerBreakpoints: $grid-breakpoints;
 
 @mixin contentOnly($breakpointName) {
   @for $i from -10 through 10 {
-    .order-#{$breakpointName}-#{$i} {
+    > .order-#{$breakpointName}-#{$i} {
       order: $i;
     }
   }
@@ -110,7 +110,7 @@ $containerBreakpoints: $grid-breakpoints;
     @each $breakpoint in map-keys($breakpoints) {
       @include media-breakpoint-up($breakpoint, $breakpoints) {
         @for $i from 1 through $columns {
-          .item-#{$breakpoint}-#{$i} {
+          > .item-#{$breakpoint}-#{$i} {
             grid-column: auto / span $i;
           }
         }
@@ -118,7 +118,7 @@ $containerBreakpoints: $grid-breakpoints;
         // Start with `1` because `0` is and invalid value.
         // Ends with `$columns - 1` because offsetting by the width of an entire row isn't possible.
         @for $i from 1 through ($columns - 1) {
-          .start-#{$breakpoint}-#{$i} {
+          > .start-#{$breakpoint}-#{$i} {
             grid-column-start: $i;
           }
         }
@@ -127,7 +127,7 @@ $containerBreakpoints: $grid-breakpoints;
       // Add classes for reordering
       @include media-breakpoint-only($breakpoint, $breakpoints) {
         @for $i from -10 through 10 {
-          .order-#{$breakpoint}-#{$i} {
+          > .order-#{$breakpoint}-#{$i} {
             order: $i;
           }
         }
