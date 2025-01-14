@@ -14,7 +14,7 @@ let pathsToProjects = [
     "/Users/sguenter/Projekte/Privat/dnd",
     "/Users/sguenter/Projekte/Privat/TestCapacitorElectron",
     "/Users/sguenter/Projekte/Privat/users-next",
-    "/Users/sguenter/Projekte/Privat/dndSave",
+    "/Users/sguenter/Projekte/Privat/dmscreen",
     "/Users/sguenter/Projekte/Privat/bat",
     "/Users/sguenter/Projekte/Privat/react-windows",
     "/Users/sguenter/Projekte/Privat/cordova-sites",

@@ -34,7 +34,7 @@
     font-size: 1rem;
 
     @include design($material) {
-      color: #212121;
+      color: var(--input-text-color, #212121);
       background-image: linear-gradient(to top, transparent 1px, #afafaf 1px);
       background-size: 100% 2px;
       background-repeat: no-repeat;
@@ -53,7 +53,7 @@
     }
 
     @include design($flat) {
-      color: #1f1f21;
+      color: var(--input-text-color, #1f1f21);
       &, &:focus {
         border-bottom: 1px solid var(--border-light);
       }

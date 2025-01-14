@@ -51,7 +51,7 @@ $marginCard: 8px;
 
     .content {
       color: #000000;
-      color: rgba(0, 0, 0, 0.54);
+      color: var(--card-text-color, rgba(0, 0, 0, 0.54));
     }
 
     .title {
@@ -65,7 +65,7 @@ $marginCard: 8px;
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 12%);
 
     .content {
-      color: #030303;
+      color: var(--card-text-color, #030303);
     }
 
     .title {
