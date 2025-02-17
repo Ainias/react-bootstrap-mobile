@@ -11,15 +11,13 @@ import { RbmComponentProps } from '../../RbmComponentProps';
 import { Override } from '../../../TypeHelpers';
 import { OptionalListener, useListenerWithExtractedProps } from '../../Hooks/useListener';
 import { withForwardRef } from '../../../helper/withForwardRef';
-
 import styles from './input.scss';
 import classNames from 'classnames';
 import { useComposedRef } from '../../Hooks/useComposedRef';
 import { useOnChangeDone } from '../hooks/useOnChangeDone';
-import { InlineBlock } from "../../Layout/InlineBlock";
-import { Text } from "../../Text/Text";
 import { useSendFormContext } from "../Controller/SendFormContext";
 import { useDebounced } from "../../Hooks/useDebounced";
+import { FormError } from "../FormError";
 
 export type InputProps<OnChangeData, OnBlurData, OnChangeDoneData> = RbmComponentProps<
     Override<
@@ -196,7 +194,7 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
                     onChange={onChange}
                     onKeyDown={realOnKeyDown}
                 />
-                {error && <InlineBlock className={styles.error}><Text>{error}</Text></InlineBlock>}
+                <FormError error={error}/>
             </label>
         );
     },

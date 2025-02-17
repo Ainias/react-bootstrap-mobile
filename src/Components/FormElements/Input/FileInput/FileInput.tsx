@@ -13,7 +13,7 @@ export type FileInputProps<OnChangeFileData> = RbmComponentProps<
     Override<
         Omit<MultipleFileInputProps<unknown>, "onChangeFiles" | "maxFiles" | "onChangeFilesData" | "mimeTypes" | "showDeleteButton">, {
         value?: FileType,
-        mimeType?: string,
+        mimeType?: string | string[],
         required?: boolean,
         "data-test-id"?: string;
     } & Listener<'onChangeFile', OnChangeFileData, FileType | undefined>>
@@ -30,7 +30,7 @@ export const FileInput = withMemo(function FileInput<OnChangeData>({
     // Refs
 
     // States
-    const mimeTypes = useMemo(() => (mimeType ? [mimeType] : undefined), [mimeType]);
+    const mimeTypes = useMemo(() => (mimeType ? (Array.isArray(mimeType) ? mimeType : [mimeType]) : undefined), [mimeType]);
     const innerValue = useMemo(() => value ? [value] : [], [value]);
 
     // Selectors
@@ -39,6 +39,7 @@ export const FileInput = withMemo(function FileInput<OnChangeData>({
     const [onChangeFile, multipleFileInputProps] = useListenerWithExtractedProps<"onChangeFile", OnChangeData>("onChangeFile", otherProps);
     const onChangeFiles = useCallback((files: FileType[]) => {
         if (!required || files[0]) {
+            console.log("LOG-d onChangeFile", files[0]);
             onChangeFile(files[0]);
         }
     }, [onChangeFile, required]);

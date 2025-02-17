@@ -1,13 +1,13 @@
 import * as React from 'react';
-import {useCallback, useRef, useState, MouseEvent} from 'react';
-import {Color, ColorChangeHandler, ColorResult, SketchPicker} from 'react-color';
-import {OptionalListener, useListener} from '../../Hooks/useListener';
-import {withMemo} from '../../../helper/withMemo';
-
+import { useCallback, useRef, useState, MouseEvent } from 'react';
+import { Color, ColorChangeHandler, ColorResult, SketchPicker } from 'react-color';
+import { OptionalListener, useListener } from '../../Hooks/useListener';
+import { withMemo } from '../../../helper/withMemo';
 import styles from './colorInput.scss';
-import {useSharedSelectedColor} from './sharedSelectedColor';
-import {Menu} from "../../Menu/Menu";
+import { useSharedSelectedColor } from './sharedSelectedColor';
+import { Menu } from "../../Menu/Menu";
 import { useClientLayoutEffect } from "../../Hooks/useClientLayoutEffect";
+import { FormError } from "../FormError";
 
 export type ColorInputProps<OnChangeData> = {
     defaultValue?: string;
@@ -21,6 +21,7 @@ export type ColorInputProps<OnChangeData> = {
     presetColors?: string[];
     sharedColorKey?: string;
     disabled?: boolean
+    error?: string;
 } & OptionalListener<'onChange', OnChangeData>;
 
 function convertToHex(color: { r: number; g: number; b: number; a?: number }, disableAlpha?: boolean) {
@@ -45,8 +46,9 @@ function ColorInput<OnChangeData>({
                                       onClose,
                                       disableAlpha,
                                       presetColors,
+                                      error,
                                       sharedColorKey = "default",
-    disabled,
+                                      disabled,
                                       ...otherProps
                                   }: ColorInputProps<OnChangeData>) {
     // Variables
@@ -101,7 +103,7 @@ function ColorInput<OnChangeData>({
 
     const openElement = useCallback(
         (e: MouseEvent) => {
-            if (disabled){
+            if (disabled) {
                 return;
             }
 
@@ -133,6 +135,7 @@ function ColorInput<OnChangeData>({
 
     // Render Functions
     return (
+        <>
         <span className={styles.colorInput}>
             <Menu x={position.x} y={position.y} isOpen={realIsOpen} onClose={onMenuClose}>
                         <SketchPicker
@@ -148,9 +151,11 @@ function ColorInput<OnChangeData>({
             </span>
             <span onClick={openElement} style={{backgroundColor: colVal}} className={styles.preview}/>
         </span>
+            <FormError error={error}/>
+        </>
     );
 }
 
 // Need ColorInputMemo for autocompletion of phpstorm
 const ColorInputMemo = withMemo(ColorInput, styles);
-export {ColorInputMemo as ColorInput};
+export { ColorInputMemo as ColorInput };

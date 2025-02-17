@@ -17,6 +17,7 @@ import { Clickable } from '../../../Clickable/Clickable';
 import { Inline } from '../../../Layout/Inline';
 import { FileType } from "./FileType";
 import { InlineBlock } from "../../../Layout/InlineBlock";
+import { FormError } from "../../FormError";
 
 
 export type MultipleFileInputProps<OnChangeFilesData> = RbmComponentProps<
@@ -63,7 +64,6 @@ export const MultipleFileInput = withMemo(function MultipleImageInput<OnChangeDa
         // Selectors
 
         // Callbacks
-
 
         const checkMimeType = useCallback(
             (fileType: string) => {
@@ -116,8 +116,8 @@ export const MultipleFileInput = withMemo(function MultipleImageInput<OnChangeDa
                 const newUrls = await getBase64(newFiles);
                 const newValue = newFiles.map((file, fileIndex) => ({
                     name: file.name,
-                    data: newUrls[fileIndex],
-                    mimeType: file.type,
+                    src: newUrls[fileIndex],
+                    type: file.type,
                     blob: file,
                 }));
 
@@ -200,13 +200,13 @@ export const MultipleFileInput = withMemo(function MultipleImageInput<OnChangeDa
 
         // Render Functions
         const renderFile = (file: FileType) => {
-            if (file.mimeType.startsWith('image/')) {
+            if (file.type.startsWith('image/')) {
                 return (
                     <Image
-                        key={file.data}
-                        src={file.data}
+                        key={file.src}
+                        src={file.src}
                         alt={file.name}
-                        className={classNames(styles.previewImage, file.data)}
+                        className={classNames(styles.previewImage)}
                     />
                 );
             }
@@ -217,6 +217,10 @@ export const MultipleFileInput = withMemo(function MultipleImageInput<OnChangeDa
                 </Block>
             );
         };
+
+        if (error){
+            console.log("LOG-d error inside MultipleFileInput:", error);
+        }
 
         return (
             <span
@@ -240,7 +244,7 @@ export const MultipleFileInput = withMemo(function MultipleImageInput<OnChangeDa
                 </Flex>
                 <Flex horizontal={true} className={styles.previewContainer}>
                     {value?.map((file, index) => {
-                        return <Grow className={styles.preview} center={true} key={file.data}>
+                        return <Grow className={styles.preview} center={true} key={file.src}>
                             <Clickable
                                 onDrop={onDrop}
                                 onDragOver={onDragOver}
@@ -282,7 +286,7 @@ export const MultipleFileInput = withMemo(function MultipleImageInput<OnChangeDa
                         </Clickable>
                     </Grow>
                 </Flex>
-                {error && <InlineBlock className={styles.error}><Text>{error}</Text></InlineBlock>}
+                <FormError error={error}/>
             </span>
         );
     },

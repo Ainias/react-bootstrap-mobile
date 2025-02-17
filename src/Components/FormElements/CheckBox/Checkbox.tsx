@@ -6,6 +6,7 @@ import { withMemo } from '../../../helper/withMemo';
 import classNames from 'classnames';
 import { Override } from '@ainias42/js-helper';
 import { OptionalListener, useListenerWithExtractedProps } from '../../Hooks/useListener';
+import { FormError } from "../FormError";
 
 export type CheckboxProps<OnChangeData, OnChangeCheckedData> = RbmComponentProps<
     Override<
@@ -14,6 +15,7 @@ export type CheckboxProps<OnChangeData, OnChangeCheckedData> = RbmComponentProps
             label?: string;
             children?: string;
             isLabelBeforeCheckbox?: boolean;
+            error?: string;
         } & OptionalListener<'onChange', OnChangeData> &
             OptionalListener<'onChangeChecked', OnChangeCheckedData, boolean>
     >
@@ -25,6 +27,7 @@ function Checkbox<OnChangeData, OnChangeCheckedData>({
     isLabelBeforeCheckbox = false,
     id,
     className,
+    error,
     style,
     ...props
 }: CheckboxProps<OnChangeData, OnChangeCheckedData>) {
@@ -80,6 +83,7 @@ function Checkbox<OnChangeData, OnChangeCheckedData>({
                 />
                 <span className={styles.checkmark} />
                 <span className={styles.label}>{label}</span>
+                <FormError error={error} />
             </label>
         </span>
     );

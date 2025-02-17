@@ -25,20 +25,22 @@ export function withHookController<C extends ComponentType<any>, OnChangeProp ex
 
         const internalOnChange = useCallback(
             (arg: any) => {
-                clearErrors(name);
-                field.onChange(arg);
+                    clearErrors(name);
+                    field.onChange(arg);
             },
             [clearErrors, field, name]
         );
         const onChangeProps = {
             [onChangeProp]: internalOnChange
-        }
+        };
 
         return (
             // @ts-expect-error Because of the prop spreading, typescript is really confused here
             <Comp
                 {...otherProps}
-                {...field}
+                name={field.name}
+                onBlur={field.onBlur}
+                disabled={field.disabled}
                 {...onChangeProps}
                 value={field.value ?? emptyValue}
                 checked={field.value ?? emptyValue}

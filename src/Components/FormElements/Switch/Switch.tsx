@@ -6,7 +6,8 @@ import classNames from 'classnames';
 
 import styles from './switch.scss';
 import { withMemo } from '../../../helper/withMemo';
-import {OptionalListener, useListenerWithExtractedProps} from "../../Hooks/useListener";
+import { OptionalListener, useListenerWithExtractedProps } from "../../Hooks/useListener";
+import { FormError } from "../FormError";
 
 export type SwitchProps<OnChangeCheckedData> = RbmComponentProps<
     Override<
@@ -17,67 +18,70 @@ export type SwitchProps<OnChangeCheckedData> = RbmComponentProps<
             children?: string;
             isLabelBeforeSwitch?: boolean;
             isDual?: boolean;
+            error?: string;
         } & OptionalListener<"onChangeChecked", OnChangeCheckedData, boolean>
     >
 >;
 
 export const Switch = withMemo(function Switch<OnChangeCheckedData>({
-    children,
-    label = '',
-    preLabel = '',
-    isLabelBeforeSwitch = false,
-    isDual = undefined,
-    id,
-    className,
-    style,
-    onChange,
-    ...props
-}: SwitchProps<OnChangeCheckedData>) {
-    // Variables
+                                                                        children,
+                                                                        label = '',
+                                                                        preLabel = '',
+                                                                        isLabelBeforeSwitch = false,
+                                                                        isDual = undefined,
+                                                                        id,
+                                                                        className,
+                                                                        style,
+                                                                        error,
+                                                                        onChange,
+                                                                        ...props
+                                                                    }: SwitchProps<OnChangeCheckedData>) {
+        // Variables
 
-    // States
+        // States
 
-    // Refs
+        // Refs
 
-    // Callbacks
-    const [onChangeChecked, otherProps] = useListenerWithExtractedProps("onChangeChecked", props);
+        // Callbacks
+        const [onChangeChecked, otherProps] = useListenerWithExtractedProps("onChangeChecked", props);
 
-    const realOnChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
-        (e) => {
-            onChange?.(e);
-            onChangeChecked(e.target.checked);
-        },
-        [onChange, onChangeChecked]
-    );
+        const realOnChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
+            (e) => {
+                onChange?.(e);
+                onChangeChecked(e.target.checked);
+            },
+            [onChange, onChangeChecked]
+        );
 
-    // Effects
+        // Effects
 
-    // Other
+        // Other
 
-    // Render Functions
+        // Render Functions
 
-    if (React.Children.count(children) === 1 && typeof children === 'string') {
-        label = children;
-    }
+        if (React.Children.count(children) === 1 && typeof children === 'string') {
+            label = children;
+        }
 
-    if (isLabelBeforeSwitch) {
-        [label, preLabel] = [preLabel, label];
-    }
+        if (isLabelBeforeSwitch) {
+            [label, preLabel] = [preLabel, label];
+        }
 
-    if (label && preLabel && isDual === undefined) {
-        isDual = true;
-    }
-    return (
-        <span className={classNames(styles.switch, { [styles.dual]: isDual }, className)} style={style}>
+        if (label && preLabel && isDual === undefined) {
+            isDual = true;
+        }
+        return (
+            <span className={classNames(styles.switch, {[styles.dual]: isDual}, className)} style={style}>
             <label htmlFor={id} key={id}>
                 <span className={styles.label}>{preLabel}</span>
-                <input {...otherProps} type="checkbox" id={id} onChange={realOnChange} />
+                <input {...otherProps} type="checkbox" id={id} onChange={realOnChange}/>
                 <div className={styles.toggle}>
-                    <span className={styles.handle} />
+                    <span className={styles.handle}/>
                 </div>
                 <span className={styles.label}>{label}</span>
+                <FormError error={error}/>
             </label>
         </span>
-    );
-},
-styles);
+        );
+    },
+    styles);

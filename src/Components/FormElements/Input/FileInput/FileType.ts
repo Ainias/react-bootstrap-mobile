@@ -1,1 +1,1 @@
-export type FileType = { name: string; data: string; mimeType: string; uploaded?: boolean; blob?: Blob };
+export type FileType = { name: string; src: string; type: string; uploaded?: boolean; blob?: Blob };
