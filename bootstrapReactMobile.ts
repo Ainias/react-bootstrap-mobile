@@ -57,6 +57,7 @@ export * from './src/Components/Hooks/useListener';
 export * from './src/Components/Hooks/useMousePosition';
 export * from './src/Components/Hooks/useOnMount';
 export * from './src/Components/Hooks/useOnce';
+export * from './src/Components/Hooks/useRerender';
 export * from './src/Components/Hooks/useWindowDimensions';
 export * from './src/Components/Icon/DoubleIcon';
 export * from './src/Components/Icon/Icon';
