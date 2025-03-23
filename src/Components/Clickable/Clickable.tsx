@@ -48,6 +48,7 @@ export type ClickableProps<
         id?: string;
         tabIndex?: number;
         draggable?: boolean
+        title?: string;
     } & OnClickListener<OnClickData> &
     OnPointerDownListener<OnMouseDownData> &
     OnPointerMoveListener<OnMouseMoveData> &
@@ -88,6 +89,7 @@ function Clickable<
         useReactOnMouseLeave = false,
         tabIndex,
         draggable,
+        title,
         ...clickData
     }: ClickableProps<OnClickData, OnPointerDownData, OnPointerMoveData, OnPointerUpData, OnClickCaptureData, OnDropData,OnDragStartData, OnDragOverData,OnMouseEnterData, OnMouseLeaveData, OnDoubleClickData, HrefType>,
     ref: ForwardedRef<HrefType extends string ? HTMLAnchorElement : HTMLSpanElement>
@@ -311,7 +313,8 @@ function Clickable<
         onDoubleClick: realOnDoubleClick,
         tabIndex: interactable ? 0 : tabIndex,
         draggable,
-        onDragStart: realOnDragStartListener
+        onDragStart: realOnDragStartListener,
+        title,
     };
     if (typeof href === 'string') {
         return (
