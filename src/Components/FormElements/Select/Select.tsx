@@ -10,9 +10,9 @@ import classNames from 'classnames';
 import { InlineBlock } from "../../Layout/InlineBlock";
 import { Text } from "../../Text/Text";
 
-export type SelectOption = {
+export type SelectOption<ValueType=string> = {
     label: string;
-    value: string;
+    value: ValueType;
     key?: string;
 };
 
@@ -21,12 +21,18 @@ export type SelectProps<OnChangeData> = RbmComponentProps<
         SelectHTMLAttributes<HTMLSelectElement>,
         {
             label?: string;
-            options: SelectOption[];
-            onChangeValue?: (newValue: string) => void;
             inline?: boolean;
             small?: boolean;
             error?: string;
-        } & OptionalListener<'onChange', OnChangeData>
+        } & ({
+            options: SelectOption[];
+            onChangeValue?: (newValue: string) => void;
+            useNumericValues?: false;
+    }|{
+            options: SelectOption<number>[];
+        onChangeValue?: (newValue: number) => void;
+        useNumericValues: true;
+    })& OptionalListener<'onChange', OnChangeData>
     >
 >;
 
@@ -39,6 +45,7 @@ export const Select = withMemo(function Select<OnChangeData>({
     inline = false,
     small = false,
     error,
+    useNumericValues,
     ...otherProps
 }: SelectProps<OnChangeData>) {
     // Variables
@@ -53,7 +60,11 @@ export const Select = withMemo(function Select<OnChangeData>({
     const [onChangeWithData, propsWithoutData] = useListenerWithExtractedProps<'onChange', OnChangeData>('onChange', otherProps);
     const onChange = useCallback<ChangeEventHandler<HTMLSelectElement>>(
         (e) => {
-            onChangeValue?.(e.target.value);
+            if (useNumericValues) {
+                onChangeValue?.(Number(e.target.value));
+            } else {
+                onChangeValue?.(e.target.value);
+            }
             onChangeWithData(e);
         },
         [onChangeWithData, onChangeValue]

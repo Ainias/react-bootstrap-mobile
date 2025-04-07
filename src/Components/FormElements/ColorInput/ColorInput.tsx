@@ -8,6 +8,7 @@ import { useSharedSelectedColor } from './sharedSelectedColor';
 import { Menu } from "../../Menu/Menu";
 import { useClientLayoutEffect } from "../../Hooks/useClientLayoutEffect";
 import { FormError } from "../FormError";
+import classNames from "classnames";
 
 export type ColorInputProps<OnChangeData> = {
     defaultValue?: string;
@@ -22,6 +23,7 @@ export type ColorInputProps<OnChangeData> = {
     sharedColorKey?: string;
     disabled?: boolean
     error?: string;
+    className?: string;
 } & OptionalListener<'onChange', OnChangeData>;
 
 function convertToHex(color: { r: number; g: number; b: number; a?: number }, disableAlpha?: boolean) {
@@ -49,6 +51,7 @@ function ColorInput<OnChangeData>({
                                       error,
                                       sharedColorKey = "default",
                                       disabled,
+    className,
                                       ...otherProps
                                   }: ColorInputProps<OnChangeData>) {
     // Variables
@@ -136,7 +139,7 @@ function ColorInput<OnChangeData>({
     // Render Functions
     return (
         <>
-        <span className={styles.colorInput}>
+        <span className={classNames(styles.colorInput, className)}>
             <Menu x={position.x} y={position.y} isOpen={realIsOpen} onClose={onMenuClose}>
                         <SketchPicker
                             color={colVal}
