@@ -3,6 +3,7 @@ const webpack = require('webpack');
 // const PrettierPlugin = require('prettier-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const getPackageJson = require('./scripts/getPackageJson');
+const CssLayeringPlugin = require('css-layering-webpack-plugin');
 
 const { version, name, license, repository, author } = getPackageJson(
     'version',
@@ -79,6 +80,12 @@ module.exports = (env) => {
             //     filename: 'css/index.css',
             // }),
             new webpack.BannerPlugin(banner),
+            new CssLayeringPlugin({
+                layers: [
+                    { path: "**/src/**/*.scss", name: "rbm" },
+                ],
+                injectOrderAs: "none"
+            }),
         ],
         resolve: {
             extensions: ['.ts', '.tsx', '.js', '.json'],
