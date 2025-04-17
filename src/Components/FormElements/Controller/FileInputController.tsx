@@ -16,7 +16,7 @@ export const FileInputController = withMemo(function FileInputController<Values 
     const {field, fieldState} = useController({name});
     const {errors} = useFormState();
 
-    const {clearErrors} = useFormContext();
+    const {clearErrors, setError} = useFormContext();
     const errorMessage = fieldState.error?.message ?? errors[`${name}.src`]?.message as string|undefined ?? errors[`${name}.name`]?.message as string|undefined ?? errors[`${name}.type`]?.message as string|undefined;
 
     const internalOnChange = useCallback(
@@ -30,11 +30,18 @@ export const FileInputController = withMemo(function FileInputController<Values 
         [clearErrors, field, name]
     );
 
+    const setErrorMessage = useCallback((error: string) => {
+        setError(name, {
+            message: error,
+        })
+    }, []);
+
     return (
         <FileInput
             {...otherProps}
             {...field}
             onChangeFile={internalOnChange}
+            onError={setErrorMessage}
             value={field.value}
             error={errorMessage}
         />

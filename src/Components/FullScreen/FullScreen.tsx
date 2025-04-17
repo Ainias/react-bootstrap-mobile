@@ -13,13 +13,13 @@ export type FullScreenProps<AsType extends keyof JSX.IntrinsicElements> = RbmCom
 >;
 
 export const FullScreen = withMemo(function FullScreen<AsTag extends keyof JSX.IntrinsicElements = 'span'>({
-    children,
-    as,
-    fullscreenKey,
-    onEnterFullscreen,
-    onLeaveFullscreen,
-    ...otherProps
-}: FullScreenProps<AsTag>) {
+                                                                                                               children,
+                                                                                                               as,
+                                                                                                               fullscreenKey,
+                                                                                                               onEnterFullscreen,
+                                                                                                               onLeaveFullscreen,
+                                                                                                               ...otherProps
+                                                                                                           }: FullScreenProps<AsTag>) {
     // Variables
 
     // Refs
@@ -34,7 +34,8 @@ export const FullScreen = withMemo(function FullScreen<AsTag extends keyof JSX.I
     const toggleFullscreen = useCallback(() => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        if (document.fullscreenElement || document.webkitFullscreenElement) {
+        const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement;
+        if (fullscreenElement === containerRef.current) {
             if ('exitFullscreen' in document) {
                 document.exitFullscreen();
             } else {
@@ -42,9 +43,9 @@ export const FullScreen = withMemo(function FullScreen<AsTag extends keyof JSX.I
                 // @ts-ignore
                 document.webkitCancelFullScreen();
             }
-            onLeaveFullscreen?.();
-            return;
+                return;
         }
+
         if ('webkitRequestFullscreen' in document.body) {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
@@ -52,7 +53,6 @@ export const FullScreen = withMemo(function FullScreen<AsTag extends keyof JSX.I
         } else {
             containerRef.current?.requestFullscreen();
         }
-        onEnterFullscreen?.();
     }, [onEnterFullscreen, onLeaveFullscreen]);
 
     // Effects
@@ -69,11 +69,37 @@ export const FullScreen = withMemo(function FullScreen<AsTag extends keyof JSX.I
         return () => window?.removeEventListener('keyup', listener);
     }, [fullscreenKey, toggleFullscreen, window]);
 
+    useEffect(() => {
+        if (!containerRef.current) {
+            return;
+        }
+
+        const container = containerRef.current;
+        const listener = () => {
+            // @ts-ignore
+            const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement;
+            if (fullscreenElement === container) {
+                console.log("LOG-d enter fullscreen")
+                onEnterFullscreen?.();
+            } else {
+                console.log("LOG-d leave fullscreen")
+                onLeaveFullscreen?.();
+            }
+        }
+        container.addEventListener('fullscreenchange', listener);
+        container.addEventListener('webkitfullscreenchange', listener);
+
+        return () => {
+            container.removeEventListener('fullscreenchange', listener);
+            container.removeEventListener('webkitfullscreenchange', listener);
+        }
+    }, [onEnterFullscreen, onLeaveFullscreen]);
+
     // Other
 
     // Render Functions
     const element = as ?? 'span';
-    const props = useMemo(() => ({ ...otherProps, ref: containerRef }), [otherProps]);
+    const props = useMemo(() => ({...otherProps, ref: containerRef}), [otherProps]);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     return React.createElement(element, props, children);
