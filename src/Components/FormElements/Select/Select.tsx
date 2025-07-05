@@ -67,7 +67,7 @@ export const Select = withMemo(function Select<OnChangeData>({
             }
             onChangeWithData(e);
         },
-        [onChangeWithData, onChangeValue]
+        [onChangeWithData, onChangeValue, useNumericValues]
     );
 
     // Effects

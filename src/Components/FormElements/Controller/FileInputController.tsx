@@ -33,8 +33,8 @@ export const FileInputController = withMemo(function FileInputController<Values 
     const setErrorMessage = useCallback((error: string) => {
         setError(name, {
             message: error,
-        })
-    }, []);
+        });
+    }, [name, setError]);
 
     return (
         <FileInput

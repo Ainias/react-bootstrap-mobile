@@ -14,7 +14,7 @@ export type ShowDialog = <
 
 const DialogContext = React.createContext<ShowDialog>(() => {
     console.error("DialogContext not initialized");
-    return Promise.reject("DialogContext not initialized")
+    return Promise.reject(new Error("DialogContext not initialized"));
 });
 export const DialogProvider = DialogContext.Provider;
 

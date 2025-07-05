@@ -14,7 +14,6 @@ versionName=$1
 versionExists="$(git ls-remote $REPOSITORY refs/tags/"$versionName"| tr -d '\n')"
 workingDir=$(pwd);
 
-
 if [ -n "$versionExists" ]; then
 	echo "Version existiert bereits!";
 	exit 1;

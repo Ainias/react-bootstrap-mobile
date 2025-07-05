@@ -15,7 +15,7 @@ export function useRerender(defaultDelay = 0){
                 updateRenderCounter(old => old + 1);
             }, delay);
         }
-    }, [])
+    }, [defaultDelay]);
 
     return [update, renderCounter] as const;
 }

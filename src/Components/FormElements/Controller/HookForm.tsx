@@ -35,7 +35,7 @@ export const HookForm = withMemo(function HookForm<TFieldValues extends FieldVal
 
     return <FormProvider {...methods}>
         <SendFormContext.Provider value={innerOnSend}>
-            <LoadingArea loading={methods.formState.isSubmitting} __allowChildren={"all"}>
+            <LoadingArea loading={methods.formState.isSubmitting} __allowChildren="all">
                 {children}
             </LoadingArea>
         </SendFormContext.Provider>

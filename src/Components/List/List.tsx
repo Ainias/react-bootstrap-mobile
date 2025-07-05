@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { ComponentType, CSSProperties, ForwardedRef, ReactElement, ReactNode, useCallback, useState } from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
-
 import styles from './list.scss';
-import { withMemo } from '../../helper/withMemo';
 import { FixedSizeList, FixedSizeListProps, ListChildComponentProps } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { SizeCalculator, SizeCalculatorProps } from '../SizeCalculator/SizeCalculator';

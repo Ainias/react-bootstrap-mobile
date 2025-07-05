@@ -53,7 +53,7 @@ export const FullScreen = withMemo(function FullScreen<AsTag extends keyof JSX.I
         } else {
             containerRef.current?.requestFullscreen();
         }
-    }, [onEnterFullscreen, onLeaveFullscreen]);
+    }, []);
 
     // Effects
     useEffect(() => {
@@ -71,28 +71,26 @@ export const FullScreen = withMemo(function FullScreen<AsTag extends keyof JSX.I
 
     useEffect(() => {
         if (!containerRef.current) {
-            return;
+            return undefined;
         }
 
         const container = containerRef.current;
         const listener = () => {
-            // @ts-ignore
+            // @ts-expect-error the typing is not completely correct
             const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement;
             if (fullscreenElement === container) {
-                console.log("LOG-d enter fullscreen")
                 onEnterFullscreen?.();
             } else {
-                console.log("LOG-d leave fullscreen")
                 onLeaveFullscreen?.();
             }
-        }
+        };
         container.addEventListener('fullscreenchange', listener);
         container.addEventListener('webkitfullscreenchange', listener);
 
         return () => {
             container.removeEventListener('fullscreenchange', listener);
             container.removeEventListener('webkitfullscreenchange', listener);
-        }
+        };
     }, [onEnterFullscreen, onLeaveFullscreen]);
 
     // Other

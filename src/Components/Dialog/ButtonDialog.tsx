@@ -4,12 +4,10 @@ import { withMemo } from '../../helper/withMemo';
 import { Block } from '../Layout/Block';
 import { Text, TEXT_SIZE } from '../Text/Text';
 import { Clickable } from '../Clickable/Clickable';
-
 import styles from './buttonDialog.scss';
 import { RbmComponentProps, WithNoChildren } from '../RbmComponentProps';
 import classNames from 'classnames';
 import { Flavor } from "../Flavor";
-import { Size } from "../../Size";
 
 export type ButtonDialogProps = RbmComponentProps<
     {

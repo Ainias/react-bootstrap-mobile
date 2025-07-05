@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { useCallback, useRef, useState, MouseEvent } from 'react';
-import { Color, ColorChangeHandler, ColorResult, SketchPicker } from 'react-color';
+import { useCallback, useRef, useState, MouseEvent, useMemo } from 'react';
+import { ColorResult, Sketch, SwatchPresetColor } from '@uiw/react-color';
 import { OptionalListener, useListener } from '../../Hooks/useListener';
 import { withMemo } from '../../../helper/withMemo';
 import styles from './colorInput.scss';
@@ -16,7 +16,6 @@ export type ColorInputProps<OnChangeData> = {
     label?: string;
     onChangeColor?: (newColor: string) => void;
     onOpen?: (currentColor: string) => void;
-    onChangeColorComplete?: (newColor: string) => void;
     onClose?: (newColor: string) => void;
     disableAlpha?: boolean;
     presetColors?: string[];
@@ -24,26 +23,13 @@ export type ColorInputProps<OnChangeData> = {
     disabled?: boolean
     error?: string;
     className?: string;
-} & OptionalListener<'onChange', OnChangeData>;
-
-function convertToHex(color: { r: number; g: number; b: number; a?: number }, disableAlpha?: boolean) {
-    let newColor = `#${color.r.toString(16).padStart(2, '0')}${color.g.toString(16).padStart(2, '0')}${color.b
-        .toString(16)
-        .padStart(2, '0')}`;
-    if (color.a !== undefined && !disableAlpha) {
-        newColor += Math.round(color.a * 255)
-            .toString(16)
-            .padStart(2, '0');
-    }
-    return newColor;
-}
+} & OptionalListener<'onChange', OnChangeData, ColorResult>;
 
 function ColorInput<OnChangeData>({
                                       defaultValue,
                                       value,
                                       label,
                                       onChangeColor,
-                                      onChangeColorComplete,
                                       onOpen,
                                       onClose,
                                       disableAlpha,
@@ -65,34 +51,34 @@ function ColorInput<OnChangeData>({
     const [isOpen, setIsOpen] = useState(false);
     const [position, setPosition] = useState({x: 0, y: 0});
 
-    const {colors, addColor} = useSharedSelectedColor(sharedColorKey);
+    const {colors, addColor} = useSharedSelectedColor(sharedColorKey, presetColors);
     const realIsOpen = disabled !== true && isOpen;
 
-    const colVal: Color = value ?? color;
+    const colVal = useMemo(() => {
+        const newVal = value ?? color;
+        if (disableAlpha && newVal.length === 9) {
+            return newVal.substring(0, 7);
+        }
+        if (disableAlpha && newVal.length === 5) {
+            return newVal.substring(0,4);
+        }
+        return newVal;
+    }, [value, color, disableAlpha]);
+
     // Selectors
 
     // Callbacks
-    const onChangeWithData = useListener<'onChange', OnChangeData>('onChange', otherProps);
-    const onChange = useCallback<ColorChangeHandler>(
-        (newColor: ColorResult, e) => {
-            const hexColor = convertToHex(newColor.rgb, disableAlpha);
+    const onChangeWithData = useListener<'onChange', OnChangeData, ColorResult>('onChange', otherProps);
+    const onChange = useCallback(
+        (newColor: ColorResult) => {
+            const hexColor = newColor.hexa;
             setColor(hexColor);
             if (onChangeColor) {
                 onChangeColor(hexColor);
             }
-            onChangeWithData(e);
+            onChangeWithData(newColor);
         },
-        [disableAlpha, onChangeColor, onChangeWithData]
-    );
-    const onChangeComplete = useCallback(
-        (newColor: ColorResult) => {
-            const hexColor = convertToHex(newColor.rgb, disableAlpha);
-            setColor(hexColor);
-            if (onChangeColorComplete) {
-                onChangeColorComplete(hexColor);
-            }
-        },
-        [disableAlpha, onChangeColorComplete]
+        [onChangeColor, onChangeWithData]
     );
 
     const onMenuClose = useCallback(
@@ -141,10 +127,9 @@ function ColorInput<OnChangeData>({
         <>
         <span className={classNames(styles.colorInput, className)}>
             <Menu x={position.x} y={position.y} isOpen={realIsOpen} onClose={onMenuClose}>
-                        <SketchPicker
+                        <Sketch
                             color={colVal}
                             onChange={onChange}
-                            onChangeComplete={onChangeComplete}
                             disableAlpha={disableAlpha}
                             presetColors={presetColors ?? colors}
                         />

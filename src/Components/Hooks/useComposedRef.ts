@@ -1,4 +1,4 @@
-import { ForwardedRef, useCallback, useEffect, useRef } from 'react';
+import { ForwardedRef, useCallback } from 'react';
 
 export function useComposedRef<RefVal>(...refs: (ForwardedRef<RefVal> | undefined)[]) {
     return useCallback((val: RefVal | null) => {

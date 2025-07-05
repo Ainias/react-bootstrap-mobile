@@ -25,5 +25,5 @@ export const FormError = withMemo(function FormError({error}: FormErrorProps) {
 		return null;
 	}
 
-	return <Block className={styles.error}><Text>{error}</Text></Block>
+	return <Block className={styles.error}><Text>{error}</Text></Block>;
 }, styles);

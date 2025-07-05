@@ -11,7 +11,7 @@ import {
     useEffect,
     MouseEvent,
     PointerEvent,
-    useRef, DragEventHandler
+    useRef
 } from 'react';
 import {withForwardRef} from '../../helper/withForwardRef';
 import {useComposedRef} from "../Hooks/useComposedRef";

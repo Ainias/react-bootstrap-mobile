@@ -40,7 +40,7 @@ export const DialogBackground = withMemo(function DialogBackground({
         <Block __allowChildren="all" className={classNames(styles.dialogBackground, className)} style={style}>
             {(!!title || !!onClose) && <Flex horizontal={true} className={styles.title}>{!!title &&
             <Grow><Heading >{title}</Heading></Grow>}{!!onClose &&
-            <Clickable onClick={onClose}><Icon size={"lg"} icon={faCircleXmark}/></Clickable>}</Flex>}
+            <Clickable onClick={onClose}><Icon size="lg" icon={faCircleXmark}/></Clickable>}</Flex>}
             {children}
         </Block>
     );

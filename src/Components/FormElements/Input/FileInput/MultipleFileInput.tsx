@@ -16,7 +16,6 @@ import { Image } from '../../../Image/Image';
 import { Clickable } from '../../../Clickable/Clickable';
 import { Inline } from '../../../Layout/Inline';
 import { FileType } from "./FileType";
-import { InlineBlock } from "../../../Layout/InlineBlock";
 import { FormError } from "../../FormError";
 
 

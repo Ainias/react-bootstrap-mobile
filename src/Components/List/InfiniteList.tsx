@@ -1,6 +1,5 @@
-import React, { CSSProperties, ReactElement, ReactNode, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import InfiniteLoader from "react-window-infinite-loader";
-import { RbmComponentProps } from "../RbmComponentProps";
 import { List, ListProps } from "./List";
 import { withMemo } from "../../helper/withMemo";
 
@@ -34,12 +33,12 @@ export const InfiniteList = withMemo(function InfiniteList<ItemType>({
         if (!isPageLoading) {
             setIsPageLoading(true);
             try {
-                loadNextPage()
+                loadNextPage();
             } finally {
                 setIsPageLoading(false);
             }
         }
-    }, [isPageLoading, loadNextPage])
+    }, [isPageLoading, loadNextPage]);
 
     // Effects
 
