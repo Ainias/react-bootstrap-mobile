@@ -1,19 +1,21 @@
 @import "designMixin";
 
-* {
-  box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
-  font-weight: 400;
-}
-
-.#{$material} {
+@layer rbm {
   * {
-    font-family: "Roboto", "Noto", sans-serif;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 400;
   }
-}
 
-.#{$flat} {
-  * {
-    font-family: -apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif;
+  .#{$material} {
+    * {
+      font-family: "Roboto", "Noto", sans-serif;
+    }
+  }
+
+  .#{$flat} {
+    * {
+      font-family: -apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif;
+    }
   }
 }
