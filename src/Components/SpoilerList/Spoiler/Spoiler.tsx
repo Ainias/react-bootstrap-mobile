@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { withMemo } from '../../../helper/withMemo';
 import { RbmComponentProps } from '../../RbmComponentProps';
-import { ReactChild, useCallback, useEffect, useRef, useState } from 'react';
+import { MouseEvent, ReactChild, useCallback, useEffect, useRef, useState } from 'react';
 import { Flex } from '../../Layout/Flex';
 import { Grow } from '../../Layout/Grow';
 import { Text, TEXT_SIZE } from '../../Text/Text';
@@ -18,6 +18,7 @@ export type SpoilerProps<OnClickData> = RbmComponentProps<
         title: ReactChild;
         initialOpen?: boolean;
         open?: boolean;
+        onlyTitleToggles?: boolean;
         noClosingAnimation?: boolean;
         openIcon?: IconSource | null;
         closeIcon?: IconSource | null;
@@ -25,17 +26,18 @@ export type SpoilerProps<OnClickData> = RbmComponentProps<
 >;
 
 function Spoiler<OnClickData>({
-    title,
-    children,
-    initialOpen = false,
-    noClosingAnimation = false,
-    openIcon = faChevronDown,
-    closeIcon = faChevronUp,
-    className,
-    style,
-    open,
-    ...listenerProps
-}: SpoilerProps<OnClickData>) {
+                                  title,
+                                  children,
+                                  initialOpen = false,
+                                  noClosingAnimation = false,
+                                  openIcon = faChevronDown,
+                                  closeIcon = faChevronUp,
+                                  className,
+                                  onlyTitleToggles = false,
+                                  style,
+                                  open,
+                                  ...listenerProps
+                              }: SpoilerProps<OnClickData>) {
     // Variables
 
     // Refs
@@ -50,12 +52,14 @@ function Spoiler<OnClickData>({
     // Callbacks
     const onClickListener = useListener<'onClick', OnClickData, boolean>('onClick', listenerProps);
 
-    const toggleOpen = useCallback(() => {
+    const toggleOpen = useCallback((ev: MouseEvent) => {
+        console.log("LOG-d target", ev.target);
         if (open !== undefined) {
             onClickListener?.(!open);
         } else {
             setIsInitialValue(false);
             setIsOpen((old) => {
+                console.log("LOG-d toggleOpen", !old);
                 onClickListener?.(!old);
                 return !old;
             });
@@ -78,7 +82,7 @@ function Spoiler<OnClickData>({
 
     return (
         <Clickable
-            onClick={toggleOpen}
+            onClick={onlyTitleToggles ? undefined: toggleOpen}
             className={classNames(className, styles.spoiler, {
                 [styles.open]: open ?? isOpen,
                 [styles.noAnimation]: isInitialValue,
@@ -86,10 +90,12 @@ function Spoiler<OnClickData>({
             })}
             style={style}
         >
-            <Flex horizontal={true}>
-                <Grow __allowChildren="all">{titleComponent}</Grow>
-                {icon ? <Icon icon={icon} className={styles.icon} /> : null}
-            </Flex>
+            <Clickable onClick={toggleOpen}>
+                <Flex horizontal={true}>
+                    <Grow __allowChildren="all">{titleComponent}</Grow>
+                    {icon ? <Icon icon={icon} className={styles.icon}/> : null}
+                </Flex>
+            </Clickable>
             <Block className={styles.bodyContainer}>
                 <Block __allowChildren="all" className={styles.body}>
                     {children}

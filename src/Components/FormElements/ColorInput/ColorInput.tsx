@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useCallback, useRef, useState, MouseEvent, useMemo } from 'react';
-import { ColorResult, Sketch, SwatchPresetColor } from '@uiw/react-color';
+import { ColorResult, Sketch } from '@uiw/react-color';
 import { OptionalListener, useListener } from '../../Hooks/useListener';
 import { withMemo } from '../../../helper/withMemo';
 import styles from './colorInput.scss';

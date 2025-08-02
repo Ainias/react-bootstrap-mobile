@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { Override } from '@ainias42/js-helper';
 import { OptionalListener, useListenerWithExtractedProps } from '../../Hooks/useListener';
-
 import styles from './button.scss';
 import classNames from 'classnames';
 import { withMemo } from '../../../helper/withMemo';
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, MouseEvent, useCallback } from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { ButtonType } from "./ButtonType";
 import { Flavor } from "../../Flavor";
@@ -17,6 +16,7 @@ export type ButtonProps<ClickData> = RbmComponentProps<
         disabled?: boolean;
         flavor?: Flavor
         fullWidth?: boolean;
+        stopPropagation?: boolean;
         size?: Omit<Size, "xxLarge" | "xLarge" | "large" | "xSmall">
     } & OptionalListener<'onClick', ClickData>>
 >;
@@ -29,9 +29,17 @@ export const Button = withMemo(function Button<ClickData>({
                                                               fullWidth = false,
                                                               flavor = Flavor.Accent,
                                                               type = ButtonType.Primary,
+    stopPropagation = true,
                                                               ...props
                                                           }: ButtonProps<ClickData>) {
     const [onClick, otherProps] = useListenerWithExtractedProps<'onClick', ClickData>('onClick', props);
+
+    const realOnClick = useCallback((ev: MouseEvent) => {
+        if (stopPropagation) {
+            ev.stopPropagation();
+        }
+        onClick?.(ev);
+    }, [onClick, stopPropagation]);
 
     const classes = {
         [styles.primary]: type === ButtonType.Primary,
@@ -41,7 +49,7 @@ export const Button = withMemo(function Button<ClickData>({
     };
 
     return (
-        <button {...otherProps} disabled={disabled} type="button" onClick={onClick}
+        <button {...otherProps} disabled={disabled} type="button" onClick={realOnClick}
                 className={classNames(styles.button, {[styles.fullWidth]: fullWidth}, classes, flavor, className)}>
             {children}
         </button>

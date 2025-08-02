@@ -6,7 +6,6 @@ import {IconProp} from '@fortawesome/fontawesome-svg-core';
 import {withMemo} from '../../helper/withMemo';
 import {IconDefinition} from '@fortawesome/free-regular-svg-icons';
 import classNames from "classnames";
-
 import styles from "./icon.scss";
 
 export type IconSource = IconProp | string | IconDefinition;

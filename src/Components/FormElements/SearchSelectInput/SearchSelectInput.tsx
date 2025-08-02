@@ -2,7 +2,7 @@ import * as React from 'react';
 import { OptionalListener } from '../../Hooks/useListener';
 import { SelectOption } from '../Select/Select';
 import classNames from 'classnames';
-import { ChangeEventHandler, KeyboardEvent, useCallback, useMemo, useRef, useState } from 'react';
+import { ChangeEventHandler, KeyboardEvent, ReactNode, useCallback, useMemo, useRef, useState } from 'react';
 import { ArrayHelper } from '@ainias42/js-helper';
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { withMemo } from '../../../helper/withMemo';
@@ -22,147 +22,179 @@ export type SearchSelectInputProps<OnChangeData> = RbmComponentProps<
         options: SelectOption[];
         onChangeValue?: (newValues: string[]) => void;
         values: string[];
+        renderSelectableOptions?: (option: SelectOption, isActive: boolean, index: number, activeIndex: number) => ReactNode,
+        renderSelectedOption?: (option: SelectOption) => ReactNode,
+        showSelectedOptions?: boolean;
+        closeOnSelect?: boolean;
+        enableSearch?: boolean;
+        allowDeselect?: boolean;
     } & OptionalListener<'onChange', OnChangeData>
 >;
 
 export const SearchSelectInput = withMemo(function SearchSelectInput<OnChangeData>({
-    label,
-    options,
-    values,
-    onChangeValue,
-    className,
-    style,
-}: SearchSelectInputProps<OnChangeData>) {
-    // Variables
-    const indexedOptions = useMemo(() => ArrayHelper.arrayToObject(options, (opt) => opt.value), [options]);
+                                                                                       label,
+                                                                                       options,
+                                                                                       values,
+                                                                                       onChangeValue,
+                                                                                       className,
+                                                                                       renderSelectableOptions,
+                                                                                       renderSelectedOption,
+                                                                                       showSelectedOptions = false,
+                                                                                       closeOnSelect = false,
+                                                                                       enableSearch = true,
+    allowDeselect = true,
+                                                                                       style,
+                                                                                   }: SearchSelectInputProps<OnChangeData>) {
+        // Variables
+        const indexedOptions = useMemo(() => ArrayHelper.arrayToObject(options, (opt) => opt.value), [options]);
 
-    // Refs
-    const containerRef = useRef<HTMLLabelElement>(null);
-    const window = useWindow();
+        // Refs
+        const containerRef = useRef<HTMLLabelElement>(null);
+        const inputRef = useRef<HTMLInputElement>(null);
+        const window = useWindow();
 
-    // States
-    const [searchText, setSearchText] = useState('');
-    const [suggestionsPosition, setSuggestionsPosition] = useState<
-        { top: number; left: number; right: number } | undefined
-    >(undefined);
+        // States
+        const [searchText, setSearchText] = useState('');
+        const [suggestionsPosition, setSuggestionsPosition] = useState<
+            { top: number; left: number; right: number } | undefined
+        >(undefined);
 
-    const [selectedIndex, setSelectedIndex] = useState(0);
+        const [selectedIndex, setSelectedIndex] = useState(0);
 
-    const selectableOptions = useMemo(() => {
-        if (!suggestionsPosition) {
-            return [];
-        }
-        return options.filter(
-            (option) => !values.includes(option.value) && option.label.toLowerCase().includes(searchText.toLowerCase())
-        );
-    }, [suggestionsPosition, options, searchText, values]);
-
-    // Selectors
-
-    // Callbacks
-    const updateSuggestionPosition = useCallback(() => {
-        if (!containerRef.current) {
-            return;
-        }
-        const { left, right, bottom: top } = containerRef.current.getBoundingClientRect();
-        setSuggestionsPosition({ top, left, right: (window?.innerWidth ?? 0) - right });
-    }, [window?.innerWidth]);
-
-    const onChange = useCallback<ChangeEventHandler<HTMLInputElement>>((ev) => {
-        setSearchText(ev.target.value);
-        setSelectedIndex(0);
-    }, []);
-    const onFocus = useCallback(() => updateSuggestionPosition(), [updateSuggestionPosition]);
-
-    const toggleOption = useCallback(
-        (_: any, value: string) => {
-            const newValues = [...values];
-            const index = values.indexOf(value);
-            if (index === -1) {
-                newValues.push(value);
-            } else {
-                newValues.splice(index, 1);
+        const selectableOptions = useMemo(() => {
+            if (!suggestionsPosition) {
+                return [];
             }
-            setSearchText('');
+            return options.filter(
+                (option) => (showSelectedOptions || !values.includes(option.value)) && (!enableSearch || option.label.toLowerCase().includes(searchText.toLowerCase()))
+            );
+        }, [suggestionsPosition, options, showSelectedOptions, values, enableSearch, searchText]);
+
+        // Selectors
+
+        // Callbacks
+        const updateSuggestionPosition = useCallback(() => {
+            if (!containerRef.current) {
+                return;
+            }
+            const {left, right, bottom: top} = containerRef.current.getBoundingClientRect();
+            setSuggestionsPosition({top, left, right: (window?.innerWidth ?? 0) - right});
+        }, [window?.innerWidth]);
+
+        const onChange = useCallback<ChangeEventHandler<HTMLInputElement>>((ev) => {
+            if (!enableSearch){
+                return;
+            }
+            setSearchText(ev.target.value);
             setSelectedIndex(0);
-            onChangeValue?.(newValues);
-        },
-        [onChangeValue, values]
-    );
+        }, [enableSearch]);
+        const onFocus = useCallback(() => updateSuggestionPosition(), [updateSuggestionPosition]);
 
-    const onKeyPress = useCallback(
-        (e: KeyboardEvent<HTMLInputElement>) => {
-            console.log('Keypress', e.key);
-
-            if (e.key === 'Enter' && !e.defaultPrevented) {
-                if (selectedIndex < selectableOptions.length) {
-                    toggleOption(undefined, selectableOptions[selectedIndex].value);
+        const toggleOption = useCallback(
+            (_: any, value: string) => {
+                const newValues = [...values];
+                const index = values.indexOf(value);
+                if (index === -1) {
+                    newValues.push(value);
+                } else {
+                    newValues.splice(index, 1);
                 }
-            } else if (e.key === 'ArrowDown') {
-                setSelectedIndex((old) => {
-                    if (old + 1 >= selectableOptions.length) {
-                        return 0;
+                setSearchText('');
+                setSelectedIndex(0);
+                onChangeValue?.(newValues);
+                if (closeOnSelect) {
+                    if (containerRef.current?.contains(document.activeElement)) {
+                        inputRef.current?.focus();
+                        requestAnimationFrame(() => {
+                            inputRef.current?.blur();
+                        });
                     }
-                    return old + 1;
-                });
-            } else if (e.key === 'ArrowUp') {
-                setSelectedIndex((old) => {
-                    if (old - 1 < 0) {
-                        return Math.max(selectableOptions.length - 1, 0);
+                }
+            },
+            [closeOnSelect, onChangeValue, values]
+        );
+
+        const onKeyPress = useCallback(
+            (e: KeyboardEvent<HTMLInputElement>) => {
+                if (e.key === 'Enter' && !e.defaultPrevented) {
+                    if (selectedIndex < selectableOptions.length) {
+                        toggleOption(undefined, selectableOptions[selectedIndex].value);
                     }
-                    return old - 1;
-                });
+                } else if (e.key === 'ArrowDown') {
+                    setSelectedIndex((old) => {
+                        if (old + 1 >= selectableOptions.length) {
+                            return 0;
+                        }
+                        return old + 1;
+                    });
+                } else if (e.key === 'ArrowUp') {
+                    setSelectedIndex((old) => {
+                        if (old - 1 < 0) {
+                            return Math.max(selectableOptions.length - 1, 0);
+                        }
+                        return old - 1;
+                    });
+                }
+            },
+            [toggleOption, selectableOptions, selectedIndex]
+        );
+
+        // Effects
+
+        // Other
+
+        // Render Functions
+        const renderOption = (value: string) => {
+            const option = indexedOptions[value];
+            if (!option) {
+                return null;
             }
-        },
-        [toggleOption, selectableOptions, selectedIndex]
-    );
 
-    // Effects
+            const element = renderSelectedOption?.(option) ?? <InlineBlock className={styles.tag}>
+                <Text size={TEXT_SIZE.xSmall}>{indexedOptions[value]?.label}</Text>
+            </InlineBlock>;
 
-    // Other
+            const onClickProps = allowDeselect ? {onClick: toggleOption, onClickData: value} : {};
 
-    // Render Functions
-    const renderOption = (value: string) => {
-        if (!indexedOptions[value]) {
-            return null;
-        }
+            return (
+                <Clickable {...onClickProps} key={option.key} __allowChildren="all">
+                    {element}
+                </Clickable>
+            );
+        };
+        const renderSelectableOption = (opt: SelectOption, index: number) => {
+            const isActive = index === selectedIndex;
+            const element = renderSelectableOptions?.(opt, isActive, index, selectedIndex) ?? (
+                <Block className={classNames(styles.selectableOption, {[styles.active]: index === selectedIndex})}>
+                    <Text>{opt.label}</Text>
+                </Block>);
+
+            return <Clickable onClick={toggleOption} onClickData={opt.value} key={opt.key} __allowChildren="all">
+                {element}
+            </Clickable>;
+        };
 
         return (
-            <Clickable onClick={toggleOption} onClickData={value} key={indexedOptions[value]?.key}>
-                <InlineBlock className={styles.tag}>
-                    <Text size={TEXT_SIZE.xSmall}>{indexedOptions[value]?.label}</Text>
+            // eslint-disable-next-line jsx-a11y/label-has-associated-control
+            <label className={classNames(styles.input, className)} style={style} ref={containerRef}>
+                {label ? <span className={styles.label}>{label}</span> : null}
+                <Flex className={styles.inputContainer} horizontal={true}>
+                    <InlineBlock>{values.map(renderOption)}</InlineBlock>
+                    <Grow __allowChildren="html">
+                        <input
+                            ref={inputRef}
+                            className={classNames(styles.text, {[styles.disabled]: !enableSearch})}
+                            value={searchText}
+                            onChange={onChange}
+                            onKeyDown={onKeyPress}
+                            onFocus={onFocus}
+                        />
+                    </Grow>
+                </Flex>
+                <InlineBlock className={styles.selectableOptionContainer} style={suggestionsPosition}>
+                    {selectableOptions.map(renderSelectableOption)}
                 </InlineBlock>
-            </Clickable>
+            </label>
         );
-    };
-    const renderSelectableOption = (opt: SelectOption, index: number) => (
-        <Clickable onClick={toggleOption} onClickData={opt.value} key={opt.key}>
-            <Block className={classNames(styles.selectableOption, { [styles.active]: index === selectedIndex })}>
-                <Text>{opt.label}</Text>
-            </Block>
-        </Clickable>
-    );
-
-    return (
-        // eslint-disable-next-line jsx-a11y/label-has-associated-control
-        <label className={classNames(styles.input, className)} style={style} ref={containerRef}>
-            {label ? <span className={styles.label}>{label}</span> : null}
-            <Flex className={styles.inputContainer} horizontal={true}>
-                <InlineBlock>{values.map(renderOption)}</InlineBlock>
-                <Grow __allowChildren="html">
-                    <input
-                        className={styles.text}
-                        value={searchText}
-                        onChange={onChange}
-                        onKeyDown={onKeyPress}
-                        onFocus={onFocus}
-                    />
-                </Grow>
-            </Flex>
-            <InlineBlock className={styles.selectableOptionContainer} style={suggestionsPosition}>
-                {selectableOptions.map(renderSelectableOption)}
-            </InlineBlock>
-        </label>
-    );
-},
-styles);
+    },
+    styles);

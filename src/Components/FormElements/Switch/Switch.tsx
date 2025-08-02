@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { ChangeEventHandler, InputHTMLAttributes, useCallback } from 'react';
+import { ChangeEventHandler, InputHTMLAttributes, MouseEvent, useCallback } from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { Override } from '../../../TypeHelpers';
 import classNames from 'classnames';
-
 import styles from './switch.scss';
 import { withMemo } from '../../../helper/withMemo';
 import { OptionalListener, useListenerWithExtractedProps } from "../../Hooks/useListener";
@@ -19,6 +18,9 @@ export type SwitchProps<OnChangeCheckedData> = RbmComponentProps<
             isLabelBeforeSwitch?: boolean;
             isDual?: boolean;
             error?: string;
+            classNameLabel?: string;
+            classNamePreLabel?: string;
+            stopPropagation?: boolean;
         } & OptionalListener<"onChangeChecked", OnChangeCheckedData, boolean>
     >
 >;
@@ -29,8 +31,11 @@ export const Switch = withMemo(function Switch<OnChangeCheckedData>({
                                                                         preLabel = '',
                                                                         isLabelBeforeSwitch = false,
                                                                         isDual = undefined,
+                                                                        stopPropagation = true,
                                                                         id,
                                                                         className,
+                                                                        classNamePreLabel,
+                                                                        classNameLabel,
                                                                         style,
                                                                         error,
                                                                         onChange,
@@ -53,6 +58,14 @@ export const Switch = withMemo(function Switch<OnChangeCheckedData>({
             [onChange, onChangeChecked]
         );
 
+        const checkStopPropagation = useCallback((ev: MouseEvent) => {
+            if (stopPropagation) {
+                console.log("LOG-d stopPropagation inside checkStopPropagation", ev);
+                ev.stopPropagation();
+                ev.nativeEvent.stopPropagation();
+            }
+        }, [stopPropagation]);
+
         // Effects
 
         // Other
@@ -71,17 +84,16 @@ export const Switch = withMemo(function Switch<OnChangeCheckedData>({
             isDual = true;
         }
         return (
-            <span className={classNames(styles.switch, {[styles.dual]: isDual}, className)} style={style}>
-            <label htmlFor={id} key={id}>
-                <span className={styles.label}>{preLabel}</span>
-                <input {...otherProps} type="checkbox" id={id} onChange={realOnChange}/>
-                <div className={styles.toggle}>
-                    <span className={styles.handle}/>
-                </div>
-                <span className={styles.label}>{label}</span>
-                <FormError error={error}/>
-            </label>
-        </span>
-        );
+            <span className={classNames(styles.switch, {[styles.dual]: isDual}, className)} style={style} onClick={checkStopPropagation}>
+                <label htmlFor={id} key={id}>
+                    <span className={classNames(styles.label, classNamePreLabel)}>{preLabel}</span>
+                    <input {...otherProps} type="checkbox" id={id} onChange={realOnChange}/>
+                    <div className={styles.toggle}>
+                        <span className={styles.handle}/>
+                    </div>
+                    <span className={classNames(styles.label, classNameLabel)}>{label}</span>
+                    <FormError error={error}/>
+                </label>
+            </span>);
     },
     styles);

@@ -45,7 +45,7 @@ export function useSharedSelectedColor(key: string|undefined, predefinedColors: 
             // triggers rerender
             sharedSelectedColor[realKey].updateFunctions.forEach((u) => u());
         },
-        [numberSavedColors, realKey, shouldSaveToLocalStorage]
+        [numberSavedColors, predefinedColors, realKey, shouldSaveToLocalStorage]
     );
 
     useLayoutEffect(() => {

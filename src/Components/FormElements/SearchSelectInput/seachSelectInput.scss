@@ -34,10 +34,15 @@
 
   .label {
     display: block;
-    font-weight: bold;
+    font-weight: var(--label-font-weight, bold);
   }
 
   .text {
+    &.disabled {
+      caret-color: transparent;
+      cursor: pointer;
+    }
+
     width: 100%;
     background-color: transparent;
     border: 0;

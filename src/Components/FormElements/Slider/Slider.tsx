@@ -14,6 +14,7 @@ export type SliderProps<OnChangeData, OnChangeValueData, OnChangeDoneData> = Rbm
         Omit<InputHTMLAttributes<HTMLInputElement>, 'type'>,
         {
             value?: number;
+            stopPropagation?: boolean;
         } & OptionalListener<'onChange', OnChangeData> &
             OptionalListener<'onChangeValue', OnChangeValueData, number> &
             OptionalListener<'onChangeDone', OnChangeDoneData>
@@ -23,6 +24,7 @@ export type SliderProps<OnChangeData, OnChangeValueData, OnChangeDoneData> = Rbm
 export const Slider = withMemo(function Slider<OnChangeData, OnChangeValueData, OnChangeDoneData>({
     className,
     style,
+    stopPropagation = true,
     ...props
 }: SliderProps<OnChangeData, OnChangeValueData, OnChangeDoneData>) {
     // Variables
@@ -57,6 +59,12 @@ export const Slider = withMemo(function Slider<OnChangeData, OnChangeValueData, 
         [onChange, onChangeValue]
     );
 
+    const checkStopPropagation = useCallback((ev: React.MouseEvent) => {
+        if (stopPropagation) {
+            ev.stopPropagation();
+        }
+    }, [stopPropagation]);
+
     // Effects
     const innerRef = useOnChangeDone(onChangeDone) as MutableRefObject<HTMLInputElement|null>;
 
@@ -66,7 +74,7 @@ export const Slider = withMemo(function Slider<OnChangeData, OnChangeValueData, 
 
     return (
         // eslint-disable-next-line jsx-a11y/label-has-associated-control
-        <label className={classNames(styles.slider, className)} style={style}>
+        <label className={classNames(styles.slider, className)} style={style} onClick={checkStopPropagation}>
             <input
                 type="range"
                 {...otherPropsWithoutData}

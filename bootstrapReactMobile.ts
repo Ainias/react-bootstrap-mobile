@@ -29,6 +29,7 @@ export * from './src/Components/FormElements/Controller/SelectController';
 export * from './src/Components/FormElements/Controller/SendFormContext';
 export * from './src/Components/FormElements/Controller/SwitchController';
 export * from './src/Components/FormElements/Controller/TextareaController';
+export * from './src/Components/FormElements/Controller/useYupResolver';
 export * from './src/Components/FormElements/Controller/withHookController';
 export * from './src/Components/FormElements/FormError';
 export * from './src/Components/FormElements/Input/FileInput/FileInput';
