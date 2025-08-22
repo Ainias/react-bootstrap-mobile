@@ -60,7 +60,6 @@ export const Switch = withMemo(function Switch<OnChangeCheckedData>({
 
         const checkStopPropagation = useCallback((ev: MouseEvent) => {
             if (stopPropagation) {
-                console.log("LOG-d stopPropagation inside checkStopPropagation", ev);
                 ev.stopPropagation();
                 ev.nativeEvent.stopPropagation();
             }

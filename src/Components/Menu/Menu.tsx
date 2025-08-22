@@ -1,16 +1,16 @@
 import * as React from 'react';
-import {withMemo} from '../../helper/withMemo';
-import {RbmComponentProps} from '../RbmComponentProps';
-import {IconSource} from '../Icon/Icon';
-import {Block} from '../Layout/Block';
+import { withMemo } from '../../helper/withMemo';
+import { RbmComponentProps } from '../RbmComponentProps';
+import { IconSource } from '../Icon/Icon';
+import { Block } from '../Layout/Block';
 import classNames from 'classnames';
 import styles from './menu.scss';
-import {useEffect, useRef, useState} from 'react';
-import {withRenderBrowserOnly} from '../../helper/withRenderBrowserOnly';
-import {useWindow} from '../../WindowContext/WindowContext';
-import {MenuItem} from "./MenuItem";
-import {MenuCloseContextProvider} from "./MenuCloseContext";
-import {createPortal} from "react-dom";
+import { useEffect, useRef, useState } from 'react';
+import { withRenderBrowserOnly } from '../../helper/withRenderBrowserOnly';
+import { useWindow } from '../../WindowContext/WindowContext';
+import { MenuItem } from "./MenuItem";
+import { MenuCloseContextProvider } from "./MenuCloseContext";
+import { createPortal } from "react-dom";
 import { useClientLayoutEffect } from "../Hooks/useClientLayoutEffect";
 
 export type MenuItemType = {
@@ -71,7 +71,7 @@ export const Menu = withMemo(
         // Effects
         useEffect(() => {
             if (isOpen) {
-                const listener = (e: MouseEvent|TouchEvent) => {
+                const listener = (e: MouseEvent | TouchEvent) => {
                     if (!menuRef.current?.contains(e.target as Node)) {
                         onClose();
                     }
@@ -90,7 +90,7 @@ export const Menu = withMemo(
             if (!isOpen) {
                 return;
             }
-            let elem = window?.document.body.querySelector(`.${  MENU_CONTAINER_CLASS}`);
+            let elem = window?.document.body.querySelector(`.${MENU_CONTAINER_CLASS}`);
             if (!elem) {
                 elem = window?.document.body;
             }
@@ -99,37 +99,38 @@ export const Menu = withMemo(
 
         useClientLayoutEffect(() => {
             if (!menuRef.current) {
-                return;
+                return undefined;
             }
-            const width = parseFloat(getComputedStyle(menuRef.current).width);
-            let newX = x;
-            if (newX > (window?.innerWidth ?? 0) - width) {
-                newX -= width + offsetX;
-            }
+            const menuElement = menuRef.current;
 
-            if (newX < 0) {
-                newX = 0;
-            }
+            const updateInnerPositions = () => {
+                const computedStyle = getComputedStyle(menuElement);
+                const height = parseFloat(computedStyle.height);
+                let newY = y;
+                if (newY > (window?.innerHeight ?? 0) - height) {
+                    newY -= height + offsetY;
+                }
+                setInnerY(Math.max(0, newY));
 
-            setInnerX(newX);
-        }, [offsetX, window?.innerWidth, x]);
+                const width = parseFloat(computedStyle.width);
+                let newX = x;
+                if (newX > (window?.innerWidth ?? 0) - width) {
+                    newX -= width + offsetX;
+                }
+                setInnerX(Math.max(0, newX));
 
-        useClientLayoutEffect(() => {
-            if (!menuRef.current) {
-                return;
-            }
-            const height = parseFloat(getComputedStyle(menuRef.current).height);
-            let newY = y;
-            if (newY > (window?.innerHeight ?? 0) - height) {
-                newY -= height + offsetY;
-            }
+            };
 
-            if (newY < 0) {
-                newY = 0;
-            }
+            const observer = new ResizeObserver(() => {
+                updateInnerPositions();
+            });
+            observer.observe(menuElement);
+            updateInnerPositions();
 
-            setInnerY(newY);
-        }, [offsetY, window?.innerHeight, y]);
+            return () => {
+                observer.disconnect();
+            };
+        }, [window, x, y, offsetX, offsetY]);
 
         // Other
 
