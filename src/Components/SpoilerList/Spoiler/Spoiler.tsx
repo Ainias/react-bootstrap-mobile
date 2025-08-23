@@ -20,6 +20,7 @@ export type SpoilerProps<OnClickData> = RbmComponentProps<
         open?: boolean;
         onlyTitleToggles?: boolean;
         noClosingAnimation?: boolean;
+        noAnimation?: boolean;
         openIcon?: IconSource | null;
         closeIcon?: IconSource | null;
     } & OptionalListener<'onClick', OnClickData>
@@ -30,6 +31,7 @@ function Spoiler<OnClickData>({
                                   children,
                                   initialOpen = false,
                                   noClosingAnimation = false,
+                                  noAnimation = false,
                                   openIcon = faChevronDown,
                                   closeIcon = faChevronUp,
                                   className,
@@ -85,7 +87,7 @@ function Spoiler<OnClickData>({
             onClick={onlyTitleToggles ? undefined: toggleOpen}
             className={classNames(className, styles.spoiler, {
                 [styles.open]: open ?? isOpen,
-                [styles.noAnimation]: isInitialValue,
+                [styles.noAnimation]: isInitialValue || noAnimation,
                 [styles.noClosingAnimation]: noClosingAnimation,
             })}
             style={style}

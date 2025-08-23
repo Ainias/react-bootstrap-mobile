@@ -23,7 +23,7 @@
   }
   100% {
     height: initial;
-    transform: translateY(0%);
+    transform: none !important;
     opacity: 1;
   }
 }
@@ -74,7 +74,7 @@
 
       .body {
         height: initial;
-        transform: translateY(0%);
+        transform: none;
         animation-name: spoilerOpen;
       }
     }
