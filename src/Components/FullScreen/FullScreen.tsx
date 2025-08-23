@@ -1,11 +1,13 @@
 import * as React from 'react';
-import { ComponentPropsWithoutRef, ComponentRef, useCallback, useEffect, useMemo, useRef } from 'react';
+import { ComponentPropsWithoutRef, useCallback, useEffect, useMemo, useRef } from 'react';
 import { Override } from '../../TypeHelpers';
 import { withMemo } from '../../helper/withMemo';
 import { useWindow } from '../../WindowContext/WindowContext';
 import { RbmComponentProps } from '../RbmComponentProps';
+import { JSX } from "react/jsx-runtime";
+import IntrinsicElements = JSX.IntrinsicElements;
 
-export type FullScreenProps<AsType extends keyof JSX.IntrinsicElements> = RbmComponentProps<
+export type FullScreenProps<AsType extends keyof IntrinsicElements> = RbmComponentProps<
     Override<
         ComponentPropsWithoutRef<AsType>,
         { as?: AsType; fullscreenKey?: string; onEnterFullscreen?: () => void; onLeaveFullscreen?: () => void }
@@ -23,7 +25,7 @@ export const FullScreen = withMemo(function FullScreen<AsTag extends keyof JSX.I
     // Variables
 
     // Refs
-    const containerRef = useRef<ComponentRef<AsTag>>(null);
+    const containerRef = useRef<HTMLElement>(null);
     const window = useWindow();
 
     // States
@@ -39,16 +41,14 @@ export const FullScreen = withMemo(function FullScreen<AsTag extends keyof JSX.I
             if ('exitFullscreen' in document) {
                 document.exitFullscreen();
             } else {
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
+                // @ts-expect-error this is not in the types but it exists
                 document.webkitCancelFullScreen();
             }
                 return;
         }
 
         if ('webkitRequestFullscreen' in document.body) {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
+            // @ts-expect-error this is not in the types but it exists
             containerRef.current?.webkitRequestFullscreen();
         } else {
             containerRef.current?.requestFullscreen();

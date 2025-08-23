@@ -114,7 +114,6 @@ export * from './src/helper/DistributiveOmit';
 export * from './src/helper/EmptyProps';
 export * from './src/helper/memoComparator';
 export * from './src/helper/nonEmptyString';
-export * from './src/helper/withForwardRef';
 export * from './src/helper/withMemo';
 export * from './src/helper/withRenderBrowserOnly';
 export * from './src/helper/withRestrictedChildren';

@@ -6,6 +6,8 @@ import { WrongChildError } from '../../WrongChildError';
 import withStyles from 'isomorphic-style-loader/withStyles';
 import { Inline, InlineProps } from '../Layout/Inline';
 import { ViewProps } from '../Layout/View';
+import { JSX } from "react/jsx-runtime";
+import IntrinsicElements = JSX.IntrinsicElements;
 
 export const TEXT_PRIO = {
     primary: styles.primary,
@@ -23,7 +25,7 @@ export const TEXT_SIZE = {
     xxLarge: styles.xxlarge,
 };
 
-export type TextProps<AsType extends keyof JSX.IntrinsicElements> = {
+export type TextProps<AsType extends keyof IntrinsicElements> = {
     block?: boolean;
     prio?: ValueOf<typeof TEXT_PRIO>;
     size?: ValueOf<typeof TEXT_SIZE>;

@@ -1,15 +1,16 @@
 import * as React from 'react';
 import { ComponentRef, ForwardedRef, PropsWithChildren } from 'react';
 import { Override } from '../../TypeHelpers';
-import { withForwardRef } from "../../helper/withForwardRef";
+import { JSX } from "react/jsx-runtime";
+import IntrinsicElements = JSX.IntrinsicElements;
+import { withMemo } from "../../helper/withMemo";
 
-export type ViewProps<AsType extends keyof JSX.IntrinsicElements> = PropsWithChildren<
-    Override<React.ComponentPropsWithoutRef<AsType>, { as?: AsType; children?: React.ReactNode }>
+export type ViewProps<AsType extends keyof IntrinsicElements> = PropsWithChildren<
+    Override<React.ComponentPropsWithoutRef<AsType>, { as?: AsType; children?: React.ReactNode, ref?: ForwardedRef<ComponentRef<AsType>> }>
 >;
 
-export const View = withForwardRef(function View<AsType extends keyof JSX.IntrinsicElements>(
-    {children, as, ...otherProps}: ViewProps<AsType>,
-    ref?: ForwardedRef<ComponentRef<AsType>>
+export const View = withMemo(function View<AsType extends keyof JSX.IntrinsicElements>(
+    {children, as,ref, ...otherProps}: ViewProps<AsType>
 ) {
     // Variables
 

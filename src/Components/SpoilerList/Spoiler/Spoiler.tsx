@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { withMemo } from '../../../helper/withMemo';
 import { RbmComponentProps } from '../../RbmComponentProps';
-import { MouseEvent, ReactChild, useCallback, useEffect, useRef, useState } from 'react';
+import { MouseEvent, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import { Flex } from '../../Layout/Flex';
 import { Grow } from '../../Layout/Grow';
 import { Text, TEXT_SIZE } from '../../Text/Text';
@@ -15,7 +15,7 @@ import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 export type SpoilerProps<OnClickData> = RbmComponentProps<
     {
-        title: ReactChild;
+        title: ReactNode;
         initialOpen?: boolean;
         open?: boolean;
         onlyTitleToggles?: boolean;

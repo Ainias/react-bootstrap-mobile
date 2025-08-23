@@ -1,7 +1,12 @@
-import React, { ComponentProps, ComponentRef, ComponentType, ForwardedRef, useCallback } from "react";
+import React, {
+    ComponentProps,
+    ComponentRef,
+    ComponentType, ForwardedRef,
+    useCallback
+} from "react";
 import { FieldPath, FieldValues, useController, useFormContext } from "react-hook-form";
 import { useComposedRef } from "../../Hooks/useComposedRef";
-import { withForwardRef } from "../../../helper/withForwardRef";
+import { withMemo } from "../../../helper/withMemo";
 
 export function withHookController<C extends ComponentType<any>, OnChangeProp extends keyof ComponentProps<C>>(Comp: C, onChangeProp: OnChangeProp, emptyValue: any = null) {
     type RefType = ComponentRef<C>;
@@ -9,12 +14,11 @@ export function withHookController<C extends ComponentType<any>, OnChangeProp ex
 
     type Props<Values extends FieldValues, Name extends FieldPath<Values> = FieldPath<Values>> = Omit<
         OldProps,
-        'name' | 'onBlur' | OnChangeProp | 'ref' | 'value'
+        'name' | 'onBlur' | OnChangeProp | 'value'
     > & { name: Name };
 
     function WithHookComponent<Values extends FieldValues, Name extends FieldPath<Values> = FieldPath<Values>>(
-        {name, ...otherProps}: Props<Values, Name>,
-        ref?: ForwardedRef<RefType>
+        {name, ref, ...otherProps}: Props<Values, Name> & {ref?: ForwardedRef<RefType>},
     ) {
         const children = "children" in otherProps ? otherProps.children : undefined;
 
@@ -25,8 +29,8 @@ export function withHookController<C extends ComponentType<any>, OnChangeProp ex
 
         const internalOnChange = useCallback(
             (arg: any) => {
-                    clearErrors(name);
-                    field.onChange(arg);
+                clearErrors(name);
+                field.onChange(arg);
             },
             [clearErrors, field, name]
         );
@@ -52,5 +56,5 @@ export function withHookController<C extends ComponentType<any>, OnChangeProp ex
         );
     }
 
-    return withForwardRef(WithHookComponent);
+    return withMemo(WithHookComponent);
 }

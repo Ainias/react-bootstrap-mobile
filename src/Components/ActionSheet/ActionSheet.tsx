@@ -1,18 +1,17 @@
 import * as React from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
-import { Ref, useCallback, useImperativeHandle, useState } from 'react';
+import { ForwardedRef, useCallback, useImperativeHandle, useState } from 'react';
 import { Clickable } from '../Clickable/Clickable';
 import { Container } from '../Layout/Container';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Icon, IconSource } from '../Icon/Icon';
-
 import styles from './actionSheet.scss';
-import { withForwardRef } from '../../helper/withForwardRef';
 import classNames from 'classnames';
 import { InlineBlock } from '../Layout/InlineBlock';
 import { Text } from '../Text/Text';
 import { Flex } from '../Layout/Flex';
 import { Block } from '../Layout/Block';
+import { withMemo } from "../../helper/withMemo";
 
 export type ActionSheetAction<ActionData> = {
     name: string;
@@ -22,21 +21,22 @@ export type ActionSheetAction<ActionData> = {
     isDeleteAction?: boolean;
 };
 
-export type ActionSheetProps = RbmComponentProps<{
-    title?: string;
-    actions: ActionSheetAction<any>[];
-    cancelText?: string;
-    onClose?: () => void;
-}>;
-
 export type ActionSheetHandle = {
     show: () => void;
     hide: () => void;
 };
 
-function ActionSheet(
-    { title, actions, cancelText = 'Cancel', className, onClose, style }: ActionSheetProps,
-    ref: Ref<ActionSheetHandle>
+
+export type ActionSheetProps = RbmComponentProps<{
+    title?: string;
+    actions: ActionSheetAction<any>[];
+    cancelText?: string;
+    onClose?: () => void;
+    ref?: ForwardedRef<ActionSheetHandle>
+}>;
+
+export const ActionSheet = withMemo(function ActionSheet(
+    { title, actions, cancelText = 'Cancel', className, onClose, style, ref }: ActionSheetProps,
 ) {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -109,7 +109,4 @@ function ActionSheet(
             </Container>
         </Clickable>
     );
-}
-
-const ActionSheetMemo = withForwardRef<ActionSheetProps, ActionSheetHandle>(ActionSheet, styles);
-export { ActionSheetMemo as ActionSheet };
+}, styles);

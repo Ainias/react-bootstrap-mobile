@@ -1,22 +1,21 @@
 import * as React from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
 import classNames from 'classnames';
-
 import styles from './layout.scss';
 import { ViewWithoutListeners, ViewWithoutListenersProps } from './ViewWithoutListeners';
-import { ComponentRef, ForwardedRef } from 'react';
-import { withForwardRef } from '../../helper/withForwardRef';
+import { JSX } from "react/jsx-runtime";
+import IntrinsicElements = JSX.IntrinsicElements;
+import { withMemo } from "../../helper/withMemo";
 
-export type InlineBlockProps<AsType extends keyof JSX.IntrinsicElements> = RbmComponentProps<
+export type InlineBlockProps<AsType extends keyof IntrinsicElements> = RbmComponentProps<
     ViewWithoutListenersProps<AsType> & {
     id?: string
     title?: string
 }
 >;
 
-function InlineBlock<AsType extends keyof JSX.IntrinsicElements = 'span'>(
+export const InlineBlock = withMemo(function InlineBlock<AsType extends keyof JSX.IntrinsicElements = 'span'>(
     { children, as = 'span' as AsType, className, ...props }: InlineBlockProps<AsType>,
-    ref?: ForwardedRef<ComponentRef<AsType>>
 ) {
     // Variables
 
@@ -39,13 +38,8 @@ function InlineBlock<AsType extends keyof JSX.IntrinsicElements = 'span'>(
             {...(props as ViewWithoutListenersProps<AsType>)}
             className={classNames(styles.inlineBlock, className)}
             as={as as AsType}
-            ref={ref}
         >
             {children}
         </ViewWithoutListeners>
     );
-}
-
-// Need InlineMemo for autocompletion of phpstorm
-const InlineBlockMemo = withForwardRef(InlineBlock, styles);
-export { InlineBlockMemo as InlineBlock };
+}, styles);

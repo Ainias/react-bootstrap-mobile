@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {RbmComponentProps} from '../RbmComponentProps';
 import {OptionalListener, useListener} from '../Hooks/useListener';
-
 import styles from './clickable.scss';
 import classNames from 'classnames';
 import {
@@ -13,8 +12,8 @@ import {
     PointerEvent,
     useRef
 } from 'react';
-import {withForwardRef} from '../../helper/withForwardRef';
 import {useComposedRef} from "../Hooks/useComposedRef";
+import { withMemo } from "../../helper/withMemo";
 
 type OnClickListener<Data> = OptionalListener<'onClick', Data>;
 type OnPointerDownListener<Data> = OptionalListener<'onPointerDown', Data, PointerEvent>;
@@ -49,6 +48,7 @@ export type ClickableProps<
         tabIndex?: number;
         draggable?: boolean
         title?: string;
+        ref?: ForwardedRef<HrefType extends string ? HTMLAnchorElement : HTMLSpanElement>
     } & OnClickListener<OnClickData> &
     OnPointerDownListener<OnMouseDownData> &
     OnPointerMoveListener<OnMouseMoveData> &
@@ -62,7 +62,7 @@ export type ClickableProps<
     OptionalListener<'onDoubleClick', OnDoubleClickData>
 >;
 
-function Clickable<
+export const Clickable = withMemo(function Clickable<
     OnClickData,
     OnPointerDownData,
     OnPointerMoveData,
@@ -90,9 +90,9 @@ function Clickable<
         tabIndex,
         draggable,
         title,
+        ref,
         ...clickData
     }: ClickableProps<OnClickData, OnPointerDownData, OnPointerMoveData, OnPointerUpData, OnClickCaptureData, OnDropData,OnDragStartData, OnDragOverData,OnMouseEnterData, OnMouseLeaveData, OnDoubleClickData, HrefType>,
-    ref: ForwardedRef<HrefType extends string ? HTMLAnchorElement : HTMLSpanElement>
 ) {
     // Variables
 
@@ -328,7 +328,4 @@ function Clickable<
             {children}
         </span>
     );
-}
-
-const ClickableMemo = withForwardRef(Clickable, styles);
-export {ClickableMemo as Clickable};
+}, styles);

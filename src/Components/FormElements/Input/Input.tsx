@@ -1,16 +1,14 @@
 import * as React from 'react';
 import {
-    ChangeEvent,
+    ChangeEvent, ForwardedRef,
     InputHTMLAttributes,
     KeyboardEvent,
-    MutableRefObject,
     useCallback, useEffect,
     useMemo, useRef,
 } from 'react';
 import { RbmComponentProps } from '../../RbmComponentProps';
 import { Override } from '../../../TypeHelpers';
 import { OptionalListener, useListenerWithExtractedProps } from '../../Hooks/useListener';
-import { withForwardRef } from '../../../helper/withForwardRef';
 import styles from './input.scss';
 import classNames from 'classnames';
 import { useComposedRef } from '../../Hooks/useComposedRef';
@@ -18,6 +16,7 @@ import { useOnChangeDone } from '../hooks/useOnChangeDone';
 import { useSendFormContext } from "../Controller/SendFormContext";
 import { useDebounced } from "../../Hooks/useDebounced";
 import { FormError } from "../FormError";
+import { withMemo } from "../../../helper/withMemo";
 
 export type InputProps<OnChangeData, OnBlurData, OnChangeDoneData> = RbmComponentProps<
     Override<
@@ -28,13 +27,14 @@ export type InputProps<OnChangeData, OnBlurData, OnChangeDoneData> = RbmComponen
             onChangeText?: (newText: string) => void;
             onEnter?: (newText: string) => void;
             error?: string,
+            ref?: ForwardedRef<HTMLInputElement>
         } & OptionalListener<'onChange', OnChangeData> &
         OptionalListener<'onBlur', OnBlurData> &
         OptionalListener<'onChangeDone', OnChangeDoneData>
     >
 >;
 
-export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnChangeDoneData>(
+export const Input = withMemo(function Input<OnChangeData, OnBlurData, OnChangeDoneData>(
         {
             label,
             className,
@@ -45,9 +45,9 @@ export const Input = withForwardRef(function Input<OnChangeData, OnBlurData, OnC
             error,
             onChangeText,
             onEnter,
+            ref,
             ...otherProps
         }: InputProps<OnChangeData, OnBlurData, OnChangeDoneData>,
-        ref: MutableRefObject<HTMLInputElement> | null
     ) {
         // Variables
 

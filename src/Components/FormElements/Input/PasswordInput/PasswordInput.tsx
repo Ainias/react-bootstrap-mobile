@@ -1,15 +1,14 @@
 import React, { ForwardedRef, useCallback, useState } from 'react';
 import { Input, InputProps } from '../Input';
 import { DistributiveOmit } from '../../../../helper/DistributiveOmit';
-import { withForwardRef } from '../../../../helper/withForwardRef';
 import { Flex } from '../../../Layout/Flex';
 import { Grow } from '../../../Layout/Grow';
 import { Icon } from '../../../Icon/Icon';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { Clickable } from '../../../Clickable/Clickable';
-
 import styles from './passwordInput.scss';
 import classNames from 'classnames';
+import { withMemo } from "../../../../helper/withMemo";
 
 export type PasswordInputProps<OnChangeData, OnBlurData, OnChangeEndData> = DistributiveOmit<
     InputProps<OnChangeData, OnBlurData, OnChangeEndData>,
@@ -17,11 +16,11 @@ export type PasswordInputProps<OnChangeData, OnBlurData, OnChangeEndData> = Dist
 > & {
     onChangeText?: (newText: string) => void;
     onEnter?: (newText: string) => void;
+    ref?: ForwardedRef<HTMLInputElement>
 };
 
-export const PasswordInput = withForwardRef(function PasswordInput<OnChangeData, OnBlurData, OnChangeEndData>(
-    { className, style, ...props }: PasswordInputProps<OnChangeData, OnBlurData, OnChangeEndData>,
-    ref: ForwardedRef<HTMLInputElement>
+export const PasswordInput = withMemo(function PasswordInput<OnChangeData, OnBlurData, OnChangeEndData>(
+    { className, style, ref,...props }: PasswordInputProps<OnChangeData, OnBlurData, OnChangeEndData>,
 ) {
     // Variables
     const [isVisible, setIsVisible] = useState(false);

@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { ComponentRef, DOMAttributes, ForwardedRef } from 'react';
+import { DOMAttributes, ForwardedRef } from 'react';
 import { View, ViewProps } from './View';
-import { withForwardRef } from "../../helper/withForwardRef";
+import { JSX } from "react/jsx-runtime";
+import IntrinsicElements = JSX.IntrinsicElements;
+import { withMemo } from "../../helper/withMemo";
 
-export type ViewWithoutListenersProps<AsType extends keyof JSX.IntrinsicElements> = Omit<
+export type ViewWithoutListenersProps<AsType extends keyof IntrinsicElements> = Omit<
     ViewProps<AsType>,
     keyof DOMAttributes<AsType>
 > & { children?: React.ReactNode, dangerouslySetInnerHTML?: {
@@ -12,9 +14,8 @@ export type ViewWithoutListenersProps<AsType extends keyof JSX.IntrinsicElements
         __html: string | TrustedHTML;
     } | undefined;   };
 
-export const ViewWithoutListeners = withForwardRef(function ViewWithoutListeners<AsType extends keyof JSX.IntrinsicElements>(
-    { children, ...props }: ViewWithoutListenersProps<AsType>,
-    ref?: ForwardedRef<ComponentRef<AsType>>
+export const ViewWithoutListeners = withMemo(function ViewWithoutListeners<AsType extends keyof JSX.IntrinsicElements>(
+    { children,ref, ...props }: ViewWithoutListenersProps<AsType>,
 ) {
     // Variables
 
@@ -32,7 +33,7 @@ export const ViewWithoutListeners = withForwardRef(function ViewWithoutListeners
 
     // Render Functions
     return (
-        <View {...props} ref={ref}>
+        <View {...props} ref={ref as ForwardedRef<SVGElement|HTMLElement>}>
             {children}
         </View>
     );

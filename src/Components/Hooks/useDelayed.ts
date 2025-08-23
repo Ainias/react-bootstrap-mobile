@@ -9,6 +9,8 @@ export function useDelayed<Args extends any[]>(
     const argsRef = useRef<Args | undefined>(undefined);
     const timeoutRef = useRef<any>(undefined);
     const mayDelayTimeoutRef = useRef<any>(undefined);
+    const maxDelayTimeout = useRef<any>(undefined);
+
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const realCB = useCallback(callback, dependencies);
@@ -40,7 +42,6 @@ export function useDelayed<Args extends any[]>(
         },
         [delay, maxDelay, realCB]
     );
-    const maxDelayTimeout = useRef<any>();
 
     return func;
 }

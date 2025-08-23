@@ -4,15 +4,16 @@ import { Block } from '../Block';
 import classNames from 'classnames';
 import styles from './grid.scss';
 import { ForwardedRef, useMemo } from 'react';
-import { withForwardRef } from "../../../helper/withForwardRef";
+import { withMemo } from "../../../helper/withMemo";
 
 export type GridProps = RbmComponentProps<{
     columns?: number;
     rows?: number;
     useContainerWidth?: boolean;
+    ref?:ForwardedRef<HTMLDivElement>
 }>;
 
-function Grid({ style, children, columns = 12, rows = 1, useContainerWidth = false, className, __allowChildren }: GridProps, ref?:ForwardedRef<HTMLDivElement>) {
+export const Grid = withMemo(function Grid({ style, children, columns = 12, rows = 1, useContainerWidth = false,ref,  className, __allowChildren }: GridProps) {
     // Variables
     const appliedStyle = useMemo(
         () => ({
@@ -47,8 +48,4 @@ function Grid({ style, children, columns = 12, rows = 1, useContainerWidth = fal
             {children}
         </Block>
     );
-}
-
-// Need RowMemo for autocompletion of phpstorm
-const GridMemo = withForwardRef(Grid, styles);
-export { GridMemo as Grid };
+}, styles);

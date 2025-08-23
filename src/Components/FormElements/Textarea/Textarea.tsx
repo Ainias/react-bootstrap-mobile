@@ -6,17 +6,16 @@ import {
     useCallback,
     KeyboardEvent,
     ChangeEvent,
-    MutableRefObject,
-    CSSProperties, useRef
+    CSSProperties, useRef, ForwardedRef
 } from 'react';
 import { OptionalListener, useListenerWithExtractedProps } from '../../Hooks/useListener';
 import styles from './textarea.scss';
 import classNames from 'classnames';
-import { withForwardRef } from "../../../helper/withForwardRef";
 import { useOnChangeDone } from "../hooks/useOnChangeDone";
 import { useComposedRef } from "../../Hooks/useComposedRef";
 import { InlineBlock } from "../../Layout/InlineBlock";
 import { Text } from "../../Text/Text";
+import { withMemo } from "../../../helper/withMemo";
 
 export type TextareaProps<OnChangeData, OnChangeDoneData> = RbmComponentProps<
     Override<
@@ -27,26 +26,28 @@ export type TextareaProps<OnChangeData, OnChangeDoneData> = RbmComponentProps<
             onEnter?: (newText: string) => void;
             onEscape?: (newText: string) => void;
             textareaStyles?: CSSProperties & Record<`--${string}`, string | number | undefined>,
-            containerRef?: MutableRefObject<HTMLLabelElement|null>
+            containerRef?: ForwardedRef<HTMLLabelElement>
+            ref?: ForwardedRef<HTMLTextAreaElement>
             error?: string,
         } & OptionalListener<'onChange', OnChangeData>
         & OptionalListener<'onChangeDone', OnChangeDoneData>
     >
 >;
 
-export const Textarea = withForwardRef(function Textarea<OnChangeData, OnChangeDoneData>({
-                                                                                             label,
-                                                                                             className,
-                                                                                             style,
-                                                                                             onKeyUp,
-                                                                                             onChangeText,
-                                                                                             onEnter,
-                                                                                             onEscape,
-                                                                                             textareaStyles,
-                                                                                             containerRef,
-    error,
-                                                                                             ...otherProps
-                                                                                         }: TextareaProps<OnChangeData, OnChangeDoneData>, ref: MutableRefObject<HTMLTextAreaElement> | null) {
+export const Textarea = withMemo(function Textarea<OnChangeData, OnChangeDoneData>({
+                                                                                       label,
+                                                                                       className,
+                                                                                       style,
+                                                                                       onKeyUp,
+                                                                                       onChangeText,
+                                                                                       onEnter,
+                                                                                       onEscape,
+                                                                                       textareaStyles,
+                                                                                       containerRef,
+                                                                                       ref,
+                                                                                       error,
+                                                                                       ...otherProps
+                                                                                   }: TextareaProps<OnChangeData, OnChangeDoneData>) {
     // Refs
     const innerRef = useRef<HTMLTextAreaElement>(null);
     const refSetter = useComposedRef(ref, innerRef);

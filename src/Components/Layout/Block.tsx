@@ -1,19 +1,21 @@
 import * as React from 'react';
 import { RbmComponentProps } from '../RbmComponentProps';
 import classNames from 'classnames';
-
 import styles from './layout.scss';
 import { ComponentRef, ForwardedRef } from 'react';
-import { withForwardRef } from '../../helper/withForwardRef';
 import { ViewWithoutListeners, ViewWithoutListenersProps } from './ViewWithoutListeners';
+import { withMemo } from "../../helper/withMemo";
+import { JSX } from "react/jsx-runtime";
+import IntrinsicElements = JSX.IntrinsicElements;
 
-export type BlockProps<AsType extends keyof JSX.IntrinsicElements> = RbmComponentProps<
-    ViewWithoutListenersProps<AsType>
+export type BlockProps<AsType extends keyof IntrinsicElements> = RbmComponentProps<
+    ViewWithoutListenersProps<AsType> & {
+    ref?: ForwardedRef<ComponentRef<AsType>>
+}
 >;
 
-function Block<AsType extends keyof JSX.IntrinsicElements = 'div'>(
-    { children, as = 'div' as AsType, className, ...props }: BlockProps<AsType>,
-    ref?: ForwardedRef<ComponentRef<AsType>>
+export const Block = withMemo(function Block<AsType extends keyof JSX.IntrinsicElements = 'div'>(
+    { children, as = 'div' as AsType, className, ref, ...props }: BlockProps<AsType>,
 ) {
     // Variables
 
@@ -41,8 +43,4 @@ function Block<AsType extends keyof JSX.IntrinsicElements = 'div'>(
             {children}
         </ViewWithoutListeners>
     );
-}
-
-// Need BlockMemo for autocompletion of phpstorm
-const BlockMemo = withForwardRef(Block, styles);
-export { BlockMemo as Block };
+}, styles);

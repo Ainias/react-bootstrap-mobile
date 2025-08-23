@@ -1,5 +1,6 @@
 import { CSSProperties, ReactNode } from 'react';
 import { Recursive } from '../TypeHelpers';
+import { JSX } from "react/jsx-runtime";
 
 export type RbmChildWithoutString = Recursive<JSX.Element | undefined | null | RbmChildWithoutString[]> | false;
 export type WithNoStringProps =

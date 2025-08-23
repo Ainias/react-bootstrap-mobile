@@ -5,7 +5,7 @@ import styles from './list.scss';
 import { FixedSizeList, FixedSizeListProps, ListChildComponentProps } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { SizeCalculator, SizeCalculatorProps } from '../SizeCalculator/SizeCalculator';
-import { withForwardRef } from "../../helper/withForwardRef";
+import { withMemo } from "../../helper/withMemo";
 
 export type ListProps<ItemType> = RbmComponentProps<{
     renderItem: (item: ItemType, style: CSSProperties, index: number) => ReactElement;
@@ -15,9 +15,10 @@ export type ListProps<ItemType> = RbmComponentProps<{
     keyExtractor?: (item: ItemType, index: number) => string;
     onItemsRendered?: FixedSizeListProps<ItemType>['onItemsRendered'];
     autoSizeClassName?: string;
+    ref?: ForwardedRef<FixedSizeList<ItemType>>
 }>;
 
-export const List = withForwardRef(function List<ItemType>({
+export const List = withMemo(function List<ItemType>({
     items,
     renderItem,
     itemHeight: initialItemHeight = 0,
@@ -25,7 +26,8 @@ export const List = withForwardRef(function List<ItemType>({
     style,
     onItemsRendered,
     autoSizeClassName,
-}: ListProps<ItemType>, ref: ForwardedRef<FixedSizeList<ItemType>>) {
+    ref,
+}: ListProps<ItemType>) {
     // Variables
 
     // States

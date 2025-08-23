@@ -3,11 +3,12 @@ import { ComponentType, ForwardedRef, PropsWithChildren, useCallback, useImperat
 import { PromiseWithHandlers } from '@ainias42/js-helper';
 import { DialogProvider, ShowDialog } from './DialogContext';
 import { Dialog } from './Dialog';
-import { withForwardRef } from "../../helper/withForwardRef";
 import { Block } from "../Layout/Block";
+import { withMemo } from "../../helper/withMemo";
 
 export type DialogContainerProps = PropsWithChildren<{
     dialogClassName?: string
+    ref?: ForwardedRef<DialogContainerRef>
 }>;
 
 type DialogData = {
@@ -21,10 +22,11 @@ export type DialogContainerRef = {
     showDialog: ShowDialog;
 }
 
-export const DialogContainer = withForwardRef(function DialogContainer({
-                                                                           children,
-                                                                           dialogClassName
-                                                                       }: DialogContainerProps, ref: ForwardedRef<DialogContainerRef>) {
+export const DialogContainer = withMemo(function DialogContainer({
+                                                                     children,
+                                                                     dialogClassName,
+                                                                     ref
+                                                                 }: DialogContainerProps) {
     // Variables
     const [dialogs, setDialogs] = useState<DialogData[]>([]);
     const [, setLastId] = useState(0);

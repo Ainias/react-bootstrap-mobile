@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from "react";
 
 export function useRerender(defaultDelay = 0){
-    const timeoutRef = useRef<ReturnType<typeof setTimeout>|undefined>();
+    const timeoutRef = useRef<ReturnType<typeof setTimeout>|undefined>(undefined);
     const [renderCounter, updateRenderCounter] = useState(0);
     const update = useCallback((delay = defaultDelay) => {
         if (delay === 0){

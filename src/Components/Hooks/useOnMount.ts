@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 export function useOnMount(cb: () => void | Promise<void> | (() => any)) {
     const called = useRef(false);
     const unmountTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
-    const unmountFunc = useRef<() => any | undefined>();
+    const unmountFunc = useRef<() => any | undefined>(undefined);
     useEffect(() => {
         clearTimeout(unmountTimeout.current);
         unmountTimeout.current = undefined;
